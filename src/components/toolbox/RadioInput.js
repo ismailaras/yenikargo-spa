@@ -1,19 +1,21 @@
 import React from 'react';
 
-const TextInput = ({name, label, onChange, placeHolder, value, error}) => {
-    return (
-        <div className='form-group'>
-            <label htmlFor={name}>{label}</label>
+const RadioInput = ({name, label, value, inline, checked}) => {
+    let cls = "custom-control custom-radio";
+    if (inline) {
+        cls += ' custom-control-inline';
+    }
+    return (<div className={cls}>
             <input
-                type="text"
-                defaultValue={value}
-                onChange={onChange}
+                type="radio"
+                id={value}
                 name={name}
-                className={error && error.length > 0 ? 'form-control is-invalid' : 'form-control'}
-                placeholder={placeHolder}/>
-            {error && <div className="badge badge-danger">{error}</div>}
+                defaultChecked={checked}
+                defaultValue={value}
+                className="custom-control-input"/>
+                <label className="custom-control-label" htmlFor={value}>{label}</label>
         </div>
     )
 }
 
-export default TextInput;
+export default RadioInput;

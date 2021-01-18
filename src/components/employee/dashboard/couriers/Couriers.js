@@ -1,24 +1,22 @@
 import React from "react";
 import Navi from "../common/Navi";
 import {Col, Container, Row} from "reactstrap/es";
-import FindCustomers from "./FindCustomers";
-import CustomersDTable from "./CustomersDTable";
-import SetCustomers from "./SetCustomers";
+import FindCouriers from "./FindCouriers";
+import CouriersDTable from "./CouriersDTable";
 import {connect} from 'react-redux'
 
 
-const Customers = () => {
+const Couriers = () => {
     return (
         <div>
             <Navi/>
             <Container fluid={true}>
                 <Row>
                     <Col md={3} className="mb-3">
-                        <FindCustomers/>
+                        <FindCouriers/>
                     </Col>
                     <Col md={9}>
-                        <SetCustomers/>
-                        <CustomersDTable/>
+                        <CouriersDTable/>
                     </Col>
                 </Row>
             </Container>
@@ -32,4 +30,4 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Customers);
+export default connect(mapStateToProps, mapDispatchToProps)(Couriers);

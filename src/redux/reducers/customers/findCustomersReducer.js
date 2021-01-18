@@ -1,7 +1,7 @@
 import * as actionTypes from '../../actions/actionTypes';
 import initialState from "../initialState";
 
-export const customerReducer = (state = initialState.customers, action) => {
+export const findCustomersReducer = (state = initialState.customers, action) => {
     switch (action.type) {
         case actionTypes.FIND_CUSTOMERS_BEGIN:
             return state;

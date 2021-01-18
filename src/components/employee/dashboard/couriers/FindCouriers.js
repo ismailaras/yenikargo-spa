@@ -18,19 +18,19 @@ const FindCouriers = ({findCouriers, selectCouriers}) => {
     const radioInputProps = [
         {
             value: 'viaId',
-            label: 'Müştəri ID ilə'
+            label: 'Kuryer ID ilə'
         },
         {
             value: 'viaCourierMobileNumber',
-            label: 'Müştəri mobil nömrəsi ilə'
+            label: 'Kuryer mobil nömrəsi ilə'
         },
         {
             value: 'viaCourierFirstName',
-            label: 'Müştəri Adı ilə'
+            label: 'Kuryer Adı ilə'
         },
         {
             value: 'viaCourierLastName',
-            label: 'Müştəri Soyadı ilə'
+            label: 'Kuryer Soyadı ilə'
         },
     ];
     return (

@@ -2,7 +2,7 @@ import * as actionTypes from '../../actions/actionTypes';
 import initialState from "../initialState";
 
 
-export const createStationReducer = (state = initialState.selectedStations.lastSelectedStation, action) => {
+export const createExtraSellingReducer = (state = initialState.selectedAllExtraSelling.lastSelectedExtraSelling, action) => {
     switch (action.type) {
         case actionTypes.CREATE_STATION_BEGIN:
             return state;

@@ -1,28 +1,23 @@
 import React from 'react';
-import {InputFeedback} from "./InputFeedback";
 
-const TextInput = ({name, label, onChange, placeHolder, value, error, onBlur, touched}) => {
-    let clsName = 'form-control';
-    if (value || (!error && touched)) {
-        clsName += ' is-valid'
-    }
-    if (!!error && touched) {
-        clsName += ' is-invalid'
-    }
+const CheckboxInput = ({name, label, onChange, value, disabled}) => {
     return (
         <div className='form-group'>
-            <label htmlFor={name}>{label}</label>
-            <input
-                type="text"
-                defaultValue={value}
-                onChange={onChange}
-                name={name}
-                onBlur={onBlur}
-                className={clsName}
-                placeholder={placeHolder}/>
-            {touched && <InputFeedback error={error} />}
+            <div className="custom-control custom-checkbox">
+                <input
+                    type="checkbox"
+                    className="custom-control-input"
+                    onChange={onChange}
+                    name={name}
+                    id={name}
+                    disabled={disabled}
+                    defaultValue={value}
+                    defaultChecked={value}
+                />
+                <label className="custom-control-label" htmlFor={name}>{label}</label>
+            </div>
         </div>
     )
 }
 
-export default TextInput;
+export default CheckboxInput;

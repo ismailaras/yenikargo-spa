@@ -1,16 +1,16 @@
 import React from "react";
 import Navi from "../common/Navi";
 import {Col, Container, Row} from "reactstrap/es";
-import StationsDTable from "./StationsDTable";
+import AllExtraSellingDTable from "./AllExtraSellingDTable";
 
-const Stations = () => {
+const AllExtraSelling = () => {
     return (
         <div>
             <Navi/>
             <Container fluid={true}>
                 <Row>
                     <Col md={12}>
-                        <StationsDTable/>
+                        <AllExtraSellingDTable/>
                     </Col>
                 </Row>
             </Container>
@@ -18,4 +18,4 @@ const Stations = () => {
     )
 }
 
-export default Stations;
+export default AllExtraSelling;

@@ -1,181 +1,171 @@
 import * as actionTypes from "./actionTypes";
-import * as customerService from "../../services/customerService";
+import * as courierService from "../../services/courierService";
 import {begin, end, endAll, pendingTask} from 'react-redux-spinner';
+import {addCourierToPackages} from "./packageActions";
+import * as notification from '../../utilities/notification';
 
-export const findCustomersBegin = () => ({
-    type: actionTypes.FIND_CUSTOMERS_BEGIN,
+export const findCouriersBegin = () => ({
+    type: actionTypes.FIND_COURIERS_BEGIN,
     payload: {},
     [pendingTask]: begin
 })
 
-export const findCustomersSuccess = customers => ({
-    type: actionTypes.FIND_CUSTOMERS_SUCCESS,
-    payload: customers,
+export const findCouriersSuccess = couriers => ({
+    type: actionTypes.FIND_COURIERS_SUCCESS,
+    payload: couriers,
     [pendingTask]: end
 })
 
-export const findCustomersError = error => ({
-    type: actionTypes.FIND_CUSTOMERS_ERROR,
+export const findCouriersError = error => ({
+    type: actionTypes.FIND_COURIERS_ERROR,
     payload: error,
     [pendingTask]: endAll
 })
 
-export const selectCustomers = selectedCustomers => ({
-    type: actionTypes.SELECT_CUSTOMERS,
-    payload: selectedCustomers
+export const selectCouriers = selectedCouriers => ({
+    type: actionTypes.SELECT_COURIERS,
+    payload: selectedCouriers
 })
 
-export const updateSelectedCustomerData = selectedCustomer => ({
-    type: actionTypes.UPDATE_SELECTED_CUSTOMER_DATA,
-    payload: selectedCustomer
+export const updateSelectedCourierData = selectedCourier => ({
+    type: actionTypes.UPDATE_SELECTED_COURIER_DATA,
+    payload: selectedCourier
 })
 
-export const deleteSelectedCustomerData = selectedCustomer => ({
-    type: actionTypes.DELETE_SELECTED_CUSTOMER_DATA,
-    payload: selectedCustomer
+export const deleteSelectedCourierData = selectedCourier => ({
+    type: actionTypes.DELETE_SELECTED_COURIER_DATA,
+    payload: selectedCourier
 })
 
-export const setSenderCustomer = senderCustomer => {
-    return ({
-        type: actionTypes.SET_SENDER_CUSTOMER,
-        payload: senderCustomer
-    })
-}
-
-export const setReceiverCustomer = receiverCustomer => ({
-    type: actionTypes.SET_RECEIVER_CUSTOMER,
-    payload: receiverCustomer
-})
-
-export const createCustomerBegin = () => ({
-    type: actionTypes.CREATE_CUSTOMER_BEGIN,
+export const createCourierBegin = () => ({
+    type: actionTypes.CREATE_COURIER_BEGIN,
     payload: {},
     [pendingTask]: begin
 })
 
-export const createCustomerSuccess = customer => ({
-    type: actionTypes.CREATE_CUSTOMER_SUCCESS,
-    payload: customer,
+export const createCourierSuccess = courier => ({
+    type: actionTypes.CREATE_COURIER_SUCCESS,
+    payload: courier,
     [pendingTask]: end
 })
 
-export const createCustomerError = error => ({
-    type: actionTypes.CREATE_CUSTOMER_ERROR,
+export const createCourierError = error => ({
+    type: actionTypes.CREATE_COURIER_ERROR,
     payload: error,
     [pendingTask]: endAll
 })
 
-export const updateCustomerBegin = () => ({
-    type: actionTypes.UPDATE_CUSTOMER_BEGIN,
+export const updateCourierBegin = () => ({
+    type: actionTypes.UPDATE_COURIER_BEGIN,
     payload: {},
     [pendingTask]: begin
 })
 
-export const updateCustomerSuccess = customer => ({
-    type: actionTypes.UPDATE_CUSTOMER_SUCCESS,
-    payload: customer,
+export const updateCourierSuccess = courier => ({
+    type: actionTypes.UPDATE_COURIER_SUCCESS,
+    payload: courier,
     [pendingTask]: end
 })
 
-export const updateCustomerError = error => ({
-    type: actionTypes.UPDATE_CUSTOMER_ERROR,
+export const updateCourierError = error => ({
+    type: actionTypes.UPDATE_COURIER_ERROR,
     payload: error,
     [pendingTask]: endAll
 })
 
-export const deleteCustomerBegin = () => ({
-    type: actionTypes.DELETE_CUSTOMER_BEGIN,
+export const deleteCourierBegin = () => ({
+    type: actionTypes.DELETE_COURIER_BEGIN,
     payload: {},
     [pendingTask]: begin
 })
 
-export const deleteCustomerSuccess = customer => ({
-    type: actionTypes.DELETE_CUSTOMER_SUCCESS,
-    payload: customer,
+export const deleteCourierSuccess = courier => ({
+    type: actionTypes.DELETE_COURIER_SUCCESS,
+    payload: courier,
     [pendingTask]: end
 })
 
-export const deleteCustomerError = error => ({
-    type: actionTypes.DELETE_CUSTOMER_ERROR,
+export const deleteCourierError = error => ({
+    type: actionTypes.DELETE_COURIER_ERROR,
     payload: error,
     [pendingTask]: endAll
 })
 
-export const createCustomer = customer => {
+export const createCourier = (courier, packages) => {
     return async dispatch => {
-        dispatch(createCustomerBegin())
-        customerService.createCustomer(customer)
+        dispatch(createCourierBegin())
+        courierService.createCourier(courier)
             .then(async data => {
                 await data;
                 if (data.message) {
-                    dispatch(createCustomerError(data.message))
+                    dispatch(createCourierError(data.message));
                 } else {
-                    dispatch(createCustomerSuccess(data))
-                    customer.is_receiver ? dispatch(setReceiverCustomer(data)) : dispatch(setSenderCustomer(data))
-
+                    dispatch(createCourierSuccess(data));
+                    dispatch(addCourierToPackages(data, packages));
+                    notification.success('Kuryer artırıldı.');
                 }
             })
-            .catch(err => dispatch(createCustomerError(err)));
+            .catch(err => dispatch(createCourierError(err)));
     }
 }
 
-export const updateCustomer = (customer, selectedCustomer) => {
+export const updateCourier = (courier, selectedCourier) => {
     return async dispatch => {
-        dispatch(updateCustomerBegin())
-        customerService.updateCustomer(customer)
+        dispatch(updateCourierBegin())
+        courierService.updateCourier(courier)
             .then(async data => {
                 await data;
                 if (data.message) {
-                    dispatch(updateCustomerError(data.message))
+                    dispatch(updateCourierError(data.message))
                 } else {
-                    dispatch(updateCustomerSuccess(data))
-                    dispatch(updateSelectedCustomerData(changeSelectedCustomerValues(data, selectedCustomer)))
+                    dispatch(updateCourierSuccess(data))
+                    dispatch(updateSelectedCourierData(changeSelectedCourierValues(data, selectedCourier)))
                 }
             })
-            .catch(err => dispatch(updateCustomerError(err)));
+            .catch(err => dispatch(updateCourierError(err)));
     }
 }
 
-export const deleteCustomer = customer => {
+export const deleteCourier = courier => {
     return async dispatch => {
-        dispatch(deleteCustomerBegin())
-        customerService.deleteCustomer(customer)
+        dispatch(deleteCourierBegin())
+        courierService.deleteCourier(courier)
             .then(async data => {
                 await data;
                 if (data.message) {
-                    dispatch(deleteCustomerError(data.message))
+                    dispatch(deleteCourierError(data.message))
                 } else {
-                    dispatch(deleteCustomerSuccess(customer))
-                    dispatch(deleteSelectedCustomerData(customer))
+                    dispatch(deleteCourierSuccess(courier))
+                    dispatch(deleteSelectedCourierData(courier))
                 }
             })
-            .catch(err => dispatch(deleteCustomerError(err)));
+            .catch(err => dispatch(deleteCourierError(err)));
     }
 }
 
-export const findCustomers = findObject => {
+export const findCouriers = findObject => {
     return async dispatch => {
-        dispatch(findCustomersBegin())
-        customerService.findCustomers(findObject)
+        dispatch(findCouriersBegin())
+        courierService.findCouriers(findObject)
             .then(async data => {
                 await data;
                 if (data.message) {
-                    dispatch(findCustomersError(data.message))
+                    dispatch(findCouriersError(data.message))
                 } else {
-                    dispatch(findCustomersSuccess(data))
+                    dispatch(findCouriersSuccess(data))
                 }
             })
-            .catch(err => dispatch(findCustomersError(err)));
+            .catch(err => dispatch(findCouriersError(err)));
     }
 }
 
-const changeSelectedCustomerValues = (values, lastSelectedCustomer) => {
-    for (let field in lastSelectedCustomer) {
+const changeSelectedCourierValues = (values, lastSelectedCourier) => {
+    for (let field in lastSelectedCourier) {
         for (let value in values) {
             if (field === value) {
-                lastSelectedCustomer[field] = values[value]
+                lastSelectedCourier[field] = values[value]
             }
         }
     }
-    return lastSelectedCustomer;
+    return lastSelectedCourier;
 }

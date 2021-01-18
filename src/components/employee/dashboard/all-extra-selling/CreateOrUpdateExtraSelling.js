@@ -1,50 +1,44 @@
 import React, {useEffect} from 'react';
-import {createStation, getStations, selectStations, updateStation} from "../../../../redux/actions/stationActions";
+import {createExtraSelling, getAllExtraSelling, selectExtraSelling, updateExtraSelling} from "../../../../redux/actions/extraSellingActions";
 import {connect} from "react-redux";
-import CreateOrUpdateStationForm from "./CreateOrUpdateStationForm";
+import CreateOrUpdateExtraSellingForm from "./CreateOrUpdateExtraSellingForm";
 import {useFormik} from "formik";
-import {createOrUpdateStationFormValidationSchema} from '../../../../utilities/formValidationSchemas';
+import {createOrUpdateExtraSellingFormValidationSchema} from '../../../../utilities/formValidationSchemas';
 import {notEmpty} from "../../../../utilities/helpers";
 
-const CreateOrUpdateStation = ({
-                                   createStation, updateStation, stations, getStations,
-                                   selectedStations
+const CreateOrUpdateExtraSelling = ({
+                                   createExtraSelling, updateExtraSelling, allExtraSelling, getAllExtraSelling,
+                                   selectedAllExtraSelling
                                }) => {
     useEffect(() => {
-        if (stations.length === 0) {
-            getStations();
+        if (allExtraSelling.length === 0) {
+            getAllExtraSelling();
         }
     });
     let initialValues = {
-        latitude: '',
-        longitude: '',
         name: '',
-        city: '',
-        address: '',
-        phone_number: '',
-        mobile_number: '',
-        url: ''
+        price: 0
     }
-    if (notEmpty(selectedStations.lastSelectedStation)) {
-        initialValues = selectedStations.lastSelectedStation
+    if (notEmpty(selectedAllExtraSelling.lastSelectedExtraSelling)) {
+        initialValues = selectedAllExtraSelling.lastSelectedExtraSelling
     }
     const {handleSubmit, handleChange, values, errors, touched, handleBlur, isSubmitting} = useFormik({
         initialValues,
-        validationSchema: createOrUpdateStationFormValidationSchema,
+        validationSchema: createOrUpdateExtraSellingFormValidationSchema,
         onSubmit: (values, {setSubmitting}) => {
             values.id
-                ? updateStation(values, selectedStations.lastSelectedStation)
-                : createStation(values);
+                ? updateExtraSelling(values, selectedAllExtraSelling.lastSelectedExtraSelling)
+                : createExtraSelling(values);
             setSubmitting(false);
         }
     });
     return (
-        <CreateOrUpdateStationForm
+        <CreateOrUpdateExtraSellingForm
             onChange={handleChange}
             onSubmit={handleSubmit}
             onBlur={handleBlur}
             values={values}
-            stations={stations}
+            allExtraSelling={allExtraSelling}
             errors={errors}
             touched={touched}
             isSubmitting={isSubmitting}
@@ -53,18 +47,18 @@ const CreateOrUpdateStation = ({
 }
 
 const mapDispatchToProps = {
-    getStations,
-    selectStations,
-    createStation,
-    updateStation
+    getAllExtraSelling,
+    selectExtraSelling,
+    createExtraSelling,
+    updateExtraSelling
 }
 
 const mapStateToProps = state => ({
-    selectedStations: state.selectStationsReducer,
+    selectedAllExtraSelling: state.selectAllExtraSellingReducer,
     selectedCustomers: state.selectCustomersReducer,
-    stations: state.getStationsReducer,
+    extraSellings: state.getAllExtraSellingReducer,
     setCustomers: state.setCustomerReducer
 });
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateOrUpdateStation);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateOrUpdateExtraSelling);

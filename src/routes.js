@@ -6,4 +6,6 @@ export const Routes = {
     packages: '/employee/dashboard/packages',
     checkout: '/employee/dashboard/checkout',
     courier: '/employee/dashboard/courier',
+    stations: '/employee/dashboard/stations',
+    allExtraSelling: '/employee/dashboard/all-extra-selling'
 }

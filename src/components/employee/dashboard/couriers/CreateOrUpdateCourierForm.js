@@ -1,14 +1,15 @@
 import React from "react";
 import TextInput from "../../../toolbox/TextInput";
-import SelectInput from "../../../toolbox/SelectInput";
-import TextareaInput from "../../../toolbox/TextareaInput";
 import NumberInput from "../../../toolbox/NumberInput";
 import CheckboxInput from "../../../toolbox/CheckboxInput";
-import PasswordInput from "../../../toolbox/PasswordInput";
 
-const CreateOrUpdateCustomerForm = ({onSubmit, values, errors, onChange, onBlur, isSubmitting, touched, stations}) => {
+const CreateOrUpdateCourierForm = ({onSubmit, values, errors, onChange, onBlur, isSubmitting, touched}) => {
     return (
         <div>
+            <span className="mr-2">Seçilmiş bağlamalar:</span>
+            {values.package_ids.map(p => (
+                <div className="badge badge-primary mr-2 mb-2" key={p}><span>{p}</span></div>
+            ))}
             <form onSubmit={onSubmit}>
                 <div className="form-row">
                     <div className="col-md-6">
@@ -50,115 +51,28 @@ const CreateOrUpdateCustomerForm = ({onSubmit, values, errors, onChange, onBlur,
                         />
                     </div>
                     <div className="col-md-6">
-                        <PasswordInput
-                            label="Şifrə"
-                            placeHolder="Şifrə"
-                            name="password"
-                            value={values.password}
-                            error={errors.password}
-                            onChange={onChange}
-                            onBlur={onBlur}
-                            touched={touched.password}
-                        />
-                    </div>
-                </div>
-                <div className="form-row">
-                    <div className="col-md-4">
-                        <TextInput
-                            label="Bank adı"
-                            placeHolder="Bank adı"
-                            name="bank_name"
-                            value={values.bank_name}
-                            error={errors.bank_name}
-                            onChange={onChange}
-                            onBlur={onBlur}
-                            touched={touched.bank_name}
-                        />
-                    </div>
-                    <div className="col-md-5">
-                        <TextInput
-                            label="Kart nömrəsi"
-                            placeHolder="Kart nömrəsi"
-                            name="card_number"
-                            value={values.card_number}
-                            error={errors.card_number}
-                            onChange={onChange}
-                            onBlur={onBlur}
-                            touched={touched.card_number}
-                        />
-                    </div>
-                    <div className="col-md-3">
-                        <TextInput
-                            label="Bitiş tarixi"
-                            placeHolder="Bitiş tarixi"
-                            name="exp_date"
-                            value={values.exp_date}
-                            error={errors.exp_date}
-                            onChange={onChange}
-                            onBlur={onBlur}
-                            touched={touched.exp_date}
-                        />
-                    </div>
-                </div>
-                <div className="form-row">
-                    <div className="col-md-6">
                         <NumberInput
-                            label="Güzəşt (0 - 1)"
-                            placeHolder="Güzəşt"
-                            name="discount"
-                            value={values.discount}
-                            error={errors.discount}
+                            label="Məbləğ"
+                            placeHolder="Məbləğ"
+                            name="courier_cost"
+                            value={values.courier_cost}
+                            error={errors.courier_cost}
                             onChange={onChange}
                             onBlur={onBlur}
-                            touched={touched.discount}
-                        />
-                    </div>
-                    <div className="col-md-6">
-                        <SelectInput
-                            label="Filial"
-                            placeHolder="Filial"
-                            name="station_id"
-                            options={stations.map(station => ({
-                                value: station.id,
-                                text: station.name
-                            }))}
-                            defaultOption="Filial seçin"
-                            value={values.station_id}
-                            error={errors.station_id}
-                            onChange={onChange}
-                            onBlur={onBlur}
-                            touched={touched.station_id}
+                            touched={touched.courier_cost}
                         />
                     </div>
                 </div>
                 <div className="form-row">
                     <div className="col-md-12">
-                        <TextareaInput
-                            label="Ünvan"
-                            placeHolder="Ünvan"
-                            name="address"
-                            value={values.address}
-                            error={errors.address}
+                        <CheckboxInput
+                            label="Qapıdan təhvil olaraq seç (Cari olaraq: Qapıya təhvil)"
+                            name="pick_up"
+                            value={values.pick_up}
                             onChange={onChange}
-                            onBlur={onBlur}
-                            touched={touched.address}
                         />
                     </div>
                 </div>
-                {!values.id
-                    ?
-                    <div className="form-row">
-                        <div className="col-md-12">
-                            <CheckboxInput
-                                label="Alan müştəri olaraq seç (Cari olaraq: Göndərən müştəri)"
-                                name="is_receiver"
-                                value={values.is_receiver}
-                                onChange={onChange}
-                            />
-                        </div>
-                    </div>
-                    :
-                    null}
                 <div className="form-row">
                     <div className="col-md-12">
                         <button className="btn btn-primary" type="submit" disabled={isSubmitting}>
@@ -171,4 +85,4 @@ const CreateOrUpdateCustomerForm = ({onSubmit, values, errors, onChange, onBlur,
     )
 }
 
-export default CreateOrUpdateCustomerForm;
+export default CreateOrUpdateCourierForm;

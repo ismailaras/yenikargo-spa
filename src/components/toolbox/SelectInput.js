@@ -1,18 +1,24 @@
 import React from 'react';
+import {InputFeedback} from "./InputFeedback";
 
-const SelectInput = ({name, label, onChange, defaultOption, value, err, options}) => {
-    let wrapperClass = 'form-group';
-    if (err && err.length > 0) {
-        wrapperClass += ' has-error';
+const SelectInput = ({name, label, onChange, defaultOption, value, error, options, onBlur, touched, disabled}) => {
+    let clsName = 'form-control';
+    if (value || (!error && touched)) {
+        clsName += ' is-valid'
+    }
+    if (!!error && touched) {
+        clsName += ' is-invalid'
     }
     return (
-        <div className={wrapperClass}>
+        <div className="form-group">
             <label htmlFor={name}>{label}</label>
             <select
                 name={name}
                 onChange={onChange}
-                value={value}
-                className="form-control">
+                defaultValue={value}
+                onBlur={onBlur}
+                disabled={disabled}
+                className={clsName}>
                 <option value="">{defaultOption}</option>
                 {options.map(option => {
                     return (
@@ -22,7 +28,7 @@ const SelectInput = ({name, label, onChange, defaultOption, value, err, options}
                     )
                 })}
             </select>
-            {err && <div className="alert alert-danger">{err}</div>}
+            {touched && <InputFeedback error={error} />}
         </div>
     )
 }

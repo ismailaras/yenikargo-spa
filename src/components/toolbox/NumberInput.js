@@ -1,19 +1,30 @@
 import React from 'react';
+import {InputFeedback} from "./InputFeedback";
 
-const TextInput = ({name, label, onChange, placeHolder, value, err}) => {
+const NumberInput = ({name, label, onChange, placeHolder, value, error, onBlur, touched, readOnly, autoFocus}) => {
+    let clsName = 'form-control';
+    if (value || (!error && touched)) {
+        clsName += ' is-valid'
+    }
+    if (!!error && touched) {
+        clsName += ' is-invalid'
+    }
     return (
         <div className='form-group'>
             <label htmlFor={name}>{label}</label>
             <input
-                type="text"
-                value={value}
+                type="number"
+                defaultValue={value}
                 onChange={onChange}
+                autoFocus={autoFocus}
                 name={name}
-                className={err && err.length > 0 ? 'form-control is-invalid' : 'form-control'}
+                onBlur={onBlur}
+                readOnly={readOnly}
+                className={clsName}
                 placeholder={placeHolder}/>
-            {err && <div className="alert alert-danger">{err}</div>}
+            {touched && <InputFeedback error={error} />}
         </div>
     )
 }
 
-export default TextInput;
+export default NumberInput;

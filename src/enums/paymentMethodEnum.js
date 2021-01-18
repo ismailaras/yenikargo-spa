@@ -1,15 +1,15 @@
-export const TrackingStateEnum = Object.freeze({
-    Declared: 0,
-    OnWay: 1,
-    Arrived: 2,
-    ReadyToPickUp: 3,
-    Delivered: 4
+export const PaymentMethodEnum = Object.freeze({
+    CreditDebitCard: 0,
+    Cash: 1,
+    PromoCode: 2,
+    Terminal: 3,
+    POS: 4
 })
 
-export const iterTrackingStates = () => {
+export const iterPaymentMethods = () => {
     const list = [];
-    for (let trackingState in TrackingStateEnum) {
-        list.push({name: trackingState,value: TrackingStateEnum[trackingState]})
+    for (let paymentMethod in PaymentMethodEnum) {
+        list.push({name: paymentMethod, value: PaymentMethodEnum[paymentMethod]})
     }
     return list;
 }

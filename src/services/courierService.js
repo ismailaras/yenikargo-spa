@@ -1,25 +1,25 @@
 import * as apiService from '../services/apiService';
 
-export const findCustomers = findObject => {
-    return apiService.post("customer/filter", findObject)
+export const findCouriers = findObject => {
+    return apiService.post("courier/filter", findObject)
         .then(data => data)
         .catch(err => err);
 }
 
-export const createCustomer = customer => {
-    return apiService.post("customer", customer)
+export const createCourier = courier => {
+    return apiService.post("courier", courier)
         .then(data => data)
         .catch(err => err);
 }
 
-export const updateCustomer = customer => {
-    return apiService.put("customer", customer)
+export const updateCourier = courier => {
+    return apiService.put("courier", courier)
         .then(data => data)
         .catch(err => err);
 }
 
-export const deleteCustomer = customer => {
-    return apiService.del("customer/" + customer.id)
+export const deleteCourier = courier => {
+    return apiService.del("courier/" + courier.id)
         .then(data => data)
         .catch(err => err);
 }

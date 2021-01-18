@@ -1,7 +1,7 @@
 import React from 'react';
 import {InputFeedback} from "./InputFeedback";
 
-const NumberInput = ({name, label, onChange, placeHolder, value, error, onBlur, touched}) => {
+const TextareaInput = ({name, label, onChange, placeHolder, value, error, onBlur, touched}) => {
     let clsName = 'form-control';
     if (value || (!error && touched)) {
         clsName += ' is-valid'
@@ -12,11 +12,11 @@ const NumberInput = ({name, label, onChange, placeHolder, value, error, onBlur, 
     return (
         <div className='form-group'>
             <label htmlFor={name}>{label}</label>
-            <input
-                type="number"
+            <textarea
                 defaultValue={value}
                 onChange={onChange}
                 name={name}
+                rows={4}
                 onBlur={onBlur}
                 className={clsName}
                 placeholder={placeHolder}/>
@@ -25,4 +25,4 @@ const NumberInput = ({name, label, onChange, placeHolder, value, error, onBlur, 
     )
 }
 
-export default NumberInput;
+export default TextareaInput;

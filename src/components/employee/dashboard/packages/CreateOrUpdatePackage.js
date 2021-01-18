@@ -1,43 +1,66 @@
 import React, {useEffect} from 'react';
+import {useHistory} from 'react-router-dom';
 import {getStations} from "../../../../redux/actions/stationActions";
-import {createCustomer, selectCustomers, updateCustomer} from "../../../../redux/actions/customerActions";
+import {createPackage, selectPackages, updatePackage} from "../../../../redux/actions/packageActions";
 import {connect} from "react-redux";
-import CreateOrUpdateCustomerForm from "./CreateOrUpdateCustomerForm";
+import CreateOrUpdatePackageForm from "./CreateOrUpdatePackageForm";
 import {useFormik} from "formik";
 import {notEmpty} from "../../../../utilities/helpers";
-import {createOrUpdateCustomerFormValidationSchema} from '../../../../utilities/formValidationSchemas';
+import {createOrUpdatePackageFormValidationSchema} from '../../../../utilities/formValidationSchemas';
 
-const CreateOrUpdateCustomer = ({createCustomer, updateCustomer, stations, getStations, selectedCustomers, selectCustomers}) => {
+let initialValues = {
+    sender_customer_id: '',
+    receiver_customer_id: '',
+    sender_station_id: '',
+    receiver_station_id: '',
+    weight: '',
+    length: 0,
+    height: 0,
+    width: 0,
+    amount: 5,
+    description: '',
+    comment: '',
+    price: 0,
+    is_postpaid: false,
+    deliver_to_address: false,
+    will_receiver_pay: false,
+    quantity: 1
+}
+
+function setInitialValues(setCustomers, selectedPackages) {
+    if (notEmpty(setCustomers.senderCustomer) && notEmpty(setCustomers.receiverCustomer)) {
+        initialValues.sender_customer_id = setCustomers.senderCustomer.id;
+        initialValues.receiver_customer_id = setCustomers.receiverCustomer.id;
+        initialValues.sender_station_id = setCustomers.senderCustomer.station_id;
+        initialValues.receiver_station_id = setCustomers.receiverCustomer.station_id;
+    } else if (notEmpty(selectedPackages.lastSelectedPackage)) {
+        initialValues = selectedPackages.lastSelectedPackage
+    }
+}
+
+const CreateOrUpdatePackage = ({
+                                   createPackage, updatePackage, stations, getStations,
+                                   selectedPackages, setCustomers
+                               }) => {
     useEffect(() => {
         if (stations.length === 0) {
-            getStations()
+            getStations();
         }
+        setInitialValues(setCustomers, selectedPackages);
     });
-    let initialValues = {
-        first_name: '',
-        last_name: '',
-        mobile_number: '',
-        password: '',
-        discount: 0,
-        station_id: '',
-        address: ''
-    }
-    if (notEmpty(selectedCustomers.lastSelectedCustomer)) {
-        initialValues = selectedCustomers.lastSelectedCustomer
-    }
+    const history = useHistory();
     const {handleSubmit, handleChange, values, errors, touched, handleBlur, isSubmitting} = useFormik({
         initialValues,
-        validationSchema: createOrUpdateCustomerFormValidationSchema,
+        validationSchema: createOrUpdatePackageFormValidationSchema,
         onSubmit: (values, {setSubmitting}) => {
-            values.is_partner = values.discount > 0
             values.id
-                ? updateCustomer(values, selectedCustomers.lastSelectedCustomer)
-                : createCustomer(values);
+                ? updatePackage(values, selectedPackages.lastSelectedPackage)
+                : createPackage(values, history);
             setSubmitting(false);
         }
     });
     return (
-        <CreateOrUpdateCustomerForm
+        <CreateOrUpdatePackageForm
             onChange={handleChange}
             onSubmit={handleSubmit}
             onBlur={handleBlur}
@@ -52,15 +75,17 @@ const CreateOrUpdateCustomer = ({createCustomer, updateCustomer, stations, getSt
 
 const mapDispatchToProps = {
     getStations,
-    selectCustomers,
-    createCustomer,
-    updateCustomer
+    selectPackages,
+    createPackage,
+    updatePackage
 }
 
 const mapStateToProps = state => ({
+    selectedPackages: state.selectPackagesReducer,
     selectedCustomers: state.selectCustomersReducer,
-    stations: state.getStationsReducer
+    stations: state.getStationsReducer,
+    setCustomers: state.setCustomerReducer
 });
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateOrUpdateCustomer);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateOrUpdatePackage);

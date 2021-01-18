@@ -2,13 +2,13 @@ import * as actionTypes from '../../actions/actionTypes';
 import initialState from "../initialState";
 
 
-export const createCustomerReducer = (state = initialState.selectedCustomers.lastSelectedCustomer, action) => {
+export const createPackageReducer = (state = initialState.selectedPackages.lastSelectedPackage, action) => {
     switch (action.type) {
-        case actionTypes.CREATE_CUSTOMER_BEGIN:
+        case actionTypes.CREATE_PACKAGE_BEGIN:
             return state;
-        case actionTypes.CREATE_CUSTOMER_SUCCESS:
+        case actionTypes.CREATE_PACKAGE_SUCCESS:
             return action.payload;
-        case actionTypes.CREATE_CUSTOMER_ERROR:
+        case actionTypes.CREATE_PACKAGE_ERROR:
             return state
         default:
             return state;

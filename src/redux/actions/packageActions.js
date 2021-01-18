@@ -1,181 +1,191 @@
 import * as actionTypes from "./actionTypes";
-import * as customerService from "../../services/customerService";
+import * as packageService from "../../services/packageService";
 import {begin, end, endAll, pendingTask} from 'react-redux-spinner';
+import {addToCart} from "./cartActions";
+import * as notification from '../../utilities/notification';
+import {Routes} from "../../routes";
 
-export const findCustomersBegin = () => ({
-    type: actionTypes.FIND_CUSTOMERS_BEGIN,
+export const findPackagesBegin = () => ({
+    type: actionTypes.FIND_PACKAGES_BEGIN,
     payload: {},
     [pendingTask]: begin
 })
 
-export const findCustomersSuccess = customers => ({
-    type: actionTypes.FIND_CUSTOMERS_SUCCESS,
-    payload: customers,
+export const findPackagesSuccess = packages => ({
+    type: actionTypes.FIND_PACKAGES_SUCCESS,
+    payload: packages,
     [pendingTask]: end
 })
 
-export const findCustomersError = error => ({
-    type: actionTypes.FIND_CUSTOMERS_ERROR,
+export const findPackagesByBarcodeSuccess = packages => ({
+    type: actionTypes.FIND_PACKAGES_BY_BARCODE_SUCCESS,
+    payload: packages,
+    [pendingTask]: end
+})
+
+export const findPackagesError = error => ({
+    type: actionTypes.FIND_PACKAGES_ERROR,
     payload: error,
     [pendingTask]: endAll
 })
 
-export const selectCustomers = selectedCustomers => ({
-    type: actionTypes.SELECT_CUSTOMERS,
-    payload: selectedCustomers
+export const selectPackages = selectedPackages => ({
+    type: actionTypes.SELECT_PACKAGES,
+    payload: selectedPackages
 })
 
-export const updateSelectedCustomerData = selectedCustomer => ({
-    type: actionTypes.UPDATE_SELECTED_CUSTOMER_DATA,
-    payload: selectedCustomer
+export const updateSelectedPackageData = selectedPackage => ({
+    type: actionTypes.UPDATE_SELECTED_PACKAGE_DATA,
+    payload: selectedPackage
 })
 
-export const deleteSelectedCustomerData = selectedCustomer => ({
-    type: actionTypes.DELETE_SELECTED_CUSTOMER_DATA,
-    payload: selectedCustomer
+export const deleteSelectedPackageData = selectedPackage => ({
+    type: actionTypes.DELETE_SELECTED_PACKAGE_DATA,
+    payload: selectedPackage
 })
 
-export const setSenderCustomer = senderCustomer => {
-    return ({
-        type: actionTypes.SET_SENDER_CUSTOMER,
-        payload: senderCustomer
-    })
-}
-
-export const setReceiverCustomer = receiverCustomer => ({
-    type: actionTypes.SET_RECEIVER_CUSTOMER,
-    payload: receiverCustomer
-})
-
-export const createCustomerBegin = () => ({
-    type: actionTypes.CREATE_CUSTOMER_BEGIN,
+export const createPackageBegin = () => ({
+    type: actionTypes.CREATE_PACKAGE_BEGIN,
     payload: {},
     [pendingTask]: begin
 })
 
-export const createCustomerSuccess = customer => ({
-    type: actionTypes.CREATE_CUSTOMER_SUCCESS,
-    payload: customer,
+export const createPackageSuccess = p => ({
+    type: actionTypes.CREATE_PACKAGE_SUCCESS,
+    payload: p,
     [pendingTask]: end
 })
 
-export const createCustomerError = error => ({
-    type: actionTypes.CREATE_CUSTOMER_ERROR,
+export const createPackageError = error => ({
+    type: actionTypes.CREATE_PACKAGE_ERROR,
     payload: error,
     [pendingTask]: endAll
 })
 
-export const updateCustomerBegin = () => ({
-    type: actionTypes.UPDATE_CUSTOMER_BEGIN,
+export const updatePackageBegin = () => ({
+    type: actionTypes.UPDATE_PACKAGE_BEGIN,
     payload: {},
     [pendingTask]: begin
 })
 
-export const updateCustomerSuccess = customer => ({
-    type: actionTypes.UPDATE_CUSTOMER_SUCCESS,
-    payload: customer,
+export const updatePackageSuccess = p => ({
+    type: actionTypes.UPDATE_PACKAGE_SUCCESS,
+    payload: p,
     [pendingTask]: end
 })
 
-export const updateCustomerError = error => ({
-    type: actionTypes.UPDATE_CUSTOMER_ERROR,
+export const updatePackageError = error => ({
+    type: actionTypes.UPDATE_PACKAGE_ERROR,
     payload: error,
     [pendingTask]: endAll
 })
 
-export const deleteCustomerBegin = () => ({
-    type: actionTypes.DELETE_CUSTOMER_BEGIN,
+export const deletePackageBegin = () => ({
+    type: actionTypes.DELETE_PACKAGE_BEGIN,
     payload: {},
     [pendingTask]: begin
 })
 
-export const deleteCustomerSuccess = customer => ({
-    type: actionTypes.DELETE_CUSTOMER_SUCCESS,
-    payload: customer,
+export const deletePackageSuccess = p => ({
+    type: actionTypes.DELETE_PACKAGE_SUCCESS,
+    payload: p,
     [pendingTask]: end
 })
 
-export const deleteCustomerError = error => ({
-    type: actionTypes.DELETE_CUSTOMER_ERROR,
+export const deletePackageError = error => ({
+    type: actionTypes.DELETE_PACKAGE_ERROR,
     payload: error,
     [pendingTask]: endAll
 })
 
-export const createCustomer = customer => {
+export const addCourierToPackages = (courier, packages) => ({
+    type: actionTypes.ADD_COURIER_TO_PACKAGES,
+    payload: {courier, packages}
+})
+
+export const createPackage = (p, history) => {
     return async dispatch => {
-        dispatch(createCustomerBegin())
-        customerService.createCustomer(customer)
+        dispatch(createPackageBegin())
+        packageService.createPackage(p)
             .then(async data => {
                 await data;
                 if (data.message) {
-                    dispatch(createCustomerError(data.message))
+                    dispatch(createPackageError(data.message))
                 } else {
-                    dispatch(createCustomerSuccess(data))
-                    customer.is_receiver ? dispatch(setReceiverCustomer(data)) : dispatch(setSenderCustomer(data))
-
+                    dispatch(createPackageSuccess(data));
+                    dispatch(addToCart({
+                        ...data,
+                        paymentFor: 'Package'
+                    }));
+                    history.push(Routes.checkout);
+                    notification.success('Bağlama artırıldı.')
                 }
             })
-            .catch(err => dispatch(createCustomerError(err)));
+            .catch(err => dispatch(createPackageError(err)));
     }
 }
 
-export const updateCustomer = (customer, selectedCustomer) => {
+export const updatePackage = (p, selectedPackage) => {
     return async dispatch => {
-        dispatch(updateCustomerBegin())
-        customerService.updateCustomer(customer)
+        dispatch(updatePackageBegin())
+        packageService.updatePackage(p)
             .then(async data => {
                 await data;
                 if (data.message) {
-                    dispatch(updateCustomerError(data.message))
+                    dispatch(updatePackageError(data.message))
                 } else {
-                    dispatch(updateCustomerSuccess(data))
-                    dispatch(updateSelectedCustomerData(changeSelectedCustomerValues(data, selectedCustomer)))
+                    dispatch(updatePackageSuccess(data))
+                    dispatch(updateSelectedPackageData(changeSelectedPackageValues(data, selectedPackage)))
                 }
             })
-            .catch(err => dispatch(updateCustomerError(err)));
+            .catch(err => dispatch(updatePackageError(err)));
     }
 }
 
-export const deleteCustomer = customer => {
+export const deletePackage = p => {
     return async dispatch => {
-        dispatch(deleteCustomerBegin())
-        customerService.deleteCustomer(customer)
+        dispatch(deletePackageBegin())
+        packageService.deletePackage(p)
             .then(async data => {
                 await data;
                 if (data.message) {
-                    dispatch(deleteCustomerError(data.message))
+                    dispatch(deletePackageError(data.message))
                 } else {
-                    dispatch(deleteCustomerSuccess(customer))
-                    dispatch(deleteSelectedCustomerData(customer))
+                    dispatch(deletePackageSuccess(p))
+                    dispatch(deleteSelectedPackageData(p))
                 }
             })
-            .catch(err => dispatch(deleteCustomerError(err)));
+            .catch(err => dispatch(deletePackageError(err)));
     }
 }
 
-export const findCustomers = findObject => {
+export const findPackages = findObject => {
     return async dispatch => {
-        dispatch(findCustomersBegin())
-        customerService.findCustomers(findObject)
+        dispatch(findPackagesBegin())
+        packageService.findPackages(findObject)
             .then(async data => {
                 await data;
                 if (data.message) {
-                    dispatch(findCustomersError(data.message))
+                    dispatch(findPackagesError(data.message))
                 } else {
-                    dispatch(findCustomersSuccess(data))
+                    if (findObject.via === 'viaBarcode') {
+                        dispatch(findPackagesByBarcodeSuccess(data));
+                    } else {
+                        dispatch(findPackagesSuccess(data))
+                    }
                 }
             })
-            .catch(err => dispatch(findCustomersError(err)));
+            .catch(err => dispatch(findPackagesError(err)));
     }
 }
 
-const changeSelectedCustomerValues = (values, lastSelectedCustomer) => {
-    for (let field in lastSelectedCustomer) {
+const changeSelectedPackageValues = (values, lastSelectedPackage) => {
+    for (let field in lastSelectedPackage) {
         for (let value in values) {
             if (field === value) {
-                lastSelectedCustomer[field] = values[value]
+                lastSelectedPackage[field] = values[value]
             }
         }
     }
-    return lastSelectedCustomer;
+    return lastSelectedPackage;
 }

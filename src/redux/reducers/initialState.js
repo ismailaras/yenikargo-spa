@@ -1,9 +1,46 @@
-const initialState =  {
-    currentCategory: {},
-    categories: [],
-    products: [],
+const initialState = {
+    auth: {
+        currentEmployee: {},
+        isAuthenticated: false,
+        error: false,
+        errorMessage: ''
+    },
+    customers: [],
+    selectedCustomers: {
+        lastSelectedCustomer: {},
+        allSelectedCustomers: [],
+        toggledClearRows: false
+    },
+    setCustomer: {
+        senderCustomer: {},
+        receiverCustomer: {}
+    },
+    allExtraSelling: [],
+    packages: [],
+    selectedPackages: {
+        lastSelectedPackage: {},
+        allSelectedPackages: [],
+        toggledClearRows: false
+    },
     cart: [],
-    savedProduct: {}
+    payments: [],
+    couriers: [],
+    selectedCouriers: {
+        lastSelectedCourier: {},
+        allSelectedCouriers: [],
+        toggledClearRows: false
+    },
+    stations: [],
+    selectedStations: {
+        lastSelectedStation: {},
+        allSelectedStations: [],
+        toggledClearRows: false
+    },
+    selectedAllExtraSelling: {
+        lastSelectedExtraSelling: {},
+        allSelectedAllExtraSelling: [],
+        toggledClearRows: false
+    },
 }
 
 export default initialState;

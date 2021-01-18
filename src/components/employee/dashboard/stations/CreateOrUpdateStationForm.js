@@ -2,7 +2,7 @@ import React from "react";
 import TextareaInput from "../../../toolbox/TextareaInput";
 import TextInput from "../../../toolbox/TextInput";
 
-const CreateOrUpdateExtraSellingForm = ({onSubmit, values, errors, onChange, onBlur, isSubmitting, touched,}) => {
+const CreateOrUpdateStationForm = ({onSubmit, values, errors, onChange, onBlur, isSubmitting, touched,}) => {
     return (
         <div>
             <form onSubmit={onSubmit}>
@@ -124,4 +124,4 @@ const CreateOrUpdateExtraSellingForm = ({onSubmit, values, errors, onChange, onB
     )
 }
 
-export default CreateOrUpdateExtraSellingForm;
+export default CreateOrUpdateStationForm;

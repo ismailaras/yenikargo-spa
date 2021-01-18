@@ -1,0 +1,64 @@
+import jwtDecode from "jwt-decode";
+
+export const getEmployeeCredentialsFromToken = () => {
+    const token = localStorage.getItem('jwtToken');
+    const decodedToken = jwtDecode(token);
+    return {
+        _id: decodedToken.identity,
+        password: decodedToken.user_claims.password
+    }
+}
+
+export const notEmpty = data => {
+    const type = Object.prototype.toString.call(data).slice(8, -1).toLowerCase();
+    switch (type) {
+        case 'null':
+        case 'undefined':
+            return false;
+        case 'object':
+            return Object.keys(data).length > 0;
+        case 'array':
+        case 'string':
+            return data !== 'undefined' && data !== 'null' && data.length > 0;
+        case 'boolean':
+            return !!data;
+        default:
+            return true;
+    }
+};
+
+export const formatDate = date => new Date(date).toLocaleString('az-AZ', {timeZone: 'Asia/Baku'});
+
+export const formatPercentage = percentage => `%${percentage * 100}`;
+
+export const formatBool = data => data ? 'Bəli' : 'Xeyir';
+
+export const formatPrice = currency => new Intl.NumberFormat('az-AZ', {
+    style: 'currency',
+    currency,
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+})
+
+export const getStateNameInAzerbaijani = state => {
+    switch (state) {
+        case 'Added':
+            return 'Əlavə edildi';
+        case 'Updated':
+            return 'Tənzimləndi';
+        case 'Deleted':
+            return 'Silindi';
+        default:
+            return state;
+    }
+}
+
+export const getCostsFromCartByPaymentSort = (cart, paymentSort) => {
+    switch (paymentSort) {
+        case 'ExtraSelling':
+
+            return
+        default:
+            return cart;
+    }
+}

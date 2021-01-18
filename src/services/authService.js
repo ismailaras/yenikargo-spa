@@ -1,30 +1,16 @@
-import axios from 'axios';
-import { setAuthorizationToken } from '../helpers/setAuthorizationToken';
+import * as apiService from '../services/apiService';
 
-
-const jwtToken = localStorage.getItem("jwtToken");
-if (jwtToken) {
-    setAuthorizationToken(jwtToken);
-}
-
-const signIn = (employeeCredentials) => {
-    console.log(employeeCredentials)
-    return axios.post("http://localhost:5000/employee/sign-in", employeeCredentials)
-        .then(employee => {
-            console.log(employee)
-            if (employee.data.status) {
-                const { token } = employee.data;
-                localStorage.setItem("jwtToken", token);
-                setAuthorizationToken(token);
+export const signIn = (employeeCredentials) => {
+    return apiService.post("employee/sign-in", employeeCredentials)
+        .then(data => {
+            if (!data.message) {
+                localStorage.setItem("jwtToken", data.jwtToken);
             }
-            return employee.data;
+            return data;
         })
-        .catch(err => console.log(err));
+        .catch(err => err);
 }
 
-const signOut = () => {
+export const signOut = () => {
     localStorage.removeItem("jwtToken");
-    setAuthorizationToken(false);
 }
-
-export default { signIn, signOut };

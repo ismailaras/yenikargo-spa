@@ -1,46 +1,43 @@
 import React, {useEffect} from 'react';
 import {getStations} from "../../../../redux/actions/stationActions";
-import {createCustomer, selectCustomers, updateCustomer} from "../../../../redux/actions/customerActions";
+import {createCourier, selectCouriers, updateCourier} from "../../../../redux/actions/courierActions";
 import {connect} from "react-redux";
-import CreateOrUpdateCustomerForm from "./CreateOrUpdateCustomerForm";
+import CreateOrUpdateCourierForm from "./CreateOrUpdateCourierForm";
 import {useFormik} from "formik";
 import {notEmpty} from "../../../../utilities/helpers";
-import {createOrUpdateCustomerFormValidationSchema} from '../../../../utilities/formValidationSchemas';
+import {createOrUpdateCourierFormValidationSchema} from '../../../../utilities/formValidationSchemas';
 
-const CreateOrUpdateCustomer = ({createCustomer, updateCustomer, stations, getStations, selectedCustomers, selectCustomers}) => {
+const CreateOrUpdateCourier = ({createCourier, updateCourier, stations, getStations, selectedCouriers, auth, selectedPackages}) => {
     useEffect(() => {
         if (stations.length === 0) {
-            getStations()
+            getStations();
         }
     });
     let initialValues = {
+        station_id: auth.currentEmployee.station_id,
         first_name: '',
+        package_ids: selectedPackages.allSelectedPackages.map(p => p.id),
         last_name: '',
         mobile_number: '',
-        password: '0000',
-        discount: 0,
-        station_id: '',
-        address: '',
-        card_number: '0000000000000000',
-        exp_date: '00/00',
-        bank_name: 'Qeyd edilməyib'
+        pick_up: false,
+        courier_cost: 0
     }
-    if (notEmpty(selectedCustomers.lastSelectedCustomer)) {
-        initialValues = selectedCustomers.lastSelectedCustomer
+    if (notEmpty(selectedCouriers.lastSelectedCourier)) {
+        initialValues = selectedCouriers.lastSelectedCourier
     }
     const {handleSubmit, handleChange, values, errors, touched, handleBlur, isSubmitting} = useFormik({
         initialValues,
-        validationSchema: createOrUpdateCustomerFormValidationSchema,
+        validationSchema: createOrUpdateCourierFormValidationSchema,
         onSubmit: (values, {setSubmitting}) => {
             values.is_partner = values.discount > 0
             values.id
-                ? updateCustomer(values, selectedCustomers.lastSelectedCustomer)
-                : createCustomer(values);
+                ? updateCourier(values, selectedCouriers.lastSelectedCourier)
+                : createCourier(values, selectedPackages.allSelectedPackages);
             setSubmitting(false);
         }
     });
     return (
-        <CreateOrUpdateCustomerForm
+        <CreateOrUpdateCourierForm
             onChange={handleChange}
             onSubmit={handleSubmit}
             onBlur={handleBlur}
@@ -55,15 +52,17 @@ const CreateOrUpdateCustomer = ({createCustomer, updateCustomer, stations, getSt
 
 const mapDispatchToProps = {
     getStations,
-    selectCustomers,
-    createCustomer,
-    updateCustomer
+    selectCouriers,
+    createCourier,
+    updateCourier
 }
 
 const mapStateToProps = state => ({
-    selectedCustomers: state.selectCustomersReducer,
-    stations: state.getStationsReducer
+    selectedCouriers: state.selectCouriersReducer,
+    selectedPackages: state.selectPackagesReducer,
+    stations: state.getStationsReducer,
+    auth: state.authReducer
 });
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateOrUpdateCustomer);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateOrUpdateCourier);

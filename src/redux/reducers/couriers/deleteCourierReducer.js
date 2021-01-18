@@ -2,13 +2,13 @@ import * as actionTypes from '../../actions/actionTypes';
 import initialState from "../initialState";
 
 
-export const deleteCustomerReducer = (state = initialState.selectedCustomers.lastSelectedCustomer, action) => {
+export const deleteCourierReducer = (state = initialState.selectedCouriers.lastSelectedCourier, action) => {
     switch (action.type) {
-        case actionTypes.DELETE_CUSTOMER_BEGIN:
+        case actionTypes.DELETE_COURIER_BEGIN:
             return state;
-        case actionTypes.DELETE_CUSTOMER_SUCCESS:
+        case actionTypes.DELETE_COURIER_SUCCESS:
             return action.payload;
-        case actionTypes.DELETE_CUSTOMER_ERROR:
+        case actionTypes.DELETE_COURIER_ERROR:
             return state
         default:
             return state;

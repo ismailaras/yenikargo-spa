@@ -1,40 +1,41 @@
 import React from 'react';
-import {findCustomers, selectCustomers} from '../../../../redux/actions/customerActions';
+import {findPackages, selectPackages} from '../../../../redux/actions/packageActions';
 import {connect} from "react-redux";
-import FindCustomersForm from "./FindCustomersForm";
+import FindPackagesForm from "./FindPackagesForm";
 import {useFormik} from "formik";
-import {findCustomersFormValidationSchema} from '../../../../utilities/formValidationSchemas';
+import {findPackagesFormValidationSchema} from '../../../../utilities/formValidationSchemas';
 
-const FindCustomers = ({findCustomers, selectCustomers}) => {
-    const {handleSubmit, handleChange, values, errors, touched, handleBlur, isSubmitting} = useFormik({
+const FindPackages = ({findPackages, selectPackages}) => {
+    const {handleSubmit, handleChange, values, errors, touched, handleBlur, isSubmitting, submitForm} = useFormik({
         initialValues: {keyword: '', via: 'viaId'},
-        validationSchema: findCustomersFormValidationSchema,
+        validationSchema: findPackagesFormValidationSchema,
         onSubmit: (values, {setSubmitting}) => {
-            selectCustomers([]); // Axtaris zamani secilmish musteriler bosh array edir.
-            findCustomers(values);
+            selectPackages([]); // Axtaris zamani secilmish musteriler bosh array edir.
+            findPackages(values);
             setSubmitting(false);
         }
     });
     const radioInputProps = [
         {
             value: 'viaId',
-            label: 'Müştəri ID ilə'
+            label: 'Bağlama ID ilə'
         },
         {
-            value: 'viaCustomerMobileNumber',
-            label: 'Müştəri mobil nömrəsi ilə'
+            value: 'viaBarcode',
+            label: 'Barcode ilə'
         },
         {
-            value: 'viaCustomerFirstName',
-            label: 'Müştəri Adı ilə'
-        },
-        {
-            value: 'viaCustomerLastName',
-            label: 'Müştəri Soyadı ilə'
-        },
+            value: 'viaTrackingState',
+            label: 'Bağlama statusu ilə'
+        }
     ];
+    const handleKeyPress = e => {
+        if (e.target.value.length === 13) {
+            submitForm();
+        }
+    }
     return (
-        <FindCustomersForm
+        <FindPackagesForm
             errors={errors}
             values={values}
             onSubmit={handleSubmit}
@@ -42,6 +43,7 @@ const FindCustomers = ({findCustomers, selectCustomers}) => {
             radioInputProps={radioInputProps}
             onBlur={handleBlur}
             touched={touched}
+            onKeyPress={handleKeyPress}
             isSubmitting={isSubmitting}
         />
     )
@@ -49,11 +51,11 @@ const FindCustomers = ({findCustomers, selectCustomers}) => {
 
 
 const mapDispatchToProps = {
-    findCustomers,
-    selectCustomers
+    findPackages,
+    selectPackages
 }
 
 const mapStateToProps = state => ({});
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(FindCustomers);
+export default connect(mapStateToProps, mapDispatchToProps)(FindPackages);

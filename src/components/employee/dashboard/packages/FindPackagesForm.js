@@ -1,15 +1,18 @@
 import React from 'react';
 import RadioInputGroup from "../../../toolbox/RadioInputGroup";
-import TextInput from "../../../toolbox/TextInput";
 import NumberInput from "../../../toolbox/NumberInput";
+import SelectInput from "../../../toolbox/SelectInput";
+import {iterTrackingStates} from '../../../../enums/trackingStateEnum'
+import TextInput from "../../../toolbox/TextInput";
 
-const FindCustomersForm = ({onSubmit, onChange, values, errors, onBlur, touched, isSubmitting, radioInputProps}) => {
+
+const FindPackagesForm = ({onSubmit, onChange, values, errors, onBlur, touched, isSubmitting, radioInputProps, onKeyPress}) => {
     return (
         <div>
             <div className="card">
                 <form onSubmit={onSubmit}>
                     <div className="card-header">
-                        Müştəri axtar
+                        Bağlama axtar
                     </div>
                     <div className="card-body">
                         <RadioInputGroup
@@ -20,8 +23,8 @@ const FindCustomersForm = ({onSubmit, onChange, values, errors, onBlur, touched,
                         />
                         <hr/>
                         {
-                            (values.via === 'viaId') || (values.via === 'viaCustomerMobileNumber')
-                                ? <NumberInput
+                            {
+                                'viaId': <NumberInput
                                     value={values.keyword}
                                     name="keyword"
                                     label="Açar söz"
@@ -30,17 +33,33 @@ const FindCustomersForm = ({onSubmit, onChange, values, errors, onBlur, touched,
                                     error={errors.keyword}
                                     onChange={onChange}
                                     onBlur={onBlur}
-                                />
-                                : <TextInput
+                                />,
+                                'viaBarcode': <TextInput
                                     value={values.keyword}
                                     name="keyword"
-                                    label="Açar söz"
-                                    placeHolder="Açar söz"
+                                    label="Barkod"
+                                    onKeyPress={onKeyPress}
+                                    placeHolder="0000000000000"
+                                    touched={touched.keyword}
+                                    error={errors.keyword}
+                                    onChange={onChange}
+                                    onBlur={onBlur}
+                                />,
+                                'viaTrackingState': <SelectInput
+                                    value={values.keyword}
+                                    name="keyword"
+                                    options={iterTrackingStates().map(trackingStateObj => ({
+                                        value: trackingStateObj.value,
+                                        text: trackingStateObj.name
+                                    }))}
+                                    label="Bağlama statusu"
+                                    defaultOption="Status seçin"
                                     touched={touched.keyword}
                                     error={errors.keyword}
                                     onChange={onChange}
                                     onBlur={onBlur}
                                 />
+                            }[values.via]
                         }
                     </div>
                     <div className="card-footer">
@@ -54,4 +73,4 @@ const FindCustomersForm = ({onSubmit, onChange, values, errors, onBlur, touched,
         </div>
     )
 }
-export default FindCustomersForm;
+export default FindPackagesForm;

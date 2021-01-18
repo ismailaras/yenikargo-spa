@@ -2,7 +2,7 @@ import React from 'react';
 import NumberInput from "../../../toolbox/NumberInput";
 import PasswordInput from "../../../toolbox/PasswordInput";
 
-const SignIn = ({onSubmit, employeeCredentials, errors, onChange}) => {
+const SignInForm = ({onSubmit, values, errors, onChange, onBlur, isSubmitting, touched}) => {
     return (
         <div>
             <div className="container" style={{marginTop: 150}}>
@@ -17,24 +17,32 @@ const SignIn = ({onSubmit, employeeCredentials, errors, onChange}) => {
                                     <NumberInput
                                         label="Əməkdaş pin kodu"
                                         placeHolder="4 rəqəmli pin kod"
-                                        name="employeeId"
+                                        name="_id"
+                                        touched={touched._id}
+                                        onBlur={onBlur}
                                         onChange={onChange}
-                                        error={errors.employeeId}
-                                        value={employeeCredentials.employeeId}
+                                        error={errors._id}
+                                        value={values._id}
                                     />
                                     <PasswordInput
                                         label="Şifrə"
                                         placeHolder="Şifrə"
-                                        name="employeePassword"
+                                        name="password"
                                         onChange={onChange}
-                                        error={errors.employeePassword}
-                                        value={employeeCredentials.employeePassword}
+                                        onBlur={onBlur}
+                                        touched={touched.password}
+                                        error={errors.password}
+                                        value={values.password}
                                     />
-                                    <button className="btn btn-primary btn-block" type="submit">Təsdiqlə</button>
+                                    <button
+                                        className="btn btn-primary btn-block"
+                                        disabled={isSubmitting}
+                                        type="submit">Təsdiqlə
+                                    </button>
                                 </form>
                             </div>
                             <div className="card-footer text-center">
-                                <span>© Yeni Kargo MMC</span>
+                                <span>© Yeni Kargo</span>
                             </div>
                         </div>
                     </div>
@@ -44,4 +52,4 @@ const SignIn = ({onSubmit, employeeCredentials, errors, onChange}) => {
     )
 }
 
-export default SignIn;
+export default SignInForm;

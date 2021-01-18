@@ -1,74 +1,51 @@
 import React, {useEffect} from 'react';
 import {getAllExtraSelling} from "../../../../redux/actions/extraSellingActions";
 import {connect} from "react-redux";
-import RadioInputGroup from "../../../toolbox/RadioInputGroup";
-import {formatPrice} from "../../../../utilities/helpers";
+import {addToCart, removeFromCart} from "../../../../redux/actions/cartActions";
+import {ExtraSellingForm} from "./ExtraSellingForm";
 
-const ExtraSellingRadioButtons = ({getAllExtraSelling, allExtraSelling, values, onChange}) => {
+
+const ExtraSelling = ({getAllExtraSelling, allExtraSelling, addToCart, removeFromCart}) => {
     useEffect(() => {
         if (allExtraSelling.length === 0) {
             getAllExtraSelling();
         }
     });
-    const allBagSelling = allExtraSelling.filter(extraSelling => extraSelling.selling_type === 'Bag');
-    const allEnvelopeSelling = allExtraSelling.filter(extraSelling => extraSelling.selling_type === 'Envelope');
-    const allPackingSelling = allExtraSelling.filter(extraSelling => extraSelling.selling_type === 'Packing');
-    const allBagSellingRadioInputProps = allBagSelling.map(bagSelling => ({
-        value: bagSelling.id,
-        label: bagSelling.name + ' - ' + formatPrice('AZN').format(bagSelling.price)
-    }));
-    const allEnvelopeSellingRadioInputProps = allEnvelopeSelling.map(envelopeSelling => ({
-        value: envelopeSelling.id,
-        label: envelopeSelling.name + ' - ' + formatPrice('AZN').format(envelopeSelling.price)
-    }));
-    const allPackingSellingRadioInputProps = allPackingSelling.map(packingSelling => ({
-        value: packingSelling.id,
-        label: packingSelling.name + ' - ' + formatPrice('AZN').format(packingSelling.price)
-    }));
+    const handleChange = (event) => {
+        const {name, value} = event.target;
+        const extraSelling = allExtraSelling.find(extraSelling => extraSelling.id === parseInt(name, 10));
+        const quantity = parseInt(value, 10);
+        const cartItem = {
+            id: extraSelling.id,
+            name: extraSelling.name,
+            quantity,
+            paymentFor: 'ExtraSelling',
+            price: extraSelling.price
+        };
+        if (quantity > 0) {
+            addToCart(cartItem);
+        } else {
+            removeFromCart(cartItem);
+        }
+    }
     return (
-        <div className="row">
-            <div className="col-md-12">
-                <h6><strong>Ekstra servislər</strong></h6>
-            </div>
-            <div className="col-md-4">
-                <strong>Klyok</strong>
-                <RadioInputGroup
-                    radioInputProps={allBagSellingRadioInputProps}
-                    name="bagSelling"
-                    checkedValue={values.bagSelling}
-                    onChange={onChange}
-                />
-            </div>
-            <div className="col-md-4">
-                <strong>Zərf</strong>
-                <RadioInputGroup
-                    radioInputProps={allEnvelopeSellingRadioInputProps}
-                    name="envelopeSelling"
-                    checkedValue={values.envelopeSelling}
-                    onChange={onChange}
-                />
-            </div>
-            <div className="col-md-4">
-                <strong>Qablaşdırma</strong>
-                <RadioInputGroup
-                    radioInputProps={allPackingSellingRadioInputProps}
-                    name="packingSelling"
-                    checkedValue={values.packingSelling}
-                    onChange={onChange}
-                />
-            </div>
-        </div>
+        <ExtraSellingForm
+            handleChange={handleChange}
+            allExtraSelling={allExtraSelling}
+        />
     )
 }
 
-
 const mapDispatchToProps = {
-    getAllExtraSelling
+    getAllExtraSelling,
+    addToCart,
+    removeFromCart
 }
 
 const mapStateToProps = state => ({
-    allExtraSelling: state.getAllExtraSellingReducer
+    allExtraSelling: state.getAllExtraSellingReducer,
+    cart: state.cartReducer
 });
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(ExtraSellingRadioButtons);
+export default connect(mapStateToProps, mapDispatchToProps)(ExtraSelling);

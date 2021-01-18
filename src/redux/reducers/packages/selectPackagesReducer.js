@@ -1,27 +1,39 @@
 import * as actionTypes from '../../actions/actionTypes';
 import initialState from "../initialState";
 
-export const selectCustomersReducer = (state = initialState.selectedCustomers, action) => {
+export const selectPackagesReducer = (state = initialState.selectedPackages, action) => {
     switch (action.type) {
-        case actionTypes.SELECT_CUSTOMERS:
+        case actionTypes.SELECT_PACKAGES:
             const [lastItem] = action.payload.slice(-1)
             if (action.payload.length === 0) {
                 state.toggledClearRows = !state.toggledClearRows
             }
             return {
-                allSelectedCustomers: action.payload,
-                lastSelectedCustomer: lastItem,
+                allSelectedPackages: action.payload,
+                lastSelectedPackage: lastItem,
                 toggledClearRows: state.toggledClearRows
             }
-        case actionTypes.UPDATE_SELECTED_CUSTOMER_DATA:
-            state.allSelectedCustomers.forEach(customer => {
-                if (customer.id === action.payload.id) {
-                    state.lastSelectedCustomer = action.payload;
+        case actionTypes.UPDATE_SELECTED_PACKAGE_DATA:
+            state.allSelectedPackages.forEach(p => {
+                if (p.id === action.payload.id) {
+                    state.lastSelectedPackage = action.payload;
                 }
             })
-            return {...state, lastSelectedCustomer: action.payload}
-        case actionTypes.DELETE_SELECTED_CUSTOMER_DATA:
-            return {...state, lastSelectedCustomer: {}}
+            return {...state, lastSelectedPackage: action.payload}
+        case actionTypes.ADD_COURIER_TO_PACKAGES:
+            const {packages, courier} = action.payload;
+            state.allSelectedPackages.forEach(ps => {
+                let selectedPackage = packages.find(p => ps.id === p.id);
+                if (selectedPackage) {
+                    state.lastSelectedPackage.courier_id = courier.id;
+                    state.lastSelectedPackage.courier_cost = courier.courier_cost;
+                    ps.courier_id = courier.id;
+                    ps.courier_cost = courier.courier_cost;
+                }
+            })
+            return state;
+        case actionTypes.DELETE_SELECTED_PACKAGE_DATA:
+            return {...state, lastSelectedPackage: {}}
         default:
             return state;
     }

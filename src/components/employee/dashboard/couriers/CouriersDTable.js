@@ -1,16 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import DTable from "../../../toolbox/DTable";
 import {connect} from "react-redux";
-import {
-    deleteCourier,
-    selectCouriers,
-    setReceiverCourier,
-    setSenderCourier
-} from '../../../../redux/actions/courierActions';
+import {deleteCourier, selectCouriers, findCouriersSuccess} from '../../../../redux/actions/courierActions';
 import CreateOrUpdateCourier from "./CreateOrUpdateCourier";
 import ModalButton from "../../../toolbox/ModalButton";
 import {CourierDTableChild} from "./CourierDTableChild";
-import {formatBool, formatDate, formatPercentage, getStateNameInAzerbaijani} from "../../../../utilities/helpers";
+import {formatBool, formatDate, getStateNameInAzerbaijani} from "../../../../utilities/helpers";
 
 const cols = [
     {
@@ -34,36 +29,15 @@ const cols = [
         sortable: true
     },
     {
-        name: <h6>Ünvan</h6>,
-        selector: 'address',
+        name: <h6>Məbləğ</h6>,
+        selector: 'courier_cost',
         sortable: true
     },
     {
-        name: <h6>Bank adı</h6>,
-        selector: 'bank_name',
-        sortable: true
-    },
-    {
-        name: <h6>Kart nömrəsi</h6>,
-        selector: 'card_number',
-        sortable: true
-    },
-    {
-        name: <h6>Bitiş tarixi</h6>,
-        selector: 'exp_date',
-        sortable: true
-    },
-    {
-        name: <h6>Partnyordur</h6>,
-        selector: 'is_partner',
+        name: <h6>Qapıdan təhvil</h6>,
+        selector: 'pick_up',
         sortable: true,
-        format: row => formatBool(row['is_partner'])
-    },
-    {
-        name: <h6>Güzəşt</h6>,
-        selector: 'discount',
-        sortable: true,
-        format: row => formatPercentage(row['discount'])
+        format: row => formatBool(row['pick_up'])
     },
     {
         name: <h6>Tarix</h6>,
@@ -80,62 +54,36 @@ const cols = [
     },
 ]
 
-const CouriersDTable = ({deleteCourier, selectCouriers, couriers, selectedCouriers, setSenderCourier, setReceiverCourier}) => {
+const CouriersDTable = ({deleteCourier, selectCouriers, couriers, selectedCouriers}) => {
     const [foundCouriers, setFoundCouriers] = useState(couriers);
     useEffect(() => {
+        // use useDispatch hook to handle removing an entity
         setFoundCouriers(couriers)
     }, [couriers]);
     const handleChange = e => {
         selectCouriers(e.selectedRows);
     };
-    const setSender = () => {
-        setSenderCourier(selectedCouriers.lastSelectedCourier);
-    }
-    const setReceiver = () => {
-        setReceiverCourier(selectedCouriers.lastSelectedCourier);
-    }
     const removeCourier = () => {
         deleteCourier(selectedCouriers.lastSelectedCourier);
         setFoundCouriers(couriers.filter(courier => selectedCouriers.lastSelectedCourier.id !== courier.id))
     }
     const buttons = [
         <ModalButton
-            buttonLabel="Müştəri artır"
-            header="Müştəri artır"
-            key={1}
-            size={'md'}
-            disabled={selectedCouriers.allSelectedCouriers.length !== 0}
-            body={<CreateOrUpdateCourier/>}
-        />,
-        <button
-            onClick={() => setSender()}
-            key={2}
-            className="btn btn-primary mx-2"
-            disabled={selectedCouriers.allSelectedCouriers.length !== 1}>
-            Göndərən seç
-        </button>,
-        <button
-            onClick={() => setReceiver()}
-            key={3}
-            className="btn btn-primary mr-2"
-            disabled={selectedCouriers.allSelectedCouriers.length !== 1}>
-            Alan seç
-        </button>,
-        <ModalButton
             buttonLabel="Tənzimlə"
-            header="Müştəri tənzimlə"
-            key={4}
+            header="Kuryer tənzimlə"
+            key={1}
             size={'md'}
             disabled={selectedCouriers.allSelectedCouriers.length !== 1}
             body={<CreateOrUpdateCourier/>}
         />,
         <button
             onClick={() => removeCourier()}
-            key={5}
+            key={2}
             className="btn btn-primary ml-2"
             disabled={selectedCouriers.allSelectedCouriers.length !== 1}>
             Sil
         </button>
+
     ]
     return (
         <div>
@@ -146,7 +94,7 @@ const CouriersDTable = ({deleteCourier, selectCouriers, couriers, selectedCourie
                 expandableRowsComponent={<CourierDTableChild/>}
                 clearSelectedRows={selectedCouriers.toggledClearRows}
                 handleChange={handleChange}
-                title={'Müştəri'}
+                title={'Kuryer'}
             />
         </div>
     )
@@ -159,9 +107,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
     selectCouriers,
-    setSenderCourier,
-    setReceiverCourier,
-    deleteCourier
+    deleteCourier,
+    findCouriersSuccess
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CouriersDTable);

@@ -1,11 +1,11 @@
 import React, {useEffect} from 'react';
 import DTable from "../../../toolbox/DTable";
 import {connect} from "react-redux";
-import {deleteExtraSelling, getAllExtraSelling, selectAllExtraSelling} from '../../../../redux/actions/extraSellingActions';
+import {deleteStation, getStations, selectStations} from '../../../../redux/actions/stationActions';
 import {addToCart} from "../../../../redux/actions/cartActions";
-import CreateOrUpdateExtraSelling from "./CreateOrUpdateExtraSelling";
+import CreateOrUpdateStation from "./CreateOrUpdateStation";
 import ModalButton from "../../../toolbox/ModalButton";
-import {ExtraSellingDTableChild} from "./ExtraSellingDTableChild";
+import {StationDTableChild} from "./StationDTableChild";
 import {formatDate, getStateNameInAzerbaijani} from "../../../../utilities/helpers";
 
 
@@ -76,17 +76,17 @@ const cols = [
     }
 ]
 
-const AllExtraSellingDTable = ({deleteExtraSelling, selectAllExtraSelling, extraSellings, selectedAllExtraSelling, getAllExtraSelling}) => {
+const StationsDTable = ({deleteStation, selectStations, stations, selectedStations, getStations}) => {
     useEffect(() => {
-        if (extraSellings.length === 0) {
-            getAllExtraSelling();
+        if (stations.length === 0) {
+            getStations();
         }
     });
     const handleChange = e => {
-        selectAllExtraSelling(e.selectedRows);
+        selectStations(e.selectedRows);
     };
-    const removeExtraSelling = () => {
-        deleteExtraSelling(selectedAllExtraSelling.lastSelectedExtraSelling);
+    const removeStation = () => {
+        deleteStation(selectedStations.lastSelectedStation);
     }
     const buttons = [
         <ModalButton
@@ -94,15 +94,15 @@ const AllExtraSellingDTable = ({deleteExtraSelling, selectAllExtraSelling, extra
             header="Filial artır"
             key={1}
             size={'md'}
-            disabled={selectedAllExtraSelling.allSelectedAllExtraSelling.length !== 0}
-            body={<CreateOrUpdateExtraSelling/>}
+            disabled={selectedStations.allSelectedStations.length !== 0}
+            body={<CreateOrUpdateStation/>}
         />,
         <button
-            onClick={() => removeExtraSelling()}
+            onClick={() => removeStation()}
             key={2}
             className="btn btn-primary mx-2"
             disabled={
-                selectedAllExtraSelling.allSelectedAllExtraSelling.length !== 1}
+                selectedStations.allSelectedStations.length !== 1}
         >
             Sil
         </button>,
@@ -111,18 +111,18 @@ const AllExtraSellingDTable = ({deleteExtraSelling, selectAllExtraSelling, extra
             header="Filial tənzimlə"
             key={3}
             size={'md'}
-            disabled={selectedAllExtraSelling.allSelectedAllExtraSelling.length !== 1}
-            body={<CreateOrUpdateExtraSelling/>}
+            disabled={selectedStations.allSelectedStations.length !== 1}
+            body={<CreateOrUpdateStation/>}
         />
     ]
     return (
         <div>
             <DTable
-                data={extraSellings}
+                data={stations}
                 buttons={buttons}
                 cols={cols}
-                expandableRowsComponent={<ExtraSellingDTableChild/>}
-                clearSelectedRows={selectedAllExtraSelling.toggledClearRows}
+                expandableRowsComponent={<StationDTableChild/>}
+                clearSelectedRows={selectedStations.toggledClearRows}
                 handleChange={handleChange}
                 title={'Filial'}
             />
@@ -131,15 +131,15 @@ const AllExtraSellingDTable = ({deleteExtraSelling, selectAllExtraSelling, extra
 }
 
 const mapStateToProps = state => ({
-    extraSellings: state.getAllExtraSellingReducer,
-    selectedAllExtraSelling: state.selectAllExtraSellingReducer
+    stations: state.getStationsReducer,
+    selectedStations: state.selectStationsReducer
 });
 
 const mapDispatchToProps = {
-    selectAllExtraSelling,
-    deleteExtraSelling,
+    selectStations,
+    deleteStation,
     addToCart,
-    getAllExtraSelling
+    getStations
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AllExtraSellingDTable);
+export default connect(mapStateToProps, mapDispatchToProps)(StationsDTable);

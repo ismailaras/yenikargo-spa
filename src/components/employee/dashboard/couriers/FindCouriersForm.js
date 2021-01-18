@@ -9,7 +9,7 @@ const FindCouriersForm = ({onSubmit, onChange, values, errors, onBlur, touched, 
             <div className="card">
                 <form onSubmit={onSubmit}>
                     <div className="card-header">
-                        Müştəri axtar
+                        Kuryer axtar
                     </div>
                     <div className="card-body">
                         <RadioInputGroup

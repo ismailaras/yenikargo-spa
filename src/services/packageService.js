@@ -1,25 +1,25 @@
 import * as apiService from '../services/apiService';
 
-export const findCustomers = findObject => {
-    return apiService.post("customer/filter", findObject)
+export const findPackages = findObject => {
+    return apiService.post("package/filter", findObject)
         .then(data => data)
         .catch(err => err);
 }
 
-export const createCustomer = customer => {
-    return apiService.post("customer", customer)
+export const createPackage = p => {
+    return apiService.post("package", p)
         .then(data => data)
         .catch(err => err);
 }
 
-export const updateCustomer = customer => {
-    return apiService.put("customer", customer)
+export const updatePackage = p => {
+    return apiService.put("package", p)
         .then(data => data)
         .catch(err => err);
 }
 
-export const deleteCustomer = customer => {
-    return apiService.del("customer/" + customer.id)
+export const deletePackage = p => {
+    return apiService.del("package/" + p.id)
         .then(data => data)
         .catch(err => err);
 }

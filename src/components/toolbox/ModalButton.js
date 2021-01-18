@@ -1,15 +1,16 @@
 import React, {useState} from 'react';
 import {Button, Modal, ModalBody, ModalHeader} from 'reactstrap';
 
-const ModalForm = ({buttonLabel, header, body, size, disabled}) => {
+const ModalButton = ({buttonLabel, header, body, size, disabled, buttonSize}) => {
     const [modal, setModal] = useState(false);
 
     const toggle = () => setModal(!modal);
 
     return (
         <span>
-            <Button color="primary" onClick={toggle} disabled={disabled}>{buttonLabel}</Button>
+            <Button color="primary" size={buttonSize} onClick={toggle} disabled={disabled}>{buttonLabel}</Button>
             <Modal isOpen={modal}
+                   backdrop={'static'}
                    toggle={toggle} size={size}>
                 <ModalHeader toggle={toggle}>{header}</ModalHeader>
                 <ModalBody>
@@ -20,4 +21,4 @@ const ModalForm = ({buttonLabel, header, body, size, disabled}) => {
     );
 }
 
-export default ModalForm;
+export default ModalButton;
