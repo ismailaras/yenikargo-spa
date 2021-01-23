@@ -54,6 +54,11 @@ const cols = [
         sortable: true
     },
     {
+        name: <h6>Filial</h6>,
+        selector: 'station_id',
+        sortable: true
+    },
+    {
         name: <h6>Partnyordur</h6>,
         selector: 'is_partner',
         sortable: true,
@@ -124,6 +129,7 @@ const CustomersDTable = ({deleteCustomer, selectCustomers, customers, selectedCu
         <ModalButton
             buttonLabel="Tənzimlə"
             header="Müştəri tənzimlə"
+            buttonColor="success"
             key={4}
             size={'md'}
             disabled={selectedCustomers.allSelectedCustomers.length !== 1}
@@ -132,7 +138,7 @@ const CustomersDTable = ({deleteCustomer, selectCustomers, customers, selectedCu
         <button
             onClick={() => removeCustomer()}
             key={5}
-            className="btn btn-primary ml-2"
+            className="btn btn-danger ml-2"
             disabled={selectedCustomers.allSelectedCustomers.length !== 1}>
             Sil
         </button>

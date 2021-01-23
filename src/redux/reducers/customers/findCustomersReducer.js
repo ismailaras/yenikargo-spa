@@ -8,7 +8,7 @@ export const findCustomersReducer = (state = initialState.customers, action) => 
         case actionTypes.FIND_CUSTOMERS_SUCCESS:
             return action.payload;
         case actionTypes.FIND_CUSTOMERS_ERROR:
-            return state
+            return []
         default:
             return state;
     }

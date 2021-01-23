@@ -116,7 +116,7 @@ export const createStation = p => {
                 } else {
                     dispatch(createStationSuccess(data));
                     dispatch(addStationToTable(data));
-                    notification.success('Filial artırıldı.')
+                    notification.success('Filial artırıldı')
                 }
             })
             .catch(err => dispatch(createStationError(err)));
@@ -134,6 +134,7 @@ export const updateStation = (p, selectedStation) => {
                 } else {
                     dispatch(updateStationSuccess(data))
                     dispatch(updateStationOnTable(data))
+                    notification.success('Filial tənzimləndi')
                     dispatch(updateSelectedStationData(changeSelectedStationValues(data, selectedStation)))
                 }
             })
@@ -153,6 +154,7 @@ export const deleteStation = p => {
                     dispatch(deleteStationSuccess(p))
                     dispatch(deleteStationFromTable(p))
                     dispatch(deleteSelectedStationData(p))
+                    notification.error('Filial silindi')
                 }
             })
             .catch(err => dispatch(deleteStationError(err)));

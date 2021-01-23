@@ -136,6 +136,7 @@ export const updatePackage = (p, selectedPackage) => {
                 } else {
                     dispatch(updatePackageSuccess(data))
                     dispatch(updateSelectedPackageData(changeSelectedPackageValues(data, selectedPackage)))
+                    notification.success('Bağlama məlumatları tənzimləndi')
                 }
             })
             .catch(err => dispatch(updatePackageError(err)));
@@ -153,6 +154,7 @@ export const deletePackage = p => {
                 } else {
                     dispatch(deletePackageSuccess(p))
                     dispatch(deleteSelectedPackageData(p))
+                    notification.success('Bağlama silindi')
                 }
             })
             .catch(err => dispatch(deletePackageError(err)));

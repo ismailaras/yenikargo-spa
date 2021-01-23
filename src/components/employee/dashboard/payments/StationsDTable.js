@@ -100,7 +100,7 @@ const StationsDTable = ({deleteStation, selectStations, stations, selectedStatio
         <button
             onClick={() => removeStation()}
             key={2}
-            className="btn btn-primary mx-2"
+            className="btn btn-danger mx-2"
             disabled={
                 selectedStations.allSelectedStations.length !== 1}
         >
@@ -109,6 +109,7 @@ const StationsDTable = ({deleteStation, selectStations, stations, selectedStatio
         <ModalButton
             buttonLabel="Tənzimlə"
             header="Filial tənzimlə"
+            buttonColor="success"
             key={3}
             size={'md'}
             disabled={selectedStations.allSelectedStations.length !== 1}

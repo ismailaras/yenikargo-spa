@@ -100,7 +100,7 @@ const AllExtraSellingDTable = ({deleteExtraSelling, selectExtraSelling, allExtra
         <button
             onClick={() => removeExtraSelling()}
             key={2}
-            className="btn btn-primary mx-2"
+            className="btn btn-danger mx-2"
             disabled={
                 selectedAllExtraSelling.allSelectedAllExtraSelling.length !== 1}
         >
@@ -109,6 +109,7 @@ const AllExtraSellingDTable = ({deleteExtraSelling, selectExtraSelling, allExtra
         <ModalButton
             buttonLabel="Tənzimlə"
             header="Filial tənzimlə"
+            buttonColor="success"
             key={3}
             size={'md'}
             disabled={selectedAllExtraSelling.allSelectedAllExtraSelling.length !== 1}

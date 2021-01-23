@@ -1,5 +1,6 @@
 import * as actionTypes from "./actionTypes";
 import * as customerService from "../../services/customerService";
+import * as notification from "../../utilities/notification";
 import {begin, end, endAll, pendingTask} from 'react-redux-spinner';
 
 export const findCustomersBegin = () => ({
@@ -112,7 +113,7 @@ export const createCustomer = customer => {
                 } else {
                     dispatch(createCustomerSuccess(data))
                     customer.is_receiver ? dispatch(setReceiverCustomer(data)) : dispatch(setSenderCustomer(data))
-
+                    notification.success('Müştəri artırıldı')
                 }
             })
             .catch(err => dispatch(createCustomerError(err)));
@@ -127,9 +128,11 @@ export const updateCustomer = (customer, selectedCustomer) => {
                 await data;
                 if (data.message) {
                     dispatch(updateCustomerError(data.message))
+                    notification.success('*Mobil nömrə fərqli olmalıdır')
                 } else {
                     dispatch(updateCustomerSuccess(data))
                     dispatch(updateSelectedCustomerData(changeSelectedCustomerValues(data, selectedCustomer)))
+                    notification.success('Müştəri məlumatları tənzimləndi')
                 }
             })
             .catch(err => dispatch(updateCustomerError(err)));
@@ -147,6 +150,7 @@ export const deleteCustomer = customer => {
                 } else {
                     dispatch(deleteCustomerSuccess(customer))
                     dispatch(deleteSelectedCustomerData(customer))
+                    notification.success('Müştəri silindi')
                 }
             })
             .catch(err => dispatch(deleteCustomerError(err)));

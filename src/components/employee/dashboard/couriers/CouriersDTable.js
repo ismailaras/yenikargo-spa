@@ -71,6 +71,7 @@ const CouriersDTable = ({deleteCourier, selectCouriers, couriers, selectedCourie
         <ModalButton
             buttonLabel="Tənzimlə"
             header="Kuryer tənzimlə"
+            buttonColor="success"
             key={1}
             size={'md'}
             disabled={selectedCouriers.allSelectedCouriers.length !== 1}
@@ -79,7 +80,7 @@ const CouriersDTable = ({deleteCourier, selectCouriers, couriers, selectedCourie
         <button
             onClick={() => removeCourier()}
             key={2}
-            className="btn btn-primary ml-2"
+            className="btn btn-danger ml-2"
             disabled={selectedCouriers.allSelectedCouriers.length !== 1}>
             Sil
         </button>

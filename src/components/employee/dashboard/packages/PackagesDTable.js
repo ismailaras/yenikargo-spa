@@ -138,12 +138,17 @@ const cols = [
 ]
 
 const PackagesDTable = ({deletePackage, selectPackages, packages, selectedPackages, addToCart}) => {
+    const [foundPackages, setFoundPackages] = useState(packages);
+    useEffect(() => {
+        setFoundPackages(packages)
+    }, [packages]);
     const history = useHistory();
     const handleChange = e => {
         selectPackages(e.selectedRows);
     };
     const removePackage = () => {
         deletePackage(selectedPackages.lastSelectedPackage);
+        setFoundPackages(packages.filter(p => selectedPackages.lastSelectedPackage.id !== p.id))
     }
     const addToCartAndRedirect = () => {
         selectedPackages.allSelectedPackages.forEach(p => {
@@ -161,6 +166,7 @@ const PackagesDTable = ({deletePackage, selectPackages, packages, selectedPackag
             buttonLabel="Tənzimlə"
             header="Bağlama tənzimlə"
             key={1}
+            buttonColor="success"
             size={'md'}
             disabled={
                 selectedPackages.allSelectedPackages.length !== 1 ||
@@ -170,7 +176,7 @@ const PackagesDTable = ({deletePackage, selectPackages, packages, selectedPackag
         <button
             onClick={() => removePackage()}
             key={2}
-            className="btn btn-primary ml-2"
+            className="btn btn-danger ml-2"
             disabled={
                 selectedPackages.allSelectedPackages.length !== 1 ||
                 selectedPackages.lastSelectedPackage.tracking_state !== 'Declared'}
@@ -204,7 +210,7 @@ const PackagesDTable = ({deletePackage, selectPackages, packages, selectedPackag
     return (
         <div>
             <DTable
-                data={packages}
+                data={foundPackages}
                 buttons={buttons}
                 cols={cols}
                 expandableRowsComponent={<PackageDTableChild/>}

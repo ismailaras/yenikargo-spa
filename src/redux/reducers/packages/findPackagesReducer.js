@@ -25,7 +25,7 @@ export const findPackagesReducer = (state = initialState.packages, action) => {
             })
             return state;
         case actionTypes.FIND_PACKAGES_ERROR:
-            return state
+            return []
         default:
             return state;
     }

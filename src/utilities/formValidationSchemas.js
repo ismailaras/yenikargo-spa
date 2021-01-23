@@ -86,10 +86,14 @@ export const createOrUpdateStationFormValidationSchema = Yup.object().shape({
         .required("Filial adı daxil edilməlidir."),
     address: Yup.string()
         .required("Ünvan daxil edilməlidir."),
+    city: Yup.string()
+        .required("Şəhər daxil edilməlidir."),    
     phone_number: Yup.string()
-        .required("Telefon nömrəsi daxil edilməlidir."),
+        .required("Telefon nömrəsi daxil edilməlidir.")
+        .test('len', '10 xanalı olmalıdır. (0505005050)', val => val && val.toString().length === 10),
     mobile_number: Yup.string()
-        .required("Mobil nömrə daxil edilməlidir."),
+        .required("Mobil nömrə daxil edilməlidir.")
+        .test('len', '10 xanalı olmalıdır. (0505005050)', val => val && val.toString().length === 10),
     url: Yup.string()
         .required("URL daxil edilməlidir.")
 });
