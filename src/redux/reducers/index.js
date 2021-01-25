@@ -1,71 +1,80 @@
-import {combineReducers} from "redux";
-import {authReducer} from "./auth/authReducer";
-import {findCustomersReducer} from "./customers/findCustomersReducer";
-import {selectCustomersReducer} from "./customers/selectCustomersReducer";
-import {setCustomerReducer} from "./customers/setCustomerReducer";
-import {createCustomerReducer} from "./customers/createCustomerReducer";
-import {updateCustomerReducer} from "./customers/updateCustomerReducer";
-import {deleteCustomerReducer} from "./customers/deleteCustomerReducer";
-import {getStationsReducer} from "./stations/getStationsReducer";
-import {findPackagesReducer} from "./packages/findPackagesReducer";
-import {selectPackagesReducer} from "./packages/selectPackagesReducer";
-import {createPackageReducer} from "./packages/createPackageReducer";
-import {updatePackageReducer} from "./packages/updatePackageReducer";
-import {deletePackageReducer} from "./packages/deletePackageReducer";
-import {getAllExtraSellingReducer} from "./extra-selling/getAllExtraSellingReducer";
-import {cartReducer} from "./checkout/cartReducer";
-import {pendingTasksReducer} from 'react-redux-spinner';
-import * as actionTypes from '../actions/actionTypes';
-import {findCouriersReducer} from "./couriers/findCouriersReducer";
-import {selectCouriersReducer} from "./couriers/selectCouriersReducer";
-import {createCourierReducer} from "./couriers/createCourierReducer";
-import {updateCourierReducer} from "./couriers/updateCourierReducer";
-import {deleteCourierReducer} from "./couriers/deleteCourierReducer";
-import {createPaymentsReducer} from "./payments/createPaymentsReducer";
-import {deleteStationReducer} from "./stations/deleteStationReducer";
-import {updateStationReducer} from "./stations/updateStationReducer";
-import {createStationReducer} from "./stations/createStationReducer";
-import {selectStationsReducer} from "./stations/selectStationsReducer";
-import {selectAllExtraSellingReducer} from "./extra-selling/selectAllExtraSellingReducer";
-import {createExtraSellingReducer} from "./extra-selling/createExtraSellingReducer";
-import {updateExtraSellingReducer} from "./extra-selling/updateExtraSellingReducer";
-import {deleteExtraSellingReducer} from "./extra-selling/deleteExtraSellingReducer";
+import { combineReducers } from "redux";
+import { authReducer } from "./auth/authReducer";
+import { findCustomersReducer } from "./customers/findCustomersReducer";
+import { selectCustomersReducer } from "./customers/selectCustomersReducer";
+import { setCustomerReducer } from "./customers/setCustomerReducer";
+import { createCustomerReducer } from "./customers/createCustomerReducer";
+import { updateCustomerReducer } from "./customers/updateCustomerReducer";
+import { deleteCustomerReducer } from "./customers/deleteCustomerReducer";
+import { getStationsReducer } from "./stations/getStationsReducer";
+import { findPackagesReducer } from "./packages/findPackagesReducer";
+import { selectPackagesReducer } from "./packages/selectPackagesReducer";
+import { createPackageReducer } from "./packages/createPackageReducer";
+import { updatePackageReducer } from "./packages/updatePackageReducer";
+import { deletePackageReducer } from "./packages/deletePackageReducer";
+import { getAllExtraSellingReducer } from "./extra-selling/getAllExtraSellingReducer";
+import { cartReducer } from "./checkout/cartReducer";
+import { pendingTasksReducer } from "react-redux-spinner";
+import * as actionTypes from "../actions/actionTypes";
+import { findCouriersReducer } from "./couriers/findCouriersReducer";
+import { selectCouriersReducer } from "./couriers/selectCouriersReducer";
+import { createCourierReducer } from "./couriers/createCourierReducer";
+import { updateCourierReducer } from "./couriers/updateCourierReducer";
+import { deleteCourierReducer } from "./couriers/deleteCourierReducer";
+import { findEmployeesReducer } from "./employees/findEmployeesReducer";
+import { selectEmployeesReducer } from "./employees/selectEmployeesReducer";
+import { createEmployeeReducer } from "./employees/createEmployeeReducer";
+import { updateEmployeeReducer } from "./employees/updateEmployeeReducer";
+import { deleteEmployeeReducer } from "./employees/deleteEmployeeReducer";
+import { createPaymentsReducer } from "./payments/createPaymentsReducer";
+import { deleteStationReducer } from "./stations/deleteStationReducer";
+import { updateStationReducer } from "./stations/updateStationReducer";
+import { createStationReducer } from "./stations/createStationReducer";
+import { selectStationsReducer } from "./stations/selectStationsReducer";
+import { selectAllExtraSellingReducer } from "./extra-selling/selectAllExtraSellingReducer";
+import { createExtraSellingReducer } from "./extra-selling/createExtraSellingReducer";
+import { updateExtraSellingReducer } from "./extra-selling/updateExtraSellingReducer";
+import { deleteExtraSellingReducer } from "./extra-selling/deleteExtraSellingReducer";
 
 const appReducer = combineReducers({
-    authReducer,
-    findCustomersReducer,
-    selectCustomersReducer,
-    setCustomerReducer,
-    getStationsReducer,
-    createCustomerReducer,
-    updateCustomerReducer,
-    deleteCustomerReducer,
-    findPackagesReducer,
-    selectPackagesReducer,
-    createPackageReducer,
-    updatePackageReducer,
-    deletePackageReducer,
-    cartReducer,
-    findCouriersReducer,
-    selectCouriersReducer,
-    createCourierReducer,
-    updateCourierReducer,
-    deleteCourierReducer,
-    createPaymentsReducer,
-    selectStationsReducer,
-    createStationReducer,
-    updateStationReducer,
-    deleteStationReducer,
-    getAllExtraSellingReducer,
-    selectAllExtraSellingReducer,
-    createExtraSellingReducer,
-    updateExtraSellingReducer,
-    deleteExtraSellingReducer,
-    pendingTasks: pendingTasksReducer
-})
+  authReducer,
+  findCustomersReducer,
+  selectCustomersReducer,
+  setCustomerReducer,
+  getStationsReducer,
+  createCustomerReducer,
+  updateCustomerReducer,
+  deleteCustomerReducer,
+  findPackagesReducer,
+  selectPackagesReducer,
+  createPackageReducer,
+  updatePackageReducer,
+  deletePackageReducer,
+  cartReducer,
+  findCouriersReducer,
+  selectCouriersReducer,
+  createCourierReducer,
+  updateCourierReducer,
+  deleteCourierReducer,
+  createEmployeeReducer,
+  updateEmployeeReducer,
+  deleteEmployeeReducer,
+  selectEmployeesReducer,
+  findEmployeesReducer,
+  createPaymentsReducer,
+  selectStationsReducer,
+  createStationReducer,
+  updateStationReducer,
+  deleteStationReducer,
+  getAllExtraSellingReducer,
+  selectAllExtraSellingReducer,
+  createExtraSellingReducer,
+  updateExtraSellingReducer,
+  deleteExtraSellingReducer,
+  pendingTasks: pendingTasksReducer,
+});
 
-
-const rootReducer = (state, action) =>  {
+const rootReducer = (state, action) => {
   if (action.type === actionTypes.EMPLOYEE_SIGN_OUT) {
     state = undefined;
   }

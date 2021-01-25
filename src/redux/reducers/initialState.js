@@ -11,6 +11,12 @@ const initialState = {
         allSelectedCustomers: [],
         toggledClearRows: false
     },
+    employees: [],
+    selectedEmployees: {
+        lastSelectedEmployee: {},
+        allSelectedEmployees: [],
+        toggledClearRows: false
+    },
     setCustomer: {
         senderCustomer: {},
         receiverCustomer: {}

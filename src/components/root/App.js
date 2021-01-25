@@ -13,6 +13,7 @@ import Checkout from "../employee/dashboard/checkout/Checkout";
 import Landing from "../landing/Landing";
 import Couriers from "../employee/dashboard/couriers/Couriers";
 import Stations from "../employee/dashboard/stations/Stations";
+import Employees from "../employee/dashboard/employees/Employees";
 import AllExtraSelling from "../employee/dashboard/all-extra-selling/AllExtraSelling";
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
                 <PrivateRoute exact path={Routes.courier} component={Couriers}/>
                 <PrivateRoute exact path={Routes.stations} component={Stations}/>
                 <PrivateRoute exact path={Routes.allExtraSelling} component={AllExtraSelling}/>
+                <PrivateRoute exact path={Routes.employees} component={Employees}/>
                 {/*<Route path="/saveProduct/:productId" component={AddOrUpdateProduct}/>*/}
                 {/*<Route path="/saveProduct" component={AddOrUpdateProduct}/>*/}
                 <Route component={NotFound}/>

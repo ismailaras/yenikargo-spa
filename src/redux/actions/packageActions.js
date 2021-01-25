@@ -1,8 +1,8 @@
 import * as actionTypes from "./actionTypes";
 import * as packageService from "../../services/packageService";
+import * as notification from '../../utilities/notification';
 import {begin, end, endAll, pendingTask} from 'react-redux-spinner';
 import {addToCart} from "./cartActions";
-import * as notification from '../../utilities/notification';
 import {Routes} from "../../routes";
 
 export const findPackagesBegin = () => ({

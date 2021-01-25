@@ -21,45 +21,9 @@ const cols = [
         sortable: true
     },
     {
-        name: <h6>Şəhər</h6>,
-        selector: 'city',
+        name: <h6>Qiymət</h6>,
+        selector: 'price',
         sortable: true
-    },
-    {
-        name: <h6>Enlik</h6>,
-        selector: 'latitude',
-        sortable: true
-    },
-    {
-        name: <h6>Uzunluq</h6>,
-        selector: 'longitude',
-        sortable: true
-    },
-    {
-        name: <h6>Ünvan</h6>,
-        selector: 'address',
-        sortable: true
-    },
-    {
-        name: <h6>Ünvan</h6>,
-        selector: 'address',
-        sortable: true
-    },
-    {
-        name: <h6>Telefon nömrəsi</h6>,
-        selector: 'phone_number',
-        sortable: true
-    },
-    {
-        name: <h6>Mobil nömrə</h6>,
-        selector: 'mobile_number',
-        sortable: true
-    },
-    {
-        name: <h6>URL</h6>,
-        selector: 'url',
-        sortable: true,
-        format: row => <a href={row.url} rel="noreferrer" target="_blank">URL</a>
     },
     {
         name: <h6>Son hərəkət</h6>,
@@ -90,8 +54,8 @@ const AllExtraSellingDTable = ({deleteExtraSelling, selectExtraSelling, allExtra
     }
     const buttons = [
         <ModalButton
-            buttonLabel="Filial artır"
-            header="Filial artır"
+            buttonLabel="Servis artır"
+            header="Servis artır"
             key={1}
             size={'md'}
             disabled={selectedAllExtraSelling.allSelectedAllExtraSelling.length !== 0}
@@ -108,7 +72,7 @@ const AllExtraSellingDTable = ({deleteExtraSelling, selectExtraSelling, allExtra
         </button>,
         <ModalButton
             buttonLabel="Tənzimlə"
-            header="Filial tənzimlə"
+            header="Servis tənzimlə"
             buttonColor="success"
             key={3}
             size={'md'}
@@ -125,7 +89,7 @@ const AllExtraSellingDTable = ({deleteExtraSelling, selectExtraSelling, allExtra
                 expandableRowsComponent={<ExtraSellingDTableChild/>}
                 clearSelectedRows={selectedAllExtraSelling.toggledClearRows}
                 handleChange={handleChange}
-                title={'Filial'}
+                title={'Servis'}
             />
         </div>
     )

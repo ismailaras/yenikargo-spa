@@ -6,10 +6,6 @@ import CheckboxInput from "../../../toolbox/CheckboxInput";
 const CreateOrUpdateCourierForm = ({onSubmit, values, errors, onChange, onBlur, isSubmitting, touched}) => {
     return (
         <div>
-            <span className="mr-2">Seçilmiş bağlamalar:</span>
-            {values.package_ids.map(p => (
-                <div className="badge badge-primary mr-2 mb-2" key={p}><span>{p}</span></div>
-            ))}
             <form onSubmit={onSubmit}>
                 <div className="form-row">
                     <div className="col-md-6">

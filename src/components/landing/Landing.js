@@ -1,11 +1,12 @@
 import React from "react";
+import { Container } from "reactstrap";
 import Navi from "./Navi";
 
 const Landing = () => {
   return (
     <div>
       <Navi />
-      <h1>Landing page here</h1>
+        <h1>YeniKargo</h1>
     </div>
   );
 };

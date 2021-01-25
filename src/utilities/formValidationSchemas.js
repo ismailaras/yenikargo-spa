@@ -25,6 +25,21 @@ export const createOrUpdateCustomerFormValidationSchema = Yup.object().shape({
         .test('len', '5 xanalı olmalıdır. (GG/AA)', val => val && val.toString().length === 5)
 });
 
+export const createOrUpdateEmployeeFormValidationSchema = Yup.object().shape({
+    first_name: Yup.string()
+        .required("Ad daxil edilməlidir."),
+    last_name: Yup.string()
+        .required("Soyad daxil edilməlidir."),
+    mobile_number: Yup.string()
+        .required("Mobil nömrə daxil edilməlidir.")
+        .test('len', '10 xanalı olmalıdır. (0505005050)', val => val && val.toString().length === 10),
+    address: Yup.string()
+        .required("Ünvan daxil edilməlidir."),
+    exp_date: Yup.string()
+        .required("Bitiş tarixi daxil edilməlidir.")
+        .test('len', '5 xanalı olmalıdır. (GG/AA)', val => val && val.toString().length === 5)
+});
+
 export const createOrUpdatePackageFormValidationSchema = Yup.object().shape({
     weight: Yup.string()
         .required("Çəki daxil edilməlidir."),
@@ -50,6 +65,13 @@ export const signInFormValidationSchema = Yup.object().shape({
 });
 
 export const findCustomersFormValidationSchema = Yup.object().shape({
+    keyword: Yup.string()
+        .required("Açar söz daxil edilməlidir.")
+        .test('len', 'Açar söz ən az 3 xanalı olmalıdır.', val => val && val.toString().length >= 3)
+});
+
+
+export const findEmployeesFormValidationSchema = Yup.object().shape({
     keyword: Yup.string()
         .required("Açar söz daxil edilməlidir.")
         .test('len', 'Açar söz ən az 3 xanalı olmalıdır.', val => val && val.toString().length >= 3)

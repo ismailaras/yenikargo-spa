@@ -21,7 +21,6 @@ export const getAllExtraSellingError = error => ({
     [pendingTask]: endAll
 })
 
-
 export const selectExtraSelling = selectedExtraSelling => ({
     type: actionTypes.SELECT_ALL_EXTRA_SELLING,
     payload: selectedExtraSelling
@@ -135,13 +134,13 @@ export const updateExtraSelling = (p, selectedExtraSelling) => {
                 } else {
                     dispatch(updateExtraSellingSuccess(data))
                     dispatch(updateExtraSellingOnTable(data))
+                    notification.success('Əlavə xidmət tənzimləndi')
                     dispatch(updateSelectedExtraSellingData(changeSelectedExtraSellingValues(data, selectedExtraSelling)))
                 }
             })
             .catch(err => dispatch(updateExtraSellingError(err)));
     }
 }
-
 
 export const deleteExtraSelling = p => {
     return async dispatch => {
@@ -155,6 +154,7 @@ export const deleteExtraSelling = p => {
                     dispatch(deleteExtraSellingSuccess(p))
                     dispatch(deleteExtraSellingFromTable(p))
                     dispatch(deleteSelectedExtraSellingData(p))
+                    notification.error('Əlavə xidmət silindi')
                 }
             })
             .catch(err => dispatch(deleteExtraSellingError(err)));

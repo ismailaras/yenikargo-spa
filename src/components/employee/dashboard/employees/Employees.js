@@ -1,21 +1,22 @@
 import React from "react";
 import Navi from "../common/Navi";
 import {Col, Container, Row} from "reactstrap/es";
-import FindPackages from "./FindPackages";
-import PackagesDTable from "./PackagesDTable";
+import FindEmployees from "./FindEmployees";
+import EmployeesDTable from "./EmployeesDTable";
 import {connect} from 'react-redux'
 
-const Packages = () => {
+
+const Employees = () => {
     return (
         <div>
             <Navi/>
             <Container fluid={true}>
                 <Row>
                     <Col md={3} className="mb-3">
-                        <FindPackages/>
+                        <FindEmployees/>
                     </Col>
                     <Col md={9}>
-                        <PackagesDTable/>
+                        <EmployeesDTable/>
                     </Col>
                 </Row>
             </Container>
@@ -23,11 +24,10 @@ const Packages = () => {
     )
 }
 
-
 const mapStateToProps = state => ({
 
 });
 
 const mapDispatchToProps = {};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Packages);
+export default connect(mapStateToProps, mapDispatchToProps)(Employees);

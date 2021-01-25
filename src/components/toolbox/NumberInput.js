@@ -13,7 +13,7 @@ const NumberInput = ({name, label, onChange, placeHolder, value, error, onBlur, 
         <div className='form-group'>
             <label htmlFor={name}>{label}</label>
             <input
-                type="number"
+                type="tel"
                 defaultValue={value}
                 onChange={onChange}
                 autoFocus={autoFocus}
