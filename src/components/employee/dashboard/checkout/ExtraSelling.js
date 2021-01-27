@@ -7,7 +7,7 @@ import {ExtraSellingForm} from "./ExtraSellingForm";
 
 const ExtraSelling = ({getAllExtraSelling, allExtraSelling, addToCart, removeFromCart}) => {
     useEffect(() => {
-        if (allExtraSelling.length > 0) {
+        if (allExtraSelling.length === 0) {
             getAllExtraSelling();
         }
     });

@@ -1,12 +1,12 @@
-import React, {useEffect} from 'react';
-import {useHistory} from 'react-router-dom';
-import {getStations} from "../../../../redux/actions/stationActions";
-import {createPackage, selectPackages, updatePackage} from "../../../../redux/actions/packageActions";
-import {connect} from "react-redux";
+import React, { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import { getStations } from "../../../../redux/actions/stationActions";
+import { createPackage, selectPackages, updatePackage } from "../../../../redux/actions/packageActions";
+import { connect } from "react-redux";
 import CreateOrUpdatePackageForm from "./CreateOrUpdatePackageForm";
-import {useFormik} from "formik";
-import {notEmpty} from "../../../../utilities/helpers";
-import {createOrUpdatePackageFormValidationSchema} from '../../../../utilities/formValidationSchemas';
+import { useFormik } from "formik";
+import { notEmpty } from "../../../../utilities/helpers";
+import { createOrUpdatePackageFormValidationSchema } from '../../../../utilities/formValidationSchemas';
 
 let initialValues = {
     sender_customer_id: '',
@@ -27,6 +27,7 @@ let initialValues = {
     quantity: 1
 }
 
+
 function setInitialValues(setCustomers, selectedPackages) {
     if (notEmpty(setCustomers.senderCustomer) && notEmpty(setCustomers.receiverCustomer)) {
         initialValues.sender_customer_id = setCustomers.senderCustomer.id;
@@ -39,9 +40,9 @@ function setInitialValues(setCustomers, selectedPackages) {
 }
 
 const CreateOrUpdatePackage = ({
-                                   createPackage, updatePackage, stations, getStations,
-                                   selectedPackages, setCustomers
-                               }) => {
+    createPackage, updatePackage, stations, getStations,
+    selectedPackages, setCustomers
+}) => {
     useEffect(() => {
         if (stations.length === 0) {
             getStations();
@@ -49,10 +50,10 @@ const CreateOrUpdatePackage = ({
         setInitialValues(setCustomers, selectedPackages);
     });
     const history = useHistory();
-    const {handleSubmit, handleChange, values, errors, touched, handleBlur, isSubmitting} = useFormik({
+    const { handleSubmit, handleChange, values, errors, touched, handleBlur, isSubmitting } = useFormik({
         initialValues,
         validationSchema: createOrUpdatePackageFormValidationSchema,
-        onSubmit: (values, {setSubmitting}) => {
+        onSubmit: (values, { setSubmitting }) => {
             values.id
                 ? updatePackage(values, selectedPackages.lastSelectedPackage)
                 : createPackage(values, history);

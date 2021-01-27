@@ -16,14 +16,9 @@ const CreateOrUpdateEmployee = ({createEmployee, updateEmployee, stations, getSt
     let initialValues = {
         first_name: '',
         last_name: '',
-        mobile_number: '',
+        email_address: '',
         password: '0000',
-        discount: 0,
         station_id: '',
-        address: '',
-        card_number: '0000000000000000',
-        exp_date: '00/00',
-        bank_name: 'Qeyd edilməyib'
     }
     if (notEmpty(selectedEmployees.lastSelectedEmployee)) {
         initialValues = selectedEmployees.lastSelectedEmployee

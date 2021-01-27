@@ -80,6 +80,12 @@ export const updatePackageError = error => ({
     [pendingTask]: endAll
 })
 
+export const setPackageStatus = p => ({
+    type: actionTypes.SET_PACKAGE_STATUS,
+    payload: p,
+    [pendingTask]: begin
+})
+
 export const deletePackageBegin = () => ({
     type: actionTypes.DELETE_PACKAGE_BEGIN,
     payload: {},

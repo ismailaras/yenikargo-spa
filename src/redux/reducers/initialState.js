@@ -21,7 +21,6 @@ const initialState = {
         senderCustomer: {},
         receiverCustomer: {}
     },
-    allExtraSelling: [],
     packages: [],
     selectedPackages: {
         lastSelectedPackage: {},
@@ -42,6 +41,7 @@ const initialState = {
         allSelectedStations: [],
         toggledClearRows: false
     },
+    allExtraSelling: [],
     selectedAllExtraSelling: {
         lastSelectedExtraSelling: {},
         allSelectedAllExtraSelling: [],

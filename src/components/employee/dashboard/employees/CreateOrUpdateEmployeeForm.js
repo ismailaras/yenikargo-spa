@@ -1,9 +1,6 @@
 import React from "react";
 import TextInput from "../../../toolbox/TextInput";
 import SelectInput from "../../../toolbox/SelectInput";
-import TextareaInput from "../../../toolbox/TextareaInput";
-import NumberInput from "../../../toolbox/NumberInput";
-import CheckboxInput from "../../../toolbox/CheckboxInput";
 import PasswordInput from "../../../toolbox/PasswordInput";
 
 const CreateOrUpdateEmployeeForm = ({onSubmit, values, errors, onChange, onBlur, isSubmitting, touched, stations}) => {
@@ -39,14 +36,14 @@ const CreateOrUpdateEmployeeForm = ({onSubmit, values, errors, onChange, onBlur,
                 <div className="form-row">
                     <div className="col-md-6">
                         <TextInput
-                            label="Mobil nömrə"
-                            placeHolder="Mobil nömrə"
-                            name="mobile_number"
-                            value={values.mobile_number}
-                            error={errors.mobile_number}
+                            label="Email"
+                            placeHolder="Email"
+                            name="email_address"
+                            value={values.email_address}
+                            error={errors.email_address}
                             onChange={onChange}
                             onBlur={onBlur}
-                            touched={touched.mobile_number}
+                            touched={touched.email_address}
                         />
                     </div>
                     <div className="col-md-6">
@@ -63,56 +60,6 @@ const CreateOrUpdateEmployeeForm = ({onSubmit, values, errors, onChange, onBlur,
                     </div>
                 </div>
                 <div className="form-row">
-                    <div className="col-md-4">
-                        <TextInput
-                            label="Bank adı"
-                            placeHolder="Bank adı"
-                            name="bank_name"
-                            value={values.bank_name}
-                            error={errors.bank_name}
-                            onChange={onChange}
-                            onBlur={onBlur}
-                            touched={touched.bank_name}
-                        />
-                    </div>
-                    <div className="col-md-5">
-                        <TextInput
-                            label="Kart nömrəsi"
-                            placeHolder="Kart nömrəsi"
-                            name="card_number"
-                            value={values.card_number}
-                            error={errors.card_number}
-                            onChange={onChange}
-                            onBlur={onBlur}
-                            touched={touched.card_number}
-                        />
-                    </div>
-                    <div className="col-md-3">
-                        <TextInput
-                            label="Bitiş tarixi"
-                            placeHolder="Bitiş tarixi"
-                            name="exp_date"
-                            value={values.exp_date}
-                            error={errors.exp_date}
-                            onChange={onChange}
-                            onBlur={onBlur}
-                            touched={touched.exp_date}
-                        />
-                    </div>
-                </div>
-                <div className="form-row">
-                    <div className="col-md-6">
-                        <NumberInput
-                            label="Güzəşt (0 - 1)"
-                            placeHolder="Güzəşt"
-                            name="discount"
-                            value={values.discount}
-                            error={errors.discount}
-                            onChange={onChange}
-                            onBlur={onBlur}
-                            touched={touched.discount}
-                        />
-                    </div>
                     <div className="col-md-6">
                         <SelectInput
                             label="Filial"
@@ -131,34 +78,6 @@ const CreateOrUpdateEmployeeForm = ({onSubmit, values, errors, onChange, onBlur,
                         />
                     </div>
                 </div>
-                <div className="form-row">
-                    <div className="col-md-12">
-                        <TextareaInput
-                            label="Ünvan"
-                            placeHolder="Ünvan"
-                            name="address"
-                            value={values.address}
-                            error={errors.address}
-                            onChange={onChange}
-                            onBlur={onBlur}
-                            touched={touched.address}
-                        />
-                    </div>
-                </div>
-                {!values.id
-                    ?
-                    <div className="form-row">
-                        <div className="col-md-12">
-                            <CheckboxInput
-                                label="Alan müştəri olaraq seç (Cari olaraq: Göndərən müştəri)"
-                                name="is_receiver"
-                                value={values.is_receiver}
-                                onChange={onChange}
-                            />
-                        </div>
-                    </div>
-                    :
-                    null}
                 <div className="form-row">
                     <div className="col-md-12">
                         <button className="btn btn-primary" type="submit" disabled={isSubmitting}>

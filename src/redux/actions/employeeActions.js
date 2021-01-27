@@ -1,36 +1,34 @@
 import * as actionTypes from "./actionTypes";
 import * as employeeService from "../../services/employeeService";
 
-export const getEmployeeByIdSuccess = employee => ({
-    type: actionTypes.GET_EMPLOYEE_BY_ID_SUCCESS,
-    payload: employee
-})
-
-export const getEmployeeByIdError = error => ({
-    type: actionTypes.GET_EMPLOYEE_BY_ID_ERROR,
-    payload: error
-})
-
-export const getEmployeeById = employeeId => {
-    return dispatch => {
-        employeeService.getEmployeeById(employeeId)
-            .then(data => {
-                if (data.message) {
-                    dispatch(getEmployeeByIdError(data.message))
-                } else {
-                    dispatch(getEmployeeByIdSuccess(data))
-                }
-            })
-            .catch(err => dispatch(getEmployeeByIdError(err)));
-    }
-}
-
-// -------------------------++++++++++++++++++++++++----------------------- //
-
-// import * as actionTypes from "./actionTypes";
-// import * as employeeService from "../../services/employeeService";
 import * as notification from "../../utilities/notification";
 import {begin, end, endAll, pendingTask} from 'react-redux-spinner';
+
+// export const getEmployeeByIdSuccess = employee => ({
+//     type: actionTypes.GET_EMPLOYEE_BY_ID_SUCCESS,
+//     payload: employee
+// })
+
+// export const getEmployeeByIdError = error => ({
+//     type: actionTypes.GET_EMPLOYEE_BY_ID_ERROR,
+//     payload: error
+// })
+
+// export const getEmployeeById = employeeId => {
+//     return dispatch => {
+//         employeeService.getEmployeeById(employeeId)
+//             .then(data => {
+//                 if (data.message) {
+//                     dispatch(getEmployeeByIdError(data.message))
+//                 } else {
+//                     dispatch(getEmployeeByIdSuccess(data))
+//                 }
+//             })
+//             .catch(err => dispatch(getEmployeeByIdError(err)));
+//     }
+// }
+
+// -------------------------++++++++++++++++++++++++----------------------- //
 
 export const findEmployeesBegin = () => ({
     type: actionTypes.FIND_EMPLOYEES_BEGIN,
@@ -56,77 +54,77 @@ export const selectEmployees = selectedEmployees => ({
 })
 
 export const updateSelectedEmployeeData = selectedEmployee => ({
-    type: actionTypes.UPDATE_SELECTED_CUSTOMER_DATA,
+    type: actionTypes.UPDATE_SELECTED_EMPLOYEE_DATA,
     payload: selectedEmployee
 })
 
 export const deleteSelectedEmployeeData = selectedEmployee => ({
-    type: actionTypes.DELETE_SELECTED_CUSTOMER_DATA,
+    type: actionTypes.DELETE_SELECTED_EMPLOYEE_DATA,
     payload: selectedEmployee
 })
 
 export const setSenderEmployee = senderEmployee => {
     return ({
-        type: actionTypes.SET_SENDER_CUSTOMER,
+        type: actionTypes.SET_SENDER_EMPLOYEE,
         payload: senderEmployee
     })
 }
 
 export const setReceiverEmployee = receiverEmployee => ({
-    type: actionTypes.SET_RECEIVER_CUSTOMER,
+    type: actionTypes.SET_RECEIVER_EMPLOYEE,
     payload: receiverEmployee
 })
 
 export const createEmployeeBegin = () => ({
-    type: actionTypes.CREATE_CUSTOMER_BEGIN,
+    type: actionTypes.CREATE_EMPLOYEE_BEGIN,
     payload: {},
     [pendingTask]: begin
 })
 
 export const createEmployeeSuccess = employee => ({
-    type: actionTypes.CREATE_CUSTOMER_SUCCESS,
+    type: actionTypes.CREATE_EMPLOYEE_SUCCESS,
     payload: employee,
     [pendingTask]: end
 })
 
 export const createEmployeeError = error => ({
-    type: actionTypes.CREATE_CUSTOMER_ERROR,
+    type: actionTypes.CREATE_EMPLOYEE_ERROR,
     payload: error,
     [pendingTask]: endAll
 })
 
 export const updateEmployeeBegin = () => ({
-    type: actionTypes.UPDATE_CUSTOMER_BEGIN,
+    type: actionTypes.UPDATE_EMPLOYEE_BEGIN,
     payload: {},
     [pendingTask]: begin
 })
 
 export const updateEmployeeSuccess = employee => ({
-    type: actionTypes.UPDATE_CUSTOMER_SUCCESS,
+    type: actionTypes.UPDATE_EMPLOYEE_SUCCESS,
     payload: employee,
     [pendingTask]: end
 })
 
 export const updateEmployeeError = error => ({
-    type: actionTypes.UPDATE_CUSTOMER_ERROR,
+    type: actionTypes.UPDATE_EMPLOYEE_ERROR,
     payload: error,
     [pendingTask]: endAll
 })
 
 export const deleteEmployeeBegin = () => ({
-    type: actionTypes.DELETE_CUSTOMER_BEGIN,
+    type: actionTypes.DELETE_EMPLOYEE_BEGIN,
     payload: {},
     [pendingTask]: begin
 })
 
 export const deleteEmployeeSuccess = employee => ({
-    type: actionTypes.DELETE_CUSTOMER_SUCCESS,
+    type: actionTypes.DELETE_EMPLOYEE_SUCCESS,
     payload: employee,
     [pendingTask]: end
 })
 
 export const deleteEmployeeError = error => ({
-    type: actionTypes.DELETE_CUSTOMER_ERROR,
+    type: actionTypes.DELETE_EMPLOYEE_ERROR,
     payload: error,
     [pendingTask]: endAll
 })

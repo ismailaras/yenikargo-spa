@@ -4,11 +4,11 @@ import initialState from "../initialState";
 
 export const deleteExtraSellingReducer = (state = initialState.selectedAllExtraSelling.lastSelectedExtraSelling, action) => {
     switch (action.type) {
-        case actionTypes.DELETE_STATION_BEGIN:
+        case actionTypes.DELETE_EXTRA_SELLING_BEGIN:
             return state;
-        case actionTypes.DELETE_STATION_SUCCESS:
+        case actionTypes.DELETE_EXTRA_SELLING_SUCCESS:
             return action.payload;
-        case actionTypes.DELETE_STATION_ERROR:
+        case actionTypes.DELETE_EXTRA_SELLING_ERROR:
             return state
         default:
             return state;

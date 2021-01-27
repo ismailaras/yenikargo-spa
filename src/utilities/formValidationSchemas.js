@@ -30,14 +30,12 @@ export const createOrUpdateEmployeeFormValidationSchema = Yup.object().shape({
         .required("Ad daxil edilməlidir."),
     last_name: Yup.string()
         .required("Soyad daxil edilməlidir."),
-    mobile_number: Yup.string()
-        .required("Mobil nömrə daxil edilməlidir.")
-        .test('len', '10 xanalı olmalıdır. (0505005050)', val => val && val.toString().length === 10),
-    address: Yup.string()
-        .required("Ünvan daxil edilməlidir."),
-    exp_date: Yup.string()
-        .required("Bitiş tarixi daxil edilməlidir.")
-        .test('len', '5 xanalı olmalıdır. (GG/AA)', val => val && val.toString().length === 5)
+    email_address: Yup.string()
+        .email('Email düzgün deyil (mail@gmail.com)')
+        .required("Email daxil edilməlidir."),
+    password: Yup.string().required("Şifrə daxil edilməlidir."),
+    station_id: Yup.string()
+        .required("Filial seçilməlidir."),
 });
 
 export const createOrUpdatePackageFormValidationSchema = Yup.object().shape({

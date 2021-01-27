@@ -11,6 +11,7 @@ import PrintLabelButton from "./PrintLabelButton";
 import {Routes} from "../../../../routes";
 import {useHistory} from "react-router-dom";
 import CreateOrUpdateCourier from "../couriers/CreateOrUpdateCourier";
+import SetPackageStatus from './SetPackageStatus';
 
 const cols = [
     {
@@ -176,13 +177,21 @@ const PackagesDTable = ({deletePackage, selectPackages, packages, selectedPackag
         <button
             onClick={() => removePackage()}
             key={2}
-            className="btn btn-danger ml-2"
+            className="btn btn-danger mx-2"
             disabled={
                 selectedPackages.allSelectedPackages.length !== 1 ||
                 selectedPackages.lastSelectedPackage.tracking_state !== 'Declared'}
         >
             Sil
         </button>,
+        //     <ModalButton
+        //     buttonLabel="Status dəyiş"
+        //     header="Status dəyiş"
+        //     key={5}
+        //     size={'md'}
+        //     disabled={selectedPackages.allSelectedPackages.length === 0}
+        //     body={<SetPackageStatus/>}
+        // />,
         <PrintLabelButton
             key={3}
             disabled={selectedPackages.allSelectedPackages.length !== 1}

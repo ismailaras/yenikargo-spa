@@ -32,13 +32,13 @@ const cols = [
     sortable: true,
   },
   {
-    name: <h6>Nömrə</h6>,
-    selector: "mobile_number",
+    name: <h6>Filial</h6>,
+    selector: "station_id",
     sortable: true,
   },
   {
-    name: <h6>Ünvan</h6>,
-    selector: "address",
+    name: <h6>Email</h6>,
+    selector: "email_address",
     sortable: true,
   },
   {
@@ -98,7 +98,7 @@ const EmployeesDTable = ({
       buttonLabel="Tənzimlə"
       header="İşçi tənzimlə"
       buttonColor="success"
-      key={2}
+      key={3}
       size={"md"}
       disabled={selectedEmployees.allSelectedEmployees.length !== 1}
       body={<CreateOrUpdateEmployee />}
