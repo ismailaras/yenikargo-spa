@@ -4,8 +4,6 @@ import { connect } from "react-redux";
 import {
   deleteEmployee,
   selectEmployees,
-  setReceiverEmployee,
-  setSenderEmployee,
 } from "../../../../redux/actions/employeeActions";
 import CreateOrUpdateEmployee from "./CreateOrUpdateEmployee";
 import ModalButton from "../../../toolbox/ModalButton";
@@ -126,8 +124,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   selectEmployees,
-  setSenderEmployee,
-  setReceiverEmployee,
   deleteEmployee,
 };
 

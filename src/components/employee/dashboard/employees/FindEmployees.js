@@ -13,16 +13,13 @@ const FindEmployees = ({findEmployees, selectEmployees}) => {
             selectEmployees([]); // Axtaris zamani secilmish musteriler bosh array edir.
             findEmployees(values);
             setSubmitting(false);
+            console.log(values)
         }
     });
     const radioInputProps = [
         {
             value: 'viaId',
             label: 'İşçi ID ilə'
-        },
-        {
-            value: 'viaEmployeeMobileNumber',
-            label: 'İşçi mobil nömrəsi ilə'
         },
         {
             value: 'viaEmployeeFirstName',

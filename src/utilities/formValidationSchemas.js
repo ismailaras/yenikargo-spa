@@ -30,9 +30,6 @@ export const createOrUpdateEmployeeFormValidationSchema = Yup.object().shape({
         .required("Ad daxil edilməlidir."),
     last_name: Yup.string()
         .required("Soyad daxil edilməlidir."),
-    email_address: Yup.string()
-        .email('Email düzgün deyil (mail@gmail.com)')
-        .required("Email daxil edilməlidir."),
     password: Yup.string().required("Şifrə daxil edilməlidir."),
     station_id: Yup.string()
         .required("Filial seçilməlidir."),
@@ -72,7 +69,7 @@ export const findCustomersFormValidationSchema = Yup.object().shape({
 export const findEmployeesFormValidationSchema = Yup.object().shape({
     keyword: Yup.string()
         .required("Açar söz daxil edilməlidir.")
-        .test('len', 'Açar söz ən az 3 xanalı olmalıdır.', val => val && val.toString().length >= 3)
+        .test('len', 'Açar söz ən az 3 xanalı olmalıdır.', val => val && val.toString().length >= 1)
 });
 
 export const findPackagesFormValidationSchema = Yup.object().shape({

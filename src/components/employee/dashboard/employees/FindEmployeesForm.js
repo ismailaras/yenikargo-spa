@@ -20,7 +20,7 @@ const FindEmployeesForm = ({onSubmit, onChange, values, errors, onBlur, touched,
                         />
                         <hr/>
                         {
-                            (values.via === 'viaId') || (values.via === 'viaEmployeeMobileNumber')
+                            (values.via === 'viaId')
                                 ? <NumberInput
                                     value={values.keyword}
                                     name="keyword"

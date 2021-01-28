@@ -63,18 +63,6 @@ export const deleteSelectedEmployeeData = selectedEmployee => ({
     payload: selectedEmployee
 })
 
-export const setSenderEmployee = senderEmployee => {
-    return ({
-        type: actionTypes.SET_SENDER_EMPLOYEE,
-        payload: senderEmployee
-    })
-}
-
-export const setReceiverEmployee = receiverEmployee => ({
-    type: actionTypes.SET_RECEIVER_EMPLOYEE,
-    payload: receiverEmployee
-})
-
 export const createEmployeeBegin = () => ({
     type: actionTypes.CREATE_EMPLOYEE_BEGIN,
     payload: {},
@@ -139,8 +127,7 @@ export const createEmployee = employee => {
                     dispatch(createEmployeeError(data.message))
                 } else {
                     dispatch(createEmployeeSuccess(data))
-                    employee.is_receiver ? dispatch(setReceiverEmployee(data)) : dispatch(setSenderEmployee(data))
-                    notification.success('Müştəri artırıldı')
+                    notification.success('İşçi artırıldı')
                 }
             })
             .catch(err => dispatch(createEmployeeError(err)));
@@ -155,7 +142,6 @@ export const updateEmployee = (employee, selectedEmployee) => {
                 await data;
                 if (data.message) {
                     dispatch(updateEmployeeError(data.message))
-                    notification.success('*Mobil nömrə fərqli olmalıdır')
                 } else {
                     dispatch(updateEmployeeSuccess(data))
                     dispatch(updateSelectedEmployeeData(changeSelectedEmployeeValues(data, selectedEmployee)))

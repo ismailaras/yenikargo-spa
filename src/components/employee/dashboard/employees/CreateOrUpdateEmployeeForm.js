@@ -35,18 +35,6 @@ const CreateOrUpdateEmployeeForm = ({onSubmit, values, errors, onChange, onBlur,
                 </div>
                 <div className="form-row">
                     <div className="col-md-6">
-                        <TextInput
-                            label="Email"
-                            placeHolder="Email"
-                            name="email_address"
-                            value={values.email_address}
-                            error={errors.email_address}
-                            onChange={onChange}
-                            onBlur={onBlur}
-                            touched={touched.email_address}
-                        />
-                    </div>
-                    <div className="col-md-6">
                         <PasswordInput
                             label="Şifrə"
                             placeHolder="Şifrə"

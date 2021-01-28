@@ -16,7 +16,6 @@ const CreateOrUpdateEmployee = ({createEmployee, updateEmployee, stations, getSt
     let initialValues = {
         first_name: '',
         last_name: '',
-        email_address: '',
         password: '0000',
         station_id: '',
     }
@@ -27,11 +26,12 @@ const CreateOrUpdateEmployee = ({createEmployee, updateEmployee, stations, getSt
         initialValues,
         validationSchema: createOrUpdateEmployeeFormValidationSchema,
         onSubmit: (values, {setSubmitting}) => {
-            values.is_partner = values.discount > 0
+            // values.is_partner = values.discount > 0
             values.id
                 ? updateEmployee(values, selectedEmployees.lastSelectedEmployee)
                 : createEmployee(values);
             setSubmitting(false);
+            console.log(values)
         }
     });
     return (
