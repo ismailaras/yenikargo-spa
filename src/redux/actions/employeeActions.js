@@ -145,7 +145,7 @@ export const updateEmployee = (employee, selectedEmployee) => {
                 } else {
                     dispatch(updateEmployeeSuccess(data))
                     dispatch(updateSelectedEmployeeData(changeSelectedEmployeeValues(data, selectedEmployee)))
-                    notification.success('Müştəri məlumatları tənzimləndi')
+                    notification.success('İşçi məlumatları tənzimləndi')
                 }
             })
             .catch(err => dispatch(updateEmployeeError(err)));
@@ -162,8 +162,8 @@ export const deleteEmployee = employee => {
                     dispatch(deleteEmployeeError(data.message))
                 } else {
                     dispatch(deleteEmployeeSuccess(employee))
+                    notification.error('İşçi silindi')
                     dispatch(deleteSelectedEmployeeData(employee))
-                    notification.success('Müştəri silindi')
                 }
             })
             .catch(err => dispatch(deleteEmployeeError(err)));

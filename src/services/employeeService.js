@@ -1,13 +1,5 @@
 import * as apiService from '../services/apiService';
 
-// export const getEmployeeById = employeeId => {
-//     return apiService.get("employee/" + employeeId)
-//         .then(data => data)
-//         .catch(err => err);
-// }
-
-// -------------------------++++++++++++++++++++++++----------------------- //
-
 export const findEmployees = findObject => {
     return apiService.post("employee/filter", findObject)
         .then(data => data)

@@ -119,6 +119,6 @@ export const createOrUpdateStationFormValidationSchema = Yup.object().shape({
 export const createOrUpdateExtraSellingFormValidationSchema = Yup.object().shape({
     name: Yup.string()
         .required("Ad daxil edilməlidir."),
-    price: Yup.string()
+    price: Yup.number()
         .required("Qiymət daxil edilməlidir.")
 });

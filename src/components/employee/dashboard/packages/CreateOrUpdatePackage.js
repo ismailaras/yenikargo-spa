@@ -1,56 +1,90 @@
-import React, { useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { getStations } from "../../../../redux/actions/stationActions";
-import { createPackage, selectPackages, updatePackage } from "../../../../redux/actions/packageActions";
+import {
+    createPackage,
+    selectPackages,
+    updatePackage,
+} from "../../../../redux/actions/packageActions";
 import { connect } from "react-redux";
 import CreateOrUpdatePackageForm from "./CreateOrUpdatePackageForm";
 import { useFormik } from "formik";
 import { notEmpty } from "../../../../utilities/helpers";
-import { createOrUpdatePackageFormValidationSchema } from '../../../../utilities/formValidationSchemas';
+import { createOrUpdatePackageFormValidationSchema } from "../../../../utilities/formValidationSchemas";
 
 let initialValues = {
-    sender_customer_id: '',
-    receiver_customer_id: '',
-    sender_station_id: '',
-    receiver_station_id: '',
-    weight: '',
+    sender_customer_id: "",
+    receiver_customer_id: "",
+    sender_station_id: "",
+    receiver_station_id: "",
+    weight: 0,
     length: 0,
     height: 0,
     width: 0,
-    amount: 5,
-    description: '',
-    comment: '',
+    amount: setAmount,
+    description: "",
+    comment: "",
     price: 0,
     is_postpaid: false,
     deliver_to_address: false,
     will_receiver_pay: false,
-    quantity: 1
-}
-
+    quantity: 1,
+};
 
 function setInitialValues(setCustomers, selectedPackages) {
-    if (notEmpty(setCustomers.senderCustomer) && notEmpty(setCustomers.receiverCustomer)) {
+    if (
+        notEmpty(setCustomers.senderCustomer) &&
+        notEmpty(setCustomers.receiverCustomer)
+    ) {
         initialValues.sender_customer_id = setCustomers.senderCustomer.id;
         initialValues.receiver_customer_id = setCustomers.receiverCustomer.id;
         initialValues.sender_station_id = setCustomers.senderCustomer.station_id;
-        initialValues.receiver_station_id = setCustomers.receiverCustomer.station_id;
+        initialValues.receiver_station_id =
+            setCustomers.receiverCustomer.station_id;
     } else if (notEmpty(selectedPackages.lastSelectedPackage)) {
-        initialValues = selectedPackages.lastSelectedPackage
+        initialValues = selectedPackages.lastSelectedPackage;
+    }
+}
+function setAmount(weight,amounts) {
+    if (weight <= 100) {
+        amounts = 10;
+        console.log(amounts)
+        console.log("100<=");
+    } else if (weight > 100) {
+        amounts = 20;
+        console.log(amounts)
+        console.log("100>");
     }
 }
 
 const CreateOrUpdatePackage = ({
-    createPackage, updatePackage, stations, getStations,
-    selectedPackages, setCustomers
+    createPackage,
+    updatePackage,
+    stations,
+    getStations,
+    selectedPackages,
+    setCustomers,
 }) => {
     useEffect(() => {
         if (stations.length === 0) {
             getStations();
         }
+        setAmount(values.weight,values.amount);
         setInitialValues(setCustomers, selectedPackages);
+        console.log(values.weight);
+        console.log(values.amount);
     });
+
     const history = useHistory();
-    const { handleSubmit, handleChange, values, errors, touched, handleBlur, isSubmitting } = useFormik({
+    const {
+        handleSubmit,
+        handleChange,
+        values,
+        errors,
+        touched,
+        handleBlur,
+        isSubmitting,
+    } = useFormik({
         initialValues,
         validationSchema: createOrUpdatePackageFormValidationSchema,
         onSubmit: (values, { setSubmitting }) => {
@@ -58,7 +92,7 @@ const CreateOrUpdatePackage = ({
                 ? updatePackage(values, selectedPackages.lastSelectedPackage)
                 : createPackage(values, history);
             setSubmitting(false);
-        }
+        },
     });
     return (
         <CreateOrUpdatePackageForm
@@ -68,25 +102,28 @@ const CreateOrUpdatePackage = ({
             values={values}
             stations={stations}
             errors={errors}
+            setAmount={setAmount}
             touched={touched}
             isSubmitting={isSubmitting}
         />
-    )
-}
+    );
+};
 
 const mapDispatchToProps = {
     getStations,
     selectPackages,
     createPackage,
-    updatePackage
-}
+    updatePackage,
+};
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     selectedPackages: state.selectPackagesReducer,
     selectedCustomers: state.selectCustomersReducer,
     stations: state.getStationsReducer,
-    setCustomers: state.setCustomerReducer
+    setCustomers: state.setCustomerReducer,
 });
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(CreateOrUpdatePackage);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(CreateOrUpdatePackage);

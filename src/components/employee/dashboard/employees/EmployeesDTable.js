@@ -59,6 +59,7 @@ const EmployeesDTable = ({
   selectEmployees,
   employees,
   selectedEmployees,
+  auth
 }) => {
   const [foundEmployees, setFoundEmployees] = useState(employees);
   useEffect(() => {
@@ -68,12 +69,14 @@ const EmployeesDTable = ({
     selectEmployees(e.selectedRows);
   };
   const removeEmployee = () => {
+    const resultConfirm = window.confirm("Əminsiniz?");
+    if (resultConfirm) {
     deleteEmployee(selectedEmployees.lastSelectedEmployee);
     setFoundEmployees(
       employees.filter(
         (employee) => selectedEmployees.lastSelectedEmployee.id !== employee.id
       )
-    );
+    );}
   };
   const buttons = [
     <ModalButton
@@ -81,14 +84,14 @@ const EmployeesDTable = ({
       header="İşçi artır"
       key={1}
       size={"md"}
-      disabled={selectedEmployees.allSelectedEmployees.length !== 0}
+      disabled={selectedEmployees.allSelectedEmployees.length !== 0 || !auth.currentEmployee.is_superuser}
       body={<CreateOrUpdateEmployee />}
     />,
     <button
       onClick={() => removeEmployee()}
       key={2}
       className="btn btn-danger mx-2"
-      disabled={selectedEmployees.allSelectedEmployees.length !== 1}
+      disabled={selectedEmployees.allSelectedEmployees.length !== 1 || !auth.currentEmployee.is_superuser}
     >
       Sil
     </button>,
@@ -98,7 +101,7 @@ const EmployeesDTable = ({
       buttonColor="success"
       key={3}
       size={"md"}
-      disabled={selectedEmployees.allSelectedEmployees.length !== 1}
+      disabled={selectedEmployees.allSelectedEmployees.length !== 1 || !auth.currentEmployee.is_superuser}
       body={<CreateOrUpdateEmployee />}
     />,
   ];
@@ -120,6 +123,7 @@ const EmployeesDTable = ({
 const mapStateToProps = (state) => ({
   employees: state.findEmployeesReducer,
   selectedEmployees: state.selectEmployeesReducer,
+  auth:state.authReducer
 });
 
 const mapDispatchToProps = {
