@@ -11,23 +11,21 @@ export const EmployeeDTableChild = ({data}) => {
                         <div className="card-body" style={{overflow: 'scroll', height: 400}}>
                             <h6>Hərəkətlər</h6>
                             <hr/>
-                            {data.data_states.map(dataState => {
-                                return <div key={dataState.created_date}>
+                                <div key={data.created_date}>
                                     <li>
-                                        <span>{getStateNameInAzerbaijani(dataState.state)}</span>
+                                        <span>{getStateNameInAzerbaijani(data.state)}</span>
                                         <br/>
-                                        <small>Müəllif: {dataState.creator_id}</small> <br/>
-                                        <small>Tarix: {formatDate(dataState.created_date)}</small> <br/>
-                                        <textarea
+                                        <small>Müəllif: {data.creator_id}</small> <br/>
+                                        <small>Tarix: {formatDate(data.created_date)}</small> <br/>
+                                        {data.comment && <textarea
                                             className="form-control"
-                                            defaultValue={dataState.comment}
+                                            defaultValue={data.comment}
                                             readOnly
                                             style={{maxWidth: 500}}
-                                            rows="3"/>
+                                            rows="3"/>}
                                     </li>
                                     <hr/>
                                 </div>
-                            })}
                         </div>
                     </div>
                 </Col>
@@ -36,16 +34,14 @@ export const EmployeeDTableChild = ({data}) => {
                         <div className="card-body" style={{overflow: 'scroll', height: 400}}>
                             <h6>Gedən bağlamalar</h6>
                             <hr/>
-                            {data.packages_for_send.map(p => {
-                                return <div key={p.created_date}>
+                                <div key={data.created_date}>
                                     <li>
-                                        <small>ID: {p.id}</small> <br/>
-                                        <small>Alan müştəri ID: {p.receiver_employee_id}</small> <br/>
-                                        <small>Alan filial ID: {p.receiver_station_id}</small> <br/>
+                                        <small>ID: {data.id}</small> <br/>
+                                        <small>Alan müştəri ID: {data.receiver_employee_id}</small> <br/>
+                                        <small>Alan filial ID: {data.receiver_station_id}</small> <br/>
                                     </li>
                                     <hr/>
                                 </div>
-                            })}
                         </div>
                     </div>
                 </Col>
@@ -54,16 +50,14 @@ export const EmployeeDTableChild = ({data}) => {
                         <div className="card-body" style={{overflow: 'scroll', height: 400}}>
                             <h6>Gələn bağlamalar</h6>
                             <hr/>
-                            {data.packages_for_receive.map(p => {
-                                return <div key={p.created_date}>
+                                return <div key={data.created_date}>
                                     <li>
-                                        <small>ID: {p.id}</small> <br/>
-                                        <small>Alan müştəri ID: {p.receiver_employee_id}</small> <br/>
-                                        <small>Alan filial ID: {p.receiver_station_id}</small> <br/>
+                                        <small>ID: {data.id}</small> <br/>
+                                        <small>Alan müştəri ID: {data.receiver_employee_id}</small> <br/>
+                                        <small>Alan filial ID: {data.receiver_station_id}</small> <br/>
                                     </li>
                                     <hr/>
                                 </div>
-                            })}
                         </div>
                     </div>
                 </Col>

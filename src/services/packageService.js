@@ -23,3 +23,9 @@ export const deletePackage = p => {
         .then(data => data)
         .catch(err => err);
 }
+
+export const changePackageState = p => {
+    return apiService.put("package/change_state", p)
+        .then(data => data)
+        .catch(err => err);
+}

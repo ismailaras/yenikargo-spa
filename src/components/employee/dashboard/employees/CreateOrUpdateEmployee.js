@@ -31,7 +31,6 @@ const CreateOrUpdateEmployee = ({createEmployee, updateEmployee, stations, getSt
                 ? updateEmployee(values, selectedEmployees.lastSelectedEmployee)
                 : createEmployee(values);
             setSubmitting(false);
-            console.log(values)
         }
     });
     return (

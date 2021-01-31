@@ -19,7 +19,7 @@ import PrintLabelButton from "./PrintLabelButton";
 import { Routes } from "../../../../routes";
 import { useHistory } from "react-router-dom";
 import CreateOrUpdateCourier from "../couriers/CreateOrUpdateCourier";
-import SetPackageStatus from "./SetPackageStatus";
+import ChangePackageState from "./ChangePackageState";
 
 const cols = [
   {
@@ -205,23 +205,23 @@ const PackagesDTable = ({
     >
       Sil
     </button>,
-    //     <ModalButton
-    //     buttonLabel="Status dəyiş"
-    //     header="Status dəyiş"
-    //     key={5}
-    //     size={'md'}
-    //     disabled={selectedPackages.allSelectedPackages.length === 0}
-    //     body={<SetPackageStatus/>}
-    // />,
+        <ModalButton
+        buttonLabel="Status dəyiş"
+        header="Status dəyiş"
+        key={3}
+        size={'md'}
+        disabled={selectedPackages.allSelectedPackages.length === 0}
+        body={<ChangePackageState/>}
+    />,
     <PrintLabelButton
-      key={3}
+      key={4}
       disabled={selectedPackages.allSelectedPackages.length !== 1}
       cls="btn btn-primary ml-2"
       pckg={selectedPackages.lastSelectedPackage}
     />,
     <button
       onClick={() => addToCartAndRedirect()}
-      key={4}
+      key={5}
       className="btn btn-primary mx-2"
       disabled={selectedPackages.allSelectedPackages.length === 0}
     >
@@ -230,7 +230,7 @@ const PackagesDTable = ({
     <ModalButton
       buttonLabel="Kuryer artır"
       header="Kuryer artır"
-      key={5}
+      key={6}
       size={"md"}
       disabled={selectedPackages.allSelectedPackages.length === 0}
       body={<CreateOrUpdateCourier />}

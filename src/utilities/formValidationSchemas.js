@@ -54,6 +54,11 @@ export const createOrUpdatePackageFormValidationSchema = Yup.object().shape({
         .test('must_be_bigger_than_0', '0 dan çox olmalıdır.', val => val && val > 0),
 });
 
+export const changePackageStateFormValidationSchema = Yup.object().shape({
+    tracking_state: Yup.string()
+        .required("Status seçilməlidir."),
+});
+
 export const signInFormValidationSchema = Yup.object().shape({
     _id: Yup.string().required("Kod daxil edilməlidir."),
     password: Yup.string().required("Şifrə daxil edilməlidir.")

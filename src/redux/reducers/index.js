@@ -12,6 +12,7 @@ import { selectPackagesReducer } from "./packages/selectPackagesReducer";
 import { createPackageReducer } from "./packages/createPackageReducer";
 import { updatePackageReducer } from "./packages/updatePackageReducer";
 import { deletePackageReducer } from "./packages/deletePackageReducer";
+import { changePackageStateReducer } from "./packages/changePackageState";
 import { cartReducer } from "./checkout/cartReducer";
 import { pendingTasksReducer } from "react-redux-spinner";
 import * as actionTypes from "../actions/actionTypes";
@@ -50,6 +51,7 @@ const appReducer = combineReducers({
   createPackageReducer,
   updatePackageReducer,
   deletePackageReducer,
+  changePackageStateReducer,
   cartReducer,
   findCouriersReducer,
   selectCouriersReducer,

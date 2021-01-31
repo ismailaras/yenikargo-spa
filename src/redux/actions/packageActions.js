@@ -80,10 +80,20 @@ export const updatePackageError = error => ({
     [pendingTask]: endAll
 })
 
-export const setPackageStatus = p => ({
-    type: actionTypes.SET_PACKAGE_STATUS,
-    payload: p,
+export const changePackageStateBegin = () => ({
+    type: actionTypes.CHANGE_PACKAGE_STATE_BEGIN,
+    payload: {},
     [pendingTask]: begin
+})
+export const changePackageStateSuccess = p => ({
+    type: actionTypes.CHANGE_PACKAGE_STATE_SUCCESS,
+    payload: p,
+    [pendingTask]: end
+})
+export const changePackageStateError = error => ({
+    type: actionTypes.CHANGE_PACKAGE_STATE_ERROR,
+    payload: error,
+    [pendingTask]: endAll
 })
 
 export const deletePackageBegin = () => ({
@@ -184,6 +194,24 @@ export const findPackages = findObject => {
                 }
             })
             .catch(err => dispatch(findPackagesError(err)));
+    }
+}
+
+export const changePackageState = (p, selectedPackage) => {
+    return async dispatch => {
+        dispatch(changePackageStateBegin())
+        packageService.changePackageState(p)
+            .then(async data => {
+                await data;
+                if (data.message) {
+                    dispatch(changePackageStateError(data.message))
+                } else {
+                    dispatch(changePackageStateSuccess(data))
+                    dispatch(updateSelectedPackageData(changeSelectedPackageValues(data, selectedPackage)))
+                    notification.success('Bağlama statusu dəyişdirildi')
+                }
+            })
+            .catch(err => dispatch(changePackageStateError(err)));
     }
 }
 
