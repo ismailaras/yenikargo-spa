@@ -1,37 +1,15 @@
-import React, { useEffect } from "react";
-import { useHistory } from "react-router-dom";
-import { getStations } from "../../../../redux/actions/stationActions";
-import {
-    createPackage,
-    selectPackages,
-    updatePackage,
-} from "../../../../redux/actions/packageActions";
-import { connect } from "react-redux";
+import React, {useEffect} from "react";
+import {useHistory} from "react-router-dom";
+import {getStations} from "../../../../redux/actions/stationActions";
+import {createPackage, selectPackages, updatePackage,} from "../../../../redux/actions/packageActions";
+import {connect} from "react-redux";
 import CreateOrUpdatePackageForm from "./CreateOrUpdatePackageForm";
-import { useFormik } from "formik";
-import { notEmpty } from "../../../../utilities/helpers";
-import { createOrUpdatePackageFormValidationSchema } from "../../../../utilities/formValidationSchemas";
+import {useFormik} from "formik";
+import {notEmpty} from "../../../../utilities/helpers";
+import {createOrUpdatePackageFormValidationSchema} from "../../../../utilities/formValidationSchemas";
 
-let initialValues = {
-    sender_customer_id: "",
-    receiver_customer_id: "",
-    sender_station_id: "",
-    receiver_station_id: "",
-    weight: 0,
-    length: 0,
-    height: 0,
-    width: 0,
-    amount: setAmount,
-    description: "",
-    comment: "",
-    price: 0,
-    is_postpaid: false,
-    deliver_to_address: false,
-    will_receiver_pay: false,
-    quantity: 1,
-};
 
-function setInitialValues(setCustomers, selectedPackages) {
+function setInitialValues(initialValues, setCustomers, selectedPackages) {
     if (
         notEmpty(setCustomers.senderCustomer) &&
         notEmpty(setCustomers.receiverCustomer)
@@ -44,8 +22,10 @@ function setInitialValues(setCustomers, selectedPackages) {
     } else if (notEmpty(selectedPackages.lastSelectedPackage)) {
         initialValues = selectedPackages.lastSelectedPackage;
     }
+    return initialValues
 }
-function setAmount(weight,amounts) {
+
+function setAmount(weight, amounts) {
     if (weight <= 100) {
         amounts = 10;
         console.log(amounts)
@@ -58,23 +38,38 @@ function setAmount(weight,amounts) {
 }
 
 const CreateOrUpdatePackage = ({
-    createPackage,
-    updatePackage,
-    stations,
-    getStations,
-    selectedPackages,
-    setCustomers,
-}) => {
+                                   createPackage,
+                                   updatePackage,
+                                   stations,
+                                   getStations,
+                                   selectedPackages,
+                                   setCustomers,
+                               }) => {
     useEffect(() => {
         if (stations.length === 0) {
             getStations();
         }
-        setAmount(values.weight,values.amount);
-        setInitialValues(setCustomers, selectedPackages);
-        console.log(values.weight);
-        console.log(values.amount);
+        setAmount(values.weight, values.amount);
     });
-
+    let initialValues = {
+        sender_customer_id: "",
+        receiver_customer_id: "",
+        sender_station_id: "",
+        receiver_station_id: "",
+        weight: 0,
+        length: 0,
+        height: 0,
+        width: 0,
+        amount: setAmount,
+        description: "",
+        comment: "",
+        price: 0,
+        is_postpaid: false,
+        deliver_to_address: false,
+        will_receiver_pay: false,
+        quantity: 1,
+    };
+    initialValues = setInitialValues(initialValues, setCustomers, selectedPackages);
     const history = useHistory();
     const {
         handleSubmit,
@@ -87,7 +82,7 @@ const CreateOrUpdatePackage = ({
     } = useFormik({
         initialValues,
         validationSchema: createOrUpdatePackageFormValidationSchema,
-        onSubmit: (values, { setSubmitting }) => {
+        onSubmit: (values, {setSubmitting}) => {
             values.id
                 ? updatePackage(values, selectedPackages.lastSelectedPackage)
                 : createPackage(values, history);
