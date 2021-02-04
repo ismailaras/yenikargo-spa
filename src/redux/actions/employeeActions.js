@@ -4,32 +4,6 @@ import * as employeeService from "../../services/employeeService";
 import * as notification from "../../utilities/notification";
 import {begin, end, endAll, pendingTask} from 'react-redux-spinner';
 
-// export const getEmployeeByIdSuccess = employee => ({
-//     type: actionTypes.GET_EMPLOYEE_BY_ID_SUCCESS,
-//     payload: employee
-// })
-
-// export const getEmployeeByIdError = error => ({
-//     type: actionTypes.GET_EMPLOYEE_BY_ID_ERROR,
-//     payload: error
-// })
-
-// export const getEmployeeById = employeeId => {
-//     return dispatch => {
-//         employeeService.getEmployeeById(employeeId)
-//             .then(data => {
-//                 if (data.message) {
-//                     dispatch(getEmployeeByIdError(data.message))
-//                 } else {
-//                     dispatch(getEmployeeByIdSuccess(data))
-//                 }
-//             })
-//             .catch(err => dispatch(getEmployeeByIdError(err)));
-//     }
-// }
-
-// -------------------------++++++++++++++++++++++++----------------------- //
-
 export const findEmployeesBegin = () => ({
     type: actionTypes.FIND_EMPLOYEES_BEGIN,
     payload: {},

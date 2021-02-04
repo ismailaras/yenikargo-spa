@@ -55,7 +55,7 @@ export const createOrUpdatePackageFormValidationSchema = Yup.object().shape({
 });
 
 export const changePackageStateFormValidationSchema = Yup.object().shape({
-    tracking_state: Yup.string()
+    state: Yup.number()
         .required("Status seçilməlidir."),
 });
 

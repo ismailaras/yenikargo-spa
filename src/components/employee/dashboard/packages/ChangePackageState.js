@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {changePackageState} from '../../../../redux/actions/packageActions'
 import {iterTrackingStates} from '../../../../enums/trackingStateEnum'
 import { connect } from "react-redux";
@@ -10,12 +10,9 @@ const ChangePackageState = ({
   selectedPackages,
   changePackageState
 }) => {
-  useEffect(() => {
-    
-  });
   let initialValues = {
-    id: selectedPackages.allSelectedPackages.map((p) => p.id),
-    tracking_state: "",
+    id: parseInt(selectedPackages.lastSelectedPackage.id),
+    state: 0,
   };
   const {
     handleSubmit,handleChange,values,errors,touched,handleBlur,isSubmitting,
@@ -23,24 +20,24 @@ const ChangePackageState = ({
     initialValues,
     validationSchema: changePackageStateFormValidationSchema,
     onSubmit: (values, { setSubmitting }) => {
-      values.id && 
-        changePackageState(values, selectedPackages.lastSelectedPackage)
+      values.id && changePackageState(values, selectedPackages.lastSelectedPackage)
+      console.log(values)
       setSubmitting(false);
     },
   });
   return (
     <form onSubmit={handleSubmit}>
       <SelectInput
-        value={values.keyword}
-        name="keyword"
+        value={values.state}
+        name="state"
         options={iterTrackingStates().map((trackingStateObj) => ({
-          value: trackingStateObj.value,
+          value: parseInt(trackingStateObj.value),
           text: trackingStateObj.name,
         }))}
         label="Bağlama statusu"
         defaultOption="Status seçin"
-        touched={touched.keyword}
-        error={errors.keyword}
+        touched={touched.state}
+        error={errors.state}
         onChange={handleChange}
         onBlur={handleBlur}
       />

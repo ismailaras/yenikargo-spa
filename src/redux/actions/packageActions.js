@@ -153,6 +153,7 @@ export const updatePackage = (p, selectedPackage) => {
                     dispatch(updatePackageSuccess(data))
                     dispatch(updateSelectedPackageData(changeSelectedPackageValues(data, selectedPackage)))
                     notification.success('Bağlama məlumatları tənzimləndi')
+                    console.log(data, selectedPackage)
                 }
             })
             .catch(err => dispatch(updatePackageError(err)));
