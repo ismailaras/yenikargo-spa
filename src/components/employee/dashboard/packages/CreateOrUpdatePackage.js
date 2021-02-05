@@ -37,22 +37,11 @@ const CreateOrUpdatePackage = ({
     return initialValues;
   }
 
-  function setAmount(weight, amounts) {
-    if (weight <= 100) {
-      values.amount = 10;
-      console.log(values.amount);
-      console.log("100<=");
-    } else if (weight > 100) {
-      values.amount = 20;
-      console.log(values.amount);
-      console.log("100>");
-    }
-  }
   useEffect(() => {
+    setAmount(values.weight);
     if (stations.length === 0) {
       getStations();
     }
-    setAmount(values.weight, values.amount);
   });
   let initialValues = {
     sender_customer_id: "",
@@ -63,7 +52,7 @@ const CreateOrUpdatePackage = ({
     length: 0,
     height: 0,
     width: 0,
-    amount: setAmount,
+    amount: 0,
     description: "",
     comment: "",
     price: 0,
@@ -77,6 +66,18 @@ const CreateOrUpdatePackage = ({
     setCustomers,
     selectedPackages
   );
+
+  function setAmount(weight) {
+    if (weight <= 100) {
+      values.amount = 10;
+      console.log(values.amount);
+      console.log("100<=");
+    } else if (weight > 100) {
+      values.amount = 20;
+      console.log(values.amount);
+      console.log("100>");
+    }
+  }
   const history = useHistory();
   const {
     handleSubmit,

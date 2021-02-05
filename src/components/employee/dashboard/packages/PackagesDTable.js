@@ -20,6 +20,7 @@ import { Routes } from "../../../../routes";
 import { useHistory } from "react-router-dom";
 import CreateOrUpdateCourier from "../couriers/CreateOrUpdateCourier";
 import ChangePackageState from "./ChangePackageState";
+import PackageStateInfo from "./PackageStateInfo";
 
 const cols = [
   {
@@ -205,13 +206,13 @@ const PackagesDTable = ({
     >
       Sil
     </button>,
-        <ModalButton
-        buttonLabel="Status dəyiş"
-        header="Status dəyiş"
-        key={3}
-        size={'md'}
-        disabled={selectedPackages.allSelectedPackages.length === 0}
-        body={<ChangePackageState/>}
+    <ModalButton
+      buttonLabel="Status dəyiş"
+      header="Status dəyiş"
+      key={3}
+      size={"md"}
+      disabled={selectedPackages.allSelectedPackages.length === 0}
+      body={<ChangePackageState />}
     />,
     <PrintLabelButton
       key={4}
@@ -234,6 +235,16 @@ const PackagesDTable = ({
       size={"md"}
       disabled={selectedPackages.allSelectedPackages.length === 0}
       body={<CreateOrUpdateCourier />}
+    />,
+    <ModalButton
+      buttonLabel="State Info"
+      header="State Info"
+      buttonColor="light"
+      key={7}
+      size={"md"}
+      clsName="ml-2"
+      disabled={selectedPackages.allSelectedPackages.length === 0}
+      body={<PackageStateInfo />}
     />,
   ];
   return (
