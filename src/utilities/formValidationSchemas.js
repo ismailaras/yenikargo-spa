@@ -87,6 +87,11 @@ export const findCouriersFormValidationSchema = Yup.object().shape({
         .required("Açar söz daxil edilməlidir.")
 });
 
+export const findPaymentsFormValidationSchema = Yup.object().shape({
+    keyword: Yup.string()
+        .required("Açar söz daxil edilməlidir.")
+});
+
 export const createOrUpdateCourierFormValidationSchema = Yup.object().shape({
     first_name: Yup.string()
         .required("Ad daxil edilməlidir."),

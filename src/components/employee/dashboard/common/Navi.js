@@ -83,7 +83,11 @@ const Navi = ({ signIn, signOut, auth }) => {
                       <span className="text-info">İşçilər</span>
                     </DropdownItem>
                   </Link>
-                  <DropdownItem>Ödənişlər</DropdownItem>
+                  <Link to={Routes.payments}>
+                    <DropdownItem>
+                      <span className="text-info">Ödənişlər</span>
+                    </DropdownItem>
+                  </Link>
                   {auth.currentEmployee.is_superuser ? (
                     <Link to={Routes.allExtraSelling}>
                       <DropdownItem>

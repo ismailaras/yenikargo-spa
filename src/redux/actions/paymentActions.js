@@ -21,6 +21,28 @@ export const createPaymentsError = error => ({
     [pendingTask]: endAll
 })
 
+export const findPaymentsBegin = () => ({
+    type: actionTypes.FIND_PAYMENTS_BEGIN,
+    payload: {},
+    [pendingTask]: begin
+})
+
+export const findPaymentsSuccess = couriers => ({
+    type: actionTypes.FIND_PAYMENTS_SUCCESS,
+    payload: couriers,
+    [pendingTask]: end
+})
+
+export const findPaymentsError = error => ({
+    type: actionTypes.FIND_PAYMENTS_ERROR,
+    payload: error,
+    [pendingTask]: endAll
+})
+
+export const selectPayments = selectedPayments => ({
+    type: actionTypes.SELECT_PAYMENTS,
+    payload: selectedPayments
+})
 
 export const createPayments = (cart, isForDelivery, paymentMethod, costs, handlePrint) => {
     return async dispatch => {
@@ -37,5 +59,22 @@ export const createPayments = (cart, isForDelivery, paymentMethod, costs, handle
                 }
             })
             .catch(err => dispatch(createPaymentsError(err)));
+    }
+}
+
+
+export const findPayments = findObject => {
+    return async dispatch => {
+        dispatch(findPaymentsBegin())
+        paymentService.findPayments(findObject)
+            .then(async data => {
+                await data;
+                if (data.message) {
+                    dispatch(findPaymentsError(data.message))
+                } else {
+                    dispatch(findPaymentsSuccess(data))
+                }
+            })
+            .catch(err => dispatch(findPaymentsError(err)));
     }
 }

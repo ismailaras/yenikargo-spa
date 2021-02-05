@@ -21,7 +21,6 @@ const ChangePackageState = ({
     validationSchema: changePackageStateFormValidationSchema,
     onSubmit: (values, { setSubmitting }) => {
       values.id && changePackageState(values, selectedPackages.lastSelectedPackage)
-      console.log(values)
       setSubmitting(false);
     },
   });

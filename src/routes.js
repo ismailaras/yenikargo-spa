@@ -8,5 +8,6 @@ export const Routes = {
     courier: '/employee/dashboard/courier',
     stations: '/employee/dashboard/stations',
     employees: '/employee/dashboard/employees',
-    allExtraSelling: '/employee/dashboard/all-extra-selling'
+    allExtraSelling: '/employee/dashboard/all-extra-selling',
+    payments: '/employee/dashboard/payments',
 }

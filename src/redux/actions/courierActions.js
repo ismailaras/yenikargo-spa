@@ -120,6 +120,7 @@ export const updateCourier = (courier, selectedCourier) => {
                 } else {
                     dispatch(updateCourierSuccess(data))
                     dispatch(updateSelectedCourierData(changeSelectedCourierValues(data, selectedCourier)))
+                    notification.success('Kuryer tənzimləndi');
                 }
             })
             .catch(err => dispatch(updateCourierError(err)));
@@ -137,6 +138,7 @@ export const deleteCourier = courier => {
                 } else {
                     dispatch(deleteCourierSuccess(courier))
                     dispatch(deleteSelectedCourierData(courier))
+                    notification.error('Kuryer silindi');
                 }
             })
             .catch(err => dispatch(deleteCourierError(err)));

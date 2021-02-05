@@ -29,6 +29,11 @@ const initialState = {
     },
     cart: [],
     payments: [],
+    selectedPayments: {
+        lastSelectedPayment: {},
+        allSelectedPayments: [],
+        toggledClearRows: false
+    },
     couriers: [],
     selectedCouriers: {
         lastSelectedCourier: {},

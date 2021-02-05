@@ -12,17 +12,6 @@ import { useFormik } from "formik";
 import { notEmpty } from "../../../../utilities/helpers";
 import { createOrUpdatePackageFormValidationSchema } from "../../../../utilities/formValidationSchemas";
 
-function setAmount(weight, amounts) {
-  if (weight <= 100) {
-    amounts = 10;
-    // console.log(amounts);
-    // console.log("100<=");
-  } else if (weight > 100) {
-    amounts = 20;
-    // console.log(amounts);
-    // console.log("100>");
-  }
-}
 
 const CreateOrUpdatePackage = ({
   createPackage,
@@ -46,6 +35,18 @@ const CreateOrUpdatePackage = ({
       initialValues = selectedPackages.lastSelectedPackage;
     }
     return initialValues;
+  }
+
+  function setAmount(weight, amounts) {
+    if (weight <= 100) {
+      values.amount = 10;
+      console.log(values.amount);
+      console.log("100<=");
+    } else if (weight > 100) {
+      values.amount = 20;
+      console.log(values.amount);
+      console.log("100>");
+    }
   }
   useEffect(() => {
     if (stations.length === 0) {
@@ -93,7 +94,6 @@ const CreateOrUpdatePackage = ({
         ? updatePackage(values, selectedPackages.lastSelectedPackage)
         : createPackage(values, history);
       setSubmitting(false);
-      console.log(values)
     },
   });
   return (

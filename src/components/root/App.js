@@ -15,6 +15,7 @@ import Couriers from "../employee/dashboard/couriers/Couriers";
 import Stations from "../employee/dashboard/stations/Stations";
 import Employees from "../employee/dashboard/employees/Employees";
 import AllExtraSelling from "../employee/dashboard/all-extra-selling/AllExtraSelling";
+import Payments from '../employee/dashboard/payments/Payments';
 
 function App() {
     return (
@@ -30,6 +31,7 @@ function App() {
                 <PrivateRoute exact path={Routes.stations} component={Stations}/>
                 <PrivateRoute exact path={Routes.allExtraSelling} component={AllExtraSelling}/>
                 <PrivateRoute exact path={Routes.employees} component={Employees}/>
+                <PrivateRoute exact path={Routes.payments} component={Payments}/>
                 {/*<Route path="/saveProduct/:productId" component={AddOrUpdateProduct}/>*/}
                 {/*<Route path="/saveProduct" component={AddOrUpdateProduct}/>*/}
                 <Route component={NotFound}/>
