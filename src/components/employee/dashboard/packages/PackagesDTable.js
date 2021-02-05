@@ -243,7 +243,9 @@ const PackagesDTable = ({
       key={7}
       size={"md"}
       clsName="ml-2"
-      disabled={selectedPackages.allSelectedPackages.length === 0}
+      disabled={selectedPackages.allSelectedPackages.length === 0 
+        || selectedPackages.lastSelectedPackage.tracking_state === ""
+        }
       body={<PackageStateInfo />}
     />,
   ];

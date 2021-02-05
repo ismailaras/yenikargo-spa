@@ -9,7 +9,7 @@ const PackageStateInfo = ({ selectedPackages }) => {
       <ListGroup type="unstyled">
         <h6>Package - {packageInfo.id}</h6>
         {packageInfo.tracking_states.map((p) => {
-          return <ListGroupItem action key={p.id}>
+          return <ListGroupItem action key={p.created_date}>
             <h4>{p.state}</h4>
             <div>Creator:<b> #{p.creator_id}</b></div>
             <div>{p.comment}</div>
