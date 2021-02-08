@@ -88,7 +88,7 @@ const CreateOrUpdateCustomerForm = ({onSubmit, values, errors, onChange, onBlur,
                         />
                     </div>
                     <div className="col-md-3">
-                        <TextInput
+                        <NumberInput
                             label="Bitiş tarixi"
                             placeHolder="Bitiş tarixi"
                             name="exp_date"

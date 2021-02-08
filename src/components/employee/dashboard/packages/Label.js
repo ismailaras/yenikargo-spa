@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import Barcode from "../../../toolbox/Barcode";
 import {formatDate} from "../../../../utilities/helpers";
+import logo_print from '../../../../assets/images/logo_print.jpg';
 
 class Label extends Component {
     generateLabels() {
@@ -21,14 +22,17 @@ class Label extends Component {
                         </div>
                     </div>
                     <hr/>
-                    {/*<div className="row">*/}
-                    {/*    <div className="col-12">*/}
-                    {/*        <h1 style={{*/}
-                    {/*            fontSize: 60,*/}
-                    {/*            textTransform: 'uppercase'*/}
-                    {/*        }}>{this.props.stations.find(station => station.id === this.props.pckg.sender_station_id).name}</h1>*/}
-                    {/*    </div>*/}
-                    {/*</div>*/}
+                    <div className="row">
+                       <div className="col-10">
+                           <h1 style={{
+                                fontSize: 50,
+                                textTransform: 'uppercase'
+                            }}>{this.props.stations.find(station => station.id === this.props.pckg.sender_station_id).name}</h1>
+                        </div>
+                        <div className="col-2 align-self-center">
+                            <img alt="logo" src={logo_print} style={{width:'50px',height:'auto',objectFit:'cover'}}/>
+                        </div>
+                    </div>
                     <hr/>
                     <div className="row">
                         <div className="col-12">
@@ -38,13 +42,12 @@ class Label extends Component {
                     <hr/>
                     <div className="row">
                         <div className="col-6">
-                            {/*<img src={logo_print}/>*/}
                             <h3><strong>YENİKARGO</strong></h3>
                             <p>info@yenikargo.com</p>
                         </div>
                         <div className="col-6 text-right align-self-center">
                             {formatDate(new Date())}
-                        </div>
+                            </div>
                     </div>
                 </div>
             </div>)
@@ -54,7 +57,7 @@ class Label extends Component {
 
     render() {
         return (
-            <div className={this.props.toggled ? 'd-none' : 'd-block'}>
+            <div className={this.props.toggled ? 'd-block' : 'd-none'}>
                 {this.props.pckg
                     ?
                     <div>

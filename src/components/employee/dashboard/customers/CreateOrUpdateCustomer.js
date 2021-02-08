@@ -22,7 +22,7 @@ const CreateOrUpdateCustomer = ({createCustomer, updateCustomer, stations, getSt
         station_id: '',
         address: '',
         card_number: '0000000000000000',
-        exp_date: '00/00',
+        exp_date: '',
         bank_name: 'Qeyd edilməyib'
     }
     if (notEmpty(selectedCustomers.lastSelectedCustomer)) {

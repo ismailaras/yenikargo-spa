@@ -44,6 +44,11 @@ const cols = [
     sortable: true,
   },
   {
+    name: <h6>Filial</h6>,
+    selector: "station_id",
+    sortable: true,
+  },
+  {
     name: <h6>Bank adı</h6>,
     selector: "bank_name",
     sortable: true,
@@ -56,11 +61,6 @@ const cols = [
   {
     name: <h6>Bitiş tarixi</h6>,
     selector: "exp_date",
-    sortable: true,
-  },
-  {
-    name: <h6>Filial</h6>,
-    selector: "station_id",
     sortable: true,
   },
   {
@@ -134,26 +134,11 @@ const CustomersDTable = ({
       disabled={selectedCustomers.allSelectedCustomers.length !== 0}
       body={<CreateOrUpdateCustomer />}
     />,
-    <button
-      onClick={() => setSender()}
-      key={2}
-      className="btn btn-primary mx-2"
-      disabled={selectedCustomers.allSelectedCustomers.length !== 1}
-    >
-      Göndərən seç
-    </button>,
-    <button
-      onClick={() => setReceiver()}
-      key={3}
-      className="btn btn-primary mr-2"
-      disabled={selectedCustomers.allSelectedCustomers.length !== 1}
-    >
-      Alan seç
-    </button>,
     <ModalButton
       buttonLabel="Tənzimlə"
       header="Müştəri tənzimlə"
       buttonColor="success"
+      clsName="ml-2"
       key={4}
       size={"md"}
       disabled={selectedCustomers.allSelectedCustomers.length !== 1}
@@ -167,6 +152,22 @@ const CustomersDTable = ({
     >
       Sil
     </button>,
+    <button
+      onClick={() => setSender()}
+      key={2}
+      className="btn btn-warning mx-2"
+      disabled={selectedCustomers.allSelectedCustomers.length !== 1}
+    >
+      Göndərən seç
+    </button>,
+    <button
+      onClick={() => setReceiver()}
+      key={3}
+      className="btn btn-info mr-2"
+      disabled={selectedCustomers.allSelectedCustomers.length !== 1}
+    >
+      Alan seç
+    </button>
   ];
   return (
     <div>

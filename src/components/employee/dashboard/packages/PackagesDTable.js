@@ -183,22 +183,10 @@ const PackagesDTable = ({
     history.push(Routes.checkout);
   };
   const buttons = [
-    <ModalButton
-      buttonLabel="Tənzimlə"
-      header="Bağlama tənzimlə"
-      key={1}
-      buttonColor="success"
-      size={"md"}
-      disabled={
-        selectedPackages.allSelectedPackages.length !== 1 ||
-        selectedPackages.lastSelectedPackage.tracking_state !== "Declared"
-      }
-      body={<CreateOrUpdatePackage />}
-    />,
     <button
       onClick={() => removePackage()}
-      key={2}
-      className="btn btn-danger mx-2"
+      key={1}
+      className="btn btn-danger"
       disabled={
         selectedPackages.allSelectedPackages.length !== 1 ||
         selectedPackages.lastSelectedPackage.tracking_state !== "Declared"
@@ -207,18 +195,36 @@ const PackagesDTable = ({
       Sil
     </button>,
     <ModalButton
+      buttonLabel="Tənzimlə"
+      header="Bağlama tənzimlə"
+      key={2}
+      clsName="mx-2"
+      buttonColor="success"
+      size={"md"}
+      disabled={
+        selectedPackages.allSelectedPackages.length !== 1 ||
+        selectedPackages.lastSelectedPackage.tracking_state !== "Declared"
+      }
+      body={<CreateOrUpdatePackage />}
+    />,
+    <ModalButton
       buttonLabel="Status dəyiş"
       header="Status dəyiş"
       key={3}
       size={"md"}
+      buttonColor="warning"
       disabled={selectedPackages.allSelectedPackages.length === 0}
       body={<ChangePackageState />}
     />,
-    <PrintLabelButton
+    <ModalButton
+      buttonLabel="Kuryer artır"
+      header="Kuryer artır"
       key={4}
-      disabled={selectedPackages.allSelectedPackages.length !== 1}
-      cls="btn btn-primary ml-2"
-      pckg={selectedPackages.lastSelectedPackage}
+      clsName="ml-2"
+      buttonColor="info"
+      size={"md"}
+      disabled={selectedPackages.allSelectedPackages.length === 0}
+      body={<CreateOrUpdateCourier />}
     />,
     <button
       onClick={() => addToCartAndRedirect()}
@@ -228,25 +234,25 @@ const PackagesDTable = ({
     >
       Ödəniş al
     </button>,
-    <ModalButton
-      buttonLabel="Kuryer artır"
-      header="Kuryer artır"
-      key={6}
-      size={"md"}
-      disabled={selectedPackages.allSelectedPackages.length === 0}
-      body={<CreateOrUpdateCourier />}
-    />,
+
     <ModalButton
       buttonLabel="State Info"
       header="State Info"
       buttonColor="light"
-      key={7}
+      key={6}
       size={"md"}
-      clsName="ml-2"
-      disabled={selectedPackages.allSelectedPackages.length === 0 
-        || selectedPackages.lastSelectedPackage.tracking_state === ""
-        }
+      clsName="mr-2"
+      disabled={
+        selectedPackages.allSelectedPackages.length === 0 ||
+        selectedPackages.lastSelectedPackage.tracking_state === ""
+      }
       body={<PackageStateInfo />}
+    />,
+    <PrintLabelButton
+      key={7}
+      disabled={selectedPackages.allSelectedPackages.length !== 1}
+      cls="btn btn-secondary"
+      pckg={selectedPackages.lastSelectedPackage}
     />,
   ];
   return (
