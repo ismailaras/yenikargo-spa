@@ -1,9 +1,6 @@
 import React, {useState} from 'react';
 import {
     Collapse,
-    DropdownItem,
-    DropdownMenu,
-    DropdownToggle,
     Nav,
     Navbar,
     NavbarBrand,
@@ -11,7 +8,6 @@ import {
     NavbarToggler,
     NavItem,
     NavLink,
-    UncontrolledDropdown
 } from 'reactstrap';
 import logo_light from '../../assets/images/logo_light_x.svg';
 

@@ -17,13 +17,13 @@ const CreateOrUpdateCustomer = ({createCustomer, updateCustomer, stations, getSt
         first_name: '',
         last_name: '',
         mobile_number: '',
-        password: '0000',
+        password: '',
         discount: 0,
         station_id: '',
         address: '',
-        card_number: '0000000000000000',
+        card_number: '',
         exp_date: '',
-        bank_name: 'Qeyd edilməyib'
+        bank_name: ''
     }
     if (notEmpty(selectedCustomers.lastSelectedCustomer)) {
         initialValues = selectedCustomers.lastSelectedCustomer
