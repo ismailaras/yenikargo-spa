@@ -4,6 +4,7 @@ import NumberInput from "../../../toolbox/NumberInput";
 import SelectInput from "../../../toolbox/SelectInput";
 import {iterTrackingStates} from '../../../../enums/trackingStateEnum'
 import TextInput from "../../../toolbox/TextInput";
+import DFilter from '../../../toolbox/DFilter';
 
 
 const FindPackagesForm = ({onSubmit, onChange, values, errors, onBlur, touched, isSubmitting, radioInputProps, onKeyPress}) => {
@@ -11,10 +12,7 @@ const FindPackagesForm = ({onSubmit, onChange, values, errors, onBlur, touched, 
         <div>
             <div className="card">
                 <form onSubmit={onSubmit}>
-                    <div className="card-header">
-                        Bağlama axtar
-                    </div>
-                    <div className="card-body">
+                    <DFilter title="Bağlama">
                         <RadioInputGroup
                             radioInputProps={radioInputProps}
                             name="via"
@@ -61,7 +59,7 @@ const FindPackagesForm = ({onSubmit, onChange, values, errors, onBlur, touched, 
                                 />
                             }[values.via]
                         }
-                    </div>
+                    </DFilter>
                     <div className="card-footer">
                         <button className="btn btn-primary" type="submit" disabled={isSubmitting}>
                             <i className="fa fa-search"/>

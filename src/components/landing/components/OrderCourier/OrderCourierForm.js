@@ -48,11 +48,11 @@ const OrderCourierForm = ({
               label="Mobil nömrə"
               placeHolder="Mobil nömrə"
               name="mobile"
-              value={values.mobile_number}
-              error={errors.mobile_number}
+              value={values.mobile}
+              error={errors.mobile}
               onChange={onChange}
               onBlur={onBlur}
-              touched={touched.mobile_number}
+              touched={touched.mobile}
             />
           </div>
           <div className="col-md-6">
@@ -60,11 +60,11 @@ const OrderCourierForm = ({
               label="Təxmini çəki"
               placeHolder="Təxmini çəki"
               name="estimated_weight"
-              value={values.weight}
-              error={errors.weight}
+              value={values.estimated_weight}
+              error={errors.estimated_weight}
               onChange={onChange}
               onBlur={onBlur}
-              touched={touched.weight}
+              touched={touched.estimated_weight}
             />
           </div>
         </div>
