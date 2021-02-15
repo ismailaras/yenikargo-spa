@@ -121,7 +121,7 @@ export const createOrUpdateCourierFormValidationSchema = Yup.object().shape({
 export const orderCourierFormValidationSchema = Yup.object().shape({
   first_name: Yup.string().required("Ad daxil edilməlidir."),
   last_name: Yup.string().required("Soyad daxil edilməlidir."),
-  mobile_number: Yup.string()
+  mobile: Yup.string()
     .required("Mobil nömrə daxil edilməlidir.")
     .test(
       "len",
@@ -129,7 +129,7 @@ export const orderCourierFormValidationSchema = Yup.object().shape({
       (val) => val && val.toString().length === 10
     ),
   city: Yup.string().required("Şəhər daxil edilməlidir."),
-  weight: Yup.string().required("Çəki daxil edilməlidir."),
+  estimated_weight: Yup.string().required("Çəki daxil edilməlidir."),
   station_id: Yup.string().required("Filial seçilməlidir."),
 });
 

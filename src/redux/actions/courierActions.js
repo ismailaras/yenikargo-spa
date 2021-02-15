@@ -37,6 +37,24 @@ export const deleteSelectedCourierData = selectedCourier => ({
     payload: selectedCourier
 })
 
+export const orderCourierBegin = () => ({
+    type: actionTypes.ORDER_COURIER_BEGIN,
+    payload: {},
+    [pendingTask]: begin
+})
+
+export const orderCourierSuccess = courier => ({
+    type: actionTypes.ORDER_COURIER_SUCCESS,
+    payload: courier,
+    [pendingTask]: end
+})
+
+export const orderCourierError = error => ({
+    type: actionTypes.ORDER_COURIER_ERROR,
+    payload: error,
+    [pendingTask]: endAll
+})
+
 export const createCourierBegin = () => ({
     type: actionTypes.CREATE_COURIER_BEGIN,
     payload: {},
@@ -90,6 +108,23 @@ export const deleteCourierError = error => ({
     payload: error,
     [pendingTask]: endAll
 })
+
+export const orderCourier = (courier) => {
+    return async dispatch => {
+        dispatch(orderCourierBegin())
+        courierService.orderCourier(courier)
+            .then(async data => {
+                await data;
+                if (data.message) {
+                    dispatch(orderCourierError(data.message));
+                } else {
+                    dispatch(orderCourierSuccess(data));
+                    notification.success('Sorğunuz göndərildi');
+                }
+            })
+            .catch(err => dispatch(orderCourierError(err)));
+    }
+}
 
 export const createCourier = (courier, packages) => {
     return async dispatch => {

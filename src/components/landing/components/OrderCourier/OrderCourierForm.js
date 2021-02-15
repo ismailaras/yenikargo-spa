@@ -47,7 +47,7 @@ const OrderCourierForm = ({
             <TextInput
               label="Mobil nömrə"
               placeHolder="Mobil nömrə"
-              name="mobile_number"
+              name="mobile"
               value={values.mobile_number}
               error={errors.mobile_number}
               onChange={onChange}
@@ -59,7 +59,7 @@ const OrderCourierForm = ({
             <NumberInput
               label="Təxmini çəki"
               placeHolder="Təxmini çəki"
-              name="weight"
+              name="estimated_weight"
               value={values.weight}
               error={errors.weight}
               onChange={onChange}
