@@ -157,9 +157,9 @@ const CreateOrUpdatePackageForm = ({onSubmit, values, errors, onChange, onBlur, 
                         <CheckboxInput
                             label="Göndərən ödəyəcək"
                             name="will_sender_pay"
-                            value={!(values.will_receiver_pay || values.is_postpaid || values.deliver_to_address) && true}
+                            value={(values.will_receiver_pay) ? true:false}
                             onChange={onChange}
-                            disabled={values.will_receiver_pay || values.is_postpaid || values.deliver_to_address}
+                            disabled={values.will_receiver_pay}
                         />
                     </div>
                     <div className="col-md-3">
@@ -168,7 +168,7 @@ const CreateOrUpdatePackageForm = ({onSubmit, values, errors, onChange, onBlur, 
                             name="will_receiver_pay"
                             value={values.will_receiver_pay}
                             onChange={onChange}
-                            disabled={values.will_sender_pay || values.is_postpaid || values.deliver_to_address}
+                            disabled={values.will_sender_pay}
                         />
                     </div>
                     <div className="col-md-3">
@@ -177,7 +177,6 @@ const CreateOrUpdatePackageForm = ({onSubmit, values, errors, onChange, onBlur, 
                             name="is_postpaid"
                             value={values.is_postpaid}
                             onChange={onChange}
-                            disabled={values.will_sender_pay || values.will_receiver_pay || values.deliver_to_address}
                         />
                     </div>
                     <div className="col-md-3">
@@ -186,7 +185,6 @@ const CreateOrUpdatePackageForm = ({onSubmit, values, errors, onChange, onBlur, 
                             name="deliver_to_address"
                             value={values.deliver_to_address}
                             onChange={onChange}
-                            disabled={values.will_sender_pay || values.is_postpaid || values.will_receiver_pay}
                         />
                     </div>
                 </div>

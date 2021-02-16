@@ -18,7 +18,7 @@ const Navi = (props) => {
 
     return (
         <div>
-            <Navbar color="primary" dark expand="md">
+            <Navbar color="primary" fixed="top" dark expand="md">
                 <div className="container">
                     <NavbarBrand href="/" style={{padding: 0}}>
                         <img src={logo_light} alt="logo" width={150}/>

@@ -7,6 +7,7 @@ import { getStations } from "../../redux/actions/stationActions";
 import styled from "styled-components";
 import ModalButton from "../toolbox/ModalButton";
 import OrderCourier from "./components/OrderCourier/OrderCourier";
+import Footer from "./Footer";
 
 const Landing = ({ stations, getStations }) => {
   useEffect(() => {
@@ -114,6 +115,7 @@ const Landing = ({ stations, getStations }) => {
           </div>
         </Container>
       </div>
+      <Footer/>
     </div>
   );
 };
