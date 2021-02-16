@@ -45,7 +45,7 @@ const cols = [
   },
   {
     name: <h6>Filial</h6>,
-    selector: "station_id",
+    selector: "station.name",
     sortable: true,
   },
   {

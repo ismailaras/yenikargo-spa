@@ -157,7 +157,7 @@ const CreateOrUpdatePackageForm = ({onSubmit, values, errors, onChange, onBlur, 
                         <CheckboxInput
                             label="Göndərən ödəyəcək"
                             name="will_sender_pay"
-                            value={(values.will_receiver_pay) ? true:false}
+                            value={!(values.will_receiver_pay) && true}
                             onChange={onChange}
                             disabled={values.will_receiver_pay}
                         />

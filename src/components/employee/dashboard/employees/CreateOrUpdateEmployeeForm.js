@@ -46,9 +46,7 @@ const CreateOrUpdateEmployeeForm = ({onSubmit, values, errors, onChange, onBlur,
                             touched={touched.password}
                         />
                     </div>
-                </div>
-                <div className="form-row">
-                    <div className="col-md-6">
+                <div className="col-md-6">
                         <SelectInput
                             label="Filial"
                             placeHolder="Filial"

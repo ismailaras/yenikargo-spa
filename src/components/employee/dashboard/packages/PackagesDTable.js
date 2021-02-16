@@ -40,12 +40,12 @@ const cols = [
   },
   {
     name: <h6>Göndərən filial</h6>,
-    selector: "sender_station_id",
+    selector: "sender_station.name",
     sortable: true,
   },
   {
     name: <h6>Alan filial</h6>,
-    selector: "receiver_station_id",
+    selector: "receiver_station.name",
     sortable: true,
   },
   {

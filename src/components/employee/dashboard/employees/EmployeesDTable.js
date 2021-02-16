@@ -31,12 +31,7 @@ const cols = [
   },
   {
     name: <h6>Filial</h6>,
-    selector: "station_id",
-    sortable: true,
-  },
-  {
-    name: <h6>Email</h6>,
-    selector: "email_address",
+    selector: "station.name",
     sortable: true,
   },
   {
@@ -65,6 +60,8 @@ const EmployeesDTable = ({
   useEffect(() => {
     setFoundEmployees(employees);
   }, [employees]);
+  console.log(foundEmployees)
+
   const handleChange = (e) => {
     selectEmployees(e.selectedRows);
   };

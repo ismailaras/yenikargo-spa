@@ -10,7 +10,6 @@ const ModalButton = ({buttonLabel, header, body, size, disabled, buttonSize, but
         <span className={clsName}>
             <Button color={colorBtn} size={buttonSize} onClick={toggle} disabled={disabled}>{buttonLabel}</Button>
             <Modal isOpen={modal}
-                   backdrop={'static'}
                    toggle={toggle} size={size}>
                 <ModalHeader toggle={toggle}>{header}</ModalHeader>
                 <ModalBody>
