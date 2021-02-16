@@ -15,8 +15,9 @@ const PaymentInfo = ({cart, createPayments}) => {
     const ref = useRef()
     const [costs, setCosts] = useState({});
     const [isForDelivery, setIsForDelivery] = useState(false);
+    const [isPrint, setIsPrint] = useState(false);
     const [paymentMethod, setPaymentMethod] = useState(PaymentMethodEnum.Cash);
-    const handlePrint = useReactToPrint({
+    const handlePrint = useReactToPrint(isPrint && {
         content: () => ref.current,
         onAfterPrint: () => setToggled(true),
         onPrintError: () => setToggled(true),
@@ -83,7 +84,7 @@ const PaymentInfo = ({cart, createPayments}) => {
                     <h5>Toplam: <strong>{formatPrice('AZN').format(costs.totalCost)}</strong></h5>
                 </div>
                 <div className="card-body">
-                    <CheckboxInput label="Çek çap edilsin" value={true} disabled={true}/>
+                    <CheckboxInput label="Çek çap edilsin" name="is-print" value={isPrint} onChange={()=>setIsPrint(!isPrint)} />
                     <CheckboxInput
                         label="Təhvil-təslim prosesi"
                         value={isForDelivery}
