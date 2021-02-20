@@ -29,3 +29,9 @@ export const changePackageState = p => {
         .then(data => data)
         .catch(err => err);
 }
+
+export const trackPackage = p => {
+    return apiService.post("check_track_state", p)
+        .then(data => data)
+        .catch(err => err);
+}

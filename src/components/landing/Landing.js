@@ -18,7 +18,7 @@ const Landing = ({ stations, getStations }) => {
   return (
     <div>
       <Navi />
-      <div id="home" className="bg-primary" style={{ minHeight: "85vh" }}>
+      <div id="home" className="bg-primary py-5" >
         <Container className="pt-5">
           <Row style={{ alignItems: "center" }}>
             <Col className="text-white">
@@ -35,9 +35,12 @@ const Landing = ({ stations, getStations }) => {
                 buttonColor="light"
                 key={1}
                 size={"md"}
-                // disabled={selectedCouriers.allSelectedCouriers.length !== 1}
                 body={<OrderCourier />}
               />
+              <div className="py-1">
+                <i className="fa fa-whatsapp"/>
+                <span className="ml-1">Whatsapp'la sifariş: <b style={{fontSize:'16px'}}>(055)444 55 66</b></span>
+              </div>
             </Col>
             <img
               style={{ width: "30rem", height: "20rem" }}

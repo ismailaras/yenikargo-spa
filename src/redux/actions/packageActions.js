@@ -96,6 +96,22 @@ export const changePackageStateError = error => ({
     [pendingTask]: endAll
 })
 
+export const trackPackageBegin = () => ({
+    type: actionTypes.TRACK_PACKAGE_BEGIN,
+    payload: {},
+    [pendingTask]: begin
+})
+export const trackPackageSuccess = p => ({
+    type: actionTypes.TRACK_PACKAGE_SUCCESS,
+    payload: p,
+    [pendingTask]: end
+})
+export const trackPackageError = error => ({
+    type: actionTypes.TRACK_PACKAGE_ERROR,
+    payload: error,
+    [pendingTask]: endAll
+})
+
 export const deletePackageBegin = () => ({
     type: actionTypes.DELETE_PACKAGE_BEGIN,
     payload: {},
@@ -212,6 +228,25 @@ export const changePackageState = (p, selectedPackage) => {
                 }
             })
             .catch(err => dispatch(changePackageStateError(err)));
+    }
+}
+
+export const trackPackage = (p) => {
+    return async dispatch => {
+        dispatch(trackPackageBegin())
+        packageService.trackPackage(p)
+            .then(async data => {
+                await data;
+                if (data.message) {
+                    dispatch(trackPackageError(data.message))
+                } else {
+                    dispatch(trackPackageSuccess(data))
+                    // dispatch(updateSelectedPackageData(changeSelectedPackageValues(data, selectedPackage)))
+                    console.log(data)
+                    notification.success('Bağlama tapıldı')
+                }
+            })
+            .catch(err => dispatch(trackPackageError(err)));
     }
 }
 
