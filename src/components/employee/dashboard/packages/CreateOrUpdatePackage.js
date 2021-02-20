@@ -83,6 +83,7 @@ const CreateOrUpdatePackage = ({
     touched,
     handleBlur,
     isSubmitting,
+    setFieldValue
   } = useFormik({
     initialValues,
     validationSchema: createOrUpdatePackageFormValidationSchema,
@@ -99,6 +100,7 @@ const CreateOrUpdatePackage = ({
       onChange={handleChange}
       onSubmit={handleSubmit}
       onBlur={handleBlur}
+      setFieldValue={setFieldValue}
       values={values}
       stations={stations}
       errors={errors}

@@ -6,8 +6,14 @@ import TextareaInput from "../../../toolbox/TextareaInput";
 import TextInput from "../../../toolbox/TextInput";
 import RadioInputGroup from "../../../toolbox/RadioInputGroup";
 
-const CreateOrUpdatePackageForm = ({onSubmit, values, errors, onChange, onBlur, isSubmitting, touched, stations}) => {
-
+const CreateOrUpdatePackageForm = ({onSubmit, values, errors, onChange, onBlur, isSubmitting, touched, stations,setFieldValue}) => {
+    var str2bool = (value) => {
+        if (value && typeof value === "string") {
+             if (value.toLowerCase() === "true") return true;
+             if (value.toLowerCase() === "false") return false;
+        }
+        return value;
+     }
     function setAmount() {
         if (values.weight <= 100) {
           values.amount = 10;
@@ -25,11 +31,11 @@ const CreateOrUpdatePackageForm = ({onSubmit, values, errors, onChange, onBlur, 
     setAmount()
     const radioInputProps = [
         {
-            value: "f",
+            value: "false",
             label: 'Göndərən ödəyəcək'
         },
         {
-            value: "t",
+            value: "true",
             label: 'Alan ödəyəcək'
         },
     ];
@@ -111,7 +117,7 @@ const CreateOrUpdatePackageForm = ({onSubmit, values, errors, onChange, onBlur, 
                 </div>
                 <div className="form-row">
                     <div className="col-md-6">
-                        <NumberInput
+                        <TextInput
                             label="Əlavə qiymət (AZN)"
                             placeHolder="Əlavə qiymət"
                             name="extra_amount"
@@ -164,13 +170,14 @@ const CreateOrUpdatePackageForm = ({onSubmit, values, errors, onChange, onBlur, 
                 </div>
                 <div className="form-row">
                     <div className="col-md-6">
+                    {/* <input type="radio" onKeyUp={onChange} name="will_receiver_pay" id=""/> */}
                     <RadioInputGroup
                         radioInputProps={radioInputProps}
                         name="will_receiver_pay"
-                        checkedValue="true"
-                        onChange={onChange}
+                        checkedValue={values.will_receiver_pay}
+                        onChange={e=>setFieldValue('will_receiver_pay',str2bool(e.target.value))}
                     />
-                    <div>{values.will_receiver_pay === 't' ? 'Alan ödəyəcək':'Göndərən ödəyəcək'} </div>
+                    <div>{values.will_receiver_pay ? 'Alan ödəyəcək':'Göndərən ödəyəcək'} </div>
                     </div>
                     {/* <div className="col-md-3">
                         <CheckboxInput
