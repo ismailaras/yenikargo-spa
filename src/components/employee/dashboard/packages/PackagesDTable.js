@@ -49,6 +49,11 @@ const cols = [
     sortable: true,
   },
   {
+    name: <h6>Hazırki filial</h6>,
+    selector: "current_location",
+    sortable: true,
+  },
+  {
     name: <h6>Kuryer ID</h6>,
     selector: "courier_id",
     sortable: true,
