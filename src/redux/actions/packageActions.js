@@ -1,9 +1,9 @@
 import * as actionTypes from "./actionTypes";
 import * as packageService from "../../services/packageService";
 import * as notification from '../../utilities/notification';
-import {begin, end, endAll, pendingTask} from 'react-redux-spinner';
-import {addToCart} from "./cartActions";
-import {Routes} from "../../routes";
+import { begin, end, endAll, pendingTask } from 'react-redux-spinner';
+import { addToCart } from "./cartActions";
+import { Routes } from "../../routes";
 
 export const findPackagesBegin = () => ({
     type: actionTypes.FIND_PACKAGES_BEGIN,
@@ -132,7 +132,7 @@ export const deletePackageError = error => ({
 
 export const addCourierToPackages = (courier, packages) => ({
     type: actionTypes.ADD_COURIER_TO_PACKAGES,
-    payload: {courier, packages}
+    payload: { courier, packages }
 })
 
 export const createPackage = (p, history) => {
@@ -242,7 +242,7 @@ export const trackPackage = (p) => {
                 } else {
                     dispatch(trackPackageSuccess(data))
                     // dispatch(updateSelectedPackageData(changeSelectedPackageValues(data, selectedPackage)))
-                    console.log(data)
+                    // console.log(data)
                     notification.success('Bağlama tapıldı')
                 }
             })

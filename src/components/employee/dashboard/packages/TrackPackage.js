@@ -5,7 +5,7 @@ import { trackPackageFormValidationSchema } from "../../../../utilities/formVali
 import NumberInput from "../../../toolbox/NumberInput";
 import { trackPackage } from "../../../../services/packageService";
 
-const TrackPackage = ({ selectedPackages, trackPackage }) => {
+const TrackPackage = ({ trackPackage }) => {
   let initialValues = {
     package_id: 0,
   };
@@ -51,8 +51,6 @@ const mapDispatchToProps = {
 };
 
 const mapStateToProps = (state) => ({
-  selectedCouriers: state.selectCouriersReducer,
-  selectedPackages: state.selectPackagesReducer,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TrackPackage);

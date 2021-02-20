@@ -48,10 +48,11 @@ const CreateOrUpdateCustomerForm = ({
         </div>
         <div className="form-row">
           <div className="col-md-6">
-            <TextInput
+            <CustomMaskedInput
               label="Mobil nömrə"
               placeHolder="Mobil nömrə"
               name="mobile_number"
+              mask="mobile_number"
               value={values.mobile_number}
               error={errors.mobile_number}
               onChange={onChange}

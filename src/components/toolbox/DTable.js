@@ -26,7 +26,7 @@ createTheme('yenikargo', {
 const customStyles={
     rows: {
         style: {
-          fontSize:'15px'
+          fontSize:'17px',
         }
       }
 }
@@ -40,7 +40,7 @@ const DTable = (props) => {
         }
     return (
         <div className="card">
-            <div className="card-header" style={{fontSize:'20px'}}>
+            <div className="card-header" style={{fontSize:'22px'}}>
                 {props.title} cədvəli
             </div>
             <div className="card-body" style={{fontSize:'20px'}}>

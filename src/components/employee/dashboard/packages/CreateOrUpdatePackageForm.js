@@ -4,8 +4,35 @@ import CheckboxInput from "../../../toolbox/CheckboxInput";
 import HiddenInput from "../../../toolbox/HiddenInput";
 import TextareaInput from "../../../toolbox/TextareaInput";
 import TextInput from "../../../toolbox/TextInput";
+import RadioInputGroup from "../../../toolbox/RadioInputGroup";
 
 const CreateOrUpdatePackageForm = ({onSubmit, values, errors, onChange, onBlur, isSubmitting, touched, stations}) => {
+
+    function setAmount() {
+        if (values.weight <= 100) {
+          values.amount = 10;
+          console.log(values.amount);
+        } else if (values.weight > 100 && values.weight < 200) {
+          values.amount = 20;
+          console.log(values.amount);
+        }
+        else if (values.weight > 200) {
+            values.amount = 50;
+            console.log(values.amount);
+          }
+        values.amount=(values.amount+ Number(values.extra_amount))
+    }
+    setAmount()
+    const radioInputProps = [
+        {
+            value: "f",
+            label: 'Göndərən ödəyəcək'
+        },
+        {
+            value: "t",
+            label: 'Alan ödəyəcək'
+        },
+    ];
     return (
         <div>
             <form onSubmit={onSubmit}>
@@ -57,7 +84,7 @@ const CreateOrUpdatePackageForm = ({onSubmit, values, errors, onChange, onBlur, 
                     </div>
                 </div>
                 <div className="form-row">
-                    <div className="col-md-4">
+                    <div className="col-md-6">
                         <NumberInput
                             label="Çəki (KQ)"
                             placeHolder="Çəki"
@@ -69,7 +96,7 @@ const CreateOrUpdatePackageForm = ({onSubmit, values, errors, onChange, onBlur, 
                             touched={touched.weight}
                         />
                     </div>
-                    <div className="col-md-4">
+                    <div className="col-md-6">
                         <NumberInput
                             label="Ədəd"
                             placeHolder="Ədəd"
@@ -81,8 +108,29 @@ const CreateOrUpdatePackageForm = ({onSubmit, values, errors, onChange, onBlur, 
                             touched={touched.quantity}
                         />
                     </div>
-                    <div className="col-md-4">
+                </div>
+                <div className="form-row">
+                    <div className="col-md-6">
                         <NumberInput
+                            label="Əlavə qiymət (AZN)"
+                            placeHolder="Əlavə qiymət"
+                            name="extra_amount"
+                            value={values.extra_amount}
+                            error={errors.extra_amount}
+                            onChange={onChange}
+                            onBlur={onBlur}
+                            touched={touched.extra_amount}
+                        />
+                    </div>                    <div className="col-md-6">
+                        <div className="form-group">
+                        <label>Daşınma haqqı</label>
+                        <HiddenInput
+                            name="amount"
+                            value={values.amount}
+                        />
+                        <div style={{fontSize:'18px',fontWeight:'bold',textAlign:'center'}}>{values.amount} AZN</div>
+                        </div>
+                        {/* <NumberInput
                             label="Daşınma haqqı (AZN)"
                             placeHolder="Daşınma haqqı"
                             name="amount"
@@ -92,47 +140,9 @@ const CreateOrUpdatePackageForm = ({onSubmit, values, errors, onChange, onBlur, 
                             onChange={onChange}
                             onBlur={onBlur}
                             touched={touched.amount}
-                        />
+                        /> */}
                     </div>
-                </div>
-                <div className="form-row">
-                    <div className="col-md-4">
-                        <NumberInput
-                            label="Genişlik (SM)"
-                            placeHolder="Genişlik"
-                            name="width"
-                            value={values.width}
-                            error={errors.width}
-                            onChange={onChange}
-                            onBlur={onBlur}
-                            touched={touched.width}
-                        />
                     </div>
-                    <div className="col-md-4">
-                        <NumberInput
-                            label="Hündürlük (SM)"
-                            placeHolder="Hündürlük"
-                            name="height"
-                            value={values.height}
-                            error={errors.height}
-                            onChange={onChange}
-                            onBlur={onBlur}
-                            touched={touched.height}
-                        />
-                    </div>
-                    <div className="col-md-4">
-                        <NumberInput
-                            label="Uzunluq (SM)"
-                            placeHolder="Uzunluq"
-                            name="length"
-                            value={values.length}
-                            error={errors.length}
-                            onChange={onChange}
-                            onBlur={onBlur}
-                            touched={touched.length}
-                        />
-                    </div>
-                </div>
                 <div className="form-row">
                     <div className="col-md-12">
                         <TextareaInput
@@ -153,7 +163,16 @@ const CreateOrUpdatePackageForm = ({onSubmit, values, errors, onChange, onBlur, 
                     </div>
                 </div>
                 <div className="form-row">
-                    <div className="col-md-3">
+                    <div className="col-md-6">
+                    <RadioInputGroup
+                        radioInputProps={radioInputProps}
+                        name="will_receiver_pay"
+                        checkedValue="true"
+                        onChange={onChange}
+                    />
+                    <div>{values.will_receiver_pay === 't' ? 'Alan ödəyəcək':'Göndərən ödəyəcək'} </div>
+                    </div>
+                    {/* <div className="col-md-3">
                         <CheckboxInput
                             label="Göndərən ödəyəcək"
                             name="will_sender_pay"
@@ -170,7 +189,7 @@ const CreateOrUpdatePackageForm = ({onSubmit, values, errors, onChange, onBlur, 
                             onChange={onChange}
                             disabled={values.will_sender_pay}
                         />
-                    </div>
+                    </div> */}
                     <div className="col-md-3">
                         <CheckboxInput
                             label="Qarşı ödəməli məhsul"

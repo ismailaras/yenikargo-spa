@@ -27,6 +27,7 @@ const initialState = {
         allSelectedPackages: [],
         toggledClearRows: false
     },
+    trackedPackage: {},
     cart: [],
     payments: [],
     selectedPayments: {

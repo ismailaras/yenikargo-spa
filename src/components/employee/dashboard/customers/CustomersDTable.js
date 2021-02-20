@@ -8,6 +8,7 @@ import {
   setSenderCustomer,
 } from "../../../../redux/actions/customerActions";
 import CreateOrUpdateCustomer from "./CreateOrUpdateCustomer";
+import * as notification from "../../../../utilities/notification";
 import ModalButton from "../../../toolbox/ModalButton";
 import { CustomerDTableChild } from "./CustomerDTableChild";
 import {
@@ -97,6 +98,7 @@ const CustomersDTable = ({
   selectedCustomers,
   setSenderCustomer,
   setReceiverCustomer,
+  currentUser,
 }) => {
   const [foundCustomers, setFoundCustomers] = useState(customers);
   useEffect(() => {
@@ -106,7 +108,14 @@ const CustomersDTable = ({
     selectCustomers(e.selectedRows);
   };
   const setSender = () => {
-    setSenderCustomer(selectedCustomers.lastSelectedCustomer);
+    if (
+      currentUser.currentEmployee.station_id !==
+      selectedCustomers.lastSelectedCustomer.station_id
+    ) {
+      notification.warn(
+        `Uğursuz əməliyyat: Göndərən müştəri filialı ilə eyni filialda olmalısınız. Hazırkı filialınız: ${selectedCustomers.lastSelectedCustomer.station.name}`
+      );
+    } else setSenderCustomer(selectedCustomers.lastSelectedCustomer);
   };
   const setReceiver = () => {
     setReceiverCustomer(selectedCustomers.lastSelectedCustomer);
@@ -167,7 +176,7 @@ const CustomersDTable = ({
       disabled={selectedCustomers.allSelectedCustomers.length !== 1}
     >
       Alan seç
-    </button>
+    </button>,
   ];
   return (
     <div>
@@ -187,6 +196,7 @@ const CustomersDTable = ({
 const mapStateToProps = (state) => ({
   customers: state.findCustomersReducer,
   selectedCustomers: state.selectCustomersReducer,
+  currentUser: state.authReducer,
 });
 
 const mapDispatchToProps = {

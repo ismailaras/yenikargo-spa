@@ -37,22 +37,21 @@ const CreateOrUpdatePackage = ({
     return initialValues;
   }
 
-  function setAmount(weight) {
-    if (weight <= 100) {
-      values.amount = 10;
-      console.log(values.amount);
-      console.log("100<=");
-    } else if (weight > 100) {
-      values.amount = 20;
-      console.log(values.amount);
-      console.log("100>");
-    }
-  }
+  // function setAmount(weight) {
+  //   if (weight <= 100) {
+  //     values.amount = 10;
+  //     console.log(values.amount);
+  //     console.log("100<=");
+  //   } else if (weight > 100) {
+  //     values.amount = 20;
+  //     console.log(values.amount);
+  //     console.log("100>");
+  //   }
+  // }
   useEffect(() => {
     if (stations.length === 0) {
       getStations();
     }
-    setAmount(values.weight);
   });
   let initialValues = {
     sender_customer_id: "",
@@ -60,9 +59,7 @@ const CreateOrUpdatePackage = ({
     sender_station_id: "",
     receiver_station_id: "",
     weight: 0,
-    length: 0,
-    height: 0,
-    width: 0,
+    extra_amount: 0,
     amount: 0,
     description: "",
     comment: "",
@@ -93,6 +90,7 @@ const CreateOrUpdatePackage = ({
       values.id
         ? updatePackage(values, selectedPackages.lastSelectedPackage)
         : createPackage(values, history);
+        console.log(values)
       setSubmitting(false);
     },
   });

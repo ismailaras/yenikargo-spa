@@ -64,6 +64,7 @@ export const getCostsFromCartByPaymentSort = (cart, paymentSort) => {
   }
 };
 
+const mobile_number= [/\d/, /\d/,/\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/];
 const exp_date = [/\d/, /\d/, "/", /\d/, /\d/];
 const card_number = [/\d/, /\d/,/\d/, /\d/, /\d/, /\d/,/\d/, /\d/,/\d/, /\d/,/\d/, /\d/, /\d/, /\d/,/\d/, /\d/];
 
@@ -73,6 +74,8 @@ export const selectMaskInputValue = (mask) => {
       return exp_date;
     case "card_number":
       return card_number;
+    case "mobile_number":
+        return mobile_number;
     default:
       return "";
   }

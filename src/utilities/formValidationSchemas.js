@@ -45,8 +45,9 @@ export const createOrUpdateEmployeeFormValidationSchema = Yup.object().shape({
 });
 
 export const createOrUpdatePackageFormValidationSchema = Yup.object().shape({
-  weight: Yup.string().required("Çəki daxil edilməlidir."),
-  amount: Yup.string().required("Daşınma haqqı hesablanmalıdır."),
+  weight: Yup.number().required("Çəki daxil edilməlidir."),
+  amount: Yup.number().required("Daşınma haqqı hesablanmalıdır."),
+  extra_amount: Yup.number().required("Əlavə daşınma haqqı hesablanmalıdır."),
   is_postpaid: Yup.boolean(),
   price: Yup.number().when("is_postpaid", {
     is: true,
