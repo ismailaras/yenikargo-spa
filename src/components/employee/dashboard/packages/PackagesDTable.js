@@ -70,6 +70,12 @@ const cols = [
     format: (row) => formatPrice("AZN").format(row.amount),
   },
   {
+    name: <h6>Əlavə dəyəri</h6>,
+    selector: "extra_amount",
+    sortable: true,
+    format: (row) => formatPrice("AZN").format(row.extra_amount),
+  },
+  {
     name: <h6>Ədəd</h6>,
     selector: "quantity",
     sortable: true,
