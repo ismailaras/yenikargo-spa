@@ -7,6 +7,7 @@ import { createCustomerReducer } from "./customers/createCustomerReducer";
 import { updateCustomerReducer } from "./customers/updateCustomerReducer";
 import { deleteCustomerReducer } from "./customers/deleteCustomerReducer";
 import { getStationsReducer } from "./stations/getStationsReducer";
+import { getCitiesReducer } from "./couriers/getCitiesReducer";
 import { findPackagesReducer } from "./packages/findPackagesReducer";
 import { selectPackagesReducer } from "./packages/selectPackagesReducer";
 import { createPackageReducer } from "./packages/createPackageReducer";
@@ -40,6 +41,7 @@ import { updateExtraSellingReducer } from "./extra-selling/updateExtraSellingRed
 import { deleteExtraSellingReducer } from "./extra-selling/deleteExtraSellingReducer";
 
 const appReducer = combineReducers({
+  getCitiesReducer,
   authReducer,
   findCustomersReducer,
   selectCustomersReducer,

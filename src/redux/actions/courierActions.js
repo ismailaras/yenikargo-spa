@@ -4,6 +4,25 @@ import {begin, end, endAll, pendingTask} from 'react-redux-spinner';
 import {addCourierToPackages} from "./packageActions";
 import * as notification from '../../utilities/notification';
 
+
+export const getCitiesBegin = () => ({
+    type: actionTypes.GET_CITIES_BEGIN,
+    payload: {},
+    [pendingTask]: begin
+})
+
+export const getCitiesSuccess = cities => ({
+    type: actionTypes.GET_CITIES_SUCCESS,
+    payload: cities,
+    [pendingTask]: end
+})
+
+export const getCitiesError = error => ({
+    type: actionTypes.GET_CITIES_ERROR,
+    payload: error,
+    [pendingTask]: endAll
+})
+
 export const findCouriersBegin = () => ({
     type: actionTypes.FIND_COURIERS_BEGIN,
     payload: {},
@@ -205,4 +224,21 @@ const changeSelectedCourierValues = (values, lastSelectedCourier) => {
         }
     }
     return lastSelectedCourier;
+}
+
+export const getCities = () => {
+    return async dispatch => {
+        dispatch(getCitiesBegin())
+        courierService.getCities()
+            .then(async data => {
+                await data;
+                if (data.message) {
+                    dispatch(getCitiesError(data.message))
+                } else {
+                    dispatch(getCitiesSuccess(data))
+                    console.log(data)
+                }
+            })
+            .catch(err => dispatch(getCitiesError(err)));
+    }
 }

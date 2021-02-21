@@ -5,6 +5,7 @@ const initialState = {
         error: false,
         errorMessage: ''
     },
+    cities: [],
     customers: [],
     selectedCustomers: {
         lastSelectedCustomer: {},

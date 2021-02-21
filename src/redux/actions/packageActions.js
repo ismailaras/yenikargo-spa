@@ -241,9 +241,7 @@ export const trackPackage = (p) => {
                     dispatch(trackPackageError(data.message))
                 } else {
                     dispatch(trackPackageSuccess(data))
-                    // dispatch(updateSelectedPackageData(changeSelectedPackageValues(data, selectedPackage)))
-                    // console.log(data)
-                    notification.success('Bağlama tapıldı')
+                    console.log(data)
                 }
             })
             .catch(err => dispatch(trackPackageError(err)));

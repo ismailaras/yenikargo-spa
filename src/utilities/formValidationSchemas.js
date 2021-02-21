@@ -40,6 +40,8 @@ export const createOrUpdateCustomerFormValidationSchema = Yup.object().shape({
 export const createOrUpdateEmployeeFormValidationSchema = Yup.object().shape({
   first_name: Yup.string().required("Ad daxil edilməlidir."),
   last_name: Yup.string().required("Soyad daxil edilməlidir."),
+  phone_number: Yup.number().required("Telefon nömrəsi daxil edilməlidir."),
+  mobile_number: Yup.number().required("Mobil nömrə daxil edilməlidir."),
   password: Yup.string().required("Şifrə daxil edilməlidir."),
   station_id: Yup.string().required("Filial seçilməlidir."),
 });
@@ -70,7 +72,7 @@ export const changePackageStateFormValidationSchema = Yup.object().shape({
 });
 
 export const trackPackageFormValidationSchema = Yup.object().shape({
-  package_id: Yup.number().required("Paket ID yazılmalıdır"),
+  id: Yup.number().required("Paket ID yazılmalıdır"),
 });
 
 export const signInFormValidationSchema = Yup.object().shape({
@@ -126,16 +128,19 @@ export const createOrUpdateCourierFormValidationSchema = Yup.object().shape({
 export const orderCourierFormValidationSchema = Yup.object().shape({
   first_name: Yup.string().required("Ad daxil edilməlidir."),
   last_name: Yup.string().required("Soyad daxil edilməlidir."),
-  mobile: Yup.string()
+  address: Yup.string().required("Adres daxil edilməlidir."),
+  note: Yup.string(),
+  mobile1: Yup.number()
     .required("Mobil nömrə daxil edilməlidir.")
     .test(
       "len",
       "10 xanalı olmalıdır. (0505005050)",
       (val) => val && val.toString().length === 10
     ),
+  mobile2: Yup.number(),
   city: Yup.string().required("Şəhər daxil edilməlidir."),
   estimated_weight: Yup.string().required("Çəki daxil edilməlidir."),
-  station_id: Yup.string().required("Filial seçilməlidir."),
+  // station_id: Yup.string().required("Filial seçilməlidir."),
 });
 
 export const createOrUpdateStationFormValidationSchema = Yup.object().shape({

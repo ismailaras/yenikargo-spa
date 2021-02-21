@@ -6,27 +6,24 @@ import TextareaInput from "../../../toolbox/TextareaInput";
 import TextInput from "../../../toolbox/TextInput";
 import RadioInputGroup from "../../../toolbox/RadioInputGroup";
 
-const CreateOrUpdatePackageForm = ({onSubmit, values, errors, onChange, onBlur, isSubmitting, touched, stations,setFieldValue}) => {
+const CreateOrUpdatePackageForm = ({ onSubmit, values, errors, onChange, onBlur, isSubmitting, touched, stations, setFieldValue }) => {
     var str2bool = (value) => {
         if (value && typeof value === "string") {
-             if (value.toLowerCase() === "true") return true;
-             if (value.toLowerCase() === "false") return false;
+            if (value.toLowerCase() === "true") return true;
+            if (value.toLowerCase() === "false") return false;
         }
         return value;
-     }
+    }
     function setAmount() {
         if (values.weight <= 100) {
-          values.amount = 10;
-          console.log(values.amount);
+            values.amount = 10;
         } else if (values.weight > 100 && values.weight < 200) {
-          values.amount = 20;
-          console.log(values.amount);
+            values.amount = 20;
         }
         else if (values.weight > 200) {
             values.amount = 50;
-            console.log(values.amount);
-          }
-        values.amount=(values.amount+ Number(values.extra_amount))
+        }
+        values.amount = (values.amount + Number(values.extra_amount))
     }
     setAmount()
     const radioInputProps = [
@@ -83,7 +80,7 @@ const CreateOrUpdatePackageForm = ({onSubmit, values, errors, onChange, onBlur, 
                         />
                     </div>
                 </div>
-                <hr/>
+                <hr />
                 <div className="form-row">
                     <div className="col-md-12">
                         <h6><strong>Bağlama detalları</strong></h6>
@@ -127,28 +124,29 @@ const CreateOrUpdatePackageForm = ({onSubmit, values, errors, onChange, onBlur, 
                             onBlur={onBlur}
                             touched={touched.extra_amount}
                         />
-                    </div>                    <div className="col-md-6">
+                    </div>
+                    <div className="col-md-6">
                         <div className="form-group">
-                        <label>Daşınma haqqı</label>
-                        <HiddenInput
-                            name="amount"
-                            value={values.amount}
-                        />
-                        <div style={{fontSize:'18px',fontWeight:'bold',textAlign:'center'}}>{values.amount} AZN</div>
+                            <label>Daşınma haqqı</label>
+                            <HiddenInput
+                                name="amount"
+                                value={values.amount}
+                            />
+                            <div className='form-control text-success'>{values.amount} AZN</div>
+                            {/* <NumberInput
+                                label="Daşınma haqqı (AZN)"
+                                placeHolder="Daşınma haqqı"
+                                name="amount"
+                                readOnly={true}
+                                value={values.amount}
+                                error={errors.amount}
+                                onChange={onChange}
+                                onBlur={onBlur}
+                                touched={touched.amount}
+                            /> */}
                         </div>
-                        {/* <NumberInput
-                            label="Daşınma haqqı (AZN)"
-                            placeHolder="Daşınma haqqı"
-                            name="amount"
-                            readOnly={true}
-                            value={values.amount}
-                            error={errors.amount}
-                            onChange={onChange}
-                            onBlur={onBlur}
-                            touched={touched.amount}
-                        /> */}
                     </div>
-                    </div>
+                </div>
                 <div className="form-row">
                     <div className="col-md-12">
                         <TextareaInput
@@ -162,7 +160,7 @@ const CreateOrUpdatePackageForm = ({onSubmit, values, errors, onChange, onBlur, 
                         />
                     </div>
                 </div>
-                <hr/>
+                <hr />
                 <div className="form-row">
                     <div className="col-md-12">
                         <h6><strong>Göndərmə detalları</strong></h6>
@@ -170,33 +168,14 @@ const CreateOrUpdatePackageForm = ({onSubmit, values, errors, onChange, onBlur, 
                 </div>
                 <div className="form-row">
                     <div className="col-md-6">
-                    {/* <input type="radio" onKeyUp={onChange} name="will_receiver_pay" id=""/> */}
-                    <RadioInputGroup
-                        radioInputProps={radioInputProps}
-                        name="will_receiver_pay"
-                        checkedValue={values.will_receiver_pay}
-                        onChange={e=>setFieldValue('will_receiver_pay',str2bool(e.target.value))}
-                    />
-                    <div>{values.will_receiver_pay ? 'Alan ödəyəcək':'Göndərən ödəyəcək'} </div>
-                    </div>
-                    {/* <div className="col-md-3">
-                        <CheckboxInput
-                            label="Göndərən ödəyəcək"
-                            name="will_sender_pay"
-                            value={!(values.will_receiver_pay) && true}
-                            onChange={onChange}
-                            disabled={values.will_receiver_pay}
-                        />
-                    </div>
-                    <div className="col-md-3">
-                        <CheckboxInput
-                            label="Alan ödəyəcək"
+                        <RadioInputGroup
+                            radioInputProps={radioInputProps}
                             name="will_receiver_pay"
-                            value={values.will_receiver_pay}
-                            onChange={onChange}
-                            disabled={values.will_sender_pay}
+                            checkedValue={values.will_receiver_pay}
+                            onChange={e => setFieldValue('will_receiver_pay', str2bool(e.target.value))}
                         />
-                    </div> */}
+                        <div>{values.will_receiver_pay ? 'Alan ödəyəcək' : 'Göndərən ödəyəcək'} </div>
+                    </div>
                     <div className="col-md-3">
                         <CheckboxInput
                             label="Qarşı ödəməli məhsul"
@@ -214,7 +193,7 @@ const CreateOrUpdatePackageForm = ({onSubmit, values, errors, onChange, onBlur, 
                         />
                     </div>
                 </div>
-                <hr/>
+                <hr />
                 {values.is_postpaid ?
                     <div className="form-row">
                         <div className="col-md-6">
