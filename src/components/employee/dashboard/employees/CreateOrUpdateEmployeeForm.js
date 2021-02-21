@@ -2,6 +2,7 @@ import React from "react";
 import TextInput from "../../../toolbox/TextInput";
 import SelectInput from "../../../toolbox/SelectInput";
 import PasswordInput from "../../../toolbox/PasswordInput";
+import CustomMaskedInput from "../../../toolbox/CustomMaskedInput";
 
 const CreateOrUpdateEmployeeForm = ({ onSubmit, values, errors, onChange, onBlur, isSubmitting, touched, stations }) => {
     return (
@@ -35,7 +36,8 @@ const CreateOrUpdateEmployeeForm = ({ onSubmit, values, errors, onChange, onBlur
                 </div>
                 <div className="form-row">
                     <div className="col-md-6">
-                        <TextInput
+                        <CustomMaskedInput
+                            mask="mobile_number"
                             label="Mobil nömrə"
                             placeHolder="Mobil nömrə"
                             name="mobile1"
@@ -47,7 +49,8 @@ const CreateOrUpdateEmployeeForm = ({ onSubmit, values, errors, onChange, onBlur
                         />
                     </div>
                     <div className="col-md-6">
-                        <TextInput
+                        <CustomMaskedInput
+                            mask="mobile_number"
                             label="Əlavə nömrə"
                             placeHolder="Əlavə nömrə"
                             name="mobile2"
@@ -76,7 +79,7 @@ const CreateOrUpdateEmployeeForm = ({ onSubmit, values, errors, onChange, onBlur
                         <TextInput
                             label="Fin kod"
                             placeHolder="Fin kod"
-                            name="first_name"
+                            name="identity2"
                             value={values.identity2}
                             error={errors.identity2}
                             onChange={onChange}
@@ -85,9 +88,10 @@ const CreateOrUpdateEmployeeForm = ({ onSubmit, values, errors, onChange, onBlur
                         />
                     </div>
                     <div className="col-md-4">
-                        <TextInput
+                        <CustomMaskedInput
                             label="Doğum tarixi"
                             placeHolder="Doğum tarixi"
+                            mask="birthdate"
                             name="birthdate"
                             value={values.birthdate}
                             error={errors.birthdate}

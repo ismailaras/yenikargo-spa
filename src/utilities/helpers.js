@@ -67,6 +67,7 @@ export const getCostsFromCartByPaymentSort = (cart, paymentSort) => {
 const mobile_number= [/\d/, /\d/,/\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/];
 const exp_date = [/\d/, /\d/, "/", /\d/, /\d/];
 const card_number = [/\d/, /\d/,/\d/, /\d/, /\d/, /\d/,/\d/, /\d/,/\d/, /\d/,/\d/, /\d/, /\d/, /\d/,/\d/, /\d/];
+const birthdate = [/\d/, /\d/,/\d/, /\d/,"-", [0-12],/\d/, /\d/,"-",/\d/, /\d/];
 
 export const selectMaskInputValue = (mask) => {
   switch (mask) {
@@ -75,7 +76,9 @@ export const selectMaskInputValue = (mask) => {
     case "card_number":
       return card_number;
     case "mobile_number":
-        return mobile_number;
+      return mobile_number;
+    case "birthdate":
+      return birthdate;
     default:
       return "";
   }
