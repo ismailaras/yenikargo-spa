@@ -236,7 +236,6 @@ export const getCities = () => {
                     dispatch(getCitiesError(data.message))
                 } else {
                     dispatch(getCitiesSuccess(data))
-                    console.log(data)
                 }
             })
             .catch(err => dispatch(getCitiesError(err)));

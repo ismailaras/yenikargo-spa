@@ -150,7 +150,7 @@ export const deleteCustomer = customer => {
                 } else {
                     dispatch(deleteCustomerSuccess(customer))
                     dispatch(deleteSelectedCustomerData(customer))
-                    notification.success('Müştəri silindi')
+                    notification.error('Müştəri silindi')
                 }
             })
             .catch(err => dispatch(deleteCustomerError(err)));

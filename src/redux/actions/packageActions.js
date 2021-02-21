@@ -186,7 +186,7 @@ export const deletePackage = p => {
                 } else {
                     dispatch(deletePackageSuccess(p))
                     dispatch(deleteSelectedPackageData(p))
-                    notification.success('Bağlama silindi')
+                    notification.error('Bağlama silindi')
                 }
             })
             .catch(err => dispatch(deletePackageError(err)));
@@ -241,7 +241,6 @@ export const trackPackage = (p) => {
                     dispatch(trackPackageError(data.message))
                 } else {
                     dispatch(trackPackageSuccess(data))
-                    console.log(data)
                 }
             })
             .catch(err => dispatch(trackPackageError(err)));

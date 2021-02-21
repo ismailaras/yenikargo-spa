@@ -39,7 +39,7 @@ const TrackPackage = ({ trackPackage, trackingPackage }) => {
         onBlur={handleBlur}
         touched={touched.id}
       />
-      {trackingPackage && <TrackPackageInfo/>}
+      {trackingPackage.package_id != values.id || !trackingPackage.package_id ?null: <TrackPackageInfo/>}
       <button className="btn btn-primary" type="submit" disabled={isSubmitting}>
         <i className="fa fa-search" />
         <span> Təsdiqlə</span>

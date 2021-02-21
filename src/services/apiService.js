@@ -53,7 +53,7 @@ export const handleResponse = async response => {
     if (response.ok) {
         const data = await response.json();
         if (data.message) {
-            notification.success(data.message);
+            notification.warn(data.message);
         }
         return data;
     }
