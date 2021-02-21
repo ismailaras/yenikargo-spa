@@ -35,6 +35,31 @@ const cols = [
     sortable: true,
   },
   {
+    name: <h6>Ünvan</h6>,
+    selector: "address",
+    sortable: true,
+  },
+  {
+    name: <h6>Mobil1</h6>,
+    selector: "mobile1",
+    sortable: true,
+  },
+  {
+    name: <h6>Mobil2</h6>,
+    selector: "mobile2",
+    sortable: true,
+  },
+  {
+    name: <h6>Fin</h6>,
+    selector: "identity2",
+    sortable: true,
+  },
+  {
+    name: <h6>Doğum tarixi</h6>,
+    selector: "birthdate",
+    sortable: true,
+  },
+  {
     name: <h6>Tarix</h6>,
     selector: "created_date",
     sortable: true,

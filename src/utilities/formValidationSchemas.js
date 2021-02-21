@@ -40,8 +40,11 @@ export const createOrUpdateCustomerFormValidationSchema = Yup.object().shape({
 export const createOrUpdateEmployeeFormValidationSchema = Yup.object().shape({
   first_name: Yup.string().required("Ad daxil edilməlidir."),
   last_name: Yup.string().required("Soyad daxil edilməlidir."),
-  phone_number: Yup.number().required("Telefon nömrəsi daxil edilməlidir."),
-  mobile_number: Yup.number().required("Mobil nömrə daxil edilməlidir."),
+  mobile1: Yup.number().required("Telefon nömrəsi daxil edilməlidir."),
+  mobile2: Yup.number(),
+  address: Yup.string().required("Şifrə daxil edilməlidir."),
+  identity2: Yup.string().required("Şifrə daxil edilməlidir."),
+  birthdate: Yup.string().required("Şifrə daxil edilməlidir."),
   password: Yup.string().required("Şifrə daxil edilməlidir."),
   station_id: Yup.string().required("Filial seçilməlidir."),
 });
