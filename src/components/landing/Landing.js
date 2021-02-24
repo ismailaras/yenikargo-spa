@@ -1,13 +1,20 @@
 import React, { useEffect } from "react";
 import { Container, Col, Row } from "reactstrap";
 import Navi from "./Navi";
-import landing_image from "../../assets/illustrations/shipping-landing.png";
 import { connect } from "react-redux";
 import { getStations } from "../../redux/actions/stationActions";
-import styled from "styled-components";
+import Footer from "./Footer";
+
+import level_gps from "../../assets/illustrations/level-gps.png";
+import level_courier from "../../assets/illustrations/level-courier.png";
+import level_box from "../../assets/illustrations/level-box.png";
+import level_truck from "../../assets/illustrations/level-truck.png";
+
+import "./style.scss";
+import LinkButton from "../toolbox/LinkButton";
 import ModalButton from "../toolbox/ModalButton";
 import OrderCourier from "./components/OrderCourier/OrderCourier";
-import Footer from "./Footer";
+import Accordion from "../toolbox/Accordion";
 
 const Landing = ({ stations, getStations }) => {
   useEffect(() => {
@@ -16,11 +23,39 @@ const Landing = ({ stations, getStations }) => {
     }
   });
   return (
-    <div>
+    <div className="landing">
       <Navi />
-      <div id="home" className="bg-primary py-5" >
-        <Container className="pt-5">
+      <div id="home">
+        <Container>
           <Row style={{ alignItems: "center" }}>
+            <Col xs="3" className="home_buttons">
+              <LinkButton
+                buttonLabel="Bağlama izlə"
+                clsName="btn-light mt-1"
+                color="black"
+                url="track-package"
+              />
+              <ModalButton
+                buttonLabel="Kuryer sifariş et"
+                header="Kuryer sifariş et"
+                clsName="mt-1"
+                buttonStyle={{width:'100%'}}
+                buttonColor="light"
+                body={<OrderCourier />}
+              />
+              <LinkButton
+                buttonLabel="Kalkulyator"
+                clsName="btn-light mt-1"
+                color="black"
+                url="track-package"
+              />
+              <LinkButton
+                buttonLabel="İş qrafiki"
+                clsName="btn-light mt-1"
+                color="black"
+                url="track-package"
+              />
+            </Col>
             <Col className="text-white">
               <h1>YeniKargo</h1>
               <p>
@@ -29,27 +64,39 @@ const Landing = ({ stations, getStations }) => {
                 culpa necessitatibus ab, placeat quae minima assumenda adipisci
                 cupiditate consequatur repudiandae!
               </p>
-              <ModalButton
-                buttonLabel="Kuryer sifariş et"
-                header="Kuryer sifarişi"
-                buttonColor="light"
-                key={1}
-                size={"md"}
-                body={<OrderCourier />}
-              />
+
               <div className="py-1">
-                <i className="fa fa-whatsapp"/>
-                <span className="ml-1">Whatsapp'la sifariş: <b style={{fontSize:'16px'}}>(055)444 55 66</b></span>
+                <i className="fa fa-whatsapp" />
+                <span className="ml-1">
+                  Whatsapp'la sifariş:
+                  <a className="text-white" style={{ fontSize: "16px" }} href="tel:123-456-7890"> 123-456-7890</a>
+                </span>
               </div>
             </Col>
-            <img
-              style={{ width: "30rem", height: "20rem" }}
-              src={landing_image}
-              alt="landing"
-            />
           </Row>
         </Container>
       </div>
+      <Container className="package_levels_container">
+        <Row>
+          <Col className="bg-white text-primary py-5">
+            <img src={level_box} alt="icon" />
+            <div>Təhlükəsiz daşınma</div>
+          </Col>
+          <Col className="bg-white text-primary mx-3 py-5">
+            <img src={level_gps} alt="icon" />
+            <div>Paket izləmə</div>
+          </Col>
+          <Col className="bg-white text-primary mr-3 py-5">
+            <img src={level_truck} alt="icon" />
+            <div>Sürətli çatdırılma</div>
+          </Col>
+          <Col className="bg-white text-primary py-5">
+            <img src={level_courier} alt="icon" />
+            <div>Qapıda ödəmə</div>
+          </Col>
+        </Row>
+      </Container>
+
       <div id="about" className="py-2">
         <Container style={{ minHeight: "100vh" }}>
           <h1>Haqqimizda</h1>
@@ -94,22 +141,23 @@ const Landing = ({ stations, getStations }) => {
           </Row>
         </Container>
       </div>
-      <div id="stations" className="bg-warning" style={{ minHeight: "100vh" }}>
-        <Container className="pt-5">
-          <div style={{ alignItems: "center" }}>
+      <div id="stations" className="bg-danger py-5" >
+        <Container className="">
+          <div>
             <div className="text-white">
               <h1>Filiallar</h1>
-              <hr className="text-danger" />
+              <hr className="text-light" />
               <Row>
                 {stations.map((s) => {
                   return (
                     <Col key={s.id}>
-                      <InfoBox>
-                        <h3>{s.city} filialı</h3>
+                      <div className="landing_station-box">
+                        <h3>{s.name}</h3>
+                        <div>Şəhər: {s.city}</div>
                         <div>Adres: {s.address}</div>
-                        <div>Tel: {s.phone_number}</div>
-                        <a href={s.url}>Ətraflı</a>
-                      </InfoBox>
+                        <a href={`tel:${s.phone_number}`}>Tel: {s.phone_number}</a>
+                        <a className="btn btn-success" href={s.url}>Xəritədə bax</a>
+                      </div>
                     </Col>
                   );
                 })}
@@ -118,16 +166,11 @@ const Landing = ({ stations, getStations }) => {
           </div>
         </Container>
       </div>
-      <Footer/>
+      <Accordion/>
+      <Footer />
     </div>
   );
 };
-
-const InfoBox = styled.div`
-  padding: 30px;
-  color: "white";
-  border: 1px solid #fafafa;
-`;
 
 const mapStateToProps = (state) => ({
   stations: state.getStationsReducer,

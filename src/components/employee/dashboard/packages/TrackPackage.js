@@ -24,7 +24,6 @@ const TrackPackage = ({ trackPackage, trackingPackage }) => {
     onSubmit: (values, { setSubmitting }) => {
       trackPackage(values);
       setSubmitting(false);
-      console.log(values);
     },
   });
   return (
@@ -39,7 +38,7 @@ const TrackPackage = ({ trackPackage, trackingPackage }) => {
         onBlur={handleBlur}
         touched={touched.id}
       />
-      {trackingPackage.package_id != values.id || !trackingPackage.package_id ?null: <TrackPackageInfo/>}
+      {!trackingPackage.package_id || trackingPackage.package_id != values.id ?null: <TrackPackageInfo/>}
       <button className="btn btn-primary" type="submit" disabled={isSubmitting}>
         <i className="fa fa-search" />
         <span> Təsdiqlə</span>

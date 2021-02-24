@@ -10,4 +10,6 @@ export const Routes = {
     employees: '/employee/dashboard/employees',
     allExtraSelling: '/employee/dashboard/all-extra-selling',
     payments: '/employee/dashboard/payments',
+    // client pages //
+    trackPackagePage:'/track-package'
 }

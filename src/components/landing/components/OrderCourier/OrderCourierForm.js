@@ -3,6 +3,7 @@ import TextInput from "../../../toolbox/TextInput";
 import NumberInput from "../../../toolbox/NumberInput";
 import SelectInput from "../../../toolbox/SelectInput";
 import TextareaInput from "../../../toolbox/TextareaInput";
+import CustomMaskedInput from "../../../toolbox/CustomMaskedInput";
 
 const OrderCourierForm = ({
   onSubmit,
@@ -45,7 +46,8 @@ const OrderCourierForm = ({
         </div>
         <div className="form-row">
           <div className="col-md-6">
-            <TextInput
+            <CustomMaskedInput
+              mask="mobile_number"
               label="Mobil nömrə"
               placeHolder="Mobil nömrə"
               name="mobile1"
@@ -57,7 +59,8 @@ const OrderCourierForm = ({
             />
           </div>
           <div className="col-md-6">
-            <TextInput
+          <CustomMaskedInput
+              mask="mobile_number"
               label="Əlavə nömrə"
               placeHolder="Əlavə nömrə"
               name="mobile2"
@@ -119,6 +122,7 @@ const OrderCourierForm = ({
             <TextareaInput
               label="Əlavə qeyd"
               name="note"
+              placeHolder="Ünvanın, paketin ətraflı təsviri və s."
               value={values.note}
               error={errors.note}
               onChange={onChange}

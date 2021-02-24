@@ -133,7 +133,7 @@ export const orderCourierFormValidationSchema = Yup.object().shape({
   last_name: Yup.string().required("Soyad daxil edilməlidir."),
   address: Yup.string().required("Adres daxil edilməlidir."),
   note: Yup.string(),
-  mobile1: Yup.number()
+  mobile1: Yup.string()
     .required("Mobil nömrə daxil edilməlidir.")
     .test(
       "len",

@@ -4,12 +4,14 @@ import {Routes} from "../../routes";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
     return (
-        <Route { ...rest } render={ props => (
-            localStorage.getItem("jwtToken") ?
-            <Component {...props} /> :
-            <Redirect to={{ pathname: Routes.signIn, state: { from: props.location } }} />
-        ) }
-        />
+        <div className="admin_container">
+            <Route { ...rest } render={ props => (
+                localStorage.getItem("jwtToken") ?
+                <Component {...props} /> :
+                <Redirect to={{ pathname: Routes.signIn, state: { from: props.location } }} />
+            ) }
+            />
+        </div>
     );
 };
 
