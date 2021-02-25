@@ -22,10 +22,20 @@ const FindPackagesForm = ({onSubmit, onChange, values, errors, onBlur, touched, 
                         <hr/>
                         {
                             {
+                                'viaCustomerId': <NumberInput
+                                    value={values.keyword}
+                                    name="keyword"
+                                    label="Müştəri ID"
+                                    placeHolder="Açar söz"
+                                    touched={touched.keyword}
+                                    error={errors.keyword}
+                                    onChange={onChange}
+                                    onBlur={onBlur}
+                                />,
                                 'viaId': <NumberInput
                                     value={values.keyword}
                                     name="keyword"
-                                    label="Açar söz"
+                                    label="Bağlama ID"
                                     placeHolder="Açar söz"
                                     touched={touched.keyword}
                                     error={errors.keyword}

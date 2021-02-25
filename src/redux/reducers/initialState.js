@@ -29,6 +29,7 @@ const initialState = {
         toggledClearRows: false
     },
     trackedPackage: {},
+    trackedPackageByCustomer: [],
     cart: [],
     payments: [],
     selectedPayments: {
@@ -54,6 +55,13 @@ const initialState = {
         allSelectedAllExtraSelling: [],
         toggledClearRows: false
     },
+    tariffs: [],
+    selectedTariffs: {
+        lastSelectedTariff: {},
+        allSelectedTariffs: [],
+        toggledClearRows: false
+    },
+    setTariff:null
 }
 
 export default initialState;

@@ -17,6 +17,10 @@ const FindPackages = ({findPackages, selectPackages}) => {
     });
     const radioInputProps = [
         {
+            value: 'viaCustomerId',
+            label: 'Müştəri ID ilə'
+        },
+        {
             value: 'viaId',
             label: 'Bağlama ID ilə'
         },
@@ -24,6 +28,7 @@ const FindPackages = ({findPackages, selectPackages}) => {
             value: 'viaBarcode',
             label: 'Barcode ilə'
         },
+        ,
         {
             value: 'viaTrackingState',
             label: 'Bağlama statusu ilə'

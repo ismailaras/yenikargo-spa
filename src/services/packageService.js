@@ -35,3 +35,9 @@ export const trackPackage = p => {
         .then(data => data)
         .catch(err => err);
 }
+
+export const trackPackageViaCustomerIDs = p => {
+    return apiService.post("check_track_states_by_customer_id", p)
+        .then(data => data)
+        .catch(err => err);
+}

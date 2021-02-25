@@ -95,7 +95,7 @@ export const changePackageStateError = error => ({
     payload: error,
     [pendingTask]: endAll
 })
-
+// TRACKING PACKAGE
 export const trackPackageBegin = () => ({
     type: actionTypes.TRACK_PACKAGE_BEGIN,
     payload: {},
@@ -108,6 +108,21 @@ export const trackPackageSuccess = p => ({
 })
 export const trackPackageError = error => ({
     type: actionTypes.TRACK_PACKAGE_ERROR,
+    payload: error,
+    [pendingTask]: endAll
+})
+export const trackPackageViaCustomerIDBegin = () => ({
+    type: actionTypes.TRACK_PACKAGE_VIA_CUSTOMER_ID_BEGIN,
+    payload: {},
+    [pendingTask]: begin
+})
+export const trackPackageViaCustomerIDSuccess = p => ({
+    type: actionTypes.TRACK_PACKAGE_VIA_CUSTOMER_ID_SUCCESS,
+    payload: p,
+    [pendingTask]: end
+})
+export const trackPackageViaCustomerIDError = error => ({
+    type: actionTypes.TRACK_PACKAGE_VIA_CUSTOMER_ID_ERROR,
     payload: error,
     [pendingTask]: endAll
 })
@@ -240,10 +255,28 @@ export const trackPackage = (p) => {
                 if (data.message) {
                     dispatch(trackPackageError(data.message))
                 } else {
+                    console.log(data)
                     dispatch(trackPackageSuccess(data))
                 }
             })
             .catch(err => dispatch(trackPackageError(err)));
+    }
+}
+
+export const trackPackageViaCustomerID = (p) => {
+    return async dispatch => {
+        dispatch(trackPackageViaCustomerIDBegin())
+        packageService.trackPackageViaCustomerIDs(p)
+            .then(async data => {
+                await data;
+                if (data.message) {
+                    dispatch(trackPackageViaCustomerIDError(data.message))
+                } else {
+                    dispatch(trackPackageViaCustomerIDSuccess(data))
+                    console.log(data)
+                }
+            })
+            .catch(err => dispatch(trackPackageViaCustomerIDError(err)));
     }
 }
 

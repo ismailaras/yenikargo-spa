@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 const TrackPackageInfo = ({ trackingPackage }) => {
   return (
-    <div>
+    <div className="mt-3">
         <Alert color="success">
           <h4 className="alert-heading">Paket - {trackingPackage.package_id} </h4>
           <p className="mb-0">

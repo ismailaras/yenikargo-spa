@@ -11,7 +11,6 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
-  Button,
 } from "reactstrap";
 import logo_dark from "../../assets/images/logo_dark_x.svg";
 import "./style.scss";

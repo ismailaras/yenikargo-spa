@@ -77,6 +77,9 @@ export const changePackageStateFormValidationSchema = Yup.object().shape({
 export const trackPackageFormValidationSchema = Yup.object().shape({
   id: Yup.number().required("Paket ID yazılmalıdır"),
 });
+export const trackPackageViaCustomerIDFormValidationSchema = Yup.object().shape({
+  customer_id: Yup.number().required("Müştəri ID yazılmalıdır"),
+});
 
 export const signInFormValidationSchema = Yup.object().shape({
   _id: Yup.string().required("Kod daxil edilməlidir."),

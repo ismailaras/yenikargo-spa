@@ -28,6 +28,7 @@ const TrackPackage = ({ trackPackage, trackingPackage }) => {
   });
   return (
     <form onSubmit={handleSubmit}>
+      <h5>Bağlama ID ilə axtar</h5>
       <NumberInput
         label="Paket ID"
         placeHolder="Paket ID"
@@ -38,11 +39,11 @@ const TrackPackage = ({ trackPackage, trackingPackage }) => {
         onBlur={handleBlur}
         touched={touched.id}
       />
-      {!trackingPackage.package_id || trackingPackage.package_id != values.id ?null: <TrackPackageInfo/>}
       <button className="btn btn-primary" type="submit" disabled={isSubmitting}>
         <i className="fa fa-search" />
         <span> Təsdiqlə</span>
       </button>
+      {!trackingPackage.package_id || trackingPackage.package_id != values.id ?null: <TrackPackageInfo/>}
     </form>
   );
 };
