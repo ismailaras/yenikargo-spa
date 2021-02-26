@@ -69,9 +69,9 @@ const TariffsDTable = ({
   getTariffs,
 }) => {
   useEffect(() => {
-    // if (tariffs.length === 0) {
-    //   getTariffs();
-    // }
+    if (tariffs.length === 0) {
+      getTariffs();
+    }
   });
   const handleChange = (e) => {
     selectTariffs(e.selectedRows);
