@@ -172,6 +172,15 @@ export const createOrUpdateStationFormValidationSchema = Yup.object().shape({
   url: Yup.string().required("URL daxil edilməlidir."),
 });
 
+
+export const createOrUpdateTariffFormValidationSchema = Yup.object().shape({
+  from_kg: Yup.number().required("Min çəki edilməlidir."),
+  to_kg: Yup.number().required("Max çəki daxil edilməlidir."),
+  price: Yup.number().required("Qiymət daxil edilməlidir."),
+  sender_station_id: Yup.string().required("Göndərən filial daxil edilməlidir."),
+  receiver_station_id: Yup.string().required("Alan filial daxil edilməlidir."),
+});
+
 export const createOrUpdateExtraSellingFormValidationSchema = Yup.object().shape(
   {
     name: Yup.string().required("Ad daxil edilməlidir."),

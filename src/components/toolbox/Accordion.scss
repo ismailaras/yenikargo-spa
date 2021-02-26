@@ -26,8 +26,8 @@
   button {
     display: flex;
     align-items: center;
-    background: #c4c4c4;
-    border: none;
+    background: transparent;
+    border: 1px dashed rgba(255, 255, 255, 0.411);
     font-size: 1.2rem;
     width: 100%;
     text-align: left;
@@ -62,12 +62,10 @@
   .plus {
     width: 14px;
     height: 14px;
-    transform: rotate(90deg);
     transition-timing-function: ease-in;
     transition: all 1s;
     position: absolute;
     right: 0;
-    background: white;
   }
 
   .panel-close {

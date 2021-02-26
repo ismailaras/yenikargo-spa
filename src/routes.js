@@ -7,9 +7,10 @@ export const Routes = {
     checkout: '/employee/dashboard/checkout',
     courier: '/employee/dashboard/courier',
     stations: '/employee/dashboard/stations',
+    tariffs: '/employee/dashboard/tariffs',
     employees: '/employee/dashboard/employees',
     allExtraSelling: '/employee/dashboard/all-extra-selling',
     payments: '/employee/dashboard/payments',
-    // client pages //
+    // client pages 
     trackPackagePage:'/track-package'
 }

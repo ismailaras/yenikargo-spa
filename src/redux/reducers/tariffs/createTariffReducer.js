@@ -2,13 +2,13 @@ import * as actionTypes from '../../actions/actionTypes';
 import initialState from "../initialState";
 
 
-export const setTariffReducer = (state = initialState.setTariff, action) => {
+export const createTariffReducer = (state = initialState.selectedTariffs.lastSelectedTariff, action) => {
     switch (action.type) {
-        case actionTypes.TRACK_PACKAGE_BEGIN:
+        case actionTypes.CREATE_TARIFF_BEGIN:
             return state;
-        case actionTypes.TRACK_PACKAGE_SUCCESS:
+        case actionTypes.CREATE_TARIFF_SUCCESS:
             return action.payload;
-        case actionTypes.TRACK_PACKAGE_ERROR:
+        case actionTypes.CREATE_TARIFF_ERROR:
             return state
         default:
             return state;

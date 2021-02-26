@@ -40,10 +40,20 @@ import { selectAllExtraSellingReducer } from "./extra-selling/selectAllExtraSell
 import { createExtraSellingReducer } from "./extra-selling/createExtraSellingReducer";
 import { updateExtraSellingReducer } from "./extra-selling/updateExtraSellingReducer";
 import { deleteExtraSellingReducer } from "./extra-selling/deleteExtraSellingReducer";
+import { deleteTariffReducer } from "./tariffs/deleteTariffReducer";
+import { updateTariffReducer } from "./tariffs/updateTariffReducer";
+import { createTariffReducer } from "./tariffs/createTariffReducer";
+import { selectTariffsReducer } from "./tariffs/selectTariffsReducer";
+import { setTariffReducer } from "./tariffs/setTariffReducer";
 
 const appReducer = combineReducers({
   getCitiesReducer,
   authReducer,
+  createTariffReducer,
+  updateTariffReducer,
+  deleteTariffReducer,
+  selectTariffsReducer,
+  setTariffReducer,
   findCustomersReducer,
   selectCustomersReducer,
   setCustomerReducer,

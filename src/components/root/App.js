@@ -14,6 +14,7 @@ import Landing from "../landing/Landing";
 import Couriers from "../employee/dashboard/couriers/Couriers";
 import Stations from "../employee/dashboard/stations/Stations";
 import Employees from "../employee/dashboard/employees/Employees";
+import Tariffs from "../employee/dashboard/tariffs/Tariffs";
 import AllExtraSelling from "../employee/dashboard/all-extra-selling/AllExtraSelling";
 import Payments from "../employee/dashboard/payments/Payments";
 import TrackPackagePage from "../landing/pages/TrackPackagePage";
@@ -31,6 +32,7 @@ function App() {
         <PrivateRoute exact path={Routes.checkout} component={Checkout} />
         <PrivateRoute exact path={Routes.courier} component={Couriers} />
         <PrivateRoute exact path={Routes.stations} component={Stations} />
+        <PrivateRoute exact path={Routes.tariffs} component={Tariffs} />
         <PrivateRoute
           exact
           path={Routes.allExtraSelling}

@@ -3,9 +3,8 @@ import './Accordion.scss'
 
 const Accordion = () => {
     const data = [
-      {title:'Sual?',description:'Cavab'},
-      {title:'Sual?',description:'Cavab'},
-      {title:'Sual?',description:'Cavab'},
+      {title:'DAŞIMA HAQQI NECƏ HESABLANIR?',description:'DAŞIMA HAQQI BAĞLAMANIN ÇƏKİSİNƏ GÖRƏ HESABLANIR.'},
+      {title:'CƏKİSİ AZ OLAN LAKİN QABARİT ÖLÇÜLƏRİ COX BÖYÜK OLAN BAĞLAMALARIN DAŞIMA HAQQI NECƏ HESABLANIR?',description:'DAŞIMA HAQQI BAĞLAMANIN ÇƏKİSİNƏ GÖRƏ HESABLANIR VƏ QABARİTİNƏ GÖRƏ ƏLAVƏ HAQQ ALINIR'},
     ]
     let indexPlus;
 
@@ -36,7 +35,7 @@ const Accordion = () => {
                                 tabIndex={indexCount(index)}
                             >
                                 <span className="title-wrapper">{tab.title}
-                                    <i className="plus"/>
+                                    <i className="fa fa-check plus"/> 
                                 </span>  
                             </button>
                         </h3>

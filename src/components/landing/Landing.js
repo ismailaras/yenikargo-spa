@@ -10,6 +10,9 @@ import level_courier from "../../assets/illustrations/level-courier.png";
 import level_box from "../../assets/illustrations/level-box.png";
 import level_truck from "../../assets/illustrations/level-truck.png";
 
+import target_icon from "../../assets/illustrations/target-icon.png";
+import warehouse_icon from "../../assets/illustrations/warehouse-icon.png";
+
 import "./style.scss";
 import LinkButton from "../toolbox/LinkButton";
 import ModalButton from "../toolbox/ModalButton";
@@ -39,7 +42,7 @@ const Landing = ({ stations, getStations }) => {
                 buttonLabel="Kuryer sifariş et"
                 header="Kuryer sifariş et"
                 clsName="mt-1"
-                buttonStyle={{width:'100%'}}
+                buttonStyle={{ width: "100%" }}
                 buttonColor="light"
                 body={<OrderCourier />}
               />
@@ -69,7 +72,14 @@ const Landing = ({ stations, getStations }) => {
                 <i className="fa fa-whatsapp" />
                 <span className="ml-1">
                   Whatsapp'la sifariş:
-                  <a className="text-white" style={{ fontSize: "16px" }} href="tel:123-456-7890"> 123-456-7890</a>
+                  <a
+                    className="text-white"
+                    style={{ fontSize: "16px" }}
+                    href="tel:123-456-7890"
+                  >
+                    {" "}
+                    123-456-7890
+                  </a>
                 </span>
               </div>
             </Col>
@@ -97,76 +107,76 @@ const Landing = ({ stations, getStations }) => {
         </Row>
       </Container>
 
-      <div id="about" className="py-2">
-        <Container style={{ minHeight: "100vh" }}>
-          <h1>Haqqimizda</h1>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro
-            quisquam non similique, aperiam iure veniam et quam, ullam earum
-            culpa necessitatibus ab, placeat quae minima assumenda adipisci
-            cupiditate consequatur repudiandae!
+      <div id="about" className="pb-4">
+        <Container>
+          <div className="d-flex justify-content-between align-items-center">
+            <h1>Missiyamız</h1>
+            <img className="icon-md" src={target_icon} alt="target" />
+          </div>
+          <hr />
+          <p className="h5">
+            <i className="fa fa-check" /> AZƏRBAYCANDA İLK ÖLKƏ DAXİLİ KARGO
+            OLARAQ BİZİM MİSSİYAMIZ ÜLKƏDƏ ONLAYN SATIŞLA MƏŞĞUL OLANLARLA,
+            ONLAYN ALICILAR ARASINDA RAHAT BİR CATDIRILMA XİDMƏTİ YARATMAQDIR.
+            SATICILAR CATDIRILMA UÇUN VAXT İTİRMƏ YERİNƏ YENİ SATIŞLAR EDİB
+            TİCARƏT DÖVRİYYƏLƏRİNİ ARTIRMAQLA MƏŞĞUL OLSUNLAR.
           </p>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro
-            quisquam non similique, aperiam iure veniam et quam, ullam earum
-            culpa necessitatibus ab, placeat quae minima assumenda adipisci
-            cupiditate consequatur repudiandae!
+          <p className="h5 my-4">
+            <i className="fa fa-check" /> ALICILAR İSƏ ÖZLƏRİNƏ UYĞUN FİLİALI VƏ
+            UYĞUN VAXTI SEÇMƏKLƏ BAĞLAMALARINI TƏHVİL ALA BİLSİNLƏR. SATICI İLƏ
+            ALICI ARASINDA VASİTƏCİLİK EDƏRƏK TƏRƏFLƏRDƏN BİRİNƏ BOŞ VAXT
+            QAZANDIRMAQ DİGƏRİNƏ İSƏ ARTIQ PUL QAZANMAQ İMKANI YARATMAQ.
           </p>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro
-            quisquam non similique, aperiam iure veniam et quam, ullam earum
-            culpa necessitatibus ab, placeat quae minima assumenda adipisci
-            cupiditate consequatur repudiandae!
-          </p>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro
-            quisquam non similique, aperiam iure veniam et quam, ullam earum
-            culpa necessitatibus ab, placeat quae minima assumenda adipisci
-            cupiditate consequatur repudiandae!
+          <p className="h5 text-justify">
+            <i className="fa fa-check" /> ONLAYN SATIŞLA MƏŞĞUL OLANLARA BİR
+            ŞƏHƏRDƏN QAZANC DEYİL BÜTÜN ÖLKƏDƏN QAZANC ETMƏK İMKANI YARATMAQDIR.
+            ALICILAR İSƏ İSTƏDİYİ ŞƏHƏRDƏ YERLƏŞƏN ONLAYN MAĞAZADAN SİFARİŞ EDE
+            BİLSİNLƏR VƏ QISA MÜDDƏTDƏ ÖZ ŞƏHƏRLƏRİNDƏ TƏHVİL ALA BİLSİNLƏR.
           </p>
         </Container>
       </div>
-      <div id="prices" className="bg-info" style={{ height: "100vh" }}>
-        <Container className="pt-5">
-          <Row style={{ alignItems: "center" }}>
-            <Col className="text-white">
-              <h1>Qiymetler</h1>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro
-                quisquam non similique, aperiam iure veniam et quam, ullam earum
-                culpa necessitatibus ab, placeat quae minima assumenda adipisci
-                cupiditate consequatur repudiandae!
-              </p>
-            </Col>
-          </Row>
-        </Container>
-      </div>
-      <div id="stations" className="bg-danger py-5" >
-        <Container className="">
-          <div>
-            <div className="text-white">
-              <h1>Filiallar</h1>
-              <hr className="text-light" />
-              <Row>
-                {stations.map((s) => {
-                  return (
-                    <Col key={s.id}>
-                      <div className="landing_station-box">
-                        <h3>{s.name}</h3>
-                        <div>Şəhər: {s.city}</div>
-                        <div>Adres: {s.address}</div>
-                        <a href={`tel:${s.phone_number}`}>Tel: {s.phone_number}</a>
-                        <a className="btn btn-success" href={s.url}>Xəritədə bax</a>
-                      </div>
-                    </Col>
-                  );
-                })}
-              </Row>
-            </div>
+
+      <div id="stations" className="bg-light py-5">
+        <Container>
+          <div className="d-flex justify-content-between align-items-center">
+            <h1>Filiallar</h1>
+            <img className="icon-md text-white" src={warehouse_icon} alt="target" />
+          </div>
+          <hr />
+          <div className="mt-3">
+            <Row>
+              {stations.map((s) => {
+                return (
+                  <Col key={s.id}>
+                    <div className="landing_station-box">
+                      <h3>{s.name}</h3>
+                      <div>Şəhər: {s.city}</div>
+                      <div>Adres: {s.address}</div>
+                      <a className="text-dark" href={`tel:${s.phone_number}`}>
+                        Tel: {s.phone_number}
+                      </a>
+                      <a className="btn btn-dark" href={s.url}>
+                        Xəritədə bax
+                      </a>
+                    </div>
+                  </Col>
+                );
+              })}
+            </Row>
           </div>
         </Container>
       </div>
-      <Accordion/>
+
+      <div id="about" className="py-4 bg-primary">
+        <Container>
+          <div className="d-flex justify-content-between align-items-center text-white pr-1">
+            <h1>Çox verilən suallar</h1>
+            <i className="fa fa-question" style={{fontSize:'34px'}}/> 
+          </div>
+          <hr className="text-white"/>
+          <Accordion />
+        </Container>
+      </div>
       <Footer />
     </div>
   );
