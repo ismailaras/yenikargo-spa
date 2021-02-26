@@ -8,7 +8,7 @@ import { notEmpty } from "../../../../utilities/helpers";
 import { getStations } from "../../../../redux/actions/stationActions";
 
 const CreateOrUpdateTariff = ({
-    createTariff, updateTariff, tariffs, getTariffs,stations,
+    createTariff, updateTariff, tariffs, getStations,stations,
     selectedTariffs
 }) => {
     useEffect(() => {
