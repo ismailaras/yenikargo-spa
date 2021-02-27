@@ -43,7 +43,7 @@ const TrackPackageViaCustomerID = ({ trackPackageViaCustomerID, trackingPackage 
         <i className="fa fa-search" />
         <span> Təsdiqlə</span>
       </button>
-      { <TrackPackageViaCustomerInfo/>}
+      {!trackingPackage[0] || trackingPackage[0].customer_id != values.customer_id ?null: <TrackPackageViaCustomerInfo/>}
     </form>
   );
 };

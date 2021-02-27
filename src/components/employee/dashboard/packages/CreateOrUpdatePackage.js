@@ -6,12 +6,12 @@ import {
   selectPackages,
   updatePackage,
 } from "../../../../redux/actions/packageActions";
+import { setTariffInterval } from "../../../../redux/actions/tariffActions";
 import { connect } from "react-redux";
 import CreateOrUpdatePackageForm from "./CreateOrUpdatePackageForm";
 import { useFormik } from "formik";
 import { notEmpty } from "../../../../utilities/helpers";
 import { createOrUpdatePackageFormValidationSchema } from "../../../../utilities/formValidationSchemas";
-
 
 const CreateOrUpdatePackage = ({
   createPackage,
@@ -20,6 +20,8 @@ const CreateOrUpdatePackage = ({
   getStations,
   selectedPackages,
   setCustomers,
+  setTariffData,
+  setTariffInterval,
 }) => {
   function setInitialValues(initialValues, setCustomers, selectedPackages) {
     if (
@@ -37,22 +39,12 @@ const CreateOrUpdatePackage = ({
     return initialValues;
   }
 
-  // function setAmount(weight) {
-  //   if (weight <= 100) {
-  //     values.amount = 10;
-  //     console.log(values.amount);
-  //     console.log("100<=");
-  //   } else if (weight > 100) {
-  //     values.amount = 20;
-  //     console.log(values.amount);
-  //     console.log("100>");
-  //   }
-  // }
   useEffect(() => {
     if (stations.length === 0) {
       getStations();
     }
   });
+
   let initialValues = {
     sender_customer_id: "",
     receiver_customer_id: "",
@@ -74,6 +66,17 @@ const CreateOrUpdatePackage = ({
     setCustomers,
     selectedPackages
   );
+
+  useEffect(() => {
+    function setPriceFunc() {
+      const sendStationID = {
+        sender_station_id: initialValues.sender_station_id,
+        receiver_station_id: initialValues.receiver_station_id,
+      };
+      setTariffInterval(sendStationID);
+    }
+    setPriceFunc();
+  }, [initialValues.sender_station_id,initialValues.receiver_station_id,setTariffInterval]);
   const history = useHistory();
   const {
     handleSubmit,
@@ -83,7 +86,7 @@ const CreateOrUpdatePackage = ({
     touched,
     handleBlur,
     isSubmitting,
-    setFieldValue
+    setFieldValue,
   } = useFormik({
     initialValues,
     validationSchema: createOrUpdatePackageFormValidationSchema,
@@ -91,7 +94,6 @@ const CreateOrUpdatePackage = ({
       values.id
         ? updatePackage(values, selectedPackages.lastSelectedPackage)
         : createPackage(values, history);
-        console.log(values)
       setSubmitting(false);
     },
   });
@@ -115,12 +117,14 @@ const mapDispatchToProps = {
   selectPackages,
   createPackage,
   updatePackage,
+  setTariffInterval,
 };
 
 const mapStateToProps = (state) => ({
   selectedPackages: state.selectPackagesReducer,
   selectedCustomers: state.selectCustomersReducer,
   stations: state.getStationsReducer,
+  setTariffData: state.setTariffReducer,
   setCustomers: state.setCustomerReducer,
 });
 

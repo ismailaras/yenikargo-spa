@@ -105,6 +105,22 @@ export const deleteTariffFromTable = tariff => ({
     payload: tariff
 })
 
+export const setTariffIntervalBegin = () => ({
+    type: actionTypes.SET_TARIFF_INTERVAL_BEGIN,
+    payload: {},
+    [pendingTask]: begin
+})
+export const setTariffIntervalSuccess = p => ({
+    type: actionTypes.SET_TARIFF_INTERVAL_SUCCESS,
+    payload: p,
+    [pendingTask]: end
+})
+export const setTariffIntervalError = error => ({
+    type: actionTypes.SET_TARIFF_INTERVAL_ERROR,
+    payload: error,
+    [pendingTask]: endAll
+})
+
 export const createTariff = p => {
     return async dispatch => {
         dispatch(createTariffBegin())
@@ -116,7 +132,7 @@ export const createTariff = p => {
                 } else {
                     dispatch(createTariffSuccess(data));
                     dispatch(addTariffToTable(data));
-                    notification.success('Filial artırıldı')
+                    notification.success('Tarif artırıldı')
                 }
             })
             .catch(err => dispatch(createTariffError(err)));
@@ -134,7 +150,7 @@ export const updateTariff = (p, selectedTariff) => {
                 } else {
                     dispatch(updateTariffSuccess(data))
                     dispatch(updateTariffOnTable(data))
-                    notification.success('Filial tənzimləndi')
+                    notification.success('Tarif tənzimləndi')
                     dispatch(updateSelectedTariffData(changeSelectedTariffValues(data, selectedTariff)))
                 }
             })
@@ -154,7 +170,7 @@ export const deleteTariff = p => {
                     dispatch(deleteTariffSuccess(p))
                     dispatch(deleteTariffFromTable(p))
                     dispatch(deleteSelectedTariffData(p))
-                    notification.error('Filial silindi')
+                    notification.error('Tarif silindi')
                 }
             })
             .catch(err => dispatch(deleteTariffError(err)));
@@ -174,6 +190,23 @@ export const getTariffs = () => {
                 }
             })
             .catch(err => dispatch(getTariffsError(err)));
+    }
+}
+
+export const setTariffInterval = (p) => {
+    return async dispatch => {
+        dispatch(setTariffIntervalBegin())
+        tariffService.setTariffInterval(p)
+            .then(async data => {
+                await data;
+                if (data.message) {
+                    dispatch(setTariffIntervalError(data.message))
+                } else {
+                    dispatch(setTariffIntervalSuccess(data))
+                    // console.log(data)
+                }
+            })
+            .catch(err => dispatch(setTariffIntervalError(err)));
     }
 }
 

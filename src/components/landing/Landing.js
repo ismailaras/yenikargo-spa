@@ -119,13 +119,14 @@ const Landing = ({ stations, getStations }) => {
             OLARAQ BİZİM MİSSİYAMIZ ÜLKƏDƏ ONLAYN SATIŞLA MƏŞĞUL OLANLARLA,
             ONLAYN ALICILAR ARASINDA RAHAT BİR CATDIRILMA XİDMƏTİ YARATMAQDIR.
             SATICILAR CATDIRILMA UÇUN VAXT İTİRMƏ YERİNƏ YENİ SATIŞLAR EDİB
-            TİCARƏT DÖVRİYYƏLƏRİNİ ARTIRMAQLA MƏŞĞUL OLSUNLAR.
+            TİCARƏT DÖVRİYYƏLƏRİNİ ARTIRMAQLA MƏŞĞUL OLSUNLAR.ALICILAR İSƏ
+            ÖZLƏRİNƏ UYĞUN FİLİALI VƏ UYĞUN VAXTI SEÇMƏKLƏ BAĞLAMALARINI TƏHVİL
+            ALA BİLSİNLƏR.
           </p>
           <p className="h5 my-4">
-            <i className="fa fa-check" /> ALICILAR İSƏ ÖZLƏRİNƏ UYĞUN FİLİALI VƏ
-            UYĞUN VAXTI SEÇMƏKLƏ BAĞLAMALARINI TƏHVİL ALA BİLSİNLƏR. SATICI İLƏ
-            ALICI ARASINDA VASİTƏCİLİK EDƏRƏK TƏRƏFLƏRDƏN BİRİNƏ BOŞ VAXT
-            QAZANDIRMAQ DİGƏRİNƏ İSƏ ARTIQ PUL QAZANMAQ İMKANI YARATMAQ.
+            <i className="fa fa-check" /> SATICI İLƏ ALICI ARASINDA VASİTƏCİLİK
+            EDƏRƏK TƏRƏFLƏRDƏN BİRİNƏ BOŞ VAXT QAZANDIRMAQ DİGƏRİNƏ İSƏ ARTIQ
+            PUL QAZANMAQ İMKANI YARATMAQ.
           </p>
           <p className="h5 text-justify">
             <i className="fa fa-check" /> ONLAYN SATIŞLA MƏŞĞUL OLANLARA BİR
@@ -140,7 +141,11 @@ const Landing = ({ stations, getStations }) => {
         <Container>
           <div className="d-flex justify-content-between align-items-center">
             <h1>Filiallar</h1>
-            <img className="icon-md text-white" src={warehouse_icon} alt="target" />
+            <img
+              className="icon-md text-white"
+              src={warehouse_icon}
+              alt="target"
+            />
           </div>
           <hr />
           <div className="mt-3">
@@ -171,9 +176,9 @@ const Landing = ({ stations, getStations }) => {
         <Container>
           <div className="d-flex justify-content-between align-items-center text-white pr-1">
             <h1>Çox verilən suallar</h1>
-            <i className="fa fa-question" style={{fontSize:'34px'}}/> 
+            <i className="fa fa-question" style={{ fontSize: "34px" }} />
           </div>
-          <hr className="text-white"/>
+          <hr className="text-white" />
           <Accordion />
         </Container>
       </div>

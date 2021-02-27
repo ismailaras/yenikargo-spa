@@ -61,7 +61,7 @@ const initialState = {
         allSelectedTariffs: [],
         toggledClearRows: false
     },
-    setTariff:null
+    setTariff:[]
 }
 
 export default initialState;

@@ -9,10 +9,8 @@ import {
 import { addToCart } from "../../../../redux/actions/cartActions";
 import CreateOrUpdateTariff from "./CreateOrUpdateTariff";
 import ModalButton from "../../../toolbox/ModalButton";
-import { TariffDTableChild } from "./TariffDTableChild";
 import {
   formatDate,
-  getStateNameInAzerbaijani,
 } from "../../../../utilities/helpers";
 
 const cols = [
@@ -45,12 +43,6 @@ const cols = [
     name: <h6>Alan filial</h6>,
     selector: "receiver_station_id",
     sortable: true,
-  },
-  {
-    name: <h6>Son hərəkət</h6>,
-    selector: "data_state",
-    sortable: true,
-    format: (row) => getStateNameInAzerbaijani(row["data_state"]),
   },
   {
     name: <h6>Tarix</h6>,
@@ -115,7 +107,6 @@ const TariffsDTable = ({
         data={tariffs}
         buttons={buttons}
         cols={cols}
-        expandableRowsComponent={<TariffDTableChild />}
         clearSelectedRows={selectedTariffs.toggledClearRows}
         handleChange={handleChange}
         title={"Tarif"}

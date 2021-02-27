@@ -25,7 +25,7 @@ export const deleteTariff = t => {
 }
 
 export const setTariffInterval = t => {
-    return apiService.post("/pricing/filter", t)
+    return apiService.post("pricing/filter", t)
         .then(data => data)
         .catch(err => err);
 }

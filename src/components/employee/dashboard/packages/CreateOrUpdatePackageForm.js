@@ -5,8 +5,9 @@ import HiddenInput from "../../../toolbox/HiddenInput";
 import TextareaInput from "../../../toolbox/TextareaInput";
 import TextInput from "../../../toolbox/TextInput";
 import RadioInputGroup from "../../../toolbox/RadioInputGroup";
+import { connect } from "react-redux";
 
-const CreateOrUpdatePackageForm = ({ onSubmit, values, errors, onChange, onBlur, isSubmitting, touched, stations, setFieldValue }) => {
+const CreateOrUpdatePackageForm = ({ onSubmit, values, errors, onChange, onBlur, isSubmitting, touched, stations, setFieldValue,setTariffData }) => {
     var str2bool = (value) => {
         if (value && typeof value === "string") {
             if (value.toLowerCase() === "true") return true;
@@ -15,17 +16,23 @@ const CreateOrUpdatePackageForm = ({ onSubmit, values, errors, onChange, onBlur,
         return value;
     }
     function setAmount() {
-        if (values.weight <= 100) {
-            values.amount = 10;
-        } else if (values.weight > 100 && values.weight < 200) {
-            values.amount = 20;
-        }
-        else if (values.weight > 200) {
-            values.amount = 50;
-        }
+        setTariffData.map(t=>{
+            if (values.weight >= t.from_kg && values.weight <t.to_kg) {
+                values.amount = t.price;
+            }
+        })
+        // if (values.weight <= 100) {
+        //     values.amount = 10;
+        // } else if (values.weight > 100 && values.weight < 200) {
+        //     values.amount = 20;
+        // }
+        // else if (values.weight > 200) {
+        //     values.amount = 50;
+        // }
         values.amount = (values.amount + Number(values.extra_amount))
     }
     setAmount()
+    console.log(setTariffData)
     const radioInputProps = [
         {
             value: "false",
@@ -233,4 +240,15 @@ const CreateOrUpdatePackageForm = ({ onSubmit, values, errors, onChange, onBlur,
     )
 }
 
-export default CreateOrUpdatePackageForm;
+const mapDispatchToProps = {
+  };
+  
+  const mapStateToProps = (state) => ({
+    setTariffData: state.setTariffReducer,
+  });
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(CreateOrUpdatePackageForm);
+  
