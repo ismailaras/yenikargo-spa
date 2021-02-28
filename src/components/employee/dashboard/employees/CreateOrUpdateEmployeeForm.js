@@ -5,6 +5,11 @@ import PasswordInput from "../../../toolbox/PasswordInput";
 import CustomMaskedInput from "../../../toolbox/CustomMaskedInput";
 
 const CreateOrUpdateEmployeeForm = ({ onSubmit, values, errors, onChange, onBlur, isSubmitting, touched, stations }) => {
+    const roles = [
+        {value:'is_sorting_admin',name:'Sorting'},
+        {value:'is_operator_admin',name:'Operator'},
+        {value:'is_readonly_admin',name:'Read only'},
+    ]
     return (
         <div>
             <form onSubmit={onSubmit}>
@@ -88,10 +93,9 @@ const CreateOrUpdateEmployeeForm = ({ onSubmit, values, errors, onChange, onBlur
                         />
                     </div>
                     <div className="col-md-4">
-                        <CustomMaskedInput
+                        <TextInput
                             label="Doğum tarixi"
                             placeHolder="Doğum tarixi"
-                            mask="birthdate"
                             name="birthdate"
                             value={values.birthdate}
                             error={errors.birthdate}
@@ -103,7 +107,7 @@ const CreateOrUpdateEmployeeForm = ({ onSubmit, values, errors, onChange, onBlur
                 </div>
 
                 <div className="form-row">
-                    <div className="col-md-6">
+                    <div className="col-md-4">
                         <TextInput
                             label="Ünvan"
                             placeHolder="Ünvan"
@@ -115,7 +119,7 @@ const CreateOrUpdateEmployeeForm = ({ onSubmit, values, errors, onChange, onBlur
                             touched={touched.address}
                         />
                     </div>
-                    <div className="col-md-6">
+                    <div className="col-md-4">
                         <SelectInput
                             label="Filial"
                             placeHolder="Filial"
@@ -130,6 +134,23 @@ const CreateOrUpdateEmployeeForm = ({ onSubmit, values, errors, onChange, onBlur
                             onChange={onChange}
                             onBlur={onBlur}
                             touched={touched.station_id}
+                        />
+                    </div>
+                    <div className="col-md-4">
+                        <SelectInput
+                            label="Rol"
+                            placeHolder="Rol seç"
+                            name="employee_role"
+                            options={roles.map(e => ({
+                                value: e.value,
+                                text: e.name
+                            }))}
+                            defaultOption="İşçi rolunu seçin"
+                            value={values.employee_role}
+                            error={errors.employee_role}
+                            onChange={onChange}
+                            onBlur={onBlur}
+                            touched={touched.employee_role}
                         />
                     </div>
                 </div>

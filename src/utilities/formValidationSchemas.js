@@ -47,6 +47,7 @@ export const createOrUpdateEmployeeFormValidationSchema = Yup.object().shape({
   birthdate: Yup.string().required("Doğum günü daxil edilməlidir."),
   password: Yup.string().required("Şifrə daxil edilməlidir."),
   station_id: Yup.string().required("Filial seçilməlidir."),
+  employee_role: Yup.string().required("Rol seçilməlidir."),
 });
 
 export const createOrUpdatePackageFormValidationSchema = Yup.object().shape({

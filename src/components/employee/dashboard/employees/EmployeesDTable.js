@@ -35,6 +35,11 @@ const cols = [
     sortable: true,
   },
   {
+    name: <h6>Rol</h6>,
+    selector: "employee_role",
+    sortable: true,
+  },
+  {
     name: <h6>Ünvan</h6>,
     selector: "address",
     sortable: true,

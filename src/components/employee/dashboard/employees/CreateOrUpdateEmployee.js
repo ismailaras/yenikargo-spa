@@ -23,6 +23,7 @@ const CreateOrUpdateEmployee = ({createEmployee, updateEmployee, stations, getSt
         birthdate: '',
         password: '0000',
         station_id: '',
+        employee_role:''
     }
     if (notEmpty(selectedEmployees.lastSelectedEmployee)) {
         initialValues = selectedEmployees.lastSelectedEmployee
