@@ -9,6 +9,7 @@ import { addToCart } from "../../../../redux/actions/cartActions";
 import CreateOrUpdatePackage from "./CreateOrUpdatePackage";
 import ModalButton from "../../../toolbox/ModalButton";
 import { PackageDTableChild } from "./PackageDTableChild";
+import * as authActions from "../../../../redux/actions/authActions";
 import {
   formatBool,
   formatDate,
@@ -21,6 +22,7 @@ import { useHistory } from "react-router-dom";
 import CreateOrUpdateCourier from "../couriers/CreateOrUpdateCourier";
 import ChangePackageState from "./ChangePackageState";
 import PackageStateInfo from "./PackageStateInfo";
+import { getEmployeeCredentialsFromToken } from "../../../../utilities/helpers";
 
 const cols = [
   {
@@ -164,11 +166,15 @@ const PackagesDTable = ({
   packages,
   selectedPackages,
   addToCart,
+  auth
 }) => {
   const [foundPackages, setFoundPackages] = useState(packages);
   useEffect(() => {
     setFoundPackages(packages);
   }, [packages]);
+  useEffect(() => {
+      getEmployeeCredentialsFromToken()
+  });
   const history = useHistory();
   const handleChange = (e) => {
     selectPackages(e.selectedRows);
@@ -200,6 +206,8 @@ const PackagesDTable = ({
       className="btn btn-danger"
       disabled={
         selectedPackages.allSelectedPackages.length !== 1 ||
+        (selectedPackages.lastSelectedPackage.sender_station_id !== auth.currentEmployee.station_id &&
+        selectedPackages.lastSelectedPackage.receiver_station_id !== auth.currentEmployee.station_id) ||
         selectedPackages.lastSelectedPackage.tracking_state !== "Declared"
       }
     >
@@ -214,6 +222,8 @@ const PackagesDTable = ({
       size={"md"}
       disabled={
         selectedPackages.allSelectedPackages.length !== 1 ||
+        (selectedPackages.lastSelectedPackage.sender_station_id !== auth.currentEmployee.station_id &&
+          selectedPackages.lastSelectedPackage.receiver_station_id !== auth.currentEmployee.station_id) ||
         selectedPackages.lastSelectedPackage.tracking_state !== "Declared"
       }
       body={<CreateOrUpdatePackage />}
@@ -224,7 +234,9 @@ const PackagesDTable = ({
       key={3}
       size={"md"}
       buttonColor="warning"
-      disabled={selectedPackages.allSelectedPackages.length === 0}
+      disabled={selectedPackages.allSelectedPackages.length === 0 || 
+        (selectedPackages.lastSelectedPackage.sender_station_id !== auth.currentEmployee.station_id &&
+          selectedPackages.lastSelectedPackage.receiver_station_id !== auth.currentEmployee.station_id)}
       body={<ChangePackageState />}
     />,
     <ModalButton
@@ -234,18 +246,19 @@ const PackagesDTable = ({
       clsName="ml-2"
       buttonColor="info"
       size={"md"}
-      disabled={selectedPackages.allSelectedPackages.length === 0}
+      disabled={selectedPackages.allSelectedPackages.length === 0 || (selectedPackages.lastSelectedPackage.sender_station_id !== auth.currentEmployee.station_id &&
+        selectedPackages.lastSelectedPackage.receiver_station_id !== auth.currentEmployee.station_id)}
       body={<CreateOrUpdateCourier />}
     />,
     <button
       onClick={() => addToCartAndRedirect()}
       key={5}
       className="btn btn-primary mx-2"
-      disabled={selectedPackages.allSelectedPackages.length === 0}
+      disabled={selectedPackages.allSelectedPackages.length === 0 || (selectedPackages.lastSelectedPackage.sender_station_id !== auth.currentEmployee.station_id &&
+        selectedPackages.lastSelectedPackage.receiver_station_id !== auth.currentEmployee.station_id)}
     >
       Ödəniş al
     </button>,
-
     <ModalButton
       buttonLabel="State Info"
       header="State Info"
@@ -255,13 +268,16 @@ const PackagesDTable = ({
       clsName="mr-2"
       disabled={
         selectedPackages.allSelectedPackages.length === 0 ||
-        selectedPackages.lastSelectedPackage.tracking_state === ""
+        selectedPackages.lastSelectedPackage.tracking_state === ""||
+        (selectedPackages.lastSelectedPackage.sender_station_id !== auth.currentEmployee.station_id &&
+          selectedPackages.lastSelectedPackage.receiver_station_id !== auth.currentEmployee.station_id)
       }
       body={<PackageStateInfo />}
     />,
     <PrintLabelButton
       key={7}
-      disabled={selectedPackages.allSelectedPackages.length !== 1}
+      disabled={selectedPackages.allSelectedPackages.length !== 1 || (selectedPackages.lastSelectedPackage.sender_station_id !== auth.currentEmployee.station_id &&
+        selectedPackages.lastSelectedPackage.receiver_station_id !== auth.currentEmployee.station_id)}
       cls="btn btn-secondary"
       pckg={selectedPackages.lastSelectedPackage}
     />,
@@ -284,12 +300,14 @@ const PackagesDTable = ({
 const mapStateToProps = (state) => ({
   packages: state.findPackagesReducer,
   selectedPackages: state.selectPackagesReducer,
+  auth: state.authReducer
 });
 
 const mapDispatchToProps = {
   selectPackages,
   deletePackage,
   addToCart,
+  signIn: authActions.signIn,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PackagesDTable);

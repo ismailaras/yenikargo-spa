@@ -93,8 +93,9 @@ const CreateOrUpdateEmployeeForm = ({ onSubmit, values, errors, onChange, onBlur
                         />
                     </div>
                     <div className="col-md-4">
-                        <TextInput
+                        <CustomMaskedInput
                             label="Doğum tarixi"
+                            mask="birthdate"
                             placeHolder="Doğum tarixi"
                             name="birthdate"
                             value={values.birthdate}

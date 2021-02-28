@@ -28,7 +28,6 @@ const FindPackages = ({findPackages, selectPackages}) => {
             value: 'viaBarcode',
             label: 'Barcode ilə'
         },
-        ,
         {
             value: 'viaTrackingState',
             label: 'Bağlama statusu ilə'

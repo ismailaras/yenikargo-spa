@@ -18,11 +18,10 @@ const CreateOrUpdatePackageForm = ({ onSubmit, values, errors, onChange, onBlur,
     function setAmount() {
         setTariffData.map(t=>{
             if (values.weight >= t.from_kg && values.weight <t.to_kg) {
-                return values.amount = t.price;
+                values.amount = t.price;
             }
-            return null
         })
-        return values.amount = (values.amount + Number(values.extra_amount))
+        values.amount += Number(values.extra_amount)
     }
     setAmount()
     console.log(setTariffData)
