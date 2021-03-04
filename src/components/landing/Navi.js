@@ -45,10 +45,10 @@ const Navi = () => {
                   Xidmətlər
                 </DropdownToggle>
                 <DropdownMenu right>
-                  <DropdownItem>Necə işləyir?</DropdownItem>
-                  <DropdownItem>Yeniliklər</DropdownItem>
-                  <DropdownItem>Missiyamız</DropdownItem>
-                  <DropdownItem>Françayzing</DropdownItem>
+                  <DropdownItem href="/#howitworks">Necə işləyir?</DropdownItem>
+                  <DropdownItem href="/yenilikler">Yeniliklər</DropdownItem>
+                  <DropdownItem href="/#missions">Missiyamız</DropdownItem>
+                  <DropdownItem href="/franchising">Françayzing</DropdownItem>
                 </DropdownMenu>
               </Dropdown>
 
@@ -60,10 +60,10 @@ const Navi = () => {
                   Fərdi müştərilər
                 </DropdownToggle>
                 <DropdownMenu right>
-                  <DropdownItem>Göndəriş</DropdownItem>
-                  <DropdownItem>Təhvil</DropdownItem>
-                  <DropdownItem>Göndərişdən sonra dəişikliklər</DropdownItem>
-                  <DropdownItem>Geri ödəməli bağlamalar</DropdownItem>
+                  <DropdownItem href="/ferdi-musteriler">Göndəriş edən</DropdownItem>
+                  <DropdownItem href="/ferdi-musteriler">Təhvil alan</DropdownItem>
+                  <DropdownItem href="/ferdi-musteriler">Göndərişdən sonra dəişikliklər</DropdownItem>
+                  <DropdownItem href="/ferdi-musteriler">Geri ödəməli bağlamalar</DropdownItem>
                 </DropdownMenu>
               </Dropdown>
 
@@ -75,11 +75,11 @@ const Navi = () => {
                   Biznes müştərilər
                 </DropdownToggle>
                 <DropdownMenu right>
-                  <DropdownItem>Online maqazinlər</DropdownItem>
-                  <DropdownItem>Korporativ müştərilər</DropdownItem>
-                  <DropdownItem>Müqavilə ilə göndərişlər</DropdownItem>
-                  <DropdownItem>Biznes müştəri kartı</DropdownItem>
-                  <DropdownItem>Topdan qutu və s satış</DropdownItem>
+                  <DropdownItem href="/biznes-musteriler">Online maqazinlər</DropdownItem>
+                  <DropdownItem href="/biznes-musteriler">Korporativ müştərilər</DropdownItem>
+                  <DropdownItem href="/biznes-musteriler">Müqavilə ilə göndərişlər</DropdownItem>
+                  <DropdownItem href="/biznes-musteriler">Biznes müştəri kartı</DropdownItem>
+                  <DropdownItem href="/biznes-musteriler">Topdan qutu və s satış</DropdownItem>
                 </DropdownMenu>
               </Dropdown>
 
@@ -91,8 +91,8 @@ const Navi = () => {
                   Xaricdən çatdırılma
                 </DropdownToggle>
                 <DropdownMenu right>
-                  <DropdownItem>Fərdi müştərilər</DropdownItem>
-                  <DropdownItem>Biznes müştərilər</DropdownItem>
+                  <DropdownItem href="/xaricden-dasinmalar">Fərdi müştərilər</DropdownItem>
+                  <DropdownItem href="/xaricden-dasinmalar">Biznes müştərilər</DropdownItem>
                 </DropdownMenu>
               </Dropdown>
 
@@ -104,8 +104,8 @@ const Navi = () => {
                   Etibarlı mağazalar
                 </DropdownToggle>
                 <DropdownMenu right>
-                  <DropdownItem>Azərbaycan</DropdownItem>
-                  <DropdownItem>Xarici</DropdownItem>
+                  <DropdownItem href="/magazalar">Azərbaycan</DropdownItem>
+                  <DropdownItem href="/magazalar">Xarici</DropdownItem>
                 </DropdownMenu>
               </Dropdown>
             </Nav>
@@ -114,13 +114,13 @@ const Navi = () => {
                 <NavLink href="/#stations">Filiallar</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/#about">Kampaniyalar</NavLink>
+                <NavLink href="/kampaniyalar">Kampaniyalar</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/#prices">Vakansiyalar</NavLink>
+                <NavLink href="/vakansiyalar">Vakansiyalar</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/#prices">FAQ</NavLink>
+                <NavLink href="/#faq">FAQ</NavLink>
               </NavItem>
             </Nav>
           </Collapse>

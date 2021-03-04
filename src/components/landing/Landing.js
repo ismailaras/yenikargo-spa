@@ -86,7 +86,7 @@ const Landing = ({ stations, getStations }) => {
           </Row>
         </Container>
       </div>
-      <Container className="package_levels_container">
+      <Container id="howitworks" className="package_levels_container">
         <Row>
           <Col className="bg-white text-primary py-5">
             <img src={level_box} alt="icon" />
@@ -107,7 +107,7 @@ const Landing = ({ stations, getStations }) => {
         </Row>
       </Container>
 
-      <div id="about" className="pb-4">
+      <div id="missions" className="pb-4">
         <Container>
           <div className="d-flex justify-content-between align-items-center">
             <h1>Missiyamız</h1>
@@ -172,7 +172,7 @@ const Landing = ({ stations, getStations }) => {
         </Container>
       </div>
 
-      <div id="about" className="py-4 bg-primary">
+      <div id="faq" className="py-4 bg-primary">
         <Container>
           <div className="d-flex justify-content-between align-items-center text-white pr-1">
             <h1>Çox verilən suallar</h1>

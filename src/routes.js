@@ -1,5 +1,11 @@
 export const Routes = {
     landing: '/',
+    franchising:'/franchising',
+    features:'/yenilikler',
+    individualCustomers:'/ferdi-musteriler',
+    businessCustomers:'/biznes-musteriler',
+    discounts:'/kampaniyalar',
+    vacations:'/vakansiyalar',
     signIn: '/employee/sign-in',
     dashboard: '/employee/dashboard',
     customers: '/employee/dashboard/customers',

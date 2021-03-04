@@ -18,12 +18,24 @@ import Tariffs from "../employee/dashboard/tariffs/Tariffs";
 import AllExtraSelling from "../employee/dashboard/all-extra-selling/AllExtraSelling";
 import Payments from "../employee/dashboard/payments/Payments";
 import TrackPackagePage from "../landing/pages/TrackPackagePage";
+import Franchising from "../landing/pages/Franchising";
+import Features from "../landing/pages/Features";
+import IndividualCustomers from "../landing/pages/IndividualCustomers";
+import BusinessCustomers from "../landing/pages/BusinessCustomers";
+import Discounts from "../landing/pages/Discounts";
+import Vacations from "../landing/pages/Vacations";
 
 function App() {
   return (
     <div>
       <Switch>
         <Route exact path={Routes.landing} component={Landing} />
+        <Route exact path={Routes.franchising} component={Franchising} />
+        <Route exact path={Routes.features} component={Features} />
+        <Route exact path={Routes.individualCustomers} component={IndividualCustomers} />
+        <Route exact path={Routes.businessCustomers} component={BusinessCustomers} />
+        <Route exact path={Routes.discounts} component={Discounts} />
+        <Route exact path={Routes.vacations} component={Vacations} />
         <Route exact path={Routes.trackPackagePage} component={TrackPackagePage} />
         <Route exact path={Routes.signIn} component={SignIn} />
         <PrivateRoute exact path={Routes.dashboard} component={Customers} />
