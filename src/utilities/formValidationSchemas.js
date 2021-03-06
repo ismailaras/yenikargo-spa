@@ -108,13 +108,13 @@ export const findEmployeesFormValidationSchema = Yup.object().shape({
 });
 
 export const findPackagesFormValidationSchema = Yup.object().shape({
-  keyword: Yup.string().required("Açar söz daxil edilməlidir."),
+  keyword: Yup.mixed().required("Açar söz daxil edilməlidir."),
 });
 
 export const findPackagesAdvancedFormValidationSchema = Yup.object().shape({
   sender_station_id: Yup.string(),
   receiver_station_id: Yup.string(),
-  states: Yup.array(),
+  states: Yup.mixed(),
 });
 
 export const findCouriersFormValidationSchema = Yup.object().shape({
@@ -177,6 +177,7 @@ export const createOrUpdateStationFormValidationSchema = Yup.object().shape({
       (val) => val && val.toString().length === 10
     ),
   url: Yup.string().required("URL daxil edilməlidir."),
+  work_hours: Yup.string().required("İş saatı daxil edilməlidir (ex: 09:00 - 18:00)"),
 });
 
 

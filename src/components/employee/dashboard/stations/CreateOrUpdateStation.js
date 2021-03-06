@@ -23,6 +23,7 @@ const CreateOrUpdateStation = ({
         address: '',
         phone_number: '',
         mobile_number: '',
+        work_hours:'',
         url: ''
     }
     if (notEmpty(selectedStations.lastSelectedStation)) {

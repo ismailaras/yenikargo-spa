@@ -47,8 +47,8 @@ const cols = [
     sortable: true,
   },
   {
-    name: <h6>Ünvan</h6>,
-    selector: "address",
+    name: <h6>İş saatı</h6>,
+    selector: "work_hours",
     sortable: true,
   },
   {
