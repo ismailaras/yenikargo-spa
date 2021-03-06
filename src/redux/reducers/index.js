@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
 import { authReducer } from "./auth/authReducer";
+import { showCustomersByNumberReducer } from "./customers/showCustomersByNumberReducer";
 import { findCustomersReducer } from "./customers/findCustomersReducer";
 import { selectCustomersReducer } from "./customers/selectCustomersReducer";
 import { setCustomerReducer } from "./customers/setCustomerReducer";
@@ -9,6 +10,7 @@ import { deleteCustomerReducer } from "./customers/deleteCustomerReducer";
 import { getStationsReducer } from "./stations/getStationsReducer";
 import { getCitiesReducer } from "./couriers/getCitiesReducer";
 import { findPackagesReducer } from "./packages/findPackagesReducer";
+import { findAdvancedPackagesReducer } from "./packages/findAdvancedPackagesReducer";
 import { selectPackagesReducer } from "./packages/selectPackagesReducer";
 import { createPackageReducer } from "./packages/createPackageReducer";
 import { updatePackageReducer } from "./packages/updatePackageReducer";
@@ -59,10 +61,12 @@ const appReducer = combineReducers({
   findCustomersReducer,
   selectCustomersReducer,
   setCustomerReducer,
+  showCustomersByNumberReducer,
   getStationsReducer,
   createCustomerReducer,
   updateCustomerReducer,
   deleteCustomerReducer,
+  findAdvancedPackagesReducer,
   findPackagesReducer,
   selectPackagesReducer,
   createPackageReducer,

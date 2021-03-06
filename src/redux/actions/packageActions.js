@@ -228,6 +228,22 @@ export const findPackages = findObject => {
     }
 }
 
+export const findAdvancedPackages = findObject => {
+    return async dispatch => {
+        dispatch(findPackagesBegin())
+        packageService.findAdvancedPackages(findObject)
+            .then(async data => {
+                await data;
+                if (data.message) {
+                    dispatch(findPackagesError(data.message))
+                } else {
+                    dispatch(findPackagesSuccess(data))
+                }
+            })
+            .catch(err => dispatch(findPackagesError(err)));
+    }
+}
+
 export const changePackageState = (p, selectedPackage) => {
     return async dispatch => {
         dispatch(changePackageStateBegin())

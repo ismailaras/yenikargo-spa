@@ -12,6 +12,7 @@ const initialState = {
         allSelectedCustomers: [],
         toggledClearRows: false
     },
+    customersByNumber: [],
     employees: [],
     selectedEmployees: {
         lastSelectedEmployee: {},

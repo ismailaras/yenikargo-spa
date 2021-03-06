@@ -6,6 +6,12 @@ export const findPackages = findObject => {
         .catch(err => err);
 }
 
+export const findAdvancedPackages = findObject => {
+    return apiService.post("package/advanced_filter", findObject)
+        .then(data => data)
+        .catch(err => err);
+}
+
 export const createPackage = p => {
     return apiService.post("package", p)
         .then(data => data)

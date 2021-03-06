@@ -21,6 +21,24 @@ export const findCustomersError = error => ({
     [pendingTask]: endAll
 })
 
+export const showCustomersBegin = () => ({
+    type: actionTypes.SHOW_CUSTOMERS_BY_NUMBER_BEGIN,
+    payload: {},
+    [pendingTask]: begin
+})
+
+export const showCustomersSuccess = customers => ({
+    type: actionTypes.SHOW_CUSTOMERS_BY_NUMBER_SUCCESS,
+    payload: customers,
+    [pendingTask]: end
+})
+
+export const showCustomersError = error => ({
+    type: actionTypes.SHOW_CUSTOMERS_BY_NUMBER_ERROR,
+    payload: error,
+    [pendingTask]: endAll
+})
+
 export const selectCustomers = selectedCustomers => ({
     type: actionTypes.SELECT_CUSTOMERS,
     payload: selectedCustomers
@@ -172,6 +190,24 @@ export const findCustomers = findObject => {
             .catch(err => dispatch(findCustomersError(err)));
     }
 }
+
+export const showCustomersByNumber = findObject => {
+    return async dispatch => {
+        dispatch(showCustomersBegin())
+        customerService.showCustomers(findObject)
+            .then(async data => {
+                await data;
+                if (data.message) {
+                    dispatch(showCustomersError(data.message))
+                } else {
+                    dispatch(showCustomersSuccess(data))
+                    console.log(data)
+                }
+            })
+            .catch(err => dispatch(showCustomersSuccess(err)));
+    }
+}
+
 
 const changeSelectedCustomerValues = (values, lastSelectedCustomer) => {
     for (let field in lastSelectedCustomer) {

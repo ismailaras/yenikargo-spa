@@ -6,6 +6,9 @@ import NumberInput from "../../../toolbox/NumberInput";
 import CheckboxInput from "../../../toolbox/CheckboxInput";
 import PasswordInput from "../../../toolbox/PasswordInput";
 import CustomMaskedInput from "../../../toolbox/CustomMaskedInput";
+import { ListGroup, ListGroupItem } from "reactstrap";
+import { showCustomersByNumber, setReceiverCustomer,setSenderCustomer } from "../../../../redux/actions/customerActions";
+import { connect } from "react-redux";
 
 const CreateOrUpdateCustomerForm = ({
   onSubmit,
@@ -16,10 +19,65 @@ const CreateOrUpdateCustomerForm = ({
   isSubmitting,
   touched,
   stations,
+  customersByNumber,
+  showCustomersByNumber,
+  setSenderCustomer,
+  setReceiverCustomer,
 }) => {
+  const handleNumber = (e) => {
+    onChange(e);
+    if (!values.id && e.target.value.length > 3) {
+      showCustomersByNumber({ mobile: e.target.value });
+    }
+  };
   return (
     <div>
       <form onSubmit={onSubmit}>
+      <div className="form-row">
+          <div className="col-md-6">
+            <TextInput
+              label="Mobil nömrə"
+              placeHolder="Mobil nömrə"
+              name="mobile_number"
+              mask="mobile_number"
+              value={values.mobile_number}
+              error={errors.mobile_number}
+              onChange={handleNumber}
+              onBlur={onBlur}
+              touched={touched.mobile_number}
+            />
+            
+          </div>
+          <div className="col-md-6">
+            <PasswordInput
+              label="Şifrə"
+              placeHolder="Şifrə"
+              name="password"
+              value={values.password}
+              error={errors.password}
+              onChange={onChange}
+              onBlur={onBlur}
+              touched={touched.password}
+            />
+          </div>
+        </div>
+        {!values.id &&
+        <ListGroup style={{ position: "relative", bottom: ".7rem" }}>
+              {customersByNumber.map((c) => {
+                return (
+                  <ListGroupItem key={c.id} className="mb-1 p-0">
+                    <div className="d-flex justify-content-between align-items-center">
+                      <div onClick={e=>setSenderCustomer(c)} className="btn btn-warning px-5">G</div>
+                      <div>
+                        {c.mobile_number}: {c.first_name} {c.last_name}
+                      </div>
+                      <div onClick={e=>setReceiverCustomer(c)} className="btn btn-info px-5">A</div>
+                    </div>
+                  </ListGroupItem>
+                );
+              })}
+            </ListGroup>}
+
         <div className="form-row">
           <div className="col-md-6">
             <TextInput
@@ -46,33 +104,7 @@ const CreateOrUpdateCustomerForm = ({
             />
           </div>
         </div>
-        <div className="form-row">
-          <div className="col-md-6">
-            <CustomMaskedInput
-              label="Mobil nömrə"
-              placeHolder="Mobil nömrə"
-              name="mobile_number"
-              mask="mobile_number"
-              value={values.mobile_number}
-              error={errors.mobile_number}
-              onChange={onChange}
-              onBlur={onBlur}
-              touched={touched.mobile_number}
-            />
-          </div>
-          <div className="col-md-6">
-            <PasswordInput
-              label="Şifrə"
-              placeHolder="Şifrə"
-              name="password"
-              value={values.password}
-              error={errors.password}
-              onChange={onChange}
-              onBlur={onBlur}
-              touched={touched.password}
-            />
-          </div>
-        </div>
+        
         <div className="form-row">
           <div className="col-md-4">
             <TextInput
@@ -186,4 +218,17 @@ const CreateOrUpdateCustomerForm = ({
   );
 };
 
-export default CreateOrUpdateCustomerForm;
+const mapDispatchToProps = {
+  showCustomersByNumber,
+  setSenderCustomer,
+  setReceiverCustomer,
+};
+
+const mapStateToProps = (state) => ({
+  customersByNumber: state.showCustomersByNumberReducer,
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CreateOrUpdateCustomerForm);

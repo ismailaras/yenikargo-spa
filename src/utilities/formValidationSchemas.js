@@ -111,6 +111,12 @@ export const findPackagesFormValidationSchema = Yup.object().shape({
   keyword: Yup.string().required("Açar söz daxil edilməlidir."),
 });
 
+export const findPackagesAdvancedFormValidationSchema = Yup.object().shape({
+  sender_station_id: Yup.string(),
+  receiver_station_id: Yup.string(),
+  states: Yup.array(),
+});
+
 export const findCouriersFormValidationSchema = Yup.object().shape({
   keyword: Yup.string().required("Açar söz daxil edilməlidir."),
 });

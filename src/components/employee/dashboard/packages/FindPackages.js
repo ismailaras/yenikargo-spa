@@ -5,7 +5,7 @@ import FindPackagesForm from "./FindPackagesForm";
 import {useFormik} from "formik";
 import {findPackagesFormValidationSchema} from '../../../../utilities/formValidationSchemas';
 
-const FindPackages = ({findPackages, selectPackages}) => {
+const FindPackages = ({findPackages, selectPackages, setIsAdvanceFilter,isAdvanceFilter}) => {
     const {handleSubmit, handleChange, values, errors, touched, handleBlur, isSubmitting, submitForm} = useFormik({
         initialValues: {keyword: '', via: 'viaId'},
         validationSchema: findPackagesFormValidationSchema,
@@ -48,6 +48,8 @@ const FindPackages = ({findPackages, selectPackages}) => {
             onBlur={handleBlur}
             touched={touched}
             onKeyPress={handleKeyPress}
+            setIsAdvanceFilter={setIsAdvanceFilter}
+            isAdvanceFilter={isAdvanceFilter}
             isSubmitting={isSubmitting}
         />
     )

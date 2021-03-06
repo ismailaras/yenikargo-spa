@@ -33,7 +33,6 @@ export const signIn = (employeeCredentials, history) => {
                 } else{
                     dispatch(signInSuccess(data.employee))
                     history.push(Routes.dashboard)
-                    console.log(data)
                     notification.success('Daxil olundu.');
                 }
             })
