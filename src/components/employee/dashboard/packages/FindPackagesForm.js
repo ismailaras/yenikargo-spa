@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
 import RadioInputGroup from "../../../toolbox/RadioInputGroup";
 import NumberInput from "../../../toolbox/NumberInput";
-import SelectInput from "../../../toolbox/SelectInput";
-import { iterTrackingStates } from "../../../../enums/trackingStateEnum";
 import TextInput from "../../../toolbox/TextInput";
 import DFilter from "../../../toolbox/DFilter";
 import { connect } from "react-redux";
@@ -29,12 +27,12 @@ const FindPackagesForm = ({
     }
   });
   const stateCollection = [
-    { value: "Declared", label: "Declared" },
-    { value: "ReadyToSorting", label: "ReadyToSorting" },
-    { value: "Sorting", label: "Sorting" },
-    { value: "OnWay", label: "OnWay" },
-    { value: "Arrived", label: "Arrived" },
-    { value: "Delivered", label: "Delivered" },
+    { value: "0", label: "Declared" },
+    { value: "1", label: "ReadyToSorting" },
+    { value: "2", label: "Sorting" },
+    { value: "3", label: "OnWay" },
+    { value: "4", label: "Arrived" },
+    { value: "5", label: "Delivered" },
   ];
   return (
     <div>
@@ -84,38 +82,26 @@ const FindPackagesForm = ({
                     onBlur={onBlur}
                   />
                 ),
-                viaTrackingState:
-                  //   <SelectInput
-                  //     value={values.keyword}
-                  //     name="keyword"
-                  //     options={iterTrackingStates().map((trackingStateObj) => ({
-                  //       value: trackingStateObj.value,
-                  //       text: trackingStateObj.name,
-                  //     }))}
-                  //     label="Bağlama statusu"
-                  //     defaultOption="Status seçin"
-                  //     touched={touched.keyword}
-                  //     error={errors.keyword}
-                  //     onChange={onChange}
-                  //     onBlur={onBlur}
-                  //   />
-                  // ),
-                  stateCollection.map((s) => {
-                    return (
-                      <label key={s.value}>
-                        <input
-                          name="keyword"
-                          type="checkbox"
-                          id={s.value}
-                          value={s.value}
-                          checked={values.keyword.includes(s.value)}
-                          onChange={onChange}
-                        />
-                        <span>{s.label}</span>
-                        {console.log(values.keyword)}
-                      </label>
-                    );
-                  }),
+                viaTrackingState: (
+                  <div className="d-flex flex-column justify-content-between align-items-left">
+                    {stateCollection.map((s) => {
+                      return (
+                        <label key={s.value}>
+                          <input
+                            name="keyword"
+                            type="checkbox"
+                            id={s.value}
+                            value={s.value}
+                            checked={values.keyword.includes(s.value)}
+                            onChange={onChange}
+                          />
+                          <span className="pl-2">{s.label}</span>
+                          {console.log(values.keyword)}
+                        </label>
+                      );
+                    })}
+                  </div>
+                ),
               }[values.via]
             }
           </DFilter>

@@ -3,16 +3,16 @@ import { Container } from "reactstrap";
 import Footer from "../Footer";
 import Navi from "../Navi";
 
-const Franchising = () => {
+const InternationalShipping = () => {
   return (
-    <div id="franchising">
+    <div id="vacations">
       <Navi />
       <Container className="my-5 text-center">
-        <h3>BU XİDMƏTİMİZ  BARƏDƏ GƏLƏCƏKDƏ DAHA GENİŞ MƏLUMATLAR  VERİLƏCƏKDİR</h3>
+        <h3>InternationalShipping</h3>
       </Container>
       <Footer />
     </div>
   );
 };
 
-export default Franchising;
+export default InternationalShipping;

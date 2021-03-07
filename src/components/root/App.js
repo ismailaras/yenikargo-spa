@@ -24,6 +24,7 @@ import IndividualCustomers from "../landing/pages/IndividualCustomers";
 import BusinessCustomers from "../landing/pages/BusinessCustomers";
 import Discounts from "../landing/pages/Discounts";
 import Vacations from "../landing/pages/Vacations";
+import InternationalShipping from "../landing/pages/InternationalShipping";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
         <Route exact path={Routes.features} component={Features} />
         <Route exact path={Routes.individualCustomers} component={IndividualCustomers} />
         <Route exact path={Routes.businessCustomers} component={BusinessCustomers} />
+        <Route exact path={Routes.internationalShipping} component={InternationalShipping} />
         <Route exact path={Routes.discounts} component={Discounts} />
         <Route exact path={Routes.vacations} component={Vacations} />
         <Route exact path={Routes.trackPackagePage} component={TrackPackagePage} />

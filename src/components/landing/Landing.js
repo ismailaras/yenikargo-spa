@@ -56,7 +56,7 @@ const Landing = ({ stations, getStations }) => {
                 buttonLabel="İş qrafiki"
                 clsName="btn-light mt-1"
                 color="black"
-                url="track-package"
+                url="/#stations"
               />
             </Col>
             <Col className="text-white">
@@ -75,10 +75,10 @@ const Landing = ({ stations, getStations }) => {
                   <a
                     className="text-white"
                     style={{ fontSize: "16px" }}
-                    href="tel:123-456-7890"
+                    href="tel:0703120981"
                   >
                     {" "}
-                    123-456-7890
+                    070-312-09-81
                   </a>
                 </span>
               </div>
