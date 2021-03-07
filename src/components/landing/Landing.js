@@ -18,6 +18,7 @@ import LinkButton from "../toolbox/LinkButton";
 import ModalButton from "../toolbox/ModalButton";
 import OrderCourier from "./components/OrderCourier/OrderCourier";
 import Accordion from "../toolbox/Accordion";
+import Calculator from "./components/Calculator/Calculator";
 
 const Landing = ({ stations, getStations }) => {
   useEffect(() => {
@@ -46,11 +47,13 @@ const Landing = ({ stations, getStations }) => {
                 buttonColor="light"
                 body={<OrderCourier />}
               />
-              <LinkButton
+              <ModalButton
                 buttonLabel="Kalkulyator"
-                clsName="btn-light mt-1"
-                color="black"
-                url="track-package"
+                header="Kalkulyator"
+                clsName="mt-1"
+                buttonStyle={{ width: "100%" }}
+                buttonColor="light"
+                body={<Calculator />}
               />
               <LinkButton
                 buttonLabel="İş qrafiki"
@@ -61,13 +64,6 @@ const Landing = ({ stations, getStations }) => {
             </Col>
             <Col className="text-white">
               <h1>YeniKargo</h1>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro
-                quisquam non similique, aperiam iure veniam et quam, ullam earum
-                culpa necessitatibus ab, placeat quae minima assumenda adipisci
-                cupiditate consequatur repudiandae!
-              </p>
-
               <div className="py-1">
                 <i className="fa fa-whatsapp" />
                 <span className="ml-1">

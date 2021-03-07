@@ -5,6 +5,7 @@ export const Routes = {
     individualCustomers:'/ferdi-musteriler',
     businessCustomers:'/biznes-musteriler',
     discounts:'/kampaniyalar',
+    internationalShipping:'/xaricden-dasinmalar',
     vacations:'/vakansiyalar',
     signIn: '/employee/sign-in',
     dashboard: '/employee/dashboard',
