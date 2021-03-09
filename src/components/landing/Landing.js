@@ -55,15 +55,16 @@ const Landing = ({ stations, getStations }) => {
                 buttonColor="light"
                 body={<Calculator />}
               />
-              <LinkButton
+              {/* <LinkButton
                 buttonLabel="İş qrafiki"
                 clsName="btn-light mt-1"
                 color="black"
                 url="/#stations"
-              />
+              /> */}
             </Col>
             <Col className="text-white">
-              <h1>YeniKargo</h1>
+              <h1 style={{fontSize:'5rem'}}>YeniKargo</h1>
+              <h3>Ölkədaxili Sifarişlərin Sərfəli Çatdırılması</h3>
               <div className="py-1">
                 <i className="fa fa-whatsapp" />
                 <span className="ml-1">
