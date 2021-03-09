@@ -5,7 +5,7 @@ import logo_print from '../../../../assets/images/logo_print.jpg';
 
 class Label extends Component {
     generateLabels() {
-        const labels = [];
+        const labels = []
         let i = 0;
         while (i < this.props.pckg.quantity) {
             i++;
