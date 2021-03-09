@@ -37,7 +37,6 @@ const FindPackagesAdvancedForm = ({
       selectPackages([]); // Axtaris zamani secilmish musteriler bosh array edir.
       findAdvancedPackages(values);
       setSubmitting(false);
-      console.log(values);
     },
   });
   useEffect(() => {
@@ -104,7 +103,6 @@ const FindPackagesAdvancedForm = ({
                 );
               })}
             </div>
-            {console.log(values)}
           </DFilter>
           <div className="card-footer">
             {isAdvanceFilter && (

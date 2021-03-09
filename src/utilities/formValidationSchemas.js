@@ -112,8 +112,8 @@ export const findPackagesFormValidationSchema = Yup.object().shape({
 });
 
 export const findPackagesAdvancedFormValidationSchema = Yup.object().shape({
-  sender_station_id: Yup.string(),
-  receiver_station_id: Yup.string(),
+  sender_station_id: Yup.mixed(),
+  receiver_station_id: Yup.mixed(),
   states: Yup.mixed(),
 });
 

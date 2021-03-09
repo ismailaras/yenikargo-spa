@@ -154,6 +154,7 @@ const Landing = ({ stations, getStations }) => {
                       <h3>{s.name}</h3>
                       <div>Şəhər: {s.city}</div>
                       <div>Adres: {s.address}</div>
+                      <div>İş saatı: {s.work_hours}</div>
                       <a className="text-dark" href={`tel:${s.phone_number}`}>
                         Tel: {s.phone_number}
                       </a>

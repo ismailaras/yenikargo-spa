@@ -31,7 +31,7 @@ export const deletePackage = p => {
 }
 
 export const changePackageState = p => {
-    return apiService.post("package/change_state", {"id":p.id, "state":Number(p.state)})
+    return apiService.post("package/change_state", {"ids":p.ids, "state":Number(p.state)})
         .then(data => data)
         .catch(err => err);
 }

@@ -96,7 +96,6 @@ const FindPackagesForm = ({
                             onChange={onChange}
                           />
                           <span className="pl-2">{s.label}</span>
-                          {console.log(values.keyword)}
                         </label>
                       );
                     })}

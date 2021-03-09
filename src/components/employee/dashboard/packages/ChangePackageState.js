@@ -11,8 +11,12 @@ import * as authActions from "../../../../redux/actions/authActions";
 
 const ChangePackageState = ({ selectedPackages, changePackageState, auth,signIn }) => {
   const history = useHistory();
+  let idArray = []
+  selectedPackages.allSelectedPackages.map(a=>{
+    idArray.push(a.id)
+  })
   let initialValues = {
-    id: parseInt(selectedPackages.lastSelectedPackage.id),
+    ids: idArray,
     state: 0,
   };
   useEffect(() => {
@@ -32,8 +36,8 @@ const ChangePackageState = ({ selectedPackages, changePackageState, auth,signIn 
     initialValues,
     validationSchema: changePackageStateFormValidationSchema,
     onSubmit: (values, { setSubmitting }) => {
-      values.id &&
-        changePackageState(values, selectedPackages.lastSelectedPackage);
+        changePackageState(values, selectedPackages.allSelectedPackages);
+        console.log(values)
       setSubmitting(false);
     },
   });
@@ -47,7 +51,6 @@ const ChangePackageState = ({ selectedPackages, changePackageState, auth,signIn 
       : auth.currentEmployee.is_operator_admin
       ? a.value !== 2 && a.value !== 3
       : a;
-      console.log(auth)
   return (
     <form onSubmit={handleSubmit}>
       <SelectInput
