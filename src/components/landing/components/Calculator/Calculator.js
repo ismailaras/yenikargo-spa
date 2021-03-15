@@ -11,7 +11,6 @@ const Calculator = ({ stations, setTariffInterval, setTariffData }) => {
   const [amount, setAmount] = useState("");
   const [sender_station_id, setSender_station_id] = useState("");
   const [receiver_station_id, setReceiver_station_id] = useState("");
-  console.log(weight, sender_station_id, receiver_station_id);
 
   useEffect(() => {
     function setPriceFunc() {

@@ -16,9 +16,25 @@ const CreateOrUpdatePackageForm = ({ onSubmit, values, errors, onChange, onBlur,
         return value;
     }
     function setAmount() {
-        setTariffData.map(t=>{
+        if(!setTariffData){ 
+        if (values.weight >= 0 && values.weight <1) {
+            values.amount = 2;
+        }else if(values.weight >= 1 && values.weight <3){
+            values.amount = 3;
+        }else if(values.weight >= 3 && values.weight <5){
+            values.amount = 4;
+        }else if(values.weight >= 5 && values.weight <10){
+            values.amount = 5;
+        }else if(values.weight >=10){
+            values.amount = values.weight * 0.5
+        }}
+
+        setTariffData && setTariffData.map(t=>{
             if (values.weight >= t.from_kg && values.weight <t.to_kg) {
                 values.amount = t.price;
+            }
+            if(t.from_kg > 99){
+                values.amount = t.price * 4;
             }
         })
         values.amount += Number(values.extra_amount)

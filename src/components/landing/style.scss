@@ -2,10 +2,12 @@
   width: 40px;
   height: 40px;
 }
+.modal-content{
+  text-transform: uppercase;
+}
 
 .nav_banner{
-  background: rgb(131,58,180);
-  background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%); 
+  background: linear-gradient(90deg, rgba(199, 233, 3, 0.986), rgb(4, 184, 124),rgb(112, 156, 226)); 
 
   a{
     color: black;
@@ -94,11 +96,57 @@
     display: flex;
     flex-direction: column;
     text-align: left;
-    border: 1px dashed black;
+    border-bottom-right-radius: 1rem;
+    border-bottom-left-radius: 1rem;
     padding: 1rem;
     gap: 5px;
+    background: white;
     a{
       color: white;
+    }
+  }
+
+  .landing_stations_container{
+    display: grid;
+    grid-template-columns: 33.3% 33.3% 33.3%;
+    row-gap: 1rem;
+    column-gap: 5px;
+  }
+
+  #tariffs{
+    background: linear-gradient(90deg, rgba(83, 144, 172, 0.986) 0%, 50%, rgb(245, 245, 245) 100%); 
+    color: white;
+
+    
+    .tariffs_container{
+      display: grid;
+      font-size: 18px;
+      grid-template-columns: 48% 48%;
+      justify-content: space-between;
+    }
+    .inside-tariffs{
+      background: #557ea1;
+      color: white;
+      padding: 1rem;
+      border-left: 7px solid yellow;
+
+      hr{
+        border: 1px solid white;
+      }
+    }
+  }
+}
+
+.trackpackage_page{
+  .trackpackage_page_container{
+    display: grid;
+    grid-template-columns: 20% 80%;
+    justify-content: space-between;
+    gap: 1rem;
+    .trackpackage_page_container__buttons{
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
     }
   }
 }

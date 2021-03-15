@@ -12,6 +12,7 @@ import level_truck from "../../assets/illustrations/level-truck.png";
 
 import target_icon from "../../assets/illustrations/target-icon.png";
 import warehouse_icon from "../../assets/illustrations/warehouse-icon.png";
+import tariffs_icon from "../../assets/illustrations/tariffs-icon.png";
 
 import "./style.scss";
 import LinkButton from "../toolbox/LinkButton";
@@ -55,6 +56,9 @@ const Landing = ({ stations, getStations }) => {
                 buttonColor="light"
                 body={<Calculator />}
               />
+              {/* <a className="text-white text-center" href="/#stations">
+                İş saatları
+              </a> */}
               {/* <LinkButton
                 buttonLabel="İş qrafiki"
                 clsName="btn-light mt-1"
@@ -63,7 +67,7 @@ const Landing = ({ stations, getStations }) => {
               /> */}
             </Col>
             <Col className="text-white">
-              <h1 style={{fontSize:'5rem'}}>YeniKargo</h1>
+              <h1 style={{ fontSize: "5rem" }}>YeniKargo</h1>
               <h3>Ölkədaxili Sifarişlərin Sərfəli Çatdırılması</h3>
               <div className="py-1">
                 <i className="fa fa-whatsapp" />
@@ -134,6 +138,38 @@ const Landing = ({ stations, getStations }) => {
         </Container>
       </div>
 
+      <div id="tariffs" className="py-5">
+        <Container>
+          <div className="d-flex justify-content-between align-items-center">
+            <h1>Tariflər</h1>
+            <img className="icon-md" src={tariffs_icon} alt="target" />
+          </div>
+          <hr />
+          <div className="tariffs_container">
+            <div className="inside-tariffs">
+              <h4>Ölkədaxili daşınma</h4>
+              <hr/>
+              <div>
+                <div>0 azn ................. KG 0 - KG 1</div>
+                <div>1 azn ................. KG 1 - KG 1</div>
+                <div>3 azn ................. KG 3 - KG 1</div>
+                <div>5 azn ................. KG 5 - KG 1</div>
+                <div>0.50 azn ................. KG 10 - və sonrakı hər kiloqramı</div>
+              </div>
+            </div>
+            <div className="inside-tariffs">
+              <h4>Naxçıvana daşınma</h4>
+              <hr/>
+              <div>
+                <div>2 azn ................. KG 0 - KG 1</div>
+                <div>3 azn ................. KG 1 - KG 3</div>
+                <div>1 azn ................. KG 3 - və sonrakı hər kiloqramı</div>
+              </div>
+            </div>
+          </div>
+        </Container>
+      </div>
+
       <div id="stations" className="bg-light py-5">
         <Container>
           <div className="d-flex justify-content-between align-items-center">
@@ -145,27 +181,25 @@ const Landing = ({ stations, getStations }) => {
             />
           </div>
           <hr />
-          <div className="mt-3">
-            <Row>
-              {stations.map((s) => {
-                return (
-                  <Col key={s.id}>
-                    <div className="landing_station-box">
-                      <h3>{s.name}</h3>
-                      <div>Şəhər: {s.city}</div>
-                      <div>Adres: {s.address}</div>
-                      <div>İş saatı: {s.work_hours}</div>
-                      <a className="text-dark" href={`tel:${s.phone_number}`}>
-                        Tel: {s.phone_number}
-                      </a>
-                      <a className="btn btn-dark" href={s.url}>
-                        Xəritədə bax
-                      </a>
-                    </div>
-                  </Col>
-                );
-              })}
-            </Row>
+          <div className="mt-3 landing_stations_container">
+            {stations.map((s) => {
+              return (
+                <div key={s.id}>
+                  <div className="landing_station-box">
+                    <h3>{s.name}</h3>
+                    <div>Şəhər: {s.city}</div>
+                    <div>Adres: {s.address}</div>
+                    <div>İş saatı: {s.work_hours}</div>
+                    <a className="text-dark" href={`tel:${s.phone_number}`}>
+                      Tel: {s.phone_number}
+                    </a>
+                    <a className="btn btn-dark" href={s.url}>
+                      Xəritədə bax
+                    </a>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </Container>
       </div>

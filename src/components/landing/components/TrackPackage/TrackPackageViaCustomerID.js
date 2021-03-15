@@ -29,6 +29,7 @@ const TrackPackageViaCustomerID = ({ trackPackageViaCustomerID, trackingPackage 
   return (
     <form onSubmit={handleSubmit}>
       <h5>Müştəri ID ilə axtar</h5>
+      <hr/>
       <NumberInput
         label="Müştəri ID"
         placeHolder="Müştəri ID"

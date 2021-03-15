@@ -7,23 +7,24 @@ import Navi from "../Navi";
 const TrackPackagePage = () => {
   const [isToggle, setIsToggle] = useState(true);
   return (
-    <div>
+    <div className="trackpackage_page">
       <Navi />
       <Container>
         <h1>Bağlama izlə</h1>
-        <div className="mb-2">
-          <Button
-            onClick={() => setIsToggle(true)}
-            color="primary"
-            className="mr-2"
-          >
-            Bağlama ID ilə
-          </Button>
-          <Button onClick={() => setIsToggle(false)} color="danger">
-            Müştəri ID ilə
-          </Button>
+        <div className="trackpackage_page_container">
+          <div className="mb-2 trackpackage_page_container__buttons">
+            <Button
+              onClick={() => setIsToggle(true)}
+              color="primary"
+            >
+              Bağlama ID ilə
+            </Button>
+            <Button onClick={() => setIsToggle(false)} color="primary">
+              Müştəri ID ilə
+            </Button>
+          </div>
+          {isToggle ? <TrackPackage /> : <TrackPackageCustomerID />}
         </div>
-        {isToggle ? <TrackPackage /> : <TrackPackageCustomerID/>}
       </Container>
     </div>
   );

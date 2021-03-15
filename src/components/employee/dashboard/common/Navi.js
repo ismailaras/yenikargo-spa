@@ -56,21 +56,23 @@ const Navi = ({ signIn, signOut, auth }) => {
                   </button>
                 </DropdownToggle>
                 <DropdownMenu right>
+                {!auth.currentEmployee.is_sorting_admin && 
                   <Link to={Routes.customers}>
                     <DropdownItem>
                       <span className="text-info">Müştərilər</span>
                     </DropdownItem>
-                  </Link>
+                  </Link>}
                   <Link to={Routes.packages}>
                     <DropdownItem>
                       <span className="text-info">Paketlər</span>
                     </DropdownItem>
                   </Link>
+                  {!auth.currentEmployee.is_sorting_admin && 
                   <Link to={Routes.checkout}>
                     <DropdownItem>
                       <span className="text-info">Ödəniş al</span>
                     </DropdownItem>
-                  </Link>
+                  </Link>}
                   {auth.currentEmployee.is_superuser ? (
                     <Link to={Routes.stations}>
                       <DropdownItem>
@@ -85,16 +87,17 @@ const Navi = ({ signIn, signOut, auth }) => {
                       </DropdownItem>
                     </Link>
                   ) : null}
-                  <Link to={Routes.employees}>
+                  {!auth.currentEmployee.is_sorting_admin && <Link to={Routes.employees}>
                     <DropdownItem>
                       <span className="text-info">İşçilər</span>
                     </DropdownItem>
-                  </Link>
+                  </Link>}
+                  {!auth.currentEmployee.is_sorting_admin && 
                   <Link to={Routes.payments}>
                     <DropdownItem>
                       <span className="text-info">Ödənişlər</span>
                     </DropdownItem>
-                  </Link>
+                  </Link>}
                   {auth.currentEmployee.is_superuser ? (
                     <Link to={Routes.allExtraSelling}>
                       <DropdownItem>
@@ -102,11 +105,12 @@ const Navi = ({ signIn, signOut, auth }) => {
                       </DropdownItem>
                     </Link>
                   ) : null}
+                  {!auth.currentEmployee.is_sorting_admin && 
                   <Link to={Routes.courier}>
                     <DropdownItem>
                       <span className="text-info">Kuryer</span>
                     </DropdownItem>
-                  </Link>
+                  </Link>}
                   <DropdownItem>Hesabat *</DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>

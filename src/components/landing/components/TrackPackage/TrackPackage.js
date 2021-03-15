@@ -29,6 +29,7 @@ const TrackPackage = ({ trackPackage, trackingPackage }) => {
   return (
     <form onSubmit={handleSubmit}>
       <h5>Bağlama ID ilə axtar</h5>
+      <hr/>
       <NumberInput
         label="Paket ID"
         placeHolder="Paket ID"
