@@ -33,14 +33,14 @@ const CreateOrUpdatePackageForm = ({ onSubmit, values, errors, onChange, onBlur,
             if (values.weight >= t.from_kg && values.weight <t.to_kg) {
                 values.amount = t.price;
             }
-            if(t.from_kg > 99){
-                values.amount = t.price * 4;
+            if(t.to_kg > 2){
+                values.amount = t.price * 3;
             }
         })
         values.amount += Number(values.extra_amount)
     }
     setAmount()
-    console.log(setTariffData)
+    // console.log(setTariffData)
     const radioInputProps = [
         {
             value: "false",

@@ -109,6 +109,7 @@ const CustomersDTable = ({
   };
   const setSender = () => {
     if (
+      !currentUser.currentEmployee.is_superuser &&
       currentUser.currentEmployee.station_id !==
       selectedCustomers.lastSelectedCustomer.station_id
     ) {

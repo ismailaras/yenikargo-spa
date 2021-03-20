@@ -5,7 +5,10 @@ import {
   createPackage,
   selectPackages,
   updatePackage,
+  findPackages,
+  findAdvancedPackages
 } from "../../../../redux/actions/packageActions";
+import {setReceiverCustomer, setSenderCustomer} from '../../../../redux/actions/customerActions';
 import { setTariffInterval } from "../../../../redux/actions/tariffActions";
 import { connect } from "react-redux";
 import CreateOrUpdatePackageForm from "./CreateOrUpdatePackageForm";
@@ -16,26 +19,36 @@ import { createOrUpdatePackageFormValidationSchema } from "../../../../utilities
 const CreateOrUpdatePackage = ({
   createPackage,
   updatePackage,
+  selectPackages,
   stations,
   getStations,
   selectedPackages,
   setCustomers,
   setTariffData,
+  findPackages,
+  filterPackageValues,
+  findAdvancedPackages,
   setTariffInterval,
+  setReceiverCustomer, setSenderCustomer
 }) => {
-  function setInitialValues(initialValues, setCustomers, selectedPackages) {
-    if (
-      notEmpty(setCustomers.senderCustomer) &&
-      notEmpty(setCustomers.receiverCustomer)
-    ) {
+  function setInitialValues(initialValues, setCustomers, selectedPackages,setSenderCustomer,setReceiverCustomer) {
+    // selectPackages({})
+    console.log(selectedPackages)    
       initialValues.sender_customer_id = setCustomers.senderCustomer.id;
       initialValues.receiver_customer_id = setCustomers.receiverCustomer.id;
       initialValues.sender_station_id = setCustomers.senderCustomer.station_id;
       initialValues.receiver_station_id =
         setCustomers.receiverCustomer.station_id;
-    } else if (notEmpty(selectedPackages.lastSelectedPackage)) {
-      initialValues = selectedPackages.lastSelectedPackage;
-    }
+      console.log('First')
+     if ( notEmpty(selectedPackages.lastSelectedPackage)) {
+       initialValues = selectedPackages.lastSelectedPackage;
+       console.log('Second')
+
+      // setTimeout(()=>{
+      //   setReceiverCustomer(null)
+      //   setSenderCustomer(null)
+      // },1000)
+      }
     return initialValues;
   }
 
@@ -64,7 +77,9 @@ const CreateOrUpdatePackage = ({
   initialValues = setInitialValues(
     initialValues,
     setCustomers,
-    selectedPackages
+    selectedPackages,
+    setSenderCustomer,
+    setReceiverCustomer
   );
 
   useEffect(() => {
@@ -91,9 +106,15 @@ const CreateOrUpdatePackage = ({
     initialValues,
     validationSchema: createOrUpdatePackageFormValidationSchema,
     onSubmit: (values, { setSubmitting }) => {
-      values.id
-        ? updatePackage(values, selectedPackages.lastSelectedPackage)
-        : createPackage(values, history);
+      if(values.id){
+          updatePackage(values, selectedPackages.lastSelectedPackage)
+          setTimeout(()=>{
+            filterPackageValues.states ?
+            findAdvancedPackages(filterPackageValues)
+            :findPackages(filterPackageValues)
+          },500)
+        }
+      else {createPackage(values, history)}
       setSubmitting(false);
     },
   });
@@ -118,6 +139,10 @@ const mapDispatchToProps = {
   createPackage,
   updatePackage,
   setTariffInterval,
+  findPackages,
+  findAdvancedPackages,
+  setReceiverCustomer, 
+  setSenderCustomer
 };
 
 const mapStateToProps = (state) => ({

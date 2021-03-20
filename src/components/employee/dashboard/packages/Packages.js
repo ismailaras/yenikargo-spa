@@ -8,6 +8,7 @@ import FindPackagesAdvancedForm from "./FindPackagesAdvancedForm";
 
 const Packages = () => {
   const [isAdvanceFilter, setIsAdvanceFilter] = useState(false);
+  const [filterPackageValues, setFilterPackageValues] = useState({});
   return (
     <div>
       <Navi />
@@ -18,16 +19,18 @@ const Packages = () => {
               <FindPackagesAdvancedForm
                 setIsAdvanceFilter={setIsAdvanceFilter}
                 isAdvanceFilter={isAdvanceFilter}
+                setFilterPackageValues={setFilterPackageValues}
               />
             ) : (
               <FindPackages
+                setFilterPackageValues={setFilterPackageValues}
                 setIsAdvanceFilter={setIsAdvanceFilter}
                 isAdvanceFilter={isAdvanceFilter}
               />
             )}
           </Col>
           <Col md={9}>
-            <PackagesDTable />
+            <PackagesDTable filterPackageValues={filterPackageValues}/>
           </Col>
         </Row>
       </Container>

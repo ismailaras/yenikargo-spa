@@ -17,7 +17,7 @@ const TrackPackageViaCustomerInfo = ({ trackingPackages }) => {
               <span className="lead">{trackingPackage.current_state}</span>
             </p>
             <p className="mb-0">
-              Müştərinin rolu: {trackingPackage.isReciever ? "Alan":"Göndərən"}
+              Müştərinin rolu: {trackingPackage.is_receiver ? "Alan":"Göndərən"}
             </p>
             <p className="mb-0">
               Hazırki lokasiya: {trackingPackage.current_location || "-"}

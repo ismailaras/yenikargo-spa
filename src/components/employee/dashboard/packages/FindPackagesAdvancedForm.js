@@ -17,6 +17,7 @@ const FindPackagesAdvancedForm = ({
   findAdvancedPackages,
   getStations,
   selectPackages,
+  setFilterPackageValues
 }) => {
   const {
     handleSubmit,
@@ -35,6 +36,7 @@ const FindPackagesAdvancedForm = ({
     validationSchema: findPackagesAdvancedFormValidationSchema,
     onSubmit: (values, { setSubmitting }) => {
       selectPackages([]); // Axtaris zamani secilmish musteriler bosh array edir.
+      setFilterPackageValues(values)
       findAdvancedPackages(values);
       setSubmitting(false);
     },

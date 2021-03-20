@@ -30,11 +30,11 @@ const Navi = () => {
         <h4>Partnyorlarımızdan pulsuz çatdırılma ilə <a href="/">ALIN</a></h4>
       </div>
       <div className="navi">
-        <Navbar color="white" expand="md">
+        <Navbar expand="md">
           <NavbarBrand href="/" style={{ padding: 0 }}>
             <img src={logo_dark} alt="logo" width={150} />
           </NavbarBrand>
-          <NavbarToggler onClick={toggle} />
+          <NavbarToggler onClick={toggle} >...</NavbarToggler>
           <Collapse isOpen={isOpen} navbar>
             <Nav className="mr-auto" navbar>
               <Dropdown

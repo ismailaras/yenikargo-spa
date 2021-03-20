@@ -29,6 +29,7 @@ const initialState = {
         allSelectedPackages: [],
         toggledClearRows: false
     },
+    filteredPackages:[],
     trackedPackage: {},
     trackedPackageByCustomer: [],
     cart: [],

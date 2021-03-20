@@ -5,12 +5,13 @@ import FindPackagesForm from "./FindPackagesForm";
 import {useFormik} from "formik";
 import {findPackagesFormValidationSchema} from '../../../../utilities/formValidationSchemas';
 
-const FindPackages = ({findPackages, selectPackages, setIsAdvanceFilter,isAdvanceFilter}) => {
+const FindPackages = ({findPackages, selectPackages, setIsAdvanceFilter,isAdvanceFilter,setFilterPackageValues}) => {
     const {handleSubmit, handleChange, values, errors, touched, handleBlur, isSubmitting, submitForm} = useFormik({
         initialValues: {keyword: '', via: 'viaId'},
         validationSchema: findPackagesFormValidationSchema,
         onSubmit: (values, {setSubmitting}) => {
             selectPackages([]); // Axtaris zamani secilmish musteriler bosh array edir.
+            setFilterPackageValues(values)
             findPackages(values);
             setSubmitting(false);
         }

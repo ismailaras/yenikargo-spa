@@ -67,8 +67,8 @@ const Landing = ({ stations, getStations }) => {
               /> */}
             </Col>
             <Col className="text-white">
-              <h1 style={{ fontSize: "5rem" }}>YeniKargo</h1>
-              <h3>Ölkədaxili Sifarişlərin Sərfəli Çatdırılması</h3>
+              <h1>YeniKargo</h1>
+              <h3 style={{opacity:'0.8'}}>Ölkədaxili Sifarişlərin Sərfəli Çatdırılması</h3>
               <div className="py-1">
                 <i className="fa fa-whatsapp" />
                 <span className="ml-1">
@@ -93,11 +93,11 @@ const Landing = ({ stations, getStations }) => {
             <img src={level_box} alt="icon" />
             <div>Təhlükəsiz daşınma</div>
           </Col>
-          <Col className="bg-white text-primary mx-3 py-5">
+          <Col className="bg-white text-primary py-5">
             <img src={level_gps} alt="icon" />
             <div>Paket izləmə</div>
           </Col>
-          <Col className="bg-white text-primary mr-3 py-5">
+          <Col className="bg-white text-primary py-5">
             <img src={level_truck} alt="icon" />
             <div>Sürətli çatdırılma</div>
           </Col>
