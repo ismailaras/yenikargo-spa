@@ -5,6 +5,11 @@ import { begin, end, endAll, pendingTask } from 'react-redux-spinner';
 import { addToCart } from "./cartActions";
 import { Routes } from "../../routes";
 
+export const setPackagesFilterKeys = keywords => ({
+    type: actionTypes.SET_PACKAGES_FILTER_KEYS,
+    payload: keywords,
+})
+
 export const findPackagesBegin = () => ({
     type: actionTypes.FIND_PACKAGES_BEGIN,
     payload: {},

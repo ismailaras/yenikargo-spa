@@ -3,6 +3,11 @@ import * as customerService from "../../services/customerService";
 import * as notification from "../../utilities/notification";
 import {begin, end, endAll, pendingTask} from 'react-redux-spinner';
 
+export const setCustomersFilterKeys = keywords => ({
+    type: actionTypes.SET_CUSTOMERS_FILTER_KEYS,
+    payload: keywords,
+})
+
 export const findCustomersBegin = () => ({
     type: actionTypes.FIND_CUSTOMERS_BEGIN,
     payload: {},

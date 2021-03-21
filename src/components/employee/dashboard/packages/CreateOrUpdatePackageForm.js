@@ -16,7 +16,6 @@ const CreateOrUpdatePackageForm = ({ onSubmit, values, errors, onChange, onBlur,
         return value;
     }
     function setAmount() {
-        if(!setTariffData){ 
         if (values.weight >= 0 && values.weight <1) {
             values.amount = 2;
         }else if(values.weight >= 1 && values.weight <3){
@@ -25,22 +24,21 @@ const CreateOrUpdatePackageForm = ({ onSubmit, values, errors, onChange, onBlur,
             values.amount = 4;
         }else if(values.weight >= 5 && values.weight <10){
             values.amount = 5;
-        }else if(values.weight >=10){
+        }else if(values.weight >=10 && values.weight <=10000){
             values.amount = values.weight * 0.5
-        }}
+        }
 
         setTariffData && setTariffData.map(t=>{
-            if (values.weight >= t.from_kg && values.weight <t.to_kg) {
+            if (values.weight >= t.from_kg && values.weight < t.to_kg) {
                 values.amount = t.price;
             }
-            if(t.to_kg > 2){
-                values.amount = t.price * 3;
-            }
+            if(values.weight >= 3){
+                values.amount = values.weight * t.price;
+            }//weight = 1, from_kg=0.5, to_kg = 1.5
         })
         values.amount += Number(values.extra_amount)
     }
     setAmount()
-    // console.log(setTariffData)
     const radioInputProps = [
         {
             value: "false",

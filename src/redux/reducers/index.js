@@ -4,6 +4,7 @@ import { showCustomersByNumberReducer } from "./customers/showCustomersByNumberR
 import { findCustomersReducer } from "./customers/findCustomersReducer";
 import { selectCustomersReducer } from "./customers/selectCustomersReducer";
 import { setCustomerReducer } from "./customers/setCustomerReducer";
+import { setCustomersFilterKeysReducer } from "./customers/setCustomersFilterKeysReducer";
 import { createCustomerReducer } from "./customers/createCustomerReducer";
 import { updateCustomerReducer } from "./customers/updateCustomerReducer";
 import { deleteCustomerReducer } from "./customers/deleteCustomerReducer";
@@ -16,6 +17,7 @@ import { createPackageReducer } from "./packages/createPackageReducer";
 import { updatePackageReducer } from "./packages/updatePackageReducer";
 import { deletePackageReducer } from "./packages/deletePackageReducer";
 import { changePackageStateReducer } from "./packages/changePackageState";
+import { setPackagesFilterKeysReducer } from "./packages/setPackagesFilterKeysReducer";
 import { trackPackageReducer } from "./packages/trackPackage";
 import { trackPackageViaCustomerIDReducer } from "./packages/trackPackageViaCustomerIDReducer";
 import { cartReducer } from "./checkout/cartReducer";
@@ -61,6 +63,7 @@ const appReducer = combineReducers({
   findCustomersReducer,
   selectCustomersReducer,
   setCustomerReducer,
+  setCustomersFilterKeysReducer,
   showCustomersByNumberReducer,
   getStationsReducer,
   createCustomerReducer,
@@ -72,6 +75,7 @@ const appReducer = combineReducers({
   createPackageReducer,
   updatePackageReducer,
   deletePackageReducer,
+  setPackagesFilterKeysReducer,
   changePackageStateReducer,
   trackPackageReducer,
   trackPackageViaCustomerIDReducer,

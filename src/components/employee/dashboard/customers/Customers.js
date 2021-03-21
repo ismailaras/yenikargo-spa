@@ -8,13 +8,14 @@ import {connect} from 'react-redux'
 
 
 const Customers = () => {
+
     return (
         <div>
             <Navi/>
             <Container fluid={true}>
                 <Row>
                     <Col md={3} className="mb-3">
-                        <FindCustomers/>
+                        <FindCustomers />
                     </Col>
                     <Col md={9}>
                         <SetCustomers/>
@@ -27,9 +28,9 @@ const Customers = () => {
 }
 
 const mapStateToProps = state => ({
-
 });
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Customers);

@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import {
   findAdvancedPackages,
   selectPackages,
+  setPackagesFilterKeys
 } from "../../../../redux/actions/packageActions";
 import { getStations } from "../../../../redux/actions/stationActions";
 import SelectInput from "../../../toolbox/SelectInput";
@@ -17,7 +18,7 @@ const FindPackagesAdvancedForm = ({
   findAdvancedPackages,
   getStations,
   selectPackages,
-  setFilterPackageValues
+  setPackagesFilterKeys
 }) => {
   const {
     handleSubmit,
@@ -36,7 +37,7 @@ const FindPackagesAdvancedForm = ({
     validationSchema: findPackagesAdvancedFormValidationSchema,
     onSubmit: (values, { setSubmitting }) => {
       selectPackages([]); // Axtaris zamani secilmish musteriler bosh array edir.
-      setFilterPackageValues(values)
+      setPackagesFilterKeys(values)
       findAdvancedPackages(values);
       setSubmitting(false);
     },
@@ -134,6 +135,7 @@ const mapDispatchToProps = {
   findAdvancedPackages,
   selectPackages,
   getStations,
+  setPackagesFilterKeys
 };
 
 const mapStateToProps = (state) => ({

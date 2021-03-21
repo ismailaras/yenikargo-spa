@@ -7,6 +7,7 @@ const initialState = {
     },
     cities: [],
     customers: [],
+    filteredCustomersKeys:{},
     selectedCustomers: {
         lastSelectedCustomer: {},
         allSelectedCustomers: [],
@@ -29,7 +30,7 @@ const initialState = {
         allSelectedPackages: [],
         toggledClearRows: false
     },
-    filteredPackages:[],
+    filteredPackagesKeys:{},
     trackedPackage: {},
     trackedPackageByCustomer: [],
     cart: [],
