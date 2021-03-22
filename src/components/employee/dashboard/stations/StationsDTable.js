@@ -92,6 +92,7 @@ const StationsDTable = ({
   stations,
   selectedStations,
   getStations,
+  auth
 }) => {
   useEffect(() => {
     if (stations.length === 0) {
@@ -113,14 +114,14 @@ const StationsDTable = ({
       header="Filial artır"
       key={1}
       size={"md"}
-      disabled={selectedStations.allSelectedStations.length !== 0}
+      disabled={auth.currentEmployee.is_readonly_admin || selectedStations.allSelectedStations.length !== 0}
       body={<CreateOrUpdateStation />}
     />,
     <button
       onClick={() => removeStation()}
       key={2}
       className="btn btn-danger mx-2"
-      disabled={selectedStations.allSelectedStations.length !== 1}
+      disabled={auth.currentEmployee.is_readonly_admin || selectedStations.allSelectedStations.length !== 1}
     >
       Sil
     </button>,
@@ -130,7 +131,7 @@ const StationsDTable = ({
       buttonColor="success"
       key={3}
       size={"md"}
-      disabled={selectedStations.allSelectedStations.length !== 1}
+      disabled={auth.currentEmployee.is_readonly_admin || selectedStations.allSelectedStations.length !== 1}
       body={<CreateOrUpdateStation />}
     />,
   ];
@@ -152,6 +153,7 @@ const StationsDTable = ({
 const mapStateToProps = (state) => ({
   stations: state.getStationsReducer,
   selectedStations: state.selectStationsReducer,
+  auth: state.authReducer
 });
 
 const mapDispatchToProps = {

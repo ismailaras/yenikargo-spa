@@ -73,14 +73,14 @@ const Navi = ({ signIn, signOut, auth }) => {
                       <span className="text-info">Ödəniş al</span>
                     </DropdownItem>
                   </Link>}
-                  {auth.currentEmployee.is_superuser ? (
+                  {!auth.currentEmployee.is_sorting_admin ? (
                     <Link to={Routes.stations}>
                       <DropdownItem>
                         <span className="text-info">Filiallar *</span>
                       </DropdownItem>
                     </Link>
                   ) : null}
-                  {auth.currentEmployee.is_superuser ? (
+                  {!auth.currentEmployee.is_sorting_admin ? (
                     <Link to={Routes.tariffs}>
                       <DropdownItem>
                         <span className="text-info">Tariflər *</span>

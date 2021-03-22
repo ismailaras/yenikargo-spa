@@ -18,13 +18,13 @@ const FindReportsForm = ({onSubmit, onChange, values, errors, onBlur, touched, i
                         />
                         <hr/>
                         {
-                                <TextInput
-                                    value={values.keyword}
-                                    name="keyword"
+                                <NumberInput
+                                    value={values.employee_id}
+                                    name="employee_id"
                                     label="Açar söz"
                                     placeHolder="Açar söz"
-                                    touched={touched.keyword}
-                                    error={errors.keyword}
+                                    touched={touched.employee_id}
+                                    error={errors.employee_id}
                                     onChange={onChange}
                                     onBlur={onBlur}
                                 />

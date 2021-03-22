@@ -59,6 +59,7 @@ const TariffsDTable = ({
   tariffs,
   selectedTariffs,
   getTariffs,
+  auth
 }) => {
   useEffect(() => {
     if (tariffs.length === 0) {
@@ -80,14 +81,14 @@ const TariffsDTable = ({
       header="Tarif artır"
       key={1}
       size={"md"}
-      disabled={selectedTariffs.allSelectedTariffs.length !== 0}
+      disabled={auth.currentEmployee.is_readonly_admin || selectedTariffs.allSelectedTariffs.length !== 0}
       body={<CreateOrUpdateTariff />}
     />,
     <button
       onClick={() => removeTariff()}
       key={2}
       className="btn btn-danger mx-2"
-      disabled={selectedTariffs.allSelectedTariffs.length !== 1}
+      disabled={auth.currentEmployee.is_readonly_admin || selectedTariffs.allSelectedTariffs.length !== 1}
     >
       Sil
     </button>,
@@ -97,7 +98,7 @@ const TariffsDTable = ({
       buttonColor="success"
       key={3}
       size={"md"}
-      disabled={selectedTariffs.allSelectedTariffs.length !== 1}
+      disabled={auth.currentEmployee.is_readonly_admin || selectedTariffs.allSelectedTariffs.length !== 1}
       body={<CreateOrUpdateTariff />}
     />,
   ];
@@ -118,6 +119,7 @@ const TariffsDTable = ({
 const mapStateToProps = (state) => ({
   tariffs: state.getTariffsReducer,
   selectedTariffs: state.selectTariffsReducer,
+  auth: state.authReducer
 });
 
 const mapDispatchToProps = {

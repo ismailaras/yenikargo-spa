@@ -6,15 +6,16 @@ import ReportsDTable from "./ReportsDTable";
 import FindReports from "./FindReports";
 
 
-const Reports = () => {
+const Reports = ({auth}) => {
     return (
         <div>
             <Navi/>
             <Container fluid={true}>
                 <Row>
+                    {!auth.currentEmployee.is_operator_admin &&
                     <Col md={3} className="mb-3">
                         <FindReports/>
-                    </Col>
+                    </Col>}
                     <Col md={9}>
                         <ReportsDTable/>
                     </Col>
@@ -25,6 +26,7 @@ const Reports = () => {
 }
 
 const mapStateToProps = state => ({
+    auth: state.authReducer,
 
 });
 

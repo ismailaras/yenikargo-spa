@@ -202,3 +202,33 @@
 #howitworks .row {
   gap: 1rem;
 }
+
+
+// Reports //
+
+.reports_table{
+  display: grid;
+  grid-template-columns: 50% 50%;
+  row-gap: 1rem;
+
+  &__items{
+    border: 1px solid rgb(255, 255, 255);
+    padding: 1rem;
+    background: green;
+    color: white;
+    
+    div{
+      font-size: 2rem;
+    }
+    &__package-price{
+      background: rgb(3, 87, 165);
+    }
+    &__extra-price{
+      background: rgb(105, 50, 71);
+    }
+    &__total-price{
+      background: rgb(14, 175, 14);
+    }
+  }
+  
+}

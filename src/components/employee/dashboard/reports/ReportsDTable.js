@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import {
   findReports,
@@ -7,24 +7,29 @@ import {
 
 const ReportsDTable = ({
   reports,
-  findReports
+  findReports,
+  auth
 }) => {
-  
-  
-  // console.log(reports)
+  useEffect(()=>{
+    function getOperatorReport(){
+      if(auth.currentEmployee.is_operator_admin){
+        findReports({employee_id:auth.currentEmployee.id})
+      }
+    }
+    getOperatorReport()
+  },[auth,findReports])
   return (
-    <div>
-      {/* <button onClick={()=>findReports('1005')}>Clik</button>
-      {console.log(reports)} */}
-      <div>Bağlama gəliri: {reports.package_payment}</div>
-      <div>Əlavə satış gəliri: {reports.extra_selling}</div>
-      <div>Cəmi: {reports.package_payment + reports.extra_selling}</div>
+    <div className="reports_table">
+      <div className="reports_table__items reports_table__items__package-price"><div> {reports.package_payment || '-'} azn</div> Bağlama gəliri </div>
+      <div className="reports_table__items reports_table__items__extra-price"><div> {reports.extra_selling || '-'} azn</div> Əlavə satış gəliri </div>
+      <div className="reports_table__items reports_table__items__total-price"><div> {reports.package_payment + reports.extra_selling || '-'} azn</div> Cəmi </div>
     </div>
   );
 };
 
 const mapStateToProps = (state) => ({
   reports: state.findReportsReducer,
+  auth: state.authReducer,
 });
 
 const mapDispatchToProps = {

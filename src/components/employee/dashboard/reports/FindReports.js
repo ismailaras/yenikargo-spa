@@ -7,8 +7,8 @@ import FindReportsForm from './FindReportsForm';
 
 const FindReports = ({findReports}) => {
     const {handleSubmit, handleChange, values, errors, touched, handleBlur, isSubmitting} = useFormik({
-        initialValues: {keyword: ''},
-        validationSchema: findPaymentsFormValidationSchema,
+        initialValues: {employee_id: ''},
+        // validationSchema: findPaymentsFormValidationSchema,
         onSubmit: (values, {setSubmitting}) => {
             findReports(values);
             setSubmitting(false);
