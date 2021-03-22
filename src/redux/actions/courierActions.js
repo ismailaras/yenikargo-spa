@@ -4,6 +4,10 @@ import {begin, end, endAll, pendingTask} from 'react-redux-spinner';
 import {addCourierToPackages} from "./packageActions";
 import * as notification from '../../utilities/notification';
 
+export const setCouriersFilterKeys = keywords => ({
+    type: actionTypes.SET_COURIERS_FILTER_KEYS,
+    payload: keywords,
+})
 
 export const getCitiesBegin = () => ({
     type: actionTypes.GET_CITIES_BEGIN,

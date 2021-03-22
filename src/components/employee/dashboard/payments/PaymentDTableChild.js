@@ -6,49 +6,30 @@ export const PaymentDTableChild = ({data}) => {
     return (
         <div>
             <Row className="my-4">
-                <Col md={6}>
+                <Col>
                     <div className="card">
                         <div className="card-body" style={{overflow: 'scroll', height: 400}}>
                             <h6>Hərəkətlər</h6>
                             <hr/>
-                            {data.data_states.map(dataState => {
-                                return <div key={dataState.created_date}>
+                                <div>
                                     <li>
-                                        <span>{getStateNameInAzerbaijani(dataState.state)}</span>
+                                        <span>{getStateNameInAzerbaijani(data.state)}</span>
                                         <br/>
-                                        <small>Müəllif: {dataState.creator_id}</small> <br/>
-                                        <small>Tarix: {formatDate(dataState.created_date)}</small> <br/>
+                                        <small>Müəllif: {data.employee.id} - {data.employee.first_name} {data.employee.last_name}</small> <br/>
+                                        <small>Tarix: {formatDate(data.created_date)}</small> <br/>
                                         <textarea
                                             className="form-control"
-                                            defaultValue={dataState.comment}
+                                            defaultValue={data.comment}
                                             readOnly
                                             style={{maxWidth: 500}}
                                             rows="3"/>
                                     </li>
                                     <hr/>
                                 </div>
-                            })}
                         </div>
                     </div>
                 </Col>
-                <Col md={6}>
-                    <div className="card">
-                        <div className="card-body" style={{overflow: 'scroll', height: 400}}>
-                            <h6>Bağlamalar</h6>
-                            <hr/>
-                            {data.packages.map(p => {
-                                return <div key={p.created_date}>
-                                    <li>
-                                        <small>ID: {p.id}</small> <br/>
-                                        <small>Alan müştəri ID: {p.receiver_payment_id}</small> <br/>
-                                        <small>Alan filial ID: {p.receiver_station_id}</small> <br/>
-                                    </li>
-                                    <hr/>
-                                </div>
-                            })}
-                        </div>
-                    </div>
-                </Col>
+                {console.log(data)}
             </Row>
         </div>
     )

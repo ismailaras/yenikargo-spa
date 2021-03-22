@@ -20,6 +20,7 @@ const initialState = {
         allSelectedEmployees: [],
         toggledClearRows: false
     },
+    filteredEmployeesKeys:{},
     setCustomer: {
         senderCustomer: {},
         receiverCustomer: {}
@@ -46,6 +47,7 @@ const initialState = {
         allSelectedCouriers: [],
         toggledClearRows: false
     },
+    filteredCouriersKeys:{},
     stations: [],
     selectedStations: {
         lastSelectedStation: {},

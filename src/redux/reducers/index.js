@@ -29,12 +29,15 @@ import { orderCourierReducer } from "./couriers/orderCourierReducer";
 import { createCourierReducer } from "./couriers/createCourierReducer";
 import { updateCourierReducer } from "./couriers/updateCourierReducer";
 import { deleteCourierReducer } from "./couriers/deleteCourierReducer";
+import { setCouriersFilterKeysReducer } from "./couriers/setCouriersFilterKeysReducer";
 import { findEmployeesReducer } from "./employees/findEmployeesReducer";
 import { selectEmployeesReducer } from "./employees/selectEmployeesReducer";
 import { createEmployeeReducer } from "./employees/createEmployeeReducer";
 import { updateEmployeeReducer } from "./employees/updateEmployeeReducer";
 import { deleteEmployeeReducer } from "./employees/deleteEmployeeReducer";
+import { setEmployeesFilterKeysReducer } from "./employees/setEmployeesFilterKeysReducer";
 import { createPaymentsReducer } from "./payments/createPaymentsReducer";
+import { findPaymentsReducer } from "./payments/findPaymentsReducer";
 import { deleteStationReducer } from "./stations/deleteStationReducer";
 import { updateStationReducer } from "./stations/updateStationReducer";
 import { createStationReducer } from "./stations/createStationReducer";
@@ -86,12 +89,15 @@ const appReducer = combineReducers({
   createCourierReducer,
   updateCourierReducer,
   deleteCourierReducer,
+  setCouriersFilterKeysReducer,
   createEmployeeReducer,
   updateEmployeeReducer,
   deleteEmployeeReducer,
   selectEmployeesReducer,
+  setEmployeesFilterKeysReducer,
   findEmployeesReducer,
   createPaymentsReducer,
+  findPaymentsReducer,
   selectStationsReducer,
   createStationReducer,
   updateStationReducer,

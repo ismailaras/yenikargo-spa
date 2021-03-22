@@ -1,13 +1,13 @@
 import React, {useEffect} from 'react';
 import {getStations} from "../../../../redux/actions/stationActions";
-import {createEmployee, selectEmployees, updateEmployee} from "../../../../redux/actions/employeeActions";
+import {createEmployee, selectEmployees, updateEmployee,findEmployees} from "../../../../redux/actions/employeeActions";
 import {connect} from "react-redux";
 import CreateOrUpdateEmployeeForm from "./CreateOrUpdateEmployeeForm";
 import {useFormik} from "formik";
 import {notEmpty} from "../../../../utilities/helpers";
 import {createOrUpdateEmployeeFormValidationSchema} from '../../../../utilities/formValidationSchemas';
 
-const CreateOrUpdateEmployee = ({createEmployee, updateEmployee, stations, getStations, selectedEmployees, selectEmployees}) => {
+const CreateOrUpdateEmployee = ({createEmployee, updateEmployee, stations, getStations, selectedEmployees, selectEmployees,findEmployees,filteredEmployees}) => {
     useEffect(() => {
         if (stations.length === 0) {
             getStations()
@@ -32,9 +32,13 @@ const CreateOrUpdateEmployee = ({createEmployee, updateEmployee, stations, getSt
         initialValues,
         validationSchema: createOrUpdateEmployeeFormValidationSchema,
         onSubmit: (values, {setSubmitting}) => {
-            values.id
-                ? updateEmployee(values, selectedEmployees.lastSelectedEmployee)
-                : createEmployee(values);
+            if(values.id){
+                updateEmployee(values, selectedEmployees.lastSelectedEmployee)
+                setTimeout(()=>{
+                    findEmployees(filteredEmployees)
+                },500)
+            }
+            else {createEmployee(values)}
             setSubmitting(false);
         }
     });
@@ -56,12 +60,14 @@ const mapDispatchToProps = {
     getStations,
     selectEmployees,
     createEmployee,
-    updateEmployee
+    updateEmployee,
+    findEmployees
 }
 
 const mapStateToProps = state => ({
     selectedEmployees: state.selectEmployeesReducer,
-    stations: state.getStationsReducer
+    stations: state.getStationsReducer,
+    filteredEmployees: state.setEmployeesFilterKeysReducer
 });
 
 

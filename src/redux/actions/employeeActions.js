@@ -4,6 +4,11 @@ import * as employeeService from "../../services/employeeService";
 import * as notification from "../../utilities/notification";
 import {begin, end, endAll, pendingTask} from 'react-redux-spinner';
 
+export const setEmployeesFilterKeys = keywords => ({
+    type: actionTypes.SET_EMPLOYEES_FILTER_KEYS,
+    payload: keywords,
+})
+
 export const findEmployeesBegin = () => ({
     type: actionTypes.FIND_EMPLOYEES_BEGIN,
     payload: {},

@@ -18,7 +18,7 @@ const FindCouriersForm = ({onSubmit, onChange, values, errors, onBlur, touched, 
                         />
                         <hr/>
                         {
-                            (values.via === 'viaId') || (values.via === 'viaCourierMobileNumber')
+                            (values.via === 'viaEmployeeId') || (values.via === 'viaPackageId')
                                 ? <NumberInput
                                     value={values.keyword}
                                     name="keyword"

@@ -17,20 +17,12 @@ const FindPayments = ({findPayments, selectPayments}) => {
     });
     const radioInputProps = [
         {
-            value: 'viaId',
-            label: 'Kuryer ID ilə'
+            value: 'viaPackageId',
+            label: 'Paket ID ilə'
         },
         {
-            value: 'viaPaymentMobileNumber',
-            label: 'Kuryer mobil nömrəsi ilə'
-        },
-        {
-            value: 'viaPaymentFirstName',
-            label: 'Kuryer Adı ilə'
-        },
-        {
-            value: 'viaPaymentLastName',
-            label: 'Kuryer Soyadı ilə'
+            value: 'viaEmployeeId',
+            label: 'İşçi ID ilə'
         },
     ];
     return (

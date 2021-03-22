@@ -18,11 +18,6 @@ const cols = [
     sortable: true,
   },
   {
-    name: <h6>Creator ID</h6>,
-    selector: "creator_id",
-    sortable: true,
-  },
-  {
     name: <h6>Ödəniş metodu</h6>,
     selector: "method",
     sortable: true,
@@ -35,6 +30,21 @@ const cols = [
   {
     name: <h6>Məhsul</h6>,
     selector: "sort",
+    sortable: true,
+  },
+  {
+    name: <h6>İşçi adı</h6>,
+    selector: "employee.first_name",
+    sortable: true,
+  },
+  {
+    name: <h6>İşçi Soyadı</h6>,
+    selector: "employee.last_name",
+    sortable: true,
+  },
+  {
+    name: <h6>Comment</h6>,
+    selector: "comment",
     sortable: true,
   },
   {

@@ -166,7 +166,6 @@ const PackagesDTable = ({
   packages,
   selectedPackages,
   addToCart,
-  filterPackageValues,
   auth
 }) => {
   const [foundPackages, setFoundPackages] = useState(packages);
@@ -227,7 +226,7 @@ const PackagesDTable = ({
           selectedPackages.lastSelectedPackage.receiver_station_id !== auth.currentEmployee.station_id) ||
         selectedPackages.lastSelectedPackage.tracking_state !== "Declared"
       }
-      body={<CreateOrUpdatePackage filterPackageValues={filterPackageValues} />}
+      body={<CreateOrUpdatePackage />}
     />,
     <ModalButton
       buttonLabel="Status dəyiş"

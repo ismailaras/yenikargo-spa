@@ -27,9 +27,9 @@ export const findPaymentsBegin = () => ({
     [pendingTask]: begin
 })
 
-export const findPaymentsSuccess = couriers => ({
+export const findPaymentsSuccess = payments => ({
     type: actionTypes.FIND_PAYMENTS_SUCCESS,
-    payload: couriers,
+    payload: payments,
     [pendingTask]: end
 })
 
@@ -73,6 +73,7 @@ export const findPayments = findObject => {
                     dispatch(findPaymentsError(data.message))
                 } else {
                     dispatch(findPaymentsSuccess(data))
+                    console.log(data)
                 }
             })
             .catch(err => dispatch(findPaymentsError(err)));
