@@ -72,7 +72,6 @@ const CreateOrUpdatePackage = ({
     setCustomers,
     selectedPackages
   );
-    {console.log(selectedPackages)}
   useEffect(() => {
     function setPriceFunc() {
       const sendStationID = {
@@ -118,6 +117,7 @@ const CreateOrUpdatePackage = ({
         }, 500)
       }
       else { createPackage(values, history) }
+        selectPackages([])
       setSubmitting(false);
     },
   });

@@ -1,27 +1,22 @@
 import React from 'react';
-import {findPayments, selectPayments} from '../../../../redux/actions/paymentActions';
+import {findReports} from '../../../../redux/actions/paymentActions';
 import {connect} from "react-redux";
 import {useFormik} from "formik";
 import {findPaymentsFormValidationSchema} from '../../../../utilities/formValidationSchemas';
 import FindReportsForm from './FindReportsForm';
 
-const FindReports = ({findPayments, selectPayments}) => {
+const FindReports = ({findReports}) => {
     const {handleSubmit, handleChange, values, errors, touched, handleBlur, isSubmitting} = useFormik({
-        initialValues: {keyword: '', via: 'viaId'},
+        initialValues: {keyword: ''},
         validationSchema: findPaymentsFormValidationSchema,
         onSubmit: (values, {setSubmitting}) => {
-            selectPayments([]); // Axtaris zamani secilmish musteriler bosh array edir.
-            findPayments(values);
+            findReports(values);
             setSubmitting(false);
         }
     });
     const radioInputProps = [
         {
-            value: 'viaPackageId',
-            label: 'Paket ID ilə'
-        },
-        {
-            value: 'viaEmployeeId',
+            value: 'employee_id',
             label: 'İşçi ID ilə'
         },
     ];
@@ -41,8 +36,7 @@ const FindReports = ({findPayments, selectPayments}) => {
 
 
 const mapDispatchToProps = {
-    findPayments,
-    selectPayments
+    findReports,
 }
 
 const mapStateToProps = state => ({});

@@ -41,6 +41,7 @@ const initialState = {
         allSelectedPayments: [],
         toggledClearRows: false
     },
+    paymentsReport:[],
     couriers: [],
     selectedCouriers: {
         lastSelectedCourier: {},

@@ -18,18 +18,7 @@ const FindReportsForm = ({onSubmit, onChange, values, errors, onBlur, touched, i
                         />
                         <hr/>
                         {
-                            (values.via === 'viaEmployeeId') || (values.via === 'viaPackageId')
-                                ? <NumberInput
-                                    value={values.keyword}
-                                    name="keyword"
-                                    label="Açar söz"
-                                    placeHolder="Açar söz"
-                                    touched={touched.keyword}
-                                    error={errors.keyword}
-                                    onChange={onChange}
-                                    onBlur={onBlur}
-                                />
-                                : <TextInput
+                                <TextInput
                                     value={values.keyword}
                                     name="keyword"
                                     label="Açar söz"

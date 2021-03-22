@@ -16,3 +16,9 @@ export const findPayments = findObject => {
         .then(data => data)
         .catch(err => err);
 }
+
+export const findReports = findObject => {
+    return apiService.post("payment/get_report", findObject)
+        .then(data => data)
+        .catch(err => err);
+}

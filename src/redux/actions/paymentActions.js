@@ -39,6 +39,24 @@ export const findPaymentsError = error => ({
     [pendingTask]: endAll
 })
 
+export const findPaymentReportsBegin = () => ({
+    type: actionTypes.FIND_PAYMENTS_REPORT_BEGIN,
+    payload: {},
+    [pendingTask]: begin
+})
+
+export const findPaymentReportsSuccess = payments => ({
+    type: actionTypes.FIND_PAYMENTS_REPORT_SUCCESS,
+    payload: payments,
+    [pendingTask]: end
+})
+
+export const findPaymentReportsError = error => ({
+    type: actionTypes.FIND_PAYMENTS_REPORT_ERROR,
+    payload: error,
+    [pendingTask]: endAll
+})
+
 export const selectPayments = selectedPayments => ({
     type: actionTypes.SELECT_PAYMENTS,
     payload: selectedPayments
@@ -73,9 +91,26 @@ export const findPayments = findObject => {
                     dispatch(findPaymentsError(data.message))
                 } else {
                     dispatch(findPaymentsSuccess(data))
-                    console.log(data)
                 }
             })
             .catch(err => dispatch(findPaymentsError(err)));
+    }
+}
+
+
+export const findReports = findObject => {
+    return async dispatch => {
+        dispatch(findPaymentReportsBegin())
+        paymentService.findReports(findObject)
+            .then(async data => {
+                await data;
+                if (data.message) {
+                    dispatch(findPaymentReportsError(data.message))
+                } else {
+                    dispatch(findPaymentReportsSuccess(data))
+                    console.log(data)
+                }
+            })
+            .catch(err => dispatch(findPaymentReportsError(err)));
     }
 }

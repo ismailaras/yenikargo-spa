@@ -1,39 +1,34 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import {
-  selectPayments,
-  findPaymentsSuccess,
+  findReports,
 } from "../../../../redux/actions/paymentActions";
-import {
-  formatDate,
-  getStateNameInAzerbaijani,
-} from "../../../../utilities/helpers";
 
 
 const ReportsDTable = ({
-  payments,
+  reports,
+  findReports
 }) => {
-  const [foundPayments, setFoundPayments] = useState(payments);
-  useEffect(() => {
-    // use useDispatch hook to handle removing an entity
-    setFoundPayments(payments);
-  }, [payments]);
-  const buttons = [];
+  
+  
+  // console.log(reports)
   return (
     <div>
-      Hi
+      {/* <button onClick={()=>findReports('1005')}>Clik</button>
+      {console.log(reports)} */}
+      <div>Bağlama gəliri: {reports.package_payment}</div>
+      <div>Əlavə satış gəliri: {reports.extra_selling}</div>
+      <div>Cəmi: {reports.package_payment + reports.extra_selling}</div>
     </div>
   );
 };
 
 const mapStateToProps = (state) => ({
-  payments: state.findPaymentsReducer,
-  selectedPayments: state.selectPaymentsReducer,
+  reports: state.findReportsReducer,
 });
 
 const mapDispatchToProps = {
-  selectPayments,
-  findPaymentsSuccess,
+  findReports
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReportsDTable);
