@@ -4,12 +4,12 @@ import TextInput from "../../../toolbox/TextInput";
 import NumberInput from "../../../toolbox/NumberInput";
 import DFilter from '../../../toolbox/DFilter';
 
-const FindPaymentsForm = ({onSubmit, onChange, values, errors, onBlur, touched, isSubmitting, radioInputProps}) => {
+const FindReportsForm = ({onSubmit, onChange, values, errors, onBlur, touched, isSubmitting, radioInputProps}) => {
     return (
         <div>
             <div className="card">
                 <form onSubmit={onSubmit}>
-                        <DFilter title="Ödəniş">
+                        <DFilter title="Hesabat">
                         <RadioInputGroup
                             radioInputProps={radioInputProps}
                             name="via"
@@ -18,7 +18,7 @@ const FindPaymentsForm = ({onSubmit, onChange, values, errors, onBlur, touched, 
                         />
                         <hr/>
                         {
-                            (values.via === 'viaPackageId')
+                            (values.via === 'viaEmployeeId') || (values.via === 'viaPackageId')
                                 ? <NumberInput
                                     value={values.keyword}
                                     name="keyword"
@@ -52,4 +52,4 @@ const FindPaymentsForm = ({onSubmit, onChange, values, errors, onBlur, touched, 
         </div>
     )
 }
-export default FindPaymentsForm;
+export default FindReportsForm;

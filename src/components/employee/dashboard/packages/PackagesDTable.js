@@ -205,6 +205,7 @@ const PackagesDTable = ({
       key={1}
       className="btn btn-danger"
       disabled={
+        auth.currentEmployee.is_readonly_admin ||
         selectedPackages.allSelectedPackages.length !== 1 ||
         (selectedPackages.lastSelectedPackage.sender_station_id !== auth.currentEmployee.station_id &&
         selectedPackages.lastSelectedPackage.receiver_station_id !== auth.currentEmployee.station_id) ||
@@ -221,6 +222,7 @@ const PackagesDTable = ({
       buttonColor="success"
       size={"md"}
       disabled={
+        auth.currentEmployee.is_readonly_admin ||
         selectedPackages.allSelectedPackages.length !== 1 ||
         (selectedPackages.lastSelectedPackage.sender_station_id !== auth.currentEmployee.station_id &&
           selectedPackages.lastSelectedPackage.receiver_station_id !== auth.currentEmployee.station_id) ||
@@ -234,7 +236,9 @@ const PackagesDTable = ({
       key={3}
       size={"md"}
       buttonColor="warning"
-      disabled={selectedPackages.allSelectedPackages.length === 0 || 
+      disabled={
+        auth.currentEmployee.is_readonly_admin ||
+        selectedPackages.allSelectedPackages.length === 0 || 
         (selectedPackages.lastSelectedPackage.sender_station_id !== auth.currentEmployee.station_id &&
           selectedPackages.lastSelectedPackage.receiver_station_id !== auth.currentEmployee.station_id)}
       body={<ChangePackageState />}
@@ -246,7 +250,9 @@ const PackagesDTable = ({
       clsName="ml-2"
       buttonColor="info"
       size={"md"}
-      disabled={selectedPackages.allSelectedPackages.length === 0 || (selectedPackages.lastSelectedPackage.sender_station_id !== auth.currentEmployee.station_id &&
+      disabled={
+        auth.currentEmployee.is_readonly_admin ||
+        selectedPackages.allSelectedPackages.length !== 1 || (selectedPackages.lastSelectedPackage.sender_station_id !== auth.currentEmployee.station_id &&
         selectedPackages.lastSelectedPackage.receiver_station_id !== auth.currentEmployee.station_id)}
       body={<CreateOrUpdateCourier />}
     />,
@@ -254,7 +260,9 @@ const PackagesDTable = ({
       onClick={() => addToCartAndRedirect()}
       key={5}
       className="btn btn-primary mx-2"
-      disabled={selectedPackages.allSelectedPackages.length === 0 || (selectedPackages.lastSelectedPackage.sender_station_id !== auth.currentEmployee.station_id &&
+      disabled={
+        auth.currentEmployee.is_readonly_admin ||
+        selectedPackages.allSelectedPackages.length !== 1|| (selectedPackages.lastSelectedPackage.sender_station_id !== auth.currentEmployee.station_id &&
         selectedPackages.lastSelectedPackage.receiver_station_id !== auth.currentEmployee.station_id)}
     >
       Ödəniş al
@@ -267,7 +275,7 @@ const PackagesDTable = ({
       size={"md"}
       clsName="mr-2"
       disabled={
-        selectedPackages.allSelectedPackages.length === 0 ||
+        selectedPackages.allSelectedPackages.length !== 1 ||
         selectedPackages.lastSelectedPackage.tracking_state === ""||
         (selectedPackages.lastSelectedPackage.sender_station_id !== auth.currentEmployee.station_id &&
           selectedPackages.lastSelectedPackage.receiver_station_id !== auth.currentEmployee.station_id)

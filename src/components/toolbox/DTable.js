@@ -58,6 +58,8 @@ const DTable = (props) => {
                     clearSelectedRows={props.clearSelectedRows}
                     onSelectedRowsChange={props.handleChange}
                     pagination={true}
+                    selectableRowsHighlight={true}
+                    responsive={true}
                     customStyles={customStyles}
                     data={props.data}/>
             </div>

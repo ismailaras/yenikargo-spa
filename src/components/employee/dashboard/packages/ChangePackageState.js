@@ -8,12 +8,13 @@ import { changePackageStateFormValidationSchema } from "../../../../utilities/fo
 import { getEmployeeCredentialsFromToken } from "../../../../utilities/helpers";
 import { useHistory } from "react-router-dom";
 import * as authActions from "../../../../redux/actions/authActions";
+import { findAdvancedPackages, findPackages } from "../../../../redux/actions/packageActions";
 
-const ChangePackageState = ({ selectedPackages, changePackageState, auth,signIn }) => {
+const ChangePackageState = ({ selectedPackages, changePackageState, auth,signIn,findAdvancedPackages,findPackages,filteredPackageKeys }) => {
   const history = useHistory();
   let idArray = []
   selectedPackages.allSelectedPackages.map(a=>{
-    idArray.push(a.id)
+    return idArray.push(a.id)
   })
   let initialValues = {
     ids: idArray,
@@ -37,7 +38,11 @@ const ChangePackageState = ({ selectedPackages, changePackageState, auth,signIn 
     validationSchema: changePackageStateFormValidationSchema,
     onSubmit: (values, { setSubmitting }) => {
         changePackageState(values, selectedPackages.allSelectedPackages);
-        console.log(values)
+        setTimeout(() => {
+          filteredPackageKeys.states ?
+          findAdvancedPackages(filteredPackageKeys)
+          : findPackages(filteredPackageKeys)
+        }, 500)
       setSubmitting(false);
     },
   });
@@ -60,7 +65,7 @@ const ChangePackageState = ({ selectedPackages, changePackageState, auth,signIn 
           .filter((a) => validateAuthStatus(a))
           .map((trackingStateObj) => ({
             value: parseInt(trackingStateObj.value),
-            text: trackingStateObj.name,
+            text: trackingStateObj.name
           }))}
         label="Bağlama statusu"
         defaultOption="Status seçin"
@@ -80,12 +85,16 @@ const ChangePackageState = ({ selectedPackages, changePackageState, auth,signIn 
 const mapDispatchToProps = {
   changePackageState,
   signIn: authActions.signIn,
+  findPackages,
+  findAdvancedPackages
 };
 
 const mapStateToProps = (state) => ({
   selectedCouriers: state.selectCouriersReducer,
   selectedPackages: state.selectPackagesReducer,
   auth: state.authReducer,
+  filteredPackageKeys:state.setPackagesFilterKeysReducer
+
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChangePackageState);

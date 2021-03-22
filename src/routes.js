@@ -13,6 +13,7 @@ export const Routes = {
     packages: '/employee/dashboard/packages',
     checkout: '/employee/dashboard/checkout',
     courier: '/employee/dashboard/courier',
+    report: '/employee/dashboard/report',
     stations: '/employee/dashboard/stations',
     tariffs: '/employee/dashboard/tariffs',
     employees: '/employee/dashboard/employees',

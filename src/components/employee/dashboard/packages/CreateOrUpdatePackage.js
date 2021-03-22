@@ -32,25 +32,15 @@ const CreateOrUpdatePackage = ({
   // setReceiverCustomer, setSenderCustomer
 }) => {
   function setInitialValues(initialValues, setCustomers, selectedPackages) {
-    // selectPackages
-    // const tariffs = useSelector(state => state.)
     if (notEmpty(setCustomers.senderCustomer) && notEmpty(setCustomers.receiverCustomer)) {
-      // console.log(selectedPackages)
       initialValues.sender_customer_id = setCustomers.senderCustomer.id;
       initialValues.receiver_customer_id = setCustomers.receiverCustomer.id;
       initialValues.sender_station_id = setCustomers.senderCustomer.station_id;
       initialValues.receiver_station_id =
         setCustomers.receiverCustomer.station_id;
-      // console.log('First')
     }
     else if (notEmpty(selectedPackages.lastSelectedPackage)) {
       initialValues = selectedPackages.lastSelectedPackage;
-      //  console.log('Second')
-
-      // setTimeout(()=>{
-      //   setReceiverCustomer(null)
-      //   setSenderCustomer(null)
-      // },1000)
     }
     return initialValues;
   }
@@ -82,7 +72,7 @@ const CreateOrUpdatePackage = ({
     setCustomers,
     selectedPackages
   );
-
+    {console.log(selectedPackages)}
   useEffect(() => {
     function setPriceFunc() {
       const sendStationID = {
@@ -123,8 +113,8 @@ const CreateOrUpdatePackage = ({
         updatePackage(values, selectedPackages.lastSelectedPackage)
         setTimeout(() => {
           filteredPackageKeys.states ?
-            findAdvancedPackages(filteredPackageKeys)
-            : findPackages(filteredPackageKeys)
+          findAdvancedPackages(filteredPackageKeys)
+          : findPackages(filteredPackageKeys)
         }, 500)
       }
       else { createPackage(values, history) }

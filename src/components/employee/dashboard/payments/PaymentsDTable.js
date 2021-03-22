@@ -82,6 +82,7 @@ const PaymentsDTable = ({
         data={foundPayments}
         cols={cols}
         buttons={buttons}
+        selectableRows={false}
         expandableRowsComponent={<PaymentDTableChild />}
         handleChange={handleChange}
         title={"Ödənişlər"}

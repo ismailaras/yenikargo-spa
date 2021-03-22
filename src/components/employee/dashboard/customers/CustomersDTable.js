@@ -99,6 +99,7 @@ const CustomersDTable = ({
   setSenderCustomer,
   setReceiverCustomer,
   currentUser,
+  auth
 }) => {
   const [foundCustomers, setFoundCustomers] = useState(customers);
   useEffect(() => {
@@ -141,7 +142,7 @@ const CustomersDTable = ({
       header="Müştəri artır"
       key={1}
       size={"md"}
-      disabled={selectedCustomers.allSelectedCustomers.length !== 0}
+      disabled={auth.currentEmployee.is_readonly_admin || selectedCustomers.allSelectedCustomers.length !== 0}
       body={<CreateOrUpdateCustomer />}
     />,
     <ModalButton
@@ -151,14 +152,14 @@ const CustomersDTable = ({
       clsName="ml-2"
       key={4}
       size={"md"}
-      disabled={selectedCustomers.allSelectedCustomers.length !== 1}
+      disabled={auth.currentEmployee.is_readonly_admin || selectedCustomers.allSelectedCustomers.length !== 1}
       body={<CreateOrUpdateCustomer />}
     />,
     <button
       onClick={() => removeCustomer()}
       key={5}
       className="btn btn-danger ml-2"
-      disabled={selectedCustomers.allSelectedCustomers.length !== 1}
+      disabled={auth.currentEmployee.is_readonly_admin || selectedCustomers.allSelectedCustomers.length !== 1}
     >
       Sil
     </button>,
@@ -166,7 +167,7 @@ const CustomersDTable = ({
       onClick={() => setSender()}
       key={2}
       className="btn btn-warning mx-2"
-      disabled={selectedCustomers.allSelectedCustomers.length !== 1}
+      disabled={auth.currentEmployee.is_readonly_admin || selectedCustomers.allSelectedCustomers.length !== 1}
     >
       Göndərən seç
     </button>,
@@ -174,7 +175,7 @@ const CustomersDTable = ({
       onClick={() => setReceiver()}
       key={3}
       className="btn btn-info mr-2"
-      disabled={selectedCustomers.allSelectedCustomers.length !== 1}
+      disabled={auth.currentEmployee.is_readonly_admin || selectedCustomers.allSelectedCustomers.length !== 1}
     >
       Alan seç
     </button>,
@@ -198,6 +199,7 @@ const mapStateToProps = (state) => ({
   customers: state.findCustomersReducer,
   selectedCustomers: state.selectCustomersReducer,
   currentUser: state.authReducer,
+  auth: state.authReducer
 });
 
 const mapDispatchToProps = {

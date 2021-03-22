@@ -1,13 +1,13 @@
 import React from 'react';
 import {findPayments, selectPayments} from '../../../../redux/actions/paymentActions';
 import {connect} from "react-redux";
-import FindPaymentsForm from "./FindPaymentsForm";
 import {useFormik} from "formik";
 import {findPaymentsFormValidationSchema} from '../../../../utilities/formValidationSchemas';
+import FindReportsForm from './FindReportsForm';
 
-const FindPayments = ({findPayments, selectPayments}) => {
+const FindReports = ({findPayments, selectPayments}) => {
     const {handleSubmit, handleChange, values, errors, touched, handleBlur, isSubmitting} = useFormik({
-        initialValues: {keyword: '', via: 'viaPackageId'},
+        initialValues: {keyword: '', via: 'viaId'},
         validationSchema: findPaymentsFormValidationSchema,
         onSubmit: (values, {setSubmitting}) => {
             selectPayments([]); // Axtaris zamani secilmish musteriler bosh array edir.
@@ -26,7 +26,7 @@ const FindPayments = ({findPayments, selectPayments}) => {
         },
     ];
     return (
-        <FindPaymentsForm
+        <FindReportsForm
             errors={errors}
             values={values}
             onSubmit={handleSubmit}
@@ -48,4 +48,4 @@ const mapDispatchToProps = {
 const mapStateToProps = state => ({});
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(FindPayments);
+export default connect(mapStateToProps, mapDispatchToProps)(FindReports);
