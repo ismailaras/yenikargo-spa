@@ -13,7 +13,6 @@
     rgb(4, 184, 124),
     rgb(112, 156, 226)
   );
-  
   a {
     color: black;
     background: white;
@@ -30,6 +29,16 @@
   }
 }
 // Navi //
+.nav_userinfo{
+  color: rgb(245, 245, 245);
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  margin-right: 1rem;
+  padding-right: 1rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.555);
+}
+
 .navi {
   // margin-bottom: 70px;
   font-family: "Signika", Arial, sans-serif;

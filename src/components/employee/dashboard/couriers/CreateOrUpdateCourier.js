@@ -25,7 +25,7 @@ const CreateOrUpdateCourier = ({createCourier, updateCourier, stations, getStati
     if (notEmpty(selectedCouriers.lastSelectedCourier)) {
         initialValues = selectedCouriers.lastSelectedCourier
     }
-    const {handleSubmit, handleChange, values, errors, touched, handleBlur, isSubmitting} = useFormik({
+    const {handleSubmit, handleChange, values, errors, touched, handleBlur, isSubmitting,setFieldValue} = useFormik({
         initialValues,
         validationSchema: createOrUpdateCourierFormValidationSchema,
         onSubmit: (values, {setSubmitting}) => {
@@ -47,6 +47,7 @@ const CreateOrUpdateCourier = ({createCourier, updateCourier, stations, getStati
             onBlur={handleBlur}
             values={values}
             stations={stations}
+            setFieldValue={setFieldValue}
             errors={errors}
             touched={touched}
             isSubmitting={isSubmitting}

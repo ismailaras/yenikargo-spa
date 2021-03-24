@@ -32,23 +32,23 @@ const Calculator = ({ stations, setTariffInterval, setTariffData }) => {
   console.log(setTariffData);
   useEffect(() => {
     function setPrice() {
-      if (weight >= 0 && weight < 1) {
+      if (weight >= 0 && weight <= 1) {
         setAmount(2);
-      } else if (weight >= 1 && weight < 3) {
+      } else if (weight > 1 && weight <= 3) {
         setAmount(3);
-      } else if (weight >= 3 && weight < 5) {
+      } else if (weight > 3 && weight <= 5) {
         setAmount(4);
-      } else if (weight >= 5 && weight < 10) {
+      } else if (weight > 5 && weight <= 10) {
         setAmount(5);
-      } else if (weight >= 10 && weight <= 10000) {
+      } else if (weight > 10 && weight <= 10000) {
         setAmount(weight * 0.5);
       }
 
       setTariffData.map((t) => {
-        if (weight >= t.from_kg && weight < t.to_kg) {
+        if (weight > t.from_kg && weight <= t.to_kg) {
           setAmount(t.price);
         }
-        if (weight >= 3) {
+        if (weight > 5) {
           setAmount(weight * t.price);
         }
       });
@@ -102,7 +102,7 @@ const Calculator = ({ stations, setTariffInterval, setTariffData }) => {
           <div className="col-md-6">
             <label>Daşınma haqqı</label>
             <div className="form-control bg-success text-white">
-              {amount} AZN
+              {amount.toPrecision(4)} AZN
             </div>
           </div>
         </div>

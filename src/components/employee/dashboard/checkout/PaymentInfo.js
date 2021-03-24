@@ -45,6 +45,7 @@ const PaymentInfo = ({cart, createPayments}) => {
                     && (!cartItem.will_receiver_pay || (cartItem.will_receiver_pay && isForDelivery))) {
                     cartItem.payment_needing = true;
                     costs.shippingCost += cartItem.amount;
+                    costs.courierCost += cartItem.courier_cost;
                 }
                 if (cartItem.paymentFor === 'Package'
                     && !cartItem.is_courier_cost_paid
@@ -56,7 +57,7 @@ const PaymentInfo = ({cart, createPayments}) => {
                     && !cartItem.is_product_paid
                     && (!cartItem.will_receiver_pay || (cartItem.will_receiver_pay && isForDelivery))) {
                     cartItem.payment_needing = true;
-                    costs.productPrice += cartItem.price;
+                    // costs.productPrice += cartItem.price;
                 }
             });
             costs.totalCost = costs.extraSellingCost + costs.shippingCost + costs.courierCost + costs.productPrice;

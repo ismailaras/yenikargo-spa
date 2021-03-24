@@ -49,6 +49,7 @@ const Navi = ({ signIn, signOut, auth }) => {
           <NavbarToggler onClick={toggle} />
           <Collapse isOpen={isOpen} navbar>
             <Nav className="ml-auto" navbar>
+              <div className="nav_userinfo">{auth.currentEmployee.first_name} {auth.currentEmployee.last_name} - {auth.currentEmployee.employee_role}</div>
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
                   <button type="button" className="btn btn-info btn-sm">
@@ -122,6 +123,7 @@ const Navi = ({ signIn, signOut, auth }) => {
               <NavItem>
                 <NavLink></NavLink>
               </NavItem>
+              {console.log(auth.currentEmployee.employee_role)}
               <NavItem>
                 <NavLink>
                   <button

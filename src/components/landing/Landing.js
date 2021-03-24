@@ -207,7 +207,7 @@ const Landing = ({ stations, getStations }) => {
       <div id="faq" className="py-4 bg-primary">
         <Container>
           <div className="d-flex justify-content-between align-items-center text-white pr-1">
-            <h1>Çox verilən suallar</h1>
+            <h1>Çox soruşulan suallar</h1>
             <i className="fa fa-question" style={{ fontSize: "34px" }} />
           </div>
           <hr className="text-white" />

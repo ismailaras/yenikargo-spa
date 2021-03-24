@@ -55,6 +55,25 @@ export const getStateNameInAzerbaijani = (state) => {
   }
 };
 
+export const getStatusNameInAzerbaijani = (status) => {
+  switch (status) {
+    case "Declared":
+      return "Bəyan olundu";
+    case "ReadyToSorting":
+      return "Çeşidləməyə göndərildi";
+    case "Sorting":
+      return "Çeşidlənir";
+    case "OnWay":
+      return "Anbardan yola çıxdı";
+    case "Arrived":
+      return "Filiala çatdı";
+    case "Delivered":
+      return "Çatdırıldı";
+    default:
+      return status;
+  }
+};
+
 export const getCostsFromCartByPaymentSort = (cart, paymentSort) => {
   switch (paymentSort) {
     case "ExtraSelling":

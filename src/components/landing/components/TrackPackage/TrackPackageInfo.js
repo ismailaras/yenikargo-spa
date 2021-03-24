@@ -1,6 +1,7 @@
 import React from "react";
 import { Alert } from "reactstrap";
 import { connect } from "react-redux";
+import { getStatusNameInAzerbaijani } from "../../../../utilities/helpers";
 
 const TrackPackageInfo = ({ trackingPackage }) => {
   return (
@@ -11,7 +12,7 @@ const TrackPackageInfo = ({ trackingPackage }) => {
             Müştəri ID: {trackingPackage.creator_id}
           </p>
           <p className="mb-0">
-            Paket statusu: <span className="lead">{trackingPackage.current_state}</span>
+            Paket statusu: <span className="lead">{getStatusNameInAzerbaijani(trackingPackage.current_state)}</span>
           </p>
           <p className="mb-0">
             Hazırki lokasiya: {trackingPackage.current_location || '-'}

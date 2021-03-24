@@ -16,23 +16,23 @@ const CreateOrUpdatePackageForm = ({ onSubmit, values, errors, onChange, onBlur,
         return value;
     }
     function setAmount() {
-        if (values.weight >= 0 && values.weight <1) {
+        if (values.weight >= 0 && values.weight <=1) {
             values.amount = 2;
-        }else if(values.weight >= 1 && values.weight <3){
+        }else if(values.weight > 1 && values.weight <=3){
             values.amount = 3;
-        }else if(values.weight >= 3 && values.weight <5){
+        }else if(values.weight > 3 && values.weight <=5){
             values.amount = 4;
-        }else if(values.weight >= 5 && values.weight <10){
+        }else if(values.weight > 5 && values.weight <=10){
             values.amount = 5;
-        }else if(values.weight >=10 && values.weight <=10000){
+        }else if(values.weight >10 && values.weight <=10000){
             values.amount = values.weight * 0.5
         }
 
         setTariffData && setTariffData.map(t=>{
-            if (values.weight >= t.from_kg && values.weight < t.to_kg) {
+            if (values.weight > t.from_kg && values.weight <= t.to_kg) {
                 values.amount = t.price;
             }
-            if(values.weight >= 3){
+            if(values.weight > 5){
                 values.amount = values.weight * t.price;
             }//weight = 1, from_kg=0.5, to_kg = 1.5
         })
@@ -145,18 +145,7 @@ const CreateOrUpdatePackageForm = ({ onSubmit, values, errors, onChange, onBlur,
                                 name="amount"
                                 value={values.amount}
                             />
-                            <div className='form-control text-success'>{values.amount} AZN</div>
-                            {/* <NumberInput
-                                label="Daşınma haqqı (AZN)"
-                                placeHolder="Daşınma haqqı"
-                                name="amount"
-                                readOnly={true}
-                                value={values.amount}
-                                error={errors.amount}
-                                onChange={onChange}
-                                onBlur={onBlur}
-                                touched={touched.amount}
-                            /> */}
+                            <div className='form-control text-success'>{values.amount.toPrecision(4)} AZN</div>
                         </div>
                     </div>
                 </div>

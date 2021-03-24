@@ -17,7 +17,7 @@ const CreateOrUpdateCustomer = ({createCustomer, updateCustomer, stations, getSt
         first_name: '',
         last_name: '',
         mobile_number: '',
-        password: '',
+        password: '0000',
         discount: 0,
         station_id: '',
         address: '',
@@ -28,7 +28,7 @@ const CreateOrUpdateCustomer = ({createCustomer, updateCustomer, stations, getSt
     if (notEmpty(selectedCustomers.lastSelectedCustomer)) {
         initialValues = selectedCustomers.lastSelectedCustomer
     }
-    const {handleSubmit, handleChange, values, errors, touched, handleBlur, isSubmitting} = useFormik({
+    const {handleSubmit, handleChange, values, errors, touched, handleBlur, isSubmitting,setFieldValue} = useFormik({
         initialValues,
         validationSchema: createOrUpdateCustomerFormValidationSchema,
         onSubmit: (values, {setSubmitting}) => {
@@ -50,6 +50,7 @@ const CreateOrUpdateCustomer = ({createCustomer, updateCustomer, stations, getSt
             onBlur={handleBlur}
             values={values}
             stations={stations}
+            setFieldValue={setFieldValue}
             errors={errors}
             touched={touched}
             isSubmitting={isSubmitting}

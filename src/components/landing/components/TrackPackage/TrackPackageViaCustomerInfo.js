@@ -1,6 +1,7 @@
 import React from "react";
 import { Alert } from "reactstrap";
 import { connect } from "react-redux";
+import { getStatusNameInAzerbaijani } from "../../../../utilities/helpers";
 
 const TrackPackageViaCustomerInfo = ({ trackingPackages }) => {
   return <div className="mt-3">
@@ -14,7 +15,7 @@ const TrackPackageViaCustomerInfo = ({ trackingPackages }) => {
             <p className="mb-0">Müştəri ID: {trackingPackage.customer_id}</p>
             <p className="mb-0">
               Paket statusu:{" "}
-              <span className="lead">{trackingPackage.current_state}</span>
+              <span className="lead">{getStatusNameInAzerbaijani(trackingPackage.current_state)}</span>
             </p>
             <p className="mb-0">
               Müştərinin rolu: {trackingPackage.is_receiver ? "Alan":"Göndərən"}

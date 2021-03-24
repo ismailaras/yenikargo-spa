@@ -32,8 +32,7 @@ const FindPackagesForm = ({
     { value: "2", label: "Sorting" },
     { value: "3", label: "OnWay" },
     { value: "4", label: "Arrived" },
-    { value: "5", label: "ReadyToPickUp" },
-    { value: "6", label: "Delivered" },
+    { value: "5", label: "Delivered" },
   ];
   return (
     <div>

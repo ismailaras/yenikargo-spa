@@ -7,8 +7,9 @@ import CheckboxInput from "../../../toolbox/CheckboxInput";
 import PasswordInput from "../../../toolbox/PasswordInput";
 import CustomMaskedInput from "../../../toolbox/CustomMaskedInput";
 import { ListGroup, ListGroupItem } from "reactstrap";
-import { showCustomersByNumber, setReceiverCustomer,setSenderCustomer } from "../../../../redux/actions/customerActions";
+import { showCustomersByNumber, setReceiverCustomer, setSenderCustomer } from "../../../../redux/actions/customerActions";
 import { connect } from "react-redux";
+import RadioInputGroup from "../../../toolbox/RadioInputGroup";
 
 const CreateOrUpdateCustomerForm = ({
   onSubmit,
@@ -18,12 +19,30 @@ const CreateOrUpdateCustomerForm = ({
   onBlur,
   isSubmitting,
   touched,
+  setFieldValue,
   stations,
   customersByNumber,
   showCustomersByNumber,
   setSenderCustomer,
   setReceiverCustomer,
 }) => {
+  var str2bool = (value) => {
+    if (value && typeof value === "string") {
+      if (value.toLowerCase() === "true") return true;
+      if (value.toLowerCase() === "false") return false;
+    }
+    return value;
+  }
+  const radioInputProps = [
+    {
+        value: "false",
+        label: 'Göndərən müştəri olaraq seç'
+    },
+    {
+        value: "true",
+        label: 'Alan müştəri olaraq seç'
+    },
+];
   const handleNumber = (e) => {
     onChange(e);
     if (!values.id && e.target.value.length > 3) {
@@ -33,7 +52,7 @@ const CreateOrUpdateCustomerForm = ({
   return (
     <div>
       <form onSubmit={onSubmit}>
-      <div className="form-row">
+        <div className="form-row">
           <div className="col-md-6">
             <TextInput
               label="Mobil nömrə"
@@ -46,7 +65,7 @@ const CreateOrUpdateCustomerForm = ({
               onBlur={onBlur}
               touched={touched.mobile_number}
             />
-            
+
           </div>
           <div className="col-md-6">
             <PasswordInput
@@ -62,21 +81,21 @@ const CreateOrUpdateCustomerForm = ({
           </div>
         </div>
         {!values.id &&
-        <ListGroup style={{ position: "relative", bottom: ".7rem" }}>
-              {customersByNumber.map((c) => {
-                return (
-                  <ListGroupItem key={c.id} className="mb-1 p-0">
-                    <div className="d-flex justify-content-between align-items-center">
-                      <div onClick={e=>setSenderCustomer(c)} className="btn btn-warning px-5">G</div>
-                      <div>
-                        {c.mobile_number}: {c.first_name} {c.last_name}
-                      </div>
-                      <div onClick={e=>setReceiverCustomer(c)} className="btn btn-info px-5">A</div>
+          <ListGroup style={{ position: "relative", bottom: ".7rem" }}>
+            {customersByNumber.map((c) => {
+              return (
+                <ListGroupItem key={c.id} className="mb-1 p-0">
+                  <div className="d-flex justify-content-between align-items-center">
+                    <div onClick={e => setSenderCustomer(c)} className="btn btn-warning px-5">G</div>
+                    <div>
+                      {c.mobile_number}: {c.first_name} {c.last_name}
                     </div>
-                  </ListGroupItem>
-                );
-              })}
-            </ListGroup>}
+                    <div onClick={e => setReceiverCustomer(c)} className="btn btn-info px-5">A</div>
+                  </div>
+                </ListGroupItem>
+              );
+            })}
+          </ListGroup>}
 
         <div className="form-row">
           <div className="col-md-6">
@@ -104,7 +123,7 @@ const CreateOrUpdateCustomerForm = ({
             />
           </div>
         </div>
-        
+
         <div className="form-row">
           <div className="col-md-4">
             <TextInput
@@ -193,11 +212,17 @@ const CreateOrUpdateCustomerForm = ({
         {!values.id ? (
           <div className="form-row">
             <div className="col-md-12">
-              <CheckboxInput
+              {/* <CheckboxInput
                 label="Alan müştəri olaraq seç (Cari olaraq: Göndərən müştəri)"
                 name="is_receiver"
                 value={values.is_receiver}
                 onChange={onChange}
+              /> */}
+              <RadioInputGroup
+                radioInputProps={radioInputProps}
+                name="is_receiver"
+                checkedValue={values.is_receiver}
+                onChange={e => setFieldValue('is_receiver', str2bool(e.target.value))}
               />
             </div>
           </div>

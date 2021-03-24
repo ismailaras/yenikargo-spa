@@ -21,6 +21,7 @@ class Label extends Component {
                             <h1>SAY: {i}/{this.props.pckg.quantity}</h1>
                         </div>
                     </div>
+                    {console.log(this.props.pckg)}
                     <hr/>
                     <div className="row">
                        <div className="col-10">
@@ -35,8 +36,12 @@ class Label extends Component {
                     </div>
                     <hr/>
                     <div className="row">
+                            <div className="col-6">Alan: {this.props.pckg.receiver_customer_id} </div>
+                            <div className="col-6">Bağlama çəkisi: {this.props.pckg.weight} kg</div>
+                    </div>
+                    <div className="row">
                         <div className="col-12">
-                            <h6>Qeyd: {this.props.pckg.description}</h6>
+                            <div>Qeyd: {this.props.pckg.description}</div>
                         </div>
                     </div>
                     <hr/>
