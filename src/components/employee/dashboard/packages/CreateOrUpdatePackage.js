@@ -10,11 +10,29 @@ import {
 } from "../../../../redux/actions/packageActions";
 import { setReceiverCustomer, setSenderCustomer } from '../../../../redux/actions/customerActions';
 import { setTariffInterval } from "../../../../redux/actions/tariffActions";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import CreateOrUpdatePackageForm from "./CreateOrUpdatePackageForm";
 import { useFormik } from "formik";
 import { notEmpty } from "../../../../utilities/helpers";
 import { createOrUpdatePackageFormValidationSchema } from "../../../../utilities/formValidationSchemas";
+
+function setInitialValues(initialValues, setCustomers, selectedPackages) {
+  if (notEmpty(setCustomers.senderCustomer) && notEmpty(setCustomers.receiverCustomer) && !notEmpty(selectedPackages.lastSelectedPackage)) {
+    initialValues.sender_customer_id = setCustomers.senderCustomer.id;
+    initialValues.receiver_customer_id = setCustomers.receiverCustomer.id;
+    initialValues.sender_station_id = setCustomers.senderCustomer.station_id;
+    initialValues.receiver_station_id =
+      setCustomers.receiverCustomer.station_id;
+  }
+  else if (notEmpty(selectedPackages.lastSelectedPackage)) {
+    initialValues = selectedPackages.lastSelectedPackage;
+  }
+
+  return initialValues;
+}
+
+
+
 
 const CreateOrUpdatePackage = ({
   createPackage,
@@ -23,7 +41,6 @@ const CreateOrUpdatePackage = ({
   stations,
   getStations,
   selectedPackages,
-  setCustomers,
   setTariffData,
   findPackages,
   findAdvancedPackages,
@@ -31,26 +48,6 @@ const CreateOrUpdatePackage = ({
   filteredPackageKeys
   // setReceiverCustomer, setSenderCustomer
 }) => {
-  function setInitialValues(initialValues, setCustomers, selectedPackages) {
-    if (notEmpty(setCustomers.senderCustomer) && notEmpty(setCustomers.receiverCustomer)) {
-      initialValues.sender_customer_id = setCustomers.senderCustomer.id;
-      initialValues.receiver_customer_id = setCustomers.receiverCustomer.id;
-      initialValues.sender_station_id = setCustomers.senderCustomer.station_id;
-      initialValues.receiver_station_id =
-        setCustomers.receiverCustomer.station_id;
-    }
-    else if (notEmpty(selectedPackages.lastSelectedPackage)) {
-      initialValues = selectedPackages.lastSelectedPackage;
-    }
-    return initialValues;
-  }
-
-  useEffect(() => {
-    if (stations.length === 0) {
-      getStations();
-    }
-  });
-
   let initialValues = {
     sender_customer_id: "",
     receiver_customer_id: "",
@@ -67,21 +64,24 @@ const CreateOrUpdatePackage = ({
     will_receiver_pay: false,
     quantity: 1,
   };
+  const setCustomers = useSelector(state=> state.setCustomerReducer)
+  useEffect(() => {
+    if (stations.length === 0) {
+      getStations();
+    }
+    const sendStationID = {
+      sender_station_id: initialValues.sender_station_id,
+      receiver_station_id: initialValues.receiver_station_id,
+    };
+    setTariffInterval(sendStationID);
+  }, [getStations,stations,initialValues.sender_station_id, initialValues.receiver_station_id, setTariffInterval]);
+
   initialValues = setInitialValues(
     initialValues,
     setCustomers,
     selectedPackages
   );
-  useEffect(() => {
-    function setPriceFunc() {
-      const sendStationID = {
-        sender_station_id: initialValues.sender_station_id,
-        receiver_station_id: initialValues.receiver_station_id,
-      };
-      setTariffInterval(sendStationID);
-    }
-    setPriceFunc();
-  }, [initialValues.sender_station_id, initialValues.receiver_station_id, setTariffInterval]);
+  
   const history = useHistory();
   // const onChange = (e) => {
   //   const {name, value} = e.target;
@@ -153,7 +153,6 @@ const mapStateToProps = (state) => ({
   selectedCustomers: state.selectCustomersReducer,
   stations: state.getStationsReducer,
   setTariffData: state.setTariffReducer,
-  setCustomers: state.setCustomerReducer,
   filteredPackageKeys:state.setPackagesFilterKeysReducer
 });
 

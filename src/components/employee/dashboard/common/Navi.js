@@ -123,7 +123,6 @@ const Navi = ({ signIn, signOut, auth }) => {
               <NavItem>
                 <NavLink></NavLink>
               </NavItem>
-              {console.log(auth.currentEmployee.employee_role)}
               <NavItem>
                 <NavLink>
                   <button

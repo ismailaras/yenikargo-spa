@@ -199,6 +199,9 @@ const PackagesDTable = ({
     });
     history.push(Routes.checkout);
   };
+  const findDifferentStationPackage = selectedPackages.allSelectedPackages.find(a=> a.sender_station_id !== auth.currentEmployee.station_id)
+  console.log(findDifferentStationPackage)
+  console.log('findDifferentStationPackage')
   const buttons = [
     <button
       onClick={() => removePackage()}
@@ -237,6 +240,7 @@ const PackagesDTable = ({
       size={"md"}
       buttonColor="warning"
       disabled={
+        findDifferentStationPackage ||
         auth.currentEmployee.is_readonly_admin ||
         selectedPackages.allSelectedPackages.length === 0 || 
         (selectedPackages.lastSelectedPackage.sender_station_id !== auth.currentEmployee.station_id &&

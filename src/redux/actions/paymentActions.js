@@ -108,7 +108,6 @@ export const findReports = findObject => {
                     dispatch(findPaymentReportsError(data.message))
                 } else {
                     dispatch(findPaymentReportsSuccess(data))
-                    console.log(data)
                 }
             })
             .catch(err => dispatch(findPaymentReportsError(err)));

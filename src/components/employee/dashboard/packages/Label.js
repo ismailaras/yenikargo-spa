@@ -21,7 +21,7 @@ class Label extends Component {
                             <h1>SAY: {i}/{this.props.pckg.quantity}</h1>
                         </div>
                     </div>
-                    {console.log(this.props.pckg)}
+                    {/* {console.log(this.props.pckg)} */}
                     <hr/>
                     <div className="row">
                        <div className="col-10">

@@ -90,7 +90,6 @@ const EmployeesDTable = ({
   useEffect(() => {
     setFoundEmployees(employees);
   }, [employees]);
-  console.log(foundEmployees)
 
   const handleChange = (e) => {
     selectEmployees(e.selectedRows);

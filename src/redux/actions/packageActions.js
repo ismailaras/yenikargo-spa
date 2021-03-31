@@ -276,7 +276,6 @@ export const trackPackage = (p) => {
                 if (data.message) {
                     dispatch(trackPackageError(data.message))
                 } else {
-                    console.log(data)
                     dispatch(trackPackageSuccess(data))
                 }
             })
@@ -294,7 +293,6 @@ export const trackPackageViaCustomerID = (p) => {
                     dispatch(trackPackageViaCustomerIDError(data.message))
                 } else {
                     dispatch(trackPackageViaCustomerIDSuccess(data))
-                    console.log(data)
                 }
             })
             .catch(err => dispatch(trackPackageViaCustomerIDError(err)));
