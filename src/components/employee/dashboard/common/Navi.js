@@ -49,6 +49,7 @@ const Navi = ({ signIn, signOut, auth }) => {
           <NavbarToggler onClick={toggle} />
           <Collapse isOpen={isOpen} navbar>
             <Nav className="ml-auto" navbar>
+              <div className="nav_userinfo">{auth.currentEmployee.first_name} {auth.currentEmployee.last_name} - {auth.currentEmployee.employee_role}</div>
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
                   <button type="button" className="btn btn-info btn-sm">
@@ -56,34 +57,48 @@ const Navi = ({ signIn, signOut, auth }) => {
                   </button>
                 </DropdownToggle>
                 <DropdownMenu right>
+                {!auth.currentEmployee.is_sorting_admin && 
                   <Link to={Routes.customers}>
                     <DropdownItem>
                       <span className="text-info">Müştərilər</span>
                     </DropdownItem>
-                  </Link>
+                  </Link>}
                   <Link to={Routes.packages}>
                     <DropdownItem>
                       <span className="text-info">Paketlər</span>
                     </DropdownItem>
                   </Link>
+                  {!auth.currentEmployee.is_sorting_admin && 
                   <Link to={Routes.checkout}>
                     <DropdownItem>
                       <span className="text-info">Ödəniş al</span>
                     </DropdownItem>
-                  </Link>
-                  {auth.currentEmployee.is_superuser ? (
+                  </Link>}
+                  {!auth.currentEmployee.is_sorting_admin ? (
                     <Link to={Routes.stations}>
                       <DropdownItem>
                         <span className="text-info">Filiallar *</span>
                       </DropdownItem>
                     </Link>
                   ) : null}
-                  <Link to={Routes.employees}>
+                  {!auth.currentEmployee.is_sorting_admin ? (
+                    <Link to={Routes.tariffs}>
+                      <DropdownItem>
+                        <span className="text-info">Tariflər *</span>
+                      </DropdownItem>
+                    </Link>
+                  ) : null}
+                  {!auth.currentEmployee.is_sorting_admin && <Link to={Routes.employees}>
                     <DropdownItem>
                       <span className="text-info">İşçilər</span>
                     </DropdownItem>
-                  </Link>
-                  <DropdownItem>Ödənişlər</DropdownItem>
+                  </Link>}
+                  {!auth.currentEmployee.is_sorting_admin && 
+                  <Link to={Routes.payments}>
+                    <DropdownItem>
+                      <span className="text-info">Ödənişlər</span>
+                    </DropdownItem>
+                  </Link>}
                   {auth.currentEmployee.is_superuser ? (
                     <Link to={Routes.allExtraSelling}>
                       <DropdownItem>
@@ -91,12 +106,18 @@ const Navi = ({ signIn, signOut, auth }) => {
                       </DropdownItem>
                     </Link>
                   ) : null}
+                  {!auth.currentEmployee.is_sorting_admin && 
                   <Link to={Routes.courier}>
                     <DropdownItem>
                       <span className="text-info">Kuryer</span>
                     </DropdownItem>
-                  </Link>
-                  <DropdownItem>Hesabat *</DropdownItem>
+                  </Link>}
+                  {!auth.currentEmployee.is_sorting_admin && 
+                  <Link to={Routes.report}>
+                    <DropdownItem>
+                      <span className="text-info">Hesabat *</span>
+                    </DropdownItem>
+                  </Link>}
                 </DropdownMenu>
               </UncontrolledDropdown>
               <NavItem>

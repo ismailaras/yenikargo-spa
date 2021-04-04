@@ -1,21 +1,26 @@
 import React from 'react';
-import {findPackages, selectPackages} from '../../../../redux/actions/packageActions';
+import {findPackages, selectPackages, setPackagesFilterKeys} from '../../../../redux/actions/packageActions';
 import {connect} from "react-redux";
 import FindPackagesForm from "./FindPackagesForm";
 import {useFormik} from "formik";
 import {findPackagesFormValidationSchema} from '../../../../utilities/formValidationSchemas';
 
-const FindPackages = ({findPackages, selectPackages}) => {
+const FindPackages = ({findPackages, selectPackages, setIsAdvanceFilter,isAdvanceFilter,setPackagesFilterKeys}) => {
     const {handleSubmit, handleChange, values, errors, touched, handleBlur, isSubmitting, submitForm} = useFormik({
         initialValues: {keyword: '', via: 'viaId'},
         validationSchema: findPackagesFormValidationSchema,
         onSubmit: (values, {setSubmitting}) => {
             selectPackages([]); // Axtaris zamani secilmish musteriler bosh array edir.
+            setPackagesFilterKeys(values)
             findPackages(values);
             setSubmitting(false);
         }
     });
     const radioInputProps = [
+        {
+            value: 'viaCustomerId',
+            label: 'Müştəri ID ilə'
+        },
         {
             value: 'viaId',
             label: 'Bağlama ID ilə'
@@ -44,6 +49,8 @@ const FindPackages = ({findPackages, selectPackages}) => {
             onBlur={handleBlur}
             touched={touched}
             onKeyPress={handleKeyPress}
+            setIsAdvanceFilter={setIsAdvanceFilter}
+            isAdvanceFilter={isAdvanceFilter}
             isSubmitting={isSubmitting}
         />
     )
@@ -52,7 +59,8 @@ const FindPackages = ({findPackages, selectPackages}) => {
 
 const mapDispatchToProps = {
     findPackages,
-    selectPackages
+    selectPackages,
+    setPackagesFilterKeys
 }
 
 const mapStateToProps = state => ({});

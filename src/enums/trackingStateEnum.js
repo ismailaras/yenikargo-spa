@@ -1,9 +1,10 @@
 export const TrackingStateEnum = Object.freeze({
     Declared: 0,
-    OnWay: 1,
-    Arrived: 2,
-    ReadyToPickUp: 3,
-    Delivered: 4
+    ReadyToSorting: 1,
+    Sorting: 2,
+    OnWay: 3,
+    Arrived: 4,
+    Delivered: 5
 })
 
 export const iterTrackingStates = () => {

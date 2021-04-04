@@ -23,6 +23,14 @@ createTheme('yenikargo', {
     },
 });
 
+const customStyles={
+    rows: {
+        style: {
+          fontSize:'17px',
+        }
+      }
+}
+
 const DTable = (props) => {
     const paginationComponentOptions =
         {
@@ -32,10 +40,10 @@ const DTable = (props) => {
         }
     return (
         <div className="card">
-            <div className="card-header">
+            <div className="card-header" style={{fontSize:'22px'}}>
                 {props.title} cədvəli
             </div>
-            <div className="card-body">
+            <div className="card-body" style={{fontSize:'20px'}}>
                 <DataTable
                     title={props.title + " cədvəli"}
                     columns={props.cols}
@@ -50,6 +58,9 @@ const DTable = (props) => {
                     clearSelectedRows={props.clearSelectedRows}
                     onSelectedRowsChange={props.handleChange}
                     pagination={true}
+                    selectableRowsHighlight={true}
+                    responsive={true}
+                    customStyles={customStyles}
                     data={props.data}/>
             </div>
             <div className="card-footer">

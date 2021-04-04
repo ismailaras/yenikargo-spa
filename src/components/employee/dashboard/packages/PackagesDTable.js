@@ -9,6 +9,7 @@ import { addToCart } from "../../../../redux/actions/cartActions";
 import CreateOrUpdatePackage from "./CreateOrUpdatePackage";
 import ModalButton from "../../../toolbox/ModalButton";
 import { PackageDTableChild } from "./PackageDTableChild";
+import * as authActions from "../../../../redux/actions/authActions";
 import {
   formatBool,
   formatDate,
@@ -20,6 +21,8 @@ import { Routes } from "../../../../routes";
 import { useHistory } from "react-router-dom";
 import CreateOrUpdateCourier from "../couriers/CreateOrUpdateCourier";
 import ChangePackageState from "./ChangePackageState";
+import PackageStateInfo from "./PackageStateInfo";
+import { getEmployeeCredentialsFromToken } from "../../../../utilities/helpers";
 
 const cols = [
   {
@@ -39,12 +42,17 @@ const cols = [
   },
   {
     name: <h6>Göndərən filial</h6>,
-    selector: "sender_station_id",
+    selector: "sender_station.name",
     sortable: true,
   },
   {
     name: <h6>Alan filial</h6>,
-    selector: "receiver_station_id",
+    selector: "receiver_station.name",
+    sortable: true,
+  },
+  {
+    name: <h6>Hazırki filial</h6>,
+    selector: "current_location",
     sortable: true,
   },
   {
@@ -62,6 +70,12 @@ const cols = [
     selector: "amount",
     sortable: true,
     format: (row) => formatPrice("AZN").format(row.amount),
+  },
+  {
+    name: <h6>Əlavə dəyəri</h6>,
+    selector: "extra_amount",
+    sortable: true,
+    format: (row) => formatPrice("AZN").format(row.extra_amount),
   },
   {
     name: <h6>Ədəd</h6>,
@@ -152,11 +166,15 @@ const PackagesDTable = ({
   packages,
   selectedPackages,
   addToCart,
+  auth
 }) => {
   const [foundPackages, setFoundPackages] = useState(packages);
   useEffect(() => {
     setFoundPackages(packages);
   }, [packages]);
+  useEffect(() => {
+      getEmployeeCredentialsFromToken()
+  });
   const history = useHistory();
   const handleChange = (e) => {
     selectPackages(e.selectedRows);
@@ -181,59 +199,99 @@ const PackagesDTable = ({
     });
     history.push(Routes.checkout);
   };
+  const findDifferentStationPackage = selectedPackages.allSelectedPackages.find(a=> a.sender_station_id !== auth.currentEmployee.station_id)
+  console.log(findDifferentStationPackage)
+  console.log('findDifferentStationPackage')
   const buttons = [
-    <ModalButton
-      buttonLabel="Tənzimlə"
-      header="Bağlama tənzimlə"
-      key={1}
-      buttonColor="success"
-      size={"md"}
-      disabled={
-        selectedPackages.allSelectedPackages.length !== 1 ||
-        selectedPackages.lastSelectedPackage.tracking_state !== "Declared"
-      }
-      body={<CreateOrUpdatePackage />}
-    />,
     <button
       onClick={() => removePackage()}
-      key={2}
-      className="btn btn-danger mx-2"
+      key={1}
+      className="btn btn-danger"
       disabled={
+        auth.currentEmployee.is_readonly_admin ||
         selectedPackages.allSelectedPackages.length !== 1 ||
+        (selectedPackages.lastSelectedPackage.sender_station_id !== auth.currentEmployee.station_id &&
+        selectedPackages.lastSelectedPackage.receiver_station_id !== auth.currentEmployee.station_id) ||
         selectedPackages.lastSelectedPackage.tracking_state !== "Declared"
       }
     >
       Sil
     </button>,
-        <ModalButton
-        buttonLabel="Status dəyiş"
-        header="Status dəyiş"
-        key={3}
-        size={'md'}
-        disabled={selectedPackages.allSelectedPackages.length === 0}
-        body={<ChangePackageState/>}
+    <ModalButton
+      buttonLabel="Tənzimlə"
+      header="Bağlama tənzimlə"
+      key={2}
+      clsName="mx-2"
+      buttonColor="success"
+      size={"md"}
+      disabled={
+        auth.currentEmployee.is_readonly_admin ||
+        selectedPackages.allSelectedPackages.length !== 1 ||
+        (selectedPackages.lastSelectedPackage.sender_station_id !== auth.currentEmployee.station_id &&
+          selectedPackages.lastSelectedPackage.receiver_station_id !== auth.currentEmployee.station_id) ||
+        selectedPackages.lastSelectedPackage.tracking_state !== "Declared"
+      }
+      body={<CreateOrUpdatePackage />}
     />,
-    <PrintLabelButton
+    <ModalButton
+      buttonLabel="Status dəyiş"
+      header="Status dəyiş"
+      key={3}
+      size={"md"}
+      buttonColor="warning"
+      disabled={
+        findDifferentStationPackage ||
+        auth.currentEmployee.is_readonly_admin ||
+        selectedPackages.allSelectedPackages.length === 0 || 
+        (selectedPackages.lastSelectedPackage.sender_station_id !== auth.currentEmployee.station_id &&
+          selectedPackages.lastSelectedPackage.receiver_station_id !== auth.currentEmployee.station_id)}
+      body={<ChangePackageState />}
+    />,
+    <ModalButton
+      buttonLabel="Kuryer artır"
+      header="Kuryer artır"
       key={4}
-      disabled={selectedPackages.allSelectedPackages.length !== 1}
-      cls="btn btn-primary ml-2"
-      pckg={selectedPackages.lastSelectedPackage}
+      clsName="ml-2"
+      buttonColor="info"
+      size={"md"}
+      disabled={
+        auth.currentEmployee.is_readonly_admin ||
+        selectedPackages.allSelectedPackages.length !== 1 || (selectedPackages.lastSelectedPackage.sender_station_id !== auth.currentEmployee.station_id &&
+        selectedPackages.lastSelectedPackage.receiver_station_id !== auth.currentEmployee.station_id)}
+      body={<CreateOrUpdateCourier />}
     />,
     <button
       onClick={() => addToCartAndRedirect()}
       key={5}
       className="btn btn-primary mx-2"
-      disabled={selectedPackages.allSelectedPackages.length === 0}
+      disabled={
+        auth.currentEmployee.is_readonly_admin ||
+        selectedPackages.allSelectedPackages.length !== 1|| (selectedPackages.lastSelectedPackage.sender_station_id !== auth.currentEmployee.station_id &&
+        selectedPackages.lastSelectedPackage.receiver_station_id !== auth.currentEmployee.station_id)}
     >
       Ödəniş al
     </button>,
     <ModalButton
-      buttonLabel="Kuryer artır"
-      header="Kuryer artır"
+      buttonLabel="State Info"
+      header="State Info"
+      buttonColor="light"
       key={6}
       size={"md"}
-      disabled={selectedPackages.allSelectedPackages.length === 0}
-      body={<CreateOrUpdateCourier />}
+      clsName="mr-2"
+      disabled={
+        selectedPackages.allSelectedPackages.length !== 1 ||
+        selectedPackages.lastSelectedPackage.tracking_state === ""||
+        (selectedPackages.lastSelectedPackage.sender_station_id !== auth.currentEmployee.station_id &&
+          selectedPackages.lastSelectedPackage.receiver_station_id !== auth.currentEmployee.station_id)
+      }
+      body={<PackageStateInfo />}
+    />,
+    <PrintLabelButton
+      key={7}
+      disabled={selectedPackages.allSelectedPackages.length !== 1 || (selectedPackages.lastSelectedPackage.sender_station_id !== auth.currentEmployee.station_id &&
+        selectedPackages.lastSelectedPackage.receiver_station_id !== auth.currentEmployee.station_id)}
+      cls="btn btn-secondary"
+      pckg={selectedPackages.lastSelectedPackage}
     />,
   ];
   return (
@@ -254,12 +312,14 @@ const PackagesDTable = ({
 const mapStateToProps = (state) => ({
   packages: state.findPackagesReducer,
   selectedPackages: state.selectPackagesReducer,
+  auth: state.authReducer
 });
 
 const mapDispatchToProps = {
   selectPackages,
   deletePackage,
   addToCart,
+  signIn: authActions.signIn,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PackagesDTable);

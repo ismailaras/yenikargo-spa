@@ -5,18 +5,22 @@ const initialState = {
         error: false,
         errorMessage: ''
     },
+    cities: [],
     customers: [],
+    filteredCustomersKeys:{},
     selectedCustomers: {
         lastSelectedCustomer: {},
         allSelectedCustomers: [],
         toggledClearRows: false
     },
+    customersByNumber: [],
     employees: [],
     selectedEmployees: {
         lastSelectedEmployee: {},
         allSelectedEmployees: [],
         toggledClearRows: false
     },
+    filteredEmployeesKeys:{},
     setCustomer: {
         senderCustomer: {},
         receiverCustomer: {}
@@ -27,14 +31,24 @@ const initialState = {
         allSelectedPackages: [],
         toggledClearRows: false
     },
+    filteredPackagesKeys:{},
+    trackedPackage: {},
+    trackedPackageByCustomer: [],
     cart: [],
     payments: [],
+    selectedPayments: {
+        lastSelectedPayment: {},
+        allSelectedPayments: [],
+        toggledClearRows: false
+    },
+    paymentsReport:[],
     couriers: [],
     selectedCouriers: {
         lastSelectedCourier: {},
         allSelectedCouriers: [],
         toggledClearRows: false
     },
+    filteredCouriersKeys:{},
     stations: [],
     selectedStations: {
         lastSelectedStation: {},
@@ -47,6 +61,13 @@ const initialState = {
         allSelectedAllExtraSelling: [],
         toggledClearRows: false
     },
+    tariffs: [],
+    selectedTariffs: {
+        lastSelectedTariff: {},
+        allSelectedTariffs: [],
+        toggledClearRows: false
+    },
+    setTariff:[]
 }
 
 export default initialState;

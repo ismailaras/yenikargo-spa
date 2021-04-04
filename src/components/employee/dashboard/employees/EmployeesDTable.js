@@ -31,12 +31,37 @@ const cols = [
   },
   {
     name: <h6>Filial</h6>,
-    selector: "station_id",
+    selector: "station.name",
     sortable: true,
   },
   {
-    name: <h6>Email</h6>,
-    selector: "email_address",
+    name: <h6>Rol</h6>,
+    selector: 'employee_role',
+    sortable: true,
+  },
+  {
+    name: <h6>Ünvan</h6>,
+    selector: "address",
+    sortable: true,
+  },
+  {
+    name: <h6>Mobil1</h6>,
+    selector: "mobile1",
+    sortable: true,
+  },
+  {
+    name: <h6>Mobil2</h6>,
+    selector: "mobile2",
+    sortable: true,
+  },
+  {
+    name: <h6>Fin</h6>,
+    selector: "identity2",
+    sortable: true,
+  },
+  {
+    name: <h6>Doğum tarixi</h6>,
+    selector: "birthdate",
     sortable: true,
   },
   {
@@ -65,6 +90,7 @@ const EmployeesDTable = ({
   useEffect(() => {
     setFoundEmployees(employees);
   }, [employees]);
+
   const handleChange = (e) => {
     selectEmployees(e.selectedRows);
   };

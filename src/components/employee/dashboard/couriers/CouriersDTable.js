@@ -67,6 +67,7 @@ const CouriersDTable = ({
   selectCouriers,
   couriers,
   selectedCouriers,
+  auth
 }) => {
   const [foundCouriers, setFoundCouriers] = useState(couriers);
   useEffect(() => {
@@ -94,14 +95,14 @@ const CouriersDTable = ({
       buttonColor="success"
       key={1}
       size={"md"}
-      disabled={selectedCouriers.allSelectedCouriers.length !== 1}
+      disabled={auth.currentEmployee.is_readonly_admin || selectedCouriers.allSelectedCouriers.length !== 1}
       body={<CreateOrUpdateCourier />}
     />,
     <button
       onClick={() => removeCourier()}
       key={2}
       className="btn btn-danger ml-2"
-      disabled={selectedCouriers.allSelectedCouriers.length !== 1}
+      disabled={auth.currentEmployee.is_readonly_admin || selectedCouriers.allSelectedCouriers.length !== 1}
     >
       Sil
     </button>,
@@ -124,6 +125,7 @@ const CouriersDTable = ({
 const mapStateToProps = (state) => ({
   couriers: state.findCouriersReducer,
   selectedCouriers: state.selectCouriersReducer,
+  auth: state.authReducer
 });
 
 const mapDispatchToProps = {

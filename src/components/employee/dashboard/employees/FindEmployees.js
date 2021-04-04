@@ -1,19 +1,19 @@
 import React from 'react';
-import {findEmployees, selectEmployees} from '../../../../redux/actions/employeeActions';
+import {findEmployees, selectEmployees, setEmployeesFilterKeys} from '../../../../redux/actions/employeeActions';
 import {connect} from "react-redux";
 import FindEmployeesForm from "./FindEmployeesForm";
 import {useFormik} from "formik";
 import {findEmployeesFormValidationSchema} from '../../../../utilities/formValidationSchemas';
 
-const FindEmployees = ({findEmployees, selectEmployees}) => {
+const FindEmployees = ({findEmployees, selectEmployees,setEmployeesFilterKeys}) => {
     const {handleSubmit, handleChange, values, errors, touched, handleBlur, isSubmitting} = useFormik({
         initialValues: {keyword: '', via: 'viaId'},
         validationSchema: findEmployeesFormValidationSchema,
         onSubmit: (values, {setSubmitting}) => {
             selectEmployees([]); // Axtaris zamani secilmish musteriler bosh array edir.
+            setEmployeesFilterKeys(values)
             findEmployees(values);
             setSubmitting(false);
-            console.log(values)
         }
     });
     const radioInputProps = [
@@ -47,7 +47,8 @@ const FindEmployees = ({findEmployees, selectEmployees}) => {
 
 const mapDispatchToProps = {
     findEmployees,
-    selectEmployees
+    selectEmployees,
+    setEmployeesFilterKeys
 }
 
 const mapStateToProps = state => ({});

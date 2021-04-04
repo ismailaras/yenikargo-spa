@@ -1,9 +1,14 @@
 import * as actionTypes from "./actionTypes";
 import * as packageService from "../../services/packageService";
 import * as notification from '../../utilities/notification';
-import {begin, end, endAll, pendingTask} from 'react-redux-spinner';
-import {addToCart} from "./cartActions";
-import {Routes} from "../../routes";
+import { begin, end, endAll, pendingTask } from 'react-redux-spinner';
+import { addToCart } from "./cartActions";
+import { Routes } from "../../routes";
+
+export const setPackagesFilterKeys = keywords => ({
+    type: actionTypes.SET_PACKAGES_FILTER_KEYS,
+    payload: keywords,
+})
 
 export const findPackagesBegin = () => ({
     type: actionTypes.FIND_PACKAGES_BEGIN,
@@ -95,6 +100,37 @@ export const changePackageStateError = error => ({
     payload: error,
     [pendingTask]: endAll
 })
+// TRACKING PACKAGE
+export const trackPackageBegin = () => ({
+    type: actionTypes.TRACK_PACKAGE_BEGIN,
+    payload: {},
+    [pendingTask]: begin
+})
+export const trackPackageSuccess = p => ({
+    type: actionTypes.TRACK_PACKAGE_SUCCESS,
+    payload: p,
+    [pendingTask]: end
+})
+export const trackPackageError = error => ({
+    type: actionTypes.TRACK_PACKAGE_ERROR,
+    payload: error,
+    [pendingTask]: endAll
+})
+export const trackPackageViaCustomerIDBegin = () => ({
+    type: actionTypes.TRACK_PACKAGE_VIA_CUSTOMER_ID_BEGIN,
+    payload: {},
+    [pendingTask]: begin
+})
+export const trackPackageViaCustomerIDSuccess = p => ({
+    type: actionTypes.TRACK_PACKAGE_VIA_CUSTOMER_ID_SUCCESS,
+    payload: p,
+    [pendingTask]: end
+})
+export const trackPackageViaCustomerIDError = error => ({
+    type: actionTypes.TRACK_PACKAGE_VIA_CUSTOMER_ID_ERROR,
+    payload: error,
+    [pendingTask]: endAll
+})
 
 export const deletePackageBegin = () => ({
     type: actionTypes.DELETE_PACKAGE_BEGIN,
@@ -116,7 +152,7 @@ export const deletePackageError = error => ({
 
 export const addCourierToPackages = (courier, packages) => ({
     type: actionTypes.ADD_COURIER_TO_PACKAGES,
-    payload: {courier, packages}
+    payload: { courier, packages }
 })
 
 export const createPackage = (p, history) => {
@@ -170,7 +206,7 @@ export const deletePackage = p => {
                 } else {
                     dispatch(deletePackageSuccess(p))
                     dispatch(deleteSelectedPackageData(p))
-                    notification.success('Bağlama silindi')
+                    notification.error('Bağlama silindi')
                 }
             })
             .catch(err => dispatch(deletePackageError(err)));
@@ -197,6 +233,22 @@ export const findPackages = findObject => {
     }
 }
 
+export const findAdvancedPackages = findObject => {
+    return async dispatch => {
+        dispatch(findPackagesBegin())
+        packageService.findAdvancedPackages(findObject)
+            .then(async data => {
+                await data;
+                if (data.message) {
+                    dispatch(findPackagesError(data.message))
+                } else {
+                    dispatch(findPackagesSuccess(data))
+                }
+            })
+            .catch(err => dispatch(findPackagesError(err)));
+    }
+}
+
 export const changePackageState = (p, selectedPackage) => {
     return async dispatch => {
         dispatch(changePackageStateBegin())
@@ -212,6 +264,38 @@ export const changePackageState = (p, selectedPackage) => {
                 }
             })
             .catch(err => dispatch(changePackageStateError(err)));
+    }
+}
+
+export const trackPackage = (p) => {
+    return async dispatch => {
+        dispatch(trackPackageBegin())
+        packageService.trackPackage(p)
+            .then(async data => {
+                await data;
+                if (data.message) {
+                    dispatch(trackPackageError(data.message))
+                } else {
+                    dispatch(trackPackageSuccess(data))
+                }
+            })
+            .catch(err => dispatch(trackPackageError(err)));
+    }
+}
+
+export const trackPackageViaCustomerID = (p) => {
+    return async dispatch => {
+        dispatch(trackPackageViaCustomerIDBegin())
+        packageService.trackPackageViaCustomerIDs(p)
+            .then(async data => {
+                await data;
+                if (data.message) {
+                    dispatch(trackPackageViaCustomerIDError(data.message))
+                } else {
+                    dispatch(trackPackageViaCustomerIDSuccess(data))
+                }
+            })
+            .catch(err => dispatch(trackPackageViaCustomerIDError(err)));
     }
 }
 

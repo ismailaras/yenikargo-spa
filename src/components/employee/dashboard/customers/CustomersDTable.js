@@ -8,6 +8,7 @@ import {
   setSenderCustomer,
 } from "../../../../redux/actions/customerActions";
 import CreateOrUpdateCustomer from "./CreateOrUpdateCustomer";
+import * as notification from "../../../../utilities/notification";
 import ModalButton from "../../../toolbox/ModalButton";
 import { CustomerDTableChild } from "./CustomerDTableChild";
 import {
@@ -44,6 +45,11 @@ const cols = [
     sortable: true,
   },
   {
+    name: <h6>Filial</h6>,
+    selector: "station.name",
+    sortable: true,
+  },
+  {
     name: <h6>Bank adı</h6>,
     selector: "bank_name",
     sortable: true,
@@ -56,11 +62,6 @@ const cols = [
   {
     name: <h6>Bitiş tarixi</h6>,
     selector: "exp_date",
-    sortable: true,
-  },
-  {
-    name: <h6>Filial</h6>,
-    selector: "station_id",
     sortable: true,
   },
   {
@@ -97,6 +98,8 @@ const CustomersDTable = ({
   selectedCustomers,
   setSenderCustomer,
   setReceiverCustomer,
+  currentUser,
+  auth
 }) => {
   const [foundCustomers, setFoundCustomers] = useState(customers);
   useEffect(() => {
@@ -106,7 +109,15 @@ const CustomersDTable = ({
     selectCustomers(e.selectedRows);
   };
   const setSender = () => {
-    setSenderCustomer(selectedCustomers.lastSelectedCustomer);
+    if (
+      !currentUser.currentEmployee.is_superuser &&
+      currentUser.currentEmployee.station_id !==
+      selectedCustomers.lastSelectedCustomer.station_id
+    ) {
+      notification.warn(
+        `Uğursuz əməliyyat: Göndərən müştəri filialı ilə eyni filialda olmalısınız. Hazırkı filialınız: ${selectedCustomers.lastSelectedCustomer.station.name}`
+      );
+    } else setSenderCustomer(selectedCustomers.lastSelectedCustomer);
   };
   const setReceiver = () => {
     setReceiverCustomer(selectedCustomers.lastSelectedCustomer);
@@ -131,41 +142,42 @@ const CustomersDTable = ({
       header="Müştəri artır"
       key={1}
       size={"md"}
-      disabled={selectedCustomers.allSelectedCustomers.length !== 0}
+      disabled={auth.currentEmployee.is_readonly_admin || selectedCustomers.allSelectedCustomers.length !== 0}
       body={<CreateOrUpdateCustomer />}
     />,
-    <button
-      onClick={() => setSender()}
-      key={2}
-      className="btn btn-primary mx-2"
-      disabled={selectedCustomers.allSelectedCustomers.length !== 1}
-    >
-      Göndərən seç
-    </button>,
-    <button
-      onClick={() => setReceiver()}
-      key={3}
-      className="btn btn-primary mr-2"
-      disabled={selectedCustomers.allSelectedCustomers.length !== 1}
-    >
-      Alan seç
-    </button>,
     <ModalButton
       buttonLabel="Tənzimlə"
       header="Müştəri tənzimlə"
       buttonColor="success"
+      clsName="ml-2"
       key={4}
       size={"md"}
-      disabled={selectedCustomers.allSelectedCustomers.length !== 1}
+      disabled={auth.currentEmployee.is_readonly_admin || selectedCustomers.allSelectedCustomers.length !== 1}
       body={<CreateOrUpdateCustomer />}
     />,
     <button
       onClick={() => removeCustomer()}
       key={5}
       className="btn btn-danger ml-2"
-      disabled={selectedCustomers.allSelectedCustomers.length !== 1}
+      disabled={auth.currentEmployee.is_readonly_admin || selectedCustomers.allSelectedCustomers.length !== 1}
     >
       Sil
+    </button>,
+    <button
+      onClick={() => setSender()}
+      key={2}
+      className="btn btn-warning mx-2"
+      disabled={auth.currentEmployee.is_readonly_admin || selectedCustomers.allSelectedCustomers.length !== 1}
+    >
+      Göndərən seç
+    </button>,
+    <button
+      onClick={() => setReceiver()}
+      key={3}
+      className="btn btn-info mr-2"
+      disabled={auth.currentEmployee.is_readonly_admin || selectedCustomers.allSelectedCustomers.length !== 1}
+    >
+      Alan seç
     </button>,
   ];
   return (
@@ -186,6 +198,8 @@ const CustomersDTable = ({
 const mapStateToProps = (state) => ({
   customers: state.findCustomersReducer,
   selectedCustomers: state.selectCustomersReducer,
+  currentUser: state.authReducer,
+  auth: state.authReducer
 });
 
 const mapDispatchToProps = {

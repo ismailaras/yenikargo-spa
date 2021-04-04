@@ -2,7 +2,7 @@ import React from "react";
 import {Col, Row} from "reactstrap/es";
 import {formatDate, getStateNameInAzerbaijani} from "../../../../utilities/helpers";
 
-export const StationDTableChild = ({data}) => {
+export const TariffDTableChild = ({data}) => {
     return (
         <div>
             <Row className="my-4">

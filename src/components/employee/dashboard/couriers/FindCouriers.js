@@ -1,16 +1,17 @@
 import React from 'react';
-import {findCouriers, selectCouriers} from '../../../../redux/actions/courierActions';
+import {findCouriers, selectCouriers, setCouriersFilterKeys} from '../../../../redux/actions/courierActions';
 import {connect} from "react-redux";
 import FindCouriersForm from "./FindCouriersForm";
 import {useFormik} from "formik";
 import {findCouriersFormValidationSchema} from '../../../../utilities/formValidationSchemas';
 
-const FindCouriers = ({findCouriers, selectCouriers}) => {
+const FindCouriers = ({findCouriers, selectCouriers,setCouriersFilterKeys}) => {
     const {handleSubmit, handleChange, values, errors, touched, handleBlur, isSubmitting} = useFormik({
         initialValues: {keyword: '', via: 'viaId'},
         validationSchema: findCouriersFormValidationSchema,
         onSubmit: (values, {setSubmitting}) => {
             selectCouriers([]); // Axtaris zamani secilmish musteriler bosh array edir.
+            setCouriersFilterKeys(values)
             findCouriers(values);
             setSubmitting(false);
         }
@@ -50,7 +51,8 @@ const FindCouriers = ({findCouriers, selectCouriers}) => {
 
 const mapDispatchToProps = {
     findCouriers,
-    selectCouriers
+    selectCouriers,
+    setCouriersFilterKeys
 }
 
 const mapStateToProps = state => ({});

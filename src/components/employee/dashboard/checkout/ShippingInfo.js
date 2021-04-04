@@ -48,23 +48,18 @@ const ShippingInfo = ({cart, removeFromCart}) => {
                             </div>
                             <hr/>
                             <div className="row">
-                                <div className="col-md-4">
+                                <div className="col-md-6">
                                     <p>Daşınma haqqı: <strong>{formatPrice('AZN').format(cartItem.amount)}</strong></p>
                                     <p>Kuryer
                                         xidməti: <strong>{formatPrice('AZN').format(cartItem.courier_cost)}</strong>
                                     </p>
                                     <p>Məhsul qiyməti: <strong>{formatPrice('AZN').format(cartItem.price)}</strong></p>
                                 </div>
-                                <div className="col-md-4">
-                                    <p>Genişlik (SM): <strong>{cartItem.width}</strong></p>
-                                    <p>Uzunluq (SM): <strong>{cartItem.length}</strong></p>
-                                    <p>Hündürlük (SM): <strong>{cartItem.height}</strong></p>
-                                </div>
-                                <div className="col-md-4">
+                                <div className="col-md-6">
                                     <p>Ədəd: <strong>{cartItem.quantity}</strong></p>
                                     <p>Çəki (KQ): <strong>{cartItem.weight}</strong></p>
                                     <p>Toplam: <strong>{formatPrice('AZN').format(
-                                        cartItem.amount + cartItem.courier_cost + cartItem.price
+                                        cartItem.amount + cartItem.courier_cost
                                     )}</strong></p>
                                 </div>
                             </div>
