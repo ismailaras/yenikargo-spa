@@ -85,7 +85,7 @@ const CreateOrUpdateStationForm = ({onSubmit, values, errors, onChange, onBlur, 
                     </div>
                 </div>
                 <div className="form-row">
-                    <div className="col-md-12">
+                    <div className="col-md-8">
                         <TextInput
                             label="URL"
                             placeHolder="URL"
@@ -95,6 +95,18 @@ const CreateOrUpdateStationForm = ({onSubmit, values, errors, onChange, onBlur, 
                             onChange={onChange}
                             onBlur={onBlur}
                             touched={touched.url}
+                        />
+                    </div>
+                    <div className="col-md-4">
+                        <TextInput
+                            label="İş saatı"
+                            placeHolder="ex: 09:00 - 18:00"
+                            name="work_hours"
+                            value={values.work_hours}
+                            error={errors.work_hours}
+                            onChange={onChange}
+                            onBlur={onBlur}
+                            touched={touched.work_hours}
                         />
                     </div>
                 </div>

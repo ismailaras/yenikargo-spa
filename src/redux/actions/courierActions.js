@@ -4,6 +4,29 @@ import {begin, end, endAll, pendingTask} from 'react-redux-spinner';
 import {addCourierToPackages} from "./packageActions";
 import * as notification from '../../utilities/notification';
 
+export const setCouriersFilterKeys = keywords => ({
+    type: actionTypes.SET_COURIERS_FILTER_KEYS,
+    payload: keywords,
+})
+
+export const getCitiesBegin = () => ({
+    type: actionTypes.GET_CITIES_BEGIN,
+    payload: {},
+    [pendingTask]: begin
+})
+
+export const getCitiesSuccess = cities => ({
+    type: actionTypes.GET_CITIES_SUCCESS,
+    payload: cities,
+    [pendingTask]: end
+})
+
+export const getCitiesError = error => ({
+    type: actionTypes.GET_CITIES_ERROR,
+    payload: error,
+    [pendingTask]: endAll
+})
+
 export const findCouriersBegin = () => ({
     type: actionTypes.FIND_COURIERS_BEGIN,
     payload: {},
@@ -35,6 +58,24 @@ export const updateSelectedCourierData = selectedCourier => ({
 export const deleteSelectedCourierData = selectedCourier => ({
     type: actionTypes.DELETE_SELECTED_COURIER_DATA,
     payload: selectedCourier
+})
+
+export const orderCourierBegin = () => ({
+    type: actionTypes.ORDER_COURIER_BEGIN,
+    payload: {},
+    [pendingTask]: begin
+})
+
+export const orderCourierSuccess = courier => ({
+    type: actionTypes.ORDER_COURIER_SUCCESS,
+    payload: courier,
+    [pendingTask]: end
+})
+
+export const orderCourierError = error => ({
+    type: actionTypes.ORDER_COURIER_ERROR,
+    payload: error,
+    [pendingTask]: endAll
 })
 
 export const createCourierBegin = () => ({
@@ -91,6 +132,23 @@ export const deleteCourierError = error => ({
     [pendingTask]: endAll
 })
 
+export const orderCourier = (courier) => {
+    return async dispatch => {
+        dispatch(orderCourierBegin())
+        courierService.orderCourier(courier)
+            .then(async data => {
+                await data;
+                if (data.message) {
+                    dispatch(orderCourierError(data.message));
+                } else {
+                    dispatch(orderCourierSuccess(data));
+                    notification.success('Sorğunuz göndərildi');
+                }
+            })
+            .catch(err => dispatch(orderCourierError(err)));
+    }
+}
+
 export const createCourier = (courier, packages) => {
     return async dispatch => {
         dispatch(createCourierBegin())
@@ -120,6 +178,7 @@ export const updateCourier = (courier, selectedCourier) => {
                 } else {
                     dispatch(updateCourierSuccess(data))
                     dispatch(updateSelectedCourierData(changeSelectedCourierValues(data, selectedCourier)))
+                    notification.success('Kuryer tənzimləndi');
                 }
             })
             .catch(err => dispatch(updateCourierError(err)));
@@ -137,6 +196,7 @@ export const deleteCourier = courier => {
                 } else {
                     dispatch(deleteCourierSuccess(courier))
                     dispatch(deleteSelectedCourierData(courier))
+                    notification.error('Kuryer silindi');
                 }
             })
             .catch(err => dispatch(deleteCourierError(err)));
@@ -168,4 +228,20 @@ const changeSelectedCourierValues = (values, lastSelectedCourier) => {
         }
     }
     return lastSelectedCourier;
+}
+
+export const getCities = () => {
+    return async dispatch => {
+        dispatch(getCitiesBegin())
+        courierService.getCities()
+            .then(async data => {
+                await data;
+                if (data.message) {
+                    dispatch(getCitiesError(data.message))
+                } else {
+                    dispatch(getCitiesSuccess(data))
+                }
+            })
+            .catch(err => dispatch(getCitiesError(err)));
+    }
 }

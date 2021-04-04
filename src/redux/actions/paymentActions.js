@@ -21,6 +21,46 @@ export const createPaymentsError = error => ({
     [pendingTask]: endAll
 })
 
+export const findPaymentsBegin = () => ({
+    type: actionTypes.FIND_PAYMENTS_BEGIN,
+    payload: {},
+    [pendingTask]: begin
+})
+
+export const findPaymentsSuccess = payments => ({
+    type: actionTypes.FIND_PAYMENTS_SUCCESS,
+    payload: payments,
+    [pendingTask]: end
+})
+
+export const findPaymentsError = error => ({
+    type: actionTypes.FIND_PAYMENTS_ERROR,
+    payload: error,
+    [pendingTask]: endAll
+})
+
+export const findPaymentReportsBegin = () => ({
+    type: actionTypes.FIND_PAYMENTS_REPORT_BEGIN,
+    payload: {},
+    [pendingTask]: begin
+})
+
+export const findPaymentReportsSuccess = payments => ({
+    type: actionTypes.FIND_PAYMENTS_REPORT_SUCCESS,
+    payload: payments,
+    [pendingTask]: end
+})
+
+export const findPaymentReportsError = error => ({
+    type: actionTypes.FIND_PAYMENTS_REPORT_ERROR,
+    payload: error,
+    [pendingTask]: endAll
+})
+
+export const selectPayments = selectedPayments => ({
+    type: actionTypes.SELECT_PAYMENTS,
+    payload: selectedPayments
+})
 
 export const createPayments = (cart, isForDelivery, paymentMethod, costs, handlePrint) => {
     return async dispatch => {
@@ -37,5 +77,39 @@ export const createPayments = (cart, isForDelivery, paymentMethod, costs, handle
                 }
             })
             .catch(err => dispatch(createPaymentsError(err)));
+    }
+}
+
+
+export const findPayments = findObject => {
+    return async dispatch => {
+        dispatch(findPaymentsBegin())
+        paymentService.findPayments(findObject)
+            .then(async data => {
+                await data;
+                if (data.message) {
+                    dispatch(findPaymentsError(data.message))
+                } else {
+                    dispatch(findPaymentsSuccess(data))
+                }
+            })
+            .catch(err => dispatch(findPaymentsError(err)));
+    }
+}
+
+
+export const findReports = findObject => {
+    return async dispatch => {
+        dispatch(findPaymentReportsBegin())
+        paymentService.findReports(findObject)
+            .then(async data => {
+                await data;
+                if (data.message) {
+                    dispatch(findPaymentReportsError(data.message))
+                } else {
+                    dispatch(findPaymentReportsSuccess(data))
+                }
+            })
+            .catch(err => dispatch(findPaymentReportsError(err)));
     }
 }

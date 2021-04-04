@@ -10,7 +10,7 @@ const PrintLabelButton = ({pckg, disabled, cls, stations, getStations}) => {
             getStations();
         }
     })
-    const ref = useRef(null)
+    const ref = useRef()
     const [toggled, setToggled] = useState(true);
     return (
         <span>
@@ -21,12 +21,12 @@ const PrintLabelButton = ({pckg, disabled, cls, stations, getStations}) => {
                     Qaimə
                 </button>}
                 content={() => ref.current}
-                onAfterPrint={() => setToggled(true)}
+                onAfterPrint={() => setToggled(false)}
                 onPrintError={() => setToggled(true)}
                 onBeforeGetContent={() => setToggled(false)}
                 onBeforePrint={() => setToggled(true)}
             />
-            <Label ref={ref} pckg={pckg} toggled={toggled} stations={stations}/>
+            <div style={{display:'none'}}><Label ref={ref} pckg={pckg} toggled={toggled} stations={stations}/></div>
         </span>
     );
 }

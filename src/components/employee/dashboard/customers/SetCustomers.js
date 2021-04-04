@@ -16,7 +16,7 @@ const SetCustomers = ({setCustomers, setReceiverCustomer, setSenderCustomer}) =>
                         className="btn btn-warning btn-sm"
                         onClick={() => setSenderCustomer({})}>
                         <i className="fa fa-times"/>
-                        <span> Göndərən müştəri: #{setCustomers.senderCustomer.id}</span>
+                        <span> Göndərən müştəri: <b>#{setCustomers.senderCustomer.id}</b></span>
                     </button>
                 )
                 : null}
@@ -28,7 +28,7 @@ const SetCustomers = ({setCustomers, setReceiverCustomer, setSenderCustomer}) =>
                             : "btn btn-info btn-sm"}
                         onClick={() => setReceiverCustomer({})}>
                         <i className="fa fa-times"/>
-                        <span> Alan müştəri: #{setCustomers.receiverCustomer.id}</span>
+                        <span> Alan müştəri: <b>#{setCustomers.receiverCustomer.id}</b></span>
                     </button>
                 )
                 : null}

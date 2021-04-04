@@ -1,5 +1,4 @@
 import React from "react";
-import TextareaInput from "../../../toolbox/TextareaInput";
 import TextInput from "../../../toolbox/TextInput";
 
 const CreateOrUpdateExtraSellingForm = ({onSubmit, values, errors, onChange, onBlur, isSubmitting, touched}) => {
@@ -23,13 +22,20 @@ const CreateOrUpdateExtraSellingForm = ({onSubmit, values, errors, onChange, onB
                         <TextInput
                             label="Qiymət"
                             placeHolder="Qiymət"
-                            name="city"
-                            value={values.city}
-                            error={errors.city}
+                            name="price"
+                            value={values.price}
+                            error={errors.price}
                             onChange={onChange}
                             onBlur={onBlur}
-                            touched={touched.city}
+                            touched={touched.price}
                         />
+                    </div>
+                </div>
+                <div className="form-row">
+                    <div className="col-md-12">
+                        <button className="btn btn-primary" type="submit" disabled={isSubmitting}>
+                            <span>Təsdiqlə</span>
+                        </button>
                     </div>
                 </div>
             </form>

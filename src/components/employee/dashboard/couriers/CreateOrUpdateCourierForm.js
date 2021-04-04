@@ -1,15 +1,28 @@
 import React from "react";
 import TextInput from "../../../toolbox/TextInput";
 import NumberInput from "../../../toolbox/NumberInput";
-import CheckboxInput from "../../../toolbox/CheckboxInput";
+import RadioInputGroup from "../../../toolbox/RadioInputGroup";
 
-const CreateOrUpdateCourierForm = ({onSubmit, values, errors, onChange, onBlur, isSubmitting, touched}) => {
+const CreateOrUpdateCourierForm = ({onSubmit, values, errors, onChange, onBlur, isSubmitting, touched,setFieldValue}) => {
+    var str2bool = (value) => {
+        if (value && typeof value === "string") {
+            if (value.toLowerCase() === "true") return true;
+            if (value.toLowerCase() === "false") return false;
+        }
+        return value;
+    }
+    const radioInputProps = [
+        {
+            value: "false",
+            label: 'Qapıya təhvil'
+        },
+        {
+            value: "true",
+            label: 'Qapıdan təhvil'
+        },
+    ];
     return (
         <div>
-            <span className="mr-2">Seçilmiş bağlamalar:</span>
-            {values.package_ids.map(p => (
-                <div className="badge badge-primary mr-2 mb-2" key={p}><span>{p}</span></div>
-            ))}
             <form onSubmit={onSubmit}>
                 <div className="form-row">
                     <div className="col-md-6">
@@ -65,11 +78,11 @@ const CreateOrUpdateCourierForm = ({onSubmit, values, errors, onChange, onBlur, 
                 </div>
                 <div className="form-row">
                     <div className="col-md-12">
-                        <CheckboxInput
-                            label="Qapıdan təhvil olaraq seç (Cari olaraq: Qapıya təhvil)"
+                        <RadioInputGroup
+                            radioInputProps={radioInputProps}
                             name="pick_up"
-                            value={values.pick_up}
-                            onChange={onChange}
+                            checkedValue={values.pick_up}
+                            onChange={e => setFieldValue('pick_up', str2bool(e.target.value))}
                         />
                     </div>
                 </div>

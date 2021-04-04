@@ -1,6 +1,12 @@
 import * as actionTypes from "./actionTypes";
 import * as customerService from "../../services/customerService";
+import * as notification from "../../utilities/notification";
 import {begin, end, endAll, pendingTask} from 'react-redux-spinner';
+
+export const setCustomersFilterKeys = keywords => ({
+    type: actionTypes.SET_CUSTOMERS_FILTER_KEYS,
+    payload: keywords,
+})
 
 export const findCustomersBegin = () => ({
     type: actionTypes.FIND_CUSTOMERS_BEGIN,
@@ -16,6 +22,24 @@ export const findCustomersSuccess = customers => ({
 
 export const findCustomersError = error => ({
     type: actionTypes.FIND_CUSTOMERS_ERROR,
+    payload: error,
+    [pendingTask]: endAll
+})
+
+export const showCustomersBegin = () => ({
+    type: actionTypes.SHOW_CUSTOMERS_BY_NUMBER_BEGIN,
+    payload: {},
+    [pendingTask]: begin
+})
+
+export const showCustomersSuccess = customers => ({
+    type: actionTypes.SHOW_CUSTOMERS_BY_NUMBER_SUCCESS,
+    payload: customers,
+    [pendingTask]: end
+})
+
+export const showCustomersError = error => ({
+    type: actionTypes.SHOW_CUSTOMERS_BY_NUMBER_ERROR,
     payload: error,
     [pendingTask]: endAll
 })
@@ -112,7 +136,7 @@ export const createCustomer = customer => {
                 } else {
                     dispatch(createCustomerSuccess(data))
                     customer.is_receiver ? dispatch(setReceiverCustomer(data)) : dispatch(setSenderCustomer(data))
-
+                    notification.success('Müştəri artırıldı')
                 }
             })
             .catch(err => dispatch(createCustomerError(err)));
@@ -127,9 +151,11 @@ export const updateCustomer = (customer, selectedCustomer) => {
                 await data;
                 if (data.message) {
                     dispatch(updateCustomerError(data.message))
+                    notification.success('*Mobil nömrə fərqli olmalıdır')
                 } else {
                     dispatch(updateCustomerSuccess(data))
                     dispatch(updateSelectedCustomerData(changeSelectedCustomerValues(data, selectedCustomer)))
+                    notification.success('Müştəri məlumatları tənzimləndi')
                 }
             })
             .catch(err => dispatch(updateCustomerError(err)));
@@ -147,6 +173,7 @@ export const deleteCustomer = customer => {
                 } else {
                     dispatch(deleteCustomerSuccess(customer))
                     dispatch(deleteSelectedCustomerData(customer))
+                    notification.error('Müştəri silindi')
                 }
             })
             .catch(err => dispatch(deleteCustomerError(err)));
@@ -168,6 +195,24 @@ export const findCustomers = findObject => {
             .catch(err => dispatch(findCustomersError(err)));
     }
 }
+
+export const showCustomersByNumber = findObject => {
+    return async dispatch => {
+        dispatch(showCustomersBegin())
+        customerService.showCustomers(findObject)
+            .then(async data => {
+                await data;
+                if (data.message) {
+                    dispatch(showCustomersError(data.message))
+                } else {
+                    dispatch(showCustomersSuccess(data))
+                    console.log(data)
+                }
+            })
+            .catch(err => dispatch(showCustomersSuccess(err)));
+    }
+}
+
 
 const changeSelectedCustomerValues = (values, lastSelectedCustomer) => {
     for (let field in lastSelectedCustomer) {

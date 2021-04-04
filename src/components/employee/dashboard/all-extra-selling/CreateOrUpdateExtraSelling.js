@@ -56,7 +56,7 @@ const mapDispatchToProps = {
 const mapStateToProps = state => ({
     selectedAllExtraSelling: state.selectAllExtraSellingReducer,
     selectedCustomers: state.selectCustomersReducer,
-    extraSellings: state.getAllExtraSellingReducer,
+    allExtraSelling: state.getAllExtraSellingReducer,
     setCustomers: state.setCustomerReducer
 });
 

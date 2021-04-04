@@ -18,12 +18,12 @@ export const PackageDTableChild = ({data}) => {
                                         <br/>
                                         <small>Müəllif: {dataState.creator_id}</small> <br/>
                                         <small>Tarix: {formatDate(dataState.created_date)}</small> <br/>
-                                        <textarea
+                                        {dataState.comment && <textarea
                                             className="form-control"
                                             defaultValue={dataState.comment}
                                             readOnly
                                             style={{maxWidth: 500}}
-                                            rows="3"/>
+                                            rows="3"/>}
                                     </li>
                                     <hr/>
                                 </div>

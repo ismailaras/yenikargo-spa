@@ -8,7 +8,7 @@ export const findCouriersReducer = (state = initialState.couriers, action) => {
         case actionTypes.FIND_COURIERS_SUCCESS:
             return action.payload;
         case actionTypes.FIND_COURIERS_ERROR:
-            return state
+            return []
         default:
             return state;
     }

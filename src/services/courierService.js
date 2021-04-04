@@ -23,3 +23,15 @@ export const deleteCourier = courier => {
         .then(data => data)
         .catch(err => err);
 }
+
+export const orderCourier = courier => {
+    return apiService.post("courier_request", courier)
+        .then(data => data)
+        .catch(err => err);
+}
+
+export const getCities = () => {
+    return apiService.get("/service_cities")
+        .then(data => data)
+        .catch(err => err);
+}

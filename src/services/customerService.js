@@ -6,6 +6,12 @@ export const findCustomers = findObject => {
         .catch(err => err);
 }
 
+export const showCustomers = findObject => {
+    return apiService.post("customer/filter_mobile", findObject)
+        .then(data => data)
+        .catch(err => err);
+}
+
 export const createCustomer = customer => {
     return apiService.post("customer", customer)
         .then(data => data)

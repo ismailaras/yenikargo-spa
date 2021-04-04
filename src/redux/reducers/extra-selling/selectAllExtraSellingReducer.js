@@ -9,18 +9,18 @@ export const selectAllExtraSellingReducer = (state = initialState.selectedAllExt
                 state.toggledClearRows = !state.toggledClearRows
             }
             return {
-                allSelectedExtraSelling: action.payload,
+                allSelectedAllExtraSelling: action.payload,
                 lastSelectedExtraSelling: lastItem,
                 toggledClearRows: state.toggledClearRows
             }
-        case actionTypes.UPDATE_SELECTED_STATION_DATA:
-            state.allSelectedExtraSelling.forEach(p => {
+        case actionTypes.UPDATE_SELECTED_EXTRA_SELLING_DATA:
+            state.allSelectedAllExtraSelling.forEach(p => {
                 if (p.id === action.payload.id) {
                     state.lastSelectedExtraSelling = action.payload;
                 }
             })
             return {...state, lastSelectedExtraSelling: action.payload}
-        case actionTypes.DELETE_SELECTED_STATION_DATA:
+        case actionTypes.DELETE_SELECTED_EXTRA_SELLING_DATA:
             return {...state, lastSelectedExtraSelling: {}}
         default:
             return state;

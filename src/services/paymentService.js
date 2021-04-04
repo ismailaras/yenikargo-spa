@@ -10,3 +10,15 @@ export const createPayments = (cart, isForDelivery, paymentMethod, costs) => {
         .then(data => data)
         .catch(err => err);
 }
+
+export const findPayments = findObject => {
+    return apiService.post("payment/filter", findObject)
+        .then(data => data)
+        .catch(err => err);
+}
+
+export const findReports = findObject => {
+    return apiService.post("payment/get_report", findObject)
+        .then(data => data)
+        .catch(err => err);
+}
