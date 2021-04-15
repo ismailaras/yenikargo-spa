@@ -34,7 +34,7 @@ const Landing = ({ stations, getStations }) => {
         <Container>
           <Row style={{ alignItems: "center" }}>
             <Col xs="3" className="home_buttons">
-              <LinkButton
+              {/*<LinkButton
                 buttonLabel="Bağlama izlə"
                 clsName="btn-light mt-1"
                 color="black"
@@ -55,7 +55,7 @@ const Landing = ({ stations, getStations }) => {
                 buttonStyle={{ width: "100%" }}
                 buttonColor="light"
                 body={<Calculator />}
-              />
+              />*/}
               {/* <a className="text-white text-center" href="/#stations">
                 İş saatları
               </a> */}
@@ -137,7 +137,7 @@ const Landing = ({ stations, getStations }) => {
           </p>
         </Container>
       </div>
-
+{/*
       <div id="tariffs" className="py-5">
         <Container>
           <div className="d-flex justify-content-between align-items-center">
@@ -168,7 +168,7 @@ const Landing = ({ stations, getStations }) => {
             </div>
           </div>
         </Container>
-      </div>
+      </div>*/}
 
       <div id="stations" className="bg-light py-5">
         <Container>
