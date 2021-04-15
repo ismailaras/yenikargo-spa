@@ -18,6 +18,7 @@ const CreateOrUpdateCustomer = ({createCustomer, updateCustomer, stations, getSt
         last_name: '',
         mobile_number: '',
         password: '0000',
+        discount: 0,
         station_id: '',
         address: '',
         card_number: '',
@@ -31,6 +32,7 @@ const CreateOrUpdateCustomer = ({createCustomer, updateCustomer, stations, getSt
         initialValues,
         validationSchema: createOrUpdateCustomerFormValidationSchema,
         onSubmit: (values, {setSubmitting}) => {
+            values.is_partner = values.discount > 0
             if(values.id){
                 updateCustomer(values, selectedCustomers.lastSelectedCustomer)
                 setTimeout(()=>{

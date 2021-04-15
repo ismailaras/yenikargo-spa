@@ -102,7 +102,7 @@ const Calculator = ({ stations, setTariffInterval, setTariffData }) => {
           <div className="col-md-6">
             <label>Daşınma haqqı</label>
             <div className="form-control bg-success text-white">
-              {amount} AZN
+              {amount.toPrecision(4)} AZN
             </div>
           </div>
         </div>

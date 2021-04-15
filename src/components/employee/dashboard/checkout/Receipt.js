@@ -11,7 +11,6 @@ class Receipt extends Component {
                         <div>
                             <p><img src={logo_dark} alt="logo" width={150}/></p>
                             <hr/>
-                            {console.log(this.props.payments)}
                             {this.props.payments.map(payment => (
                                 <h5 key={payment.id}
                                       dangerouslySetInnerHTML={{__html: payment.comment.replace(/(?:\r\n|\r|\n)/g, '<br>')}}>

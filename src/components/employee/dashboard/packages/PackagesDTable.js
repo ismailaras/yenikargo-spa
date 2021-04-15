@@ -56,11 +56,9 @@ const cols = [
     sortable: true,
   },
   {
-    name: <h6>Son izləmə</h6>,
-    selector: "tracking_state",
+    name: <h6>Kuryer ID</h6>,
+    selector: "courier_id",
     sortable: true,
-    format: (row) => getStateNameInAzerbaijani(row["tracking_state"]),
-    minWidth: 150
   },
   {
     name: <h6>Çəki (KQ)</h6>,
@@ -72,32 +70,23 @@ const cols = [
     selector: "amount",
     sortable: true,
     format: (row) => formatPrice("AZN").format(row.amount),
-    minWidth: 150
   },
   {
     name: <h6>Əlavə dəyəri</h6>,
     selector: "extra_amount",
     sortable: true,
     format: (row) => formatPrice("AZN").format(row.extra_amount),
-    minWidth: 150
   },
   {
     name: <h6>Ədəd</h6>,
     selector: "quantity",
     sortable: true,
-    minWidth: 150
   },
   {
     name: <h6>Məhsul qiyməti</h6>,
     selector: "price",
     sortable: true,
     format: (row) => formatPrice("AZN").format(row.price),
-    minWidth: 150
-  },
-  {
-    name: <h6>Kuryer ID</h6>,
-    selector: "courier_id",
-    sortable: true,
   },
   {
     name: <h6>Kuryer haqqı</h6>,
@@ -127,13 +116,13 @@ const cols = [
     name: <h6>Alan ödəməli məhsul</h6>,
     selector: "is_postpaid",
     sortable: true,
-    format: (row) => formatBool(row["will_receiver_pay"]),
+    format: (row) => formatBool(row["is_postpaid"]),
   },
   {
     name: <h6>Qarşı ödəməli</h6>,
     selector: "will_receiver_pay",
     sortable: true,
-    format: (row) => formatBool(row["is_postpaid"]),
+    format: (row) => formatBool(row["will_receiver_pay"]),
   },
   {
     name: <h6>Ödəniş metodu</h6>,
@@ -149,6 +138,12 @@ const cols = [
     name: <h6>Əlavə məlumat</h6>,
     selector: "comment",
     sortable: true,
+  },
+  {
+    name: <h6>Son izləmə</h6>,
+    selector: "tracking_state",
+    sortable: true,
+    format: (row) => getStateNameInAzerbaijani(row["tracking_state"]),
   },
   {
     name: <h6>Tarix</h6>,
@@ -204,9 +199,9 @@ const PackagesDTable = ({
     });
     history.push(Routes.checkout);
   };
-  const findDifferentStationPackage = selectedPackages.allSelectedPackages.filter(a=> a.sender_station_id !== auth.currentEmployee.station_id).length>0?true:false
+  const findDifferentStationPackage = selectedPackages.allSelectedPackages.find(a=> a.sender_station_id !== auth.currentEmployee.station_id)
   console.log(findDifferentStationPackage)
-
+  console.log('findDifferentStationPackage')
   const buttons = [
     <button
       onClick={() => removePackage()}

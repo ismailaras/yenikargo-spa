@@ -35,9 +35,6 @@ const CreateOrUpdatePackageForm = ({ onSubmit, values, errors, onChange, onBlur,
             if(values.weight > 5){
                 values.amount = values.weight * t.price;
             }//weight = 1, from_kg=0.5, to_kg = 1.5
-            // t.afterPerWeight, default:0, checkbox olacaq,
-            // check edende from_kg ve to_kg inputu baglanacaq,
-            // afterPerWeight inputu acilacaq
         })
         values.amount += Number(values.extra_amount)
     }

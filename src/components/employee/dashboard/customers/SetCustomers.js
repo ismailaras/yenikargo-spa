@@ -26,7 +26,7 @@ const SetCustomers = ({setCustomers, setReceiverCustomer, setSenderCustomer}) =>
                         className={notEmpty(setCustomers.senderCustomer)
                             ? "btn btn-info btn-sm mx-2"
                             : "btn btn-info btn-sm"}
-                        onClick={() => setSenderCustomer({})}>
+                        onClick={() => setReceiverCustomer({})}>
                         <i className="fa fa-times"/>
                         <span> Alan müştəri: <b>#{setCustomers.receiverCustomer.id}</b></span>
                     </button>

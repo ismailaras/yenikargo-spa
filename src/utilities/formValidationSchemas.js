@@ -3,7 +3,7 @@ import * as Yup from "yup";
 export const createOrUpdateCustomerFormValidationSchema = Yup.object().shape({
   first_name: Yup.string().required("Ad daxil edilməlidir."),
   last_name: Yup.string().required("Soyad daxil edilməlidir."),
-  bank_name: Yup.string(),
+  bank_name: Yup.string().required("Soyad daxil edilməlidir."),
   mobile_number: Yup.string()
     .required("Mobil nömrə daxil edilməlidir.")
     .test(
@@ -12,10 +12,29 @@ export const createOrUpdateCustomerFormValidationSchema = Yup.object().shape({
       (val) => val && val.toString().length === 10
     ),
   password: Yup.string().required("Şifrə daxil edilməlidir."),
+  discount: Yup.string()
+    .required("Güzəşt daxil edilməlidir.")
+    .test(
+      "is_in_0_1",
+      "0 ilə 1 arasında yazılmalıdır.",
+      (val) => val && val >= 0 && val <= 1
+    ),
   station_id: Yup.string().required("Filial seçilməlidir."),
-  address: Yup.string(),
-  card_number: Yup.string(),
+  address: Yup.string().required("Ünvan daxil edilməlidir."),
+  card_number: Yup.string()
+    .required("Kart nömrəsi daxil edilməlidir.")
+    .test(
+      "len",
+      "16 xanalı olmalıdır.",
+      (val) => val && val.toString().length === 16
+    ),
   exp_date: Yup.string()
+    .required("Bitiş tarixi daxil edilməlidir.")
+    .test(
+      "len",
+      "5 xanalı olmalıdır. (GG/AA)",
+      (val) => val && val.toString().length === 5
+    ),
 });
 
 export const createOrUpdateEmployeeFormValidationSchema = Yup.object().shape({
