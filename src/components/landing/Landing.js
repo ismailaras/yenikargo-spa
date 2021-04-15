@@ -34,7 +34,7 @@ const Landing = ({ stations, getStations }) => {
         <Container>
           <Row style={{ alignItems: "center" }}>
             <Col xs="3" className="home_buttons">
-              {/*<LinkButton
+              <LinkButton
                 buttonLabel="Bağlama izlə"
                 clsName="btn-light mt-1"
                 color="black"
@@ -47,15 +47,15 @@ const Landing = ({ stations, getStations }) => {
                 buttonStyle={{ width: "100%" }}
                 buttonColor="light"
                 body={<OrderCourier />}
-              />*/}
-         {/*     <ModalButton
+              />
+              <ModalButton
                 buttonLabel="Kalkulyator"
                 header="Kalkulyator"
                 clsName="mt-1"
                 buttonStyle={{ width: "100%" }}
                 buttonColor="light"
                 body={<Calculator />}
-              />*/}
+              />
               {/* <a className="text-white text-center" href="/#stations">
                 İş saatları
               </a> */}
@@ -137,7 +137,6 @@ const Landing = ({ stations, getStations }) => {
           </p>
         </Container>
       </div>
-{/*
 
       <div id="tariffs" className="py-5">
         <Container>
@@ -170,7 +169,6 @@ const Landing = ({ stations, getStations }) => {
           </div>
         </Container>
       </div>
-*/}
 
       <div id="stations" className="bg-light py-5">
         <Container>
