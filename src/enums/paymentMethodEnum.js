@@ -1,9 +1,9 @@
 export const PaymentMethodEnum = Object.freeze({
-    CreditDebitCard: 0,
-    Cash: 1,
-    PromoCode: 2,
-    Terminal: 3,
-    POS: 4
+    // CreditDebitCard: 0,
+    Cash: 0,
+    // PromoCode: 2,
+    Terminal: 1,
+    // POS: 4
 })
 
 export const iterPaymentMethods = () => {

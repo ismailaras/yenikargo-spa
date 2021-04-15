@@ -165,19 +165,7 @@ const CreateOrUpdateCustomerForm = ({
           </div>
         </div>
         <div className="form-row">
-          <div className="col-md-6">
-            <NumberInput
-              label="Güzəşt (0 - 1)"
-              placeHolder="Güzəşt"
-              name="discount"
-              value={values.discount}
-              error={errors.discount}
-              onChange={onChange}
-              onBlur={onBlur}
-              touched={touched.discount}
-            />
-          </div>
-          <div className="col-md-6">
+          <div className="col-md-12">
             <SelectInput
               label="Filial"
               placeHolder="Filial"

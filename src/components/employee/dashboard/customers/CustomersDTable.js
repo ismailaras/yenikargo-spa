@@ -28,6 +28,7 @@ const cols = [
     name: <h6>Ad</h6>,
     selector: "first_name",
     sortable: true,
+    minWidth: 200
   },
   {
     name: <h6>Soyad</h6>,
@@ -38,6 +39,7 @@ const cols = [
     name: <h6>Nömrə</h6>,
     selector: "mobile_number",
     sortable: true,
+    minWidth: 150
   },
   {
     name: <h6>Ünvan</h6>,

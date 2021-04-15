@@ -32,7 +32,7 @@ export const formatDate = (date) =>
 
 export const formatPercentage = (percentage) => `%${percentage * 100}`;
 
-export const formatBool = (data) => (data ? "Bəli" : "Xeyir");
+export const formatBool = (data) => (data === true ? "Bəli" : "Xeyir");
 
 export const formatPrice = (currency) =>
   new Intl.NumberFormat("az-AZ", {

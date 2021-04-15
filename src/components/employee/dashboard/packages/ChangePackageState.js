@@ -46,13 +46,13 @@ const ChangePackageState = ({ selectedPackages, changePackageState, auth,signIn,
       setSubmitting(false);
     },
   });
+  console.log(selectedPackages.lastSelectedPackage.sender_station_id)
   const validateAuthStatus = (a) =>
     auth.currentEmployee.is_sorting_admin
-      ? a.value !== 1 &&
-        a.value !== 0 &&
-        a.value !== 4 &&
-        a.value !== 5 &&
-        a.value !== 6
+      ? selectedPackages.lastSelectedPackage.sender_station_id === auth.currentEmployee.station_id ?
+        a.value !== 1 &&
+        a.value !== 0 :
+        a.value !== 4
       : auth.currentEmployee.is_operator_admin
       ? a.value !== 2 && a.value !== 3
       : a;
