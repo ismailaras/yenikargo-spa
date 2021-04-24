@@ -49,7 +49,7 @@ const Navi = ({ signIn, signOut, auth }) => {
           <NavbarToggler onClick={toggle} />
           <Collapse isOpen={isOpen} navbar>
             <Nav className="ml-auto" navbar>
-              <div className="nav_userinfo">{auth.currentEmployee.first_name} {auth.currentEmployee.last_name} - {auth.currentEmployee.employee_role}</div>
+              <div className="nav_userinfo">{auth.currentEmployee.first_name} {auth.currentEmployee.last_name} - {auth.currentEmployee.employee_role} - {auth.currentEmployee?.station?.name}</div>
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
                   <button type="button" className="btn btn-info btn-sm">
@@ -88,12 +88,13 @@ const Navi = ({ signIn, signOut, auth }) => {
                       </DropdownItem>
                     </Link>
                   ) : null}
-                  {!auth.currentEmployee.is_sorting_admin && <Link to={Routes.employees}>
+                  {console.log(auth.currentEmployee)}
+                  {auth.currentEmployee.is_superuser && <Link to={Routes.employees}>
                     <DropdownItem>
                       <span className="text-info">İşçilər</span>
                     </DropdownItem>
                   </Link>}
-                  {!auth.currentEmployee.is_sorting_admin && 
+                  {!auth.currentEmployee.is_sorting_admin &&
                   <Link to={Routes.payments}>
                     <DropdownItem>
                       <span className="text-info">Ödənişlər</span>

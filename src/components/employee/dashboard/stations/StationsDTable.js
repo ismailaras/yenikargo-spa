@@ -114,14 +114,14 @@ const StationsDTable = ({
       header="Filial artır"
       key={1}
       size={"md"}
-      disabled={auth.currentEmployee.is_readonly_admin || selectedStations.allSelectedStations.length !== 0}
+      disabled={!auth.currentEmployee.is_superuser || selectedStations.allSelectedStations.length !== 0}
       body={<CreateOrUpdateStation />}
     />,
     <button
       onClick={() => removeStation()}
       key={2}
       className="btn btn-danger mx-2"
-      disabled={auth.currentEmployee.is_readonly_admin || selectedStations.allSelectedStations.length !== 1}
+      disabled={!auth.currentEmployee.is_superuser || selectedStations.allSelectedStations.length !== 1}
     >
       Sil
     </button>,
@@ -131,7 +131,7 @@ const StationsDTable = ({
       buttonColor="success"
       key={3}
       size={"md"}
-      disabled={auth.currentEmployee.is_readonly_admin || selectedStations.allSelectedStations.length !== 1}
+      disabled={!auth.currentEmployee.is_superuser || selectedStations.allSelectedStations.length !== 1}
       body={<CreateOrUpdateStation />}
     />,
   ];

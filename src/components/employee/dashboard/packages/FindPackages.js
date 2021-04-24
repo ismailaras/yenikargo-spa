@@ -34,8 +34,9 @@ const FindPackages = ({findPackages, selectPackages, setIsAdvanceFilter,isAdvanc
             label: 'Bağlama statusu ilə'
         }
     ];
-    const handleKeyPress = e => {
-        if (e.target.value.length === 13) {
+    function handleKeyPress(e) {
+        console.log(e.target.value)
+        if (e.target.value.length >= 12) {
             submitForm();
         }
     }

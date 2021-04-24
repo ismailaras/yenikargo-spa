@@ -25,10 +25,10 @@ class Label extends Component {
                     <hr/>
                     <div className="row">
                        <div className="col-10">
-                           <h1 style={{
-                                fontSize: 50,
-                                textTransform: 'uppercase'
-                            }}>{this.props.stations.find(station => station.id === this.props.pckg.sender_station_id).name}</h1>
+                           {/*<h1 style={{*/}
+                           {/*     fontSize: 50,*/}
+                           {/*     textTransform: 'uppercase'*/}
+                           {/* }}>{this.props.stations.find(station => station.id === this.props.pckg.sender_station_id)}</h1>*/}
                         </div>
                         <div className="col-2 align-self-center">
                             <img alt="logo" src={logo_print} style={{width:'50px',height:'auto',objectFit:'cover'}}/>

@@ -69,7 +69,7 @@ const CreateOrUpdateEmployeeForm = ({ onSubmit, values, errors, onChange, onBlur
                 </div>
                 <div className="form-row">
                     <div className="col-md-4">
-                        <PasswordInput
+                        <TextInput
                             label="Şifrə"
                             placeHolder="Şifrə"
                             name="password"

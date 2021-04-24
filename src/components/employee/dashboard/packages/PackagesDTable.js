@@ -44,55 +44,70 @@ const cols = [
     name: <h6>Göndərən filial</h6>,
     selector: "sender_station.name",
     sortable: true,
+    minWidth: 100
   },
   {
     name: <h6>Alan filial</h6>,
     selector: "receiver_station.name",
     sortable: true,
+    minWidth: 100
   },
   {
     name: <h6>Hazırki filial</h6>,
     selector: "current_location",
     sortable: true,
+    minWidth: 100
   },
   {
-    name: <h6>Kuryer ID</h6>,
-    selector: "courier_id",
+    name: <h6>Son izləmə</h6>,
+    selector: "tracking_state",
     sortable: true,
+    format: (row) => getStateNameInAzerbaijani(row["tracking_state"]),
   },
   {
     name: <h6>Çəki (KQ)</h6>,
     selector: "weight",
     sortable: true,
+    minWidth: 100
   },
   {
     name: <h6>Daşınma haqqı</h6>,
     selector: "amount",
     sortable: true,
+    minWidth: 100,
     format: (row) => formatPrice("AZN").format(row.amount),
   },
   {
     name: <h6>Əlavə dəyəri</h6>,
     selector: "extra_amount",
     sortable: true,
+    minWidth: 100,
     format: (row) => formatPrice("AZN").format(row.extra_amount),
   },
   {
     name: <h6>Ədəd</h6>,
     selector: "quantity",
     sortable: true,
+    minWidth: 100
   },
   {
     name: <h6>Məhsul qiyməti</h6>,
     selector: "price",
     sortable: true,
+    minWidth: 100,
     format: (row) => formatPrice("AZN").format(row.price),
   },
   {
     name: <h6>Kuryer haqqı</h6>,
     selector: "courier_cost",
     sortable: true,
+    minWidth: 100,
     format: (row) => formatPrice("AZN").format(row.courier_cost),
+  },
+  {
+    name: <h6>Kuryer ID</h6>,
+    selector: "courier_id",
+    sortable: true,
   },
   {
     name: <h6>Ödənilib</h6>,
@@ -140,12 +155,6 @@ const cols = [
     sortable: true,
   },
   {
-    name: <h6>Son izləmə</h6>,
-    selector: "tracking_state",
-    sortable: true,
-    format: (row) => getStateNameInAzerbaijani(row["tracking_state"]),
-  },
-  {
     name: <h6>Tarix</h6>,
     selector: "created_date",
     sortable: true,
@@ -156,6 +165,7 @@ const cols = [
     name: <h6>Son hərəkət</h6>,
     selector: "data_state",
     sortable: true,
+    minWidth: 100,
     format: (row) => getStateNameInAzerbaijani(row["data_state"]),
   },
 ];
@@ -242,9 +252,10 @@ const PackagesDTable = ({
       disabled={
         findDifferentStationPackage ||
         auth.currentEmployee.is_readonly_admin ||
-        selectedPackages.allSelectedPackages.length === 0 || 
+        selectedPackages.allSelectedPackages.length === 0 ||
         (selectedPackages.lastSelectedPackage.sender_station_id !== auth.currentEmployee.station_id &&
-          selectedPackages.lastSelectedPackage.receiver_station_id !== auth.currentEmployee.station_id)}
+          selectedPackages.lastSelectedPackage.receiver_station_id !== auth.currentEmployee.station_id)
+      }
       body={<ChangePackageState />}
     />,
     <ModalButton

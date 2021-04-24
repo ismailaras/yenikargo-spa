@@ -81,14 +81,14 @@ const TariffsDTable = ({
       header="Tarif artır"
       key={1}
       size={"md"}
-      disabled={auth.currentEmployee.is_readonly_admin || selectedTariffs.allSelectedTariffs.length !== 0}
+      disabled={!auth.currentEmployee.is_superuser || selectedTariffs.allSelectedTariffs.length !== 0}
       body={<CreateOrUpdateTariff />}
     />,
     <button
       onClick={() => removeTariff()}
       key={2}
       className="btn btn-danger mx-2"
-      disabled={auth.currentEmployee.is_readonly_admin || selectedTariffs.allSelectedTariffs.length !== 1}
+      disabled={!auth.currentEmployee.is_superuser || selectedTariffs.allSelectedTariffs.length !== 1}
     >
       Sil
     </button>,
@@ -98,7 +98,7 @@ const TariffsDTable = ({
       buttonColor="success"
       key={3}
       size={"md"}
-      disabled={auth.currentEmployee.is_readonly_admin || selectedTariffs.allSelectedTariffs.length !== 1}
+      disabled={!auth.currentEmployee.is_superuser || selectedTariffs.allSelectedTariffs.length !== 1}
       body={<CreateOrUpdateTariff />}
     />,
   ];

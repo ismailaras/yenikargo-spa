@@ -44,8 +44,9 @@ const TrackPackageViaCustomerInfo = ({ trackingPackages }) => {
               <table className="table text-white table-bordered">
                 <thead
                   onClick={(e) => console.log(e)}
-                  class="thead-light"
+                  className="thead-light"
                 >
+                {console.log(trackingPackage)}
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Status</th>
