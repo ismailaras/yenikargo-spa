@@ -17,8 +17,8 @@ const CreateOrUpdateTariff = ({
         }
     });
     let initialValues = {
-        from_kg: '',
-        to_kg: '',
+        from_kg: null,
+        to_kg: null,
         price: '',
         sender_station_id: '',
         receiver_station_id: '',

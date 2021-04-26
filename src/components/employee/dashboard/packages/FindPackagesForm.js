@@ -20,6 +20,7 @@ const FindPackagesForm = ({
   stations,
   setIsAdvanceFilter,
   isAdvanceFilter,
+  auth
 }) => {
   useEffect(() => {
     if (stations.length === 0) {
@@ -27,12 +28,12 @@ const FindPackagesForm = ({
     }
   });
   const stateCollection = [
-    { value: "0", label: "Declared" },
-    { value: "1", label: "ReadyToSorting" },
-    { value: "2", label: "Sorting" },
-    { value: "3", label: "OnWay" },
-    { value: "4", label: "Arrived" },
-    { value: "5", label: "Delivered" },
+    { value: "0", label: "Declared", isSorting:false },
+    { value: "1", label: "ReadyToSorting", isSorting:true },
+    { value: "2", label: "Sorting", isSorting:true },
+    { value: "3", label: "OnWay", isSorting:true },
+    { value: "4", label: "Arrived", isSorting:false },
+    { value: "5", label: "Delivered", isSorting:false },
   ];
   return (
     <div>
@@ -84,7 +85,7 @@ const FindPackagesForm = ({
                 ),
                 viaTrackingState: (
                   <div className="d-flex flex-column justify-content-between align-items-left">
-                    {stateCollection.map((s) => {
+                    {stateCollection.filter(a=> auth.currentEmployee.is_sorting_admin ? a.isSorting !== false : a).map((s) => {
                       return (
                         <label key={s.value}>
                           <input
@@ -135,6 +136,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = (state) => ({
   stations: state.getStationsReducer,
+  auth: state.authReducer
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(FindPackagesForm);

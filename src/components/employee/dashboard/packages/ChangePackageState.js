@@ -84,7 +84,7 @@ const ChangePackageState = ({
                 options={trackingStateItems
                     .filter(a => validateAuthStatus(a))
                     .map((trackingStateObj, index) => ({
-                        value: index,
+                        value: trackingStateObj.id,
                         text: trackingStateObj.name
                     }))}
                 label="Bağlama statusu"

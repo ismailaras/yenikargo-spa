@@ -18,7 +18,8 @@ const FindPackagesAdvancedForm = ({
   findAdvancedPackages,
   getStations,
   selectPackages,
-  setPackagesFilterKeys
+  setPackagesFilterKeys,
+  auth
 }) => {
   const {
     handleSubmit,
@@ -48,12 +49,12 @@ const FindPackagesAdvancedForm = ({
     }
   });
   const stateCollection = [
-    { value: "Declared", label: "Declared" },
-    { value: "ReadyToSorting", label: "ReadyToSorting" },
-    { value: "Sorting", label: "Sorting" },
-    { value: "OnWay", label: "OnWay" },
-    { value: "Arrived", label: "Arrived" },
-    { value: "Delivered", label: "Delivered" },
+    { value: "Declared", label: "Declared", isSorting:false },
+    { value: "ReadyToSorting", label: "ReadyToSorting", isSorting:true },
+    { value: "Sorting", label: "Sorting",isSorting:true },
+    { value: "OnWay", label: "OnWay",isSorting:true },
+    { value: "Arrived", label: "Arrived",isSorting:false },
+    { value: "Delivered", label: "Delivered",isSorting:false },
   ];
   return (
     <div>
@@ -90,7 +91,7 @@ const FindPackagesAdvancedForm = ({
               onBlur={handleBlur}
             />
             <div className="d-flex flex-column justify-content-between align-items-left">
-              {stateCollection.map((s) => {
+              {stateCollection.filter(a=> auth.currentEmployee.is_sorting_admin ? a.isSorting !== false : a).map((s) => {
                 return (
                   <label key={s.value}>
                     <input
@@ -140,6 +141,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = (state) => ({
   stations: state.getStationsReducer,
+  auth: state.authReducer
 });
 
 export default connect(

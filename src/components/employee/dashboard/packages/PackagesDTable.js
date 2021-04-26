@@ -129,15 +129,15 @@ const cols = [
   },
   {
     name: <h6>Alan ödəməli məhsul</h6>,
-    selector: "is_postpaid",
-    sortable: true,
-    format: (row) => formatBool(row["is_postpaid"]),
-  },
-  {
-    name: <h6>Qarşı ödəməli</h6>,
     selector: "will_receiver_pay",
     sortable: true,
     format: (row) => formatBool(row["will_receiver_pay"]),
+  },
+  {
+    name: <h6>Qarşı ödəməli</h6>,
+    selector: "is_postpaid",
+    sortable: true,
+    format: (row) => formatBool(row["is_postpaid"]),
   },
   {
     name: <h6>Ödəniş metodu</h6>,
@@ -178,8 +178,6 @@ const PackagesDTable = ({
   addToCart,
   auth
 }) => {
-  var today = new Date();
-  console.log(today)
   const [foundPackages, setFoundPackages] = useState(packages);
   useEffect(() => {
     setFoundPackages(packages);
@@ -222,7 +220,7 @@ const PackagesDTable = ({
       disabled={
         auth.currentEmployee.is_readonly_admin ||
         selectedPackages.allSelectedPackages.length !== 1 ||
-        (!auth.currentEmployee.is_sorting_admin && (selectedPackages.lastSelectedPackage.sender_station_id !== auth.currentEmployee.station_id &&
+        (!auth.currentEmployee.is_sorting_admin && !auth.currentEmployee.is_superuser && (selectedPackages.lastSelectedPackage.sender_station_id !== auth.currentEmployee.station_id &&
         selectedPackages.lastSelectedPackage.receiver_station_id !== auth.currentEmployee.station_id)) ||
         selectedPackages.lastSelectedPackage.tracking_state !== "Declared"
       }
@@ -239,7 +237,7 @@ const PackagesDTable = ({
       disabled={
         auth.currentEmployee.is_readonly_admin ||
         selectedPackages.allSelectedPackages.length !== 1 ||
-        (!auth.currentEmployee.is_sorting_admin && (selectedPackages.lastSelectedPackage.sender_station_id !== auth.currentEmployee.station_id &&
+        (!auth.currentEmployee.is_sorting_admin && !auth.currentEmployee.is_superuser && (selectedPackages.lastSelectedPackage.sender_station_id !== auth.currentEmployee.station_id &&
           selectedPackages.lastSelectedPackage.receiver_station_id !== auth.currentEmployee.station_id)) ||
         selectedPackages.lastSelectedPackage.tracking_state !== "Declared"
       }
@@ -254,7 +252,7 @@ const PackagesDTable = ({
       disabled={
         auth.currentEmployee.is_readonly_admin ||
         selectedPackages.allSelectedPackages.length === 0 ||
-        (!auth.currentEmployee.is_sorting_admin && (selectedPackages.lastSelectedPackage.sender_station_id !== auth.currentEmployee.station_id &&
+        (!auth.currentEmployee.is_sorting_admin && !auth.currentEmployee.is_superuser && (selectedPackages.lastSelectedPackage.sender_station_id !== auth.currentEmployee.station_id &&
           selectedPackages.lastSelectedPackage.receiver_station_id !== auth.currentEmployee.station_id))
       }
       body={<ChangePackageState />}
@@ -268,8 +266,10 @@ const PackagesDTable = ({
       size={"md"}
       disabled={
         auth.currentEmployee.is_readonly_admin ||
-        selectedPackages.allSelectedPackages.length !== 1 || (selectedPackages.lastSelectedPackage.sender_station_id !== auth.currentEmployee.station_id &&
-        selectedPackages.lastSelectedPackage.receiver_station_id !== auth.currentEmployee.station_id)}
+        selectedPackages.allSelectedPackages.length !== 1 || (!auth.currentEmployee.is_superuser && (selectedPackages.lastSelectedPackage.sender_station_id !== auth.currentEmployee.station_id &&
+        selectedPackages.lastSelectedPackage.receiver_station_id !== auth.currentEmployee.station_id)) ||
+        selectedPackages.lastSelectedPackage.tracking_state !== "Declared"
+      }
       body={<CreateOrUpdateCourier />}
     />,
     <button
@@ -277,9 +277,9 @@ const PackagesDTable = ({
       key={5}
       className="btn btn-primary mx-2"
       disabled={
+        selectedPackages?.lastSelectedPackage?.tracking_state !== "Arrived" ||
         auth.currentEmployee.is_readonly_admin ||
-        selectedPackages.allSelectedPackages.length !== 1|| (selectedPackages.lastSelectedPackage.sender_station_id !== auth.currentEmployee.station_id &&
-        selectedPackages.lastSelectedPackage.receiver_station_id !== auth.currentEmployee.station_id)}
+        selectedPackages.allSelectedPackages.length !== 1}
     >
       Ödəniş al
     </button>,
@@ -298,13 +298,12 @@ const PackagesDTable = ({
     />,
     <PrintLabelButton
       key={7}
-      disabled={selectedPackages.allSelectedPackages.length !== 1 || (selectedPackages.lastSelectedPackage.sender_station_id !== auth.currentEmployee.station_id &&
-        selectedPackages.lastSelectedPackage.receiver_station_id !== auth.currentEmployee.station_id)}
+      disabled={selectedPackages.allSelectedPackages.length !== 1 || (!auth.currentEmployee.is_superuser && (selectedPackages.lastSelectedPackage.sender_station_id !== auth.currentEmployee.station_id &&
+        selectedPackages.lastSelectedPackage.receiver_station_id !== auth.currentEmployee.station_id))}
       cls="btn btn-secondary"
       pckg={selectedPackages.lastSelectedPackage}
     />,
   ];
-  {console.log(packages[0])}
   return (
     <div>
       <DTable

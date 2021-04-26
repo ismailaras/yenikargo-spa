@@ -22,13 +22,14 @@ const TrackPackageInfo = ({ trackingPackage }) => {
             </span>
           </p>
           <p>Hazırki lokasiya: {trackingPackage.current_location || "-"}</p>
-          <p>Müştəri ID: {trackingPackage.creator_id}</p>
+          <p>Göndərən müştəri: {trackingPackage.sender_customer_id} \
+            Alan müştəri: {trackingPackage.receiver_customer_id}</p>
         </div>
 
         <hr />
 
         <table className="table text-white table-bordered">
-          <thead onClick={()=>setToggleTable(!toggleTable)} class="thead-light">
+          <thead onClick={()=>setToggleTable(!toggleTable)} className="thead-light">
             <tr>
               <th scope="col">#</th>
               <th scope="col">Status</th>

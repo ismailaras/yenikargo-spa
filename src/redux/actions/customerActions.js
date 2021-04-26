@@ -206,7 +206,6 @@ export const showCustomersByNumber = findObject => {
                     dispatch(showCustomersError(data.message))
                 } else {
                     dispatch(showCustomersSuccess(data))
-                    console.log(data)
                 }
             })
             .catch(err => dispatch(showCustomersSuccess(err)));

@@ -145,7 +145,7 @@ const CreateOrUpdatePackageForm = ({ onSubmit, values, errors, onChange, onBlur,
                                 name="amount"
                                 value={values.amount}
                             />
-                            <div className='form-control text-success'>{values.amount.toPrecision(4)} AZN</div>
+                            <div className='form-control text-success'>{values.amount.toFixed(2)} AZN</div>
                         </div>
                     </div>
                 </div>

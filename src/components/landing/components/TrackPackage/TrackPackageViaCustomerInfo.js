@@ -24,9 +24,12 @@ const TrackPackageViaCustomerInfo = ({ trackingPackages }) => {
                     {getStatusNameInAzerbaijani(trackingPackage.current_state)}
                   </span>
                 </p>
-                <p className="mb-0">
-                  Müştəri ID: {trackingPackage.customer_id}
-                </p>
+                <div>
+                    <p className="mb-0">
+                      Göndərən müştəri: {trackingPackage.sender_customer_id} \
+                      Alan müştəri: {trackingPackage.receiver_customer_id}
+                      </p>
+                </div>
               </div>
 
               <div className="d-flex justify-content-between align-items-center">
