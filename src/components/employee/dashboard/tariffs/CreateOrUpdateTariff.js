@@ -22,6 +22,7 @@ const CreateOrUpdateTariff = ({
         price: '',
         sender_station_id: '',
         receiver_station_id: '',
+        price_per_kg:0
     }
     if (notEmpty(selectedTariffs.lastSelectedTariff)) {
         initialValues = selectedTariffs.lastSelectedTariff

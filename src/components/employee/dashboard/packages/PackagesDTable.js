@@ -178,6 +178,8 @@ const PackagesDTable = ({
   addToCart,
   auth
 }) => {
+  var today = new Date();
+  console.log(today)
   const [foundPackages, setFoundPackages] = useState(packages);
   useEffect(() => {
     setFoundPackages(packages);
@@ -209,9 +211,9 @@ const PackagesDTable = ({
     });
     history.push(Routes.checkout);
   };
-  const findDifferentStationPackage = selectedPackages.allSelectedPackages.find(a=> a.sender_station_id !== auth.currentEmployee.station_id)
-  console.log(findDifferentStationPackage)
-  console.log('findDifferentStationPackage')
+  // const findDifferentStationPackage = selectedPackages.allSelectedPackages.find(a=> a.sender_station_id !== auth.currentEmployee.station_id)
+  // const findDifferentStationPackage1 = selectedPackages.allSelectedPackages.find(a=> a.receiver_station_id !== auth.currentEmployee.station_id)
+
   const buttons = [
     <button
       onClick={() => removePackage()}
@@ -220,8 +222,8 @@ const PackagesDTable = ({
       disabled={
         auth.currentEmployee.is_readonly_admin ||
         selectedPackages.allSelectedPackages.length !== 1 ||
-        (selectedPackages.lastSelectedPackage.sender_station_id !== auth.currentEmployee.station_id &&
-        selectedPackages.lastSelectedPackage.receiver_station_id !== auth.currentEmployee.station_id) ||
+        (!auth.currentEmployee.is_sorting_admin && (selectedPackages.lastSelectedPackage.sender_station_id !== auth.currentEmployee.station_id &&
+        selectedPackages.lastSelectedPackage.receiver_station_id !== auth.currentEmployee.station_id)) ||
         selectedPackages.lastSelectedPackage.tracking_state !== "Declared"
       }
     >
@@ -237,8 +239,8 @@ const PackagesDTable = ({
       disabled={
         auth.currentEmployee.is_readonly_admin ||
         selectedPackages.allSelectedPackages.length !== 1 ||
-        (selectedPackages.lastSelectedPackage.sender_station_id !== auth.currentEmployee.station_id &&
-          selectedPackages.lastSelectedPackage.receiver_station_id !== auth.currentEmployee.station_id) ||
+        (!auth.currentEmployee.is_sorting_admin && (selectedPackages.lastSelectedPackage.sender_station_id !== auth.currentEmployee.station_id &&
+          selectedPackages.lastSelectedPackage.receiver_station_id !== auth.currentEmployee.station_id)) ||
         selectedPackages.lastSelectedPackage.tracking_state !== "Declared"
       }
       body={<CreateOrUpdatePackage />}
@@ -250,11 +252,10 @@ const PackagesDTable = ({
       size={"md"}
       buttonColor="warning"
       disabled={
-        findDifferentStationPackage ||
         auth.currentEmployee.is_readonly_admin ||
         selectedPackages.allSelectedPackages.length === 0 ||
-        (selectedPackages.lastSelectedPackage.sender_station_id !== auth.currentEmployee.station_id &&
-          selectedPackages.lastSelectedPackage.receiver_station_id !== auth.currentEmployee.station_id)
+        (!auth.currentEmployee.is_sorting_admin && (selectedPackages.lastSelectedPackage.sender_station_id !== auth.currentEmployee.station_id &&
+          selectedPackages.lastSelectedPackage.receiver_station_id !== auth.currentEmployee.station_id))
       }
       body={<ChangePackageState />}
     />,
@@ -291,9 +292,7 @@ const PackagesDTable = ({
       clsName="mr-2"
       disabled={
         selectedPackages.allSelectedPackages.length !== 1 ||
-        selectedPackages.lastSelectedPackage.tracking_state === ""||
-        (selectedPackages.lastSelectedPackage.sender_station_id !== auth.currentEmployee.station_id &&
-          selectedPackages.lastSelectedPackage.receiver_station_id !== auth.currentEmployee.station_id)
+        selectedPackages.lastSelectedPackage.tracking_state === ""
       }
       body={<PackageStateInfo />}
     />,
@@ -305,6 +304,7 @@ const PackagesDTable = ({
       pckg={selectedPackages.lastSelectedPackage}
     />,
   ];
+  {console.log(packages[0])}
   return (
     <div>
       <DTable

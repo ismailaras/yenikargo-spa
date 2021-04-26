@@ -28,7 +28,7 @@ export const notEmpty = (data) => {
 };
 
 export const formatDate = (date) =>
-  new Date(date).toLocaleString("az-AZ", { timeZone: "Asia/Baku" });
+  new Date(date).toLocaleString("en-GB", { timeZone: "Asia/Baku" });
 
 export const formatPercentage = (percentage) => `%${percentage * 100}`;
 

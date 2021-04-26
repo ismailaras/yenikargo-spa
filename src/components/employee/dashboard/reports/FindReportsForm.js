@@ -1,6 +1,5 @@
 import React from 'react';
 import RadioInputGroup from "../../../toolbox/RadioInputGroup";
-import TextInput from "../../../toolbox/TextInput";
 import NumberInput from "../../../toolbox/NumberInput";
 import DFilter from '../../../toolbox/DFilter';
 

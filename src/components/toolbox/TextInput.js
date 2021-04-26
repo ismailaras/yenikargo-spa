@@ -1,7 +1,7 @@
 import React from 'react';
 import {InputFeedback} from "./InputFeedback";
 
-const TextInput = ({name, label, onChange, placeHolder, value, error, onBlur, touched, readOnly, onKeyPress}) => {
+const TextInput = ({name, label, onChange, placeHolder, value, error, onBlur, touched, readOnly, onKeyPress, disabled}) => {
     let clsName = 'form-control';
     if (value || (!error && touched)) {
         clsName += ' is-valid'
@@ -20,6 +20,7 @@ const TextInput = ({name, label, onChange, placeHolder, value, error, onBlur, to
                 onKeyPress={onKeyPress}
                 readOnly={readOnly}
                 onBlur={onBlur}
+                disabled={disabled}
                 className={clsName}
                 placeholder={placeHolder}/>
             {touched && <InputFeedback error={error} />}

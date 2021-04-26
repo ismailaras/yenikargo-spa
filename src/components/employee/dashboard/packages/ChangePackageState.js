@@ -56,11 +56,11 @@ const ChangePackageState = ({
     });
     const fPackage = selectedPackages.allSelectedPackages[0]
     const trackingStateItems = [
-        {id:0,name:"Declared",isSender:true,isReceiver:false,isSorting:false},
-        {id:1,name:"ReadyToSorting",isSender:true,isReceiver:false,isSorting:true},
-        {id:2,name:"Sorting",isSender:false,isReceiver:false,isSorting:true},
-        {id:3,name:"OnWay",isSender:false,isReceiver:true,isSorting:true},
-        {id:4,name:"Arrived",isSender:false,isReceiver:true,isSorting:false},
+        {id: 0, name: "Declared", isSender: true, isReceiver: false, isSorting: false},
+        {id: 1, name: "ReadyToSorting", isSender: true, isReceiver: false, isSorting: true},
+        {id: 2, name: "Sorting", isSender: false, isReceiver: false, isSorting: true},
+        {id: 3, name: "OnWay", isSender: false, isReceiver: true, isSorting: true},
+        {id: 4, name: "Arrived", isSender: false, isReceiver: true, isSorting: false},
         // Delivered: 5
     ]
 
@@ -68,9 +68,9 @@ const ChangePackageState = ({
         if (auth.currentEmployee.is_sorting_admin) {
             return a.isSorting !== false
         } else if (auth.currentEmployee.is_operator_admin) {
-            if(fPackage.sender_station_id === auth.currentEmployee.station_id){
+            if (fPackage.sender_station_id === auth.currentEmployee.station_id) {
                 return a.isSender !== false
-            }else if(fPackage.receiver_station_id === auth.currentEmployee.station_id){
+            } else if (fPackage.receiver_station_id === auth.currentEmployee.station_id) {
                 return a.isReceiver !== false
             }
         }
@@ -82,8 +82,8 @@ const ChangePackageState = ({
                 value={values.state}
                 name="state"
                 options={trackingStateItems
-                    .filter(a=> validateAuthStatus(a))
-                    .map((trackingStateObj,index) => ({
+                    .filter(a => validateAuthStatus(a))
+                    .map((trackingStateObj, index) => ({
                         value: index,
                         text: trackingStateObj.name
                     }))}

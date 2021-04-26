@@ -57,7 +57,7 @@ const Navi = ({ signIn, signOut, auth }) => {
                   </button>
                 </DropdownToggle>
                 <DropdownMenu right>
-                {!auth.currentEmployee.is_sorting_admin && 
+                {
                   <Link to={Routes.customers}>
                     <DropdownItem>
                       <span className="text-info">Müştərilər</span>

@@ -35,6 +35,11 @@ const cols = [
     sortable: true,
   },
   {
+    name: <h6>İnterval kg limiti</h6>,
+    selector: "price_per_kg",
+    sortable: true,
+  },
+  {
     name: <h6>Göndərən filial</h6>,
     selector: "sender_station.name",
     sortable: true,

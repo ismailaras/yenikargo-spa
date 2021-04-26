@@ -35,6 +35,7 @@ const TrackPackageInfo = ({ trackingPackage }) => {
               <th scope="col">Tarix</th>
             </tr>
           </thead>
+          <tbody>
           {toggleTable && trackingPackage.tracking_states
             .map((item, index) => {
               return (
@@ -48,6 +49,7 @@ const TrackPackageInfo = ({ trackingPackage }) => {
               );
             })
             .reverse()}
+          </tbody>
         </table>
       </Alert>
     </div>

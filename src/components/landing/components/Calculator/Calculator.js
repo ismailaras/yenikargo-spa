@@ -48,7 +48,7 @@ const Calculator = ({ stations, setTariffInterval, setTariffData }) => {
         if (weight > t.from_kg && weight <= t.to_kg) {
           setAmount(t.price);
         }
-        if (weight > 5) {
+        if (weight > t.price_per_kg) {
           setAmount(weight * t.price);
         }
       });
@@ -102,7 +102,7 @@ const Calculator = ({ stations, setTariffInterval, setTariffData }) => {
           <div className="col-md-6">
             <label>Daşınma haqqı</label>
             <div className="form-control bg-success text-white">
-              {amount.toPrecision(4)} AZN
+              {Number(amount).toFixed(2)} AZN
             </div>
           </div>
         </div>

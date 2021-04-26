@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Alert } from "reactstrap";
 import { connect } from "react-redux";
 import {
@@ -7,7 +7,6 @@ import {
 } from "../../../../utilities/helpers";
 
 const TrackPackageViaCustomerInfo = ({ trackingPackages }) => {
-  const [toggleTable, setToggleTable] = useState(null);
 
   return (
     <div className="mt-3">
@@ -46,25 +45,25 @@ const TrackPackageViaCustomerInfo = ({ trackingPackages }) => {
                   onClick={(e) => console.log(e)}
                   className="thead-light"
                 >
-                {console.log(trackingPackage)}
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Status</th>
                     <th scope="col">Tarix</th>
                   </tr>
                 </thead>
+                <tbody>
                 {
                   trackingPackage.tracking_states
                     .map((item, index) => {
                       return (
                         <tr key={index}>
-                          <td scope="row">{`>`}</td>
+                          <td>#</td>
                           <td>{getStatusNameInAzerbaijani(item.state)}</td>
                           <td>{formatDate(item.created_date)}</td>
                         </tr>
                       );
                     })
-                    .reverse()}
+                    .reverse()}</tbody>
               </table>
             </Alert>
           </div>

@@ -2,7 +2,7 @@ import React from 'react';
 import {findReports} from '../../../../redux/actions/paymentActions';
 import {connect} from "react-redux";
 import {useFormik} from "formik";
-import {findPaymentsFormValidationSchema} from '../../../../utilities/formValidationSchemas';
+// import {findPaymentsFormValidationSchema} from '../../../../utilities/formValidationSchemas';
 import FindReportsForm from './FindReportsForm';
 
 const FindReports = ({findReports}) => {

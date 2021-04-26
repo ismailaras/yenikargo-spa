@@ -3,7 +3,7 @@ import * as Yup from "yup";
 export const createOrUpdateCustomerFormValidationSchema = Yup.object().shape({
   first_name: Yup.string().required("Ad daxil edilməlidir."),
   last_name: Yup.string().required("Soyad daxil edilməlidir."),
-  bank_name: Yup.string().required("Soyad daxil edilməlidir."),
+  bank_name: Yup.string(),
   mobile_number: Yup.string()
     .required("Mobil nömrə daxil edilməlidir.")
     .test(
@@ -13,7 +13,6 @@ export const createOrUpdateCustomerFormValidationSchema = Yup.object().shape({
     ),
   password: Yup.string().required("Şifrə daxil edilməlidir."),
   discount: Yup.string()
-    .required("Güzəşt daxil edilməlidir.")
     .test(
       "is_in_0_1",
       "0 ilə 1 arasında yazılmalıdır.",
@@ -21,20 +20,8 @@ export const createOrUpdateCustomerFormValidationSchema = Yup.object().shape({
     ),
   station_id: Yup.string().required("Filial seçilməlidir."),
   address: Yup.string().required("Ünvan daxil edilməlidir."),
-  card_number: Yup.string()
-    .required("Kart nömrəsi daxil edilməlidir.")
-    .test(
-      "len",
-      "16 xanalı olmalıdır.",
-      (val) => val && val.toString().length === 16
-    ),
+  card_number: Yup.string(),
   exp_date: Yup.string()
-    .required("Bitiş tarixi daxil edilməlidir.")
-    .test(
-      "len",
-      "5 xanalı olmalıdır. (GG/AA)",
-      (val) => val && val.toString().length === 5
-    ),
 });
 
 export const createOrUpdateEmployeeFormValidationSchema = Yup.object().shape({
@@ -182,9 +169,10 @@ export const createOrUpdateStationFormValidationSchema = Yup.object().shape({
 
 
 export const createOrUpdateTariffFormValidationSchema = Yup.object().shape({
-  from_kg: Yup.number().required("Min çəki edilməlidir."),
-  to_kg: Yup.number().required("Max çəki daxil edilməlidir."),
+  from_kg: Yup.number(),
+  to_kg: Yup.number(),
   price: Yup.number().required("Qiymət daxil edilməlidir."),
+  price_per_kg:Yup.number(),
   sender_station_id: Yup.string().required("Göndərən filial daxil edilməlidir."),
   receiver_station_id: Yup.string().required("Alan filial daxil edilməlidir."),
 });

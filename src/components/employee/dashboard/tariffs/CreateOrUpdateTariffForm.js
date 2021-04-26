@@ -1,8 +1,10 @@
-import React from "react";
+import React, {useState} from "react";
 import TextInput from "../../../toolbox/TextInput";
 import SelectInput from "../../../toolbox/SelectInput";
+import CheckboxInput from "../../../toolbox/CheckboxInput";
 
 const CreateOrUpdateTariffForm = ({ onSubmit, values, errors, onChange, onBlur, isSubmitting, touched,stations }) => {
+    const [isPerKg,setIsPerKg] = useState(false)
     return (
         <div>
             <form onSubmit={onSubmit}>
@@ -15,6 +17,7 @@ const CreateOrUpdateTariffForm = ({ onSubmit, values, errors, onChange, onBlur, 
                             value={values.from_kg}
                             error={errors.from_kg}
                             onChange={onChange}
+                            disabled={isPerKg}
                             onBlur={onBlur}
                             touched={touched.from_kg}
                         />
@@ -27,11 +30,31 @@ const CreateOrUpdateTariffForm = ({ onSubmit, values, errors, onChange, onBlur, 
                             value={values.to_kg}
                             error={errors.to_kg}
                             onChange={onChange}
+                            disabled={isPerKg}
                             onBlur={onBlur}
                             touched={touched.to_kg}
                         />
                     </div>
                 </div>
+                <div className="form-row">
+                    <div className="col-md-12">
+                    <CheckboxInput label="Kiloqram limiti" name="isPerKg"  value={isPerKg} onChange={()=>setIsPerKg(!isPerKg)} />
+                    </div>
+                </div>
+                {isPerKg && <div className="form-row">
+                    <div className="col-md-12">
+                        <TextInput
+                            label="Son çəki"
+                            placeHolder="Çəki"
+                            name="price_per_kg"
+                            value={values.price_per_kg}
+                            error={errors.price_per_kg}
+                            onChange={onChange}
+                            onBlur={onBlur}
+                            touched={touched.price_per_kg}
+                        />
+                    </div>
+                </div>}
                 <div className="form-row">
                     <div className="col-md-6">
                         <SelectInput
