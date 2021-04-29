@@ -128,7 +128,7 @@ const cols = [
     format: (row) => formatBool(row["is_courier_cost_paid"]),
   },
   {
-    name: <h6>Alan ödəməli məhsul</h6>,
+    name: <h6>Alan ödəməli</h6>,
     selector: "will_receiver_pay",
     sortable: true,
     format: (row) => formatBool(row["will_receiver_pay"]),
@@ -198,6 +198,7 @@ const PackagesDTable = ({
       );
     }
   };
+  {console.log(packages)}
   const addToCartAndRedirect = () => {
     selectedPackages.allSelectedPackages.forEach((p) => {
       if (p.tracking_state !== "Delivered") {
@@ -277,7 +278,7 @@ const PackagesDTable = ({
       key={5}
       className="btn btn-primary mx-2"
       disabled={
-        selectedPackages?.lastSelectedPackage?.tracking_state !== "Arrived" ||
+        (selectedPackages?.lastSelectedPackage?.tracking_state !== "Arrived" && selectedPackages?.lastSelectedPackage?.tracking_state !== "Declared") ||
         auth.currentEmployee.is_readonly_admin ||
         selectedPackages.allSelectedPackages.length !== 1}
     >

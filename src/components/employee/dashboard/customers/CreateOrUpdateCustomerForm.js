@@ -2,8 +2,6 @@ import React from "react";
 import TextInput from "../../../toolbox/TextInput";
 import SelectInput from "../../../toolbox/SelectInput";
 import TextareaInput from "../../../toolbox/TextareaInput";
-import NumberInput from "../../../toolbox/NumberInput";
-import CheckboxInput from "../../../toolbox/CheckboxInput";
 import PasswordInput from "../../../toolbox/PasswordInput";
 import CustomMaskedInput from "../../../toolbox/CustomMaskedInput";
 import { ListGroup, ListGroupItem } from "reactstrap";
@@ -25,6 +23,7 @@ const CreateOrUpdateCustomerForm = ({
   showCustomersByNumber,
   setSenderCustomer,
   setReceiverCustomer,
+  currentUser
 }) => {
   var str2bool = (value) => {
     if (value && typeof value === "string") {
@@ -32,6 +31,17 @@ const CreateOrUpdateCustomerForm = ({
       if (value.toLowerCase() === "false") return false;
     }
     return value;
+  }
+  let handleSenderCustomer = e=>{
+    if (
+        !currentUser.currentEmployee.is_superuser &&
+        currentUser.currentEmployee.station_id !==
+        e.station_id
+    ) {
+      return true
+    } else {
+      return false
+    };
   }
   const radioInputProps = [
     {
@@ -82,13 +92,14 @@ const CreateOrUpdateCustomerForm = ({
         </div>
         {!values.id &&
           <ListGroup style={{ position: "relative", bottom: ".7rem" }}>
+            {console.log(customersByNumber)}
             {customersByNumber.map((c) => {
               return (
                 <ListGroupItem key={c.id} className="mb-1 p-0">
                   <div className="d-flex justify-content-between align-items-center">
-                    <div onClick={e => setSenderCustomer(c)} className="btn btn-warning px-5">G</div>
+                    <button disabled={handleSenderCustomer(c)} onClick={()=>setSenderCustomer(c)} className="btn btn-warning px-5">G</button>
                     <div>
-                      {c.mobile_number}: {c.first_name} {c.last_name}
+                      {c.mobile_number}: {c.first_name} {c.last_name}-{c.station.name}
                     </div>
                     <div onClick={e => setReceiverCustomer(c)} className="btn btn-info px-5">A</div>
                   </div>
@@ -251,6 +262,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = (state) => ({
   customersByNumber: state.showCustomersByNumberReducer,
+  currentUser: state.authReducer,
 });
 
 export default connect(

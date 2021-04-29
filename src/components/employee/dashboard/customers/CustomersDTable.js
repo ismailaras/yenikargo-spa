@@ -118,7 +118,7 @@ const CustomersDTable = ({
       selectedCustomers.lastSelectedCustomer.station_id
     ) {
       notification.warn(
-        `Uğursuz əməliyyat: Göndərən müştəri filialı ilə eyni filialda olmalısınız. Hazırkı filialınız: ${selectedCustomers.lastSelectedCustomer.station.name}`
+        `Uğursuz əməliyyat: Göndərən müştəri filialı ilə eyni filialda olmalısınız. Hazırkı filialınız: ${currentUser.currentEmployee.station.name}`
       );
     } else setSenderCustomer(selectedCustomers.lastSelectedCustomer);
   };

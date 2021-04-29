@@ -14,6 +14,7 @@ const ShippingInfo = ({cart, removeFromCart}) => {
                 {cart.filter(cartItem => cartItem.paymentFor === 'Package').length > 0 ? cart.map(cartItem => (cartItem.paymentFor === 'Package'
                     ?
                     <div className={cartItem.is_paid ? 'paid-text' : null} key={cartItem.id}>
+                        {console.log(cartItem)}
                         <div className="container-fluid bg-light pt-3 mb-2"
                              style={{borderRadius: 5, border: '1px solid rgba(223,215,202,.75)'}}>
                             <div className="row">

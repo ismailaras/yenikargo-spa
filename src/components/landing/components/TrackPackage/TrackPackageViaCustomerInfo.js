@@ -37,9 +37,6 @@ const TrackPackageViaCustomerInfo = ({ trackingPackages }) => {
                   Müştərinin rolu:{" "}
                   {trackingPackage.is_receiver ? "Alan" : "Göndərən"}
                 </p>
-                <p className="mb-0">
-                  Hazırki lokasiya: {trackingPackage.current_location || "-"}
-                </p>
               </div>
               <hr />
 

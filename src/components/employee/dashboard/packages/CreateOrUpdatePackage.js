@@ -53,7 +53,7 @@ const CreateOrUpdatePackage = ({
     receiver_customer_id: "",
     sender_station_id: "",
     receiver_station_id: "",
-    weight: 0,
+    weight: null,
     extra_amount: 0,
     amount: 0,
     description: "",

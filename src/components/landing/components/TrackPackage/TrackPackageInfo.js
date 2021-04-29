@@ -7,7 +7,6 @@ import {
 } from "../../../../utilities/helpers";
 
 const TrackPackageInfo = ({ trackingPackage }) => {
-  const [toggleTable,setToggleTable] = useState(false)
   return (
     <div className="mt-3">
       <Alert color="success">
@@ -21,7 +20,6 @@ const TrackPackageInfo = ({ trackingPackage }) => {
               {getStatusNameInAzerbaijani(trackingPackage.current_state)}
             </span>
           </p>
-          <p>Hazırki lokasiya: {trackingPackage.current_location || "-"}</p>
           <p>Göndərən müştəri: {trackingPackage.sender_customer_id} \
             Alan müştəri: {trackingPackage.receiver_customer_id}</p>
         </div>
@@ -29,7 +27,7 @@ const TrackPackageInfo = ({ trackingPackage }) => {
         <hr />
 
         <table className="table text-white table-bordered">
-          <thead onClick={()=>setToggleTable(!toggleTable)} className="thead-light">
+          <thead className="thead-light">
             <tr>
               <th scope="col">#</th>
               <th scope="col">Status</th>
@@ -37,7 +35,7 @@ const TrackPackageInfo = ({ trackingPackage }) => {
             </tr>
           </thead>
           <tbody>
-          {toggleTable && trackingPackage.tracking_states
+          {trackingPackage.tracking_states
             .map((item, index) => {
               return (
                 <tr key={index}>

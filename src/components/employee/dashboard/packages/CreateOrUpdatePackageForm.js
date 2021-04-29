@@ -32,7 +32,7 @@ const CreateOrUpdatePackageForm = ({ onSubmit, values, errors, onChange, onBlur,
             if (values.weight > t.from_kg && values.weight <= t.to_kg) {
                 values.amount = t.price;
             }
-            if(values.weight > values.price_per_kg){
+            if(t.price_per_kg > 0 && values.weight > t.price_per_kg){
                 values.amount = values.weight * t.price;
             }//weight = 1, from_kg=0.5, to_kg = 1.5
         })

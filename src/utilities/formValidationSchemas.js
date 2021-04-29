@@ -169,8 +169,8 @@ export const createOrUpdateStationFormValidationSchema = Yup.object().shape({
 
 
 export const createOrUpdateTariffFormValidationSchema = Yup.object().shape({
-  from_kg: Yup.number(),
-  to_kg: Yup.number(),
+  from_kg: Yup.mixed(),
+  to_kg: Yup.mixed(),
   price: Yup.number().required("Qiymət daxil edilməlidir."),
   price_per_kg:Yup.number(),
   sender_station_id: Yup.string().required("Göndərən filial daxil edilməlidir."),
