@@ -42,7 +42,6 @@ const TrackPackageViaCustomerInfo = ({ trackingPackages }) => {
 
               <table className="table text-white table-bordered">
                 <thead
-                  onClick={(e) => console.log(e)}
                   className="thead-light"
                 >
                   <tr>

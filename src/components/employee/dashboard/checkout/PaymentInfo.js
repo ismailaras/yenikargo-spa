@@ -38,7 +38,10 @@ const PaymentInfo = ({cart, createPayments}) => {
                 cartItem.payment_needing = false;
                 if (cartItem.paymentFor === 'ExtraSelling') {
                     cartItem.payment_needing = true;
-                    costs.extraSellingCost += cartItem.price * cartItem.quantity;
+                    if(cartItem.will_receiver_pay || isForDelivery){
+                        cartItem.payment_needing = false;
+                        costs.extraSellingCost += cartItem.price * cartItem.quantity;
+                    }
                 }
                 if (cartItem.paymentFor === 'Package'
                     && !cartItem.is_paid

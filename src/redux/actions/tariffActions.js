@@ -203,7 +203,6 @@ export const setTariffInterval = (p) => {
                     dispatch(setTariffIntervalError(data.message))
                 } else {
                     dispatch(setTariffIntervalSuccess(data))
-                    // console.log(data)
                 }
             })
             .catch(err => dispatch(setTariffIntervalError(err)));

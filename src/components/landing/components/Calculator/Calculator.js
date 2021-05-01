@@ -48,7 +48,7 @@ const Calculator = ({ stations, setTariffInterval, setTariffData }) => {
         if (weight > t.from_kg && weight <= t.to_kg) {
           setAmount(t.price);
         }
-        if (weight > t.price_per_kg) {
+        if (t.price_per_kg > 0 && weight > t.price_per_kg) {
           setAmount(weight * t.price);
         }
       });

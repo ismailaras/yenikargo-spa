@@ -80,7 +80,6 @@ const TariffsDTable = ({
       deleteTariff(selectedTariffs.lastSelectedTariff);
     }
   };
-  {console.log(tariffs[0])}
   const buttons = [
     <ModalButton
       buttonLabel="Tarif artır"

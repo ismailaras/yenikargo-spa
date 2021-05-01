@@ -88,7 +88,6 @@ const Navi = ({ signIn, signOut, auth }) => {
                       </DropdownItem>
                     </Link>
                   ) : null}
-                  {console.log(auth.currentEmployee)}
                   {auth.currentEmployee.is_superuser && <Link to={Routes.employees}>
                     <DropdownItem>
                       <span className="text-info">İşçilər</span>
