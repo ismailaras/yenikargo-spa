@@ -35,7 +35,6 @@ const FindPackages = ({findPackages, selectPackages, setIsAdvanceFilter,isAdvanc
         }
     ];
     function handleKeyPress(e) {
-        console.log(e.target.value)
         if (e.target.value.length >= 12) {
             submitForm();
         }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Alert } from "reactstrap";
 import { connect } from "react-redux";
 import {
@@ -31,6 +31,7 @@ const TrackPackageInfo = ({ trackingPackage }) => {
             <tr>
               <th scope="col">#</th>
               <th scope="col">Status</th>
+              <th scope="col">Filial</th>
               <th scope="col">Tarix</th>
             </tr>
           </thead>
@@ -38,14 +39,15 @@ const TrackPackageInfo = ({ trackingPackage }) => {
           {trackingPackage.tracking_states
             .map((item, index) => {
               return (
-                <tr key={index}>
-                  <td scope="row">
+                <tr key={index} style={{background: trackingPackage.current_state === item.state && "green"}}>
+                  <td>
                     {`>`}
                   </td>
                   <td>{getStatusNameInAzerbaijani(item.state)}</td>
+                  <td>{item.state === "Declared" ? trackingPackage.sender_station_name:item.state === "Delivered"?trackingPackage.receiver_station_name : null }</td>
                   <td>{formatDate(item.created_date)}</td>
                 </tr>
-              );
+              )
             })
             .reverse()}
           </tbody>

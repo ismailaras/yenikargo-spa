@@ -27,7 +27,6 @@ const OrderCourier = ({ orderCourier,getCities, cities}) => {
         onSubmit: (values, {setSubmitting}) => {
             orderCourier(values)
             setSubmitting(false);
-            console.log(values)
         }
     });
     return (

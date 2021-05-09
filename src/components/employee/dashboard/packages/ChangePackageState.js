@@ -1,6 +1,5 @@
 import React, {useEffect} from "react";
 import {changePackageState} from "../../../../redux/actions/packageActions";
-import {iterTrackingStates} from "../../../../enums/trackingStateEnum";
 import {connect} from "react-redux";
 import SelectInput from "../../../toolbox/SelectInput";
 import {useFormik} from "formik";

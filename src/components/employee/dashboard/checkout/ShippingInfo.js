@@ -14,7 +14,6 @@ const ShippingInfo = ({cart, removeFromCart}) => {
                 {cart.filter(cartItem => cartItem.paymentFor === 'Package').length > 0 ? cart.map(cartItem => (cartItem.paymentFor === 'Package'
                     ?
                     <div className={cartItem.is_paid ? 'paid-text' : null} key={cartItem.id}>
-                        {console.log(cartItem)}
                         <div className="container-fluid bg-light pt-3 mb-2"
                              style={{borderRadius: 5, border: '1px solid rgba(223,215,202,.75)'}}>
                             <div className="row">
@@ -49,14 +48,20 @@ const ShippingInfo = ({cart, removeFromCart}) => {
                             </div>
                             <hr/>
                             <div className="row">
-                                <div className="col-md-6">
+
+                                <div className="col-md-4">
+                                    <p>Alan müştəri: <strong> {cartItem.receiver_full_name}</strong></p>
+                                    <p>Əlaqə nömrəsi: <strong>{cartItem.receiver_mobile_number}</strong></p>
+                                    <p>Alan filial: <strong> {cartItem.receiver_station.name}</strong></p>
+                                </div>
+                                <div className="col-md-4">
                                     <p>Daşınma haqqı: <strong>{formatPrice('AZN').format(cartItem.amount)}</strong></p>
                                     <p>Kuryer
                                         xidməti: <strong>{formatPrice('AZN').format(cartItem.courier_cost)}</strong>
                                     </p>
                                     <p>Məhsul qiyməti: <strong>{formatPrice('AZN').format(cartItem.price)}</strong></p>
                                 </div>
-                                <div className="col-md-6">
+                                <div className="col-md-4">
                                     <p>Ədəd: <strong>{cartItem.quantity}</strong></p>
                                     <p>Çəki (KQ): <strong>{cartItem.weight}</strong></p>
                                     <p>Toplam: <strong>{formatPrice('AZN').format(

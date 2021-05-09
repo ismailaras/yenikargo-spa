@@ -34,13 +34,29 @@ const PaymentInfo = ({cart, createPayments}) => {
                 courierCost: 0,
                 productPrice: 0,
             };
+            {
+                console.log(cart)
+            }
             cart.forEach(cartItem => {
                 cartItem.payment_needing = false;
                 if (cartItem.paymentFor === 'ExtraSelling') {
-                    cartItem.payment_needing = true;
-                    if(cartItem.will_receiver_pay || isForDelivery){
-                        cartItem.payment_needing = false;
+                    // cartItem.payment_needing = true;
+                    // if ((cartItem.will_receiver_pay && cartItem.is_postpaid) && isForDelivery) {
+                    //     cartItem.payment_needing = false;
+                    //     costs.extraSellingCost += cartItem.price * cartItem.quantity;
+                    // }
+                    if ((cartItem.will_receiver_pay && cartItem.is_postpaid) && isForDelivery) {
                         costs.extraSellingCost += cartItem.price * cartItem.quantity;
+                    }
+                    if ((cartItem.will_receiver_pay && cartItem.is_postpaid) && !isForDelivery) {
+                        costs.extraSellingCost = 0;
+                    }
+                    if ((!cartItem.will_receiver_pay && !cartItem.is_postpaid && isForDelivery)) {
+                        costs.extraSellingCost += cartItem.price * cartItem.quantity;
+                        cartItem.payment_needing = false;
+                    }
+                    if (cartItem.is_postpaid && !isForDelivery) {
+                        costs.extraSellingCost = 0;
                     }
                 }
                 if (cartItem.paymentFor === 'Package'
@@ -60,7 +76,12 @@ const PaymentInfo = ({cart, createPayments}) => {
                     && !cartItem.is_product_paid
                     && (!cartItem.will_receiver_pay || (cartItem.will_receiver_pay && isForDelivery))) {
                     cartItem.payment_needing = true;
+
                     // costs.productPrice += cartItem.price;
+                }
+                if (cartItem.paymentFor === 'Package'
+                    && cartItem.is_postpaid && !isForDelivery) {
+                    costs.shippingCost = 0;
                 }
             });
             costs.totalCost = costs.extraSellingCost + costs.shippingCost + costs.courierCost + costs.productPrice;
@@ -88,7 +109,8 @@ const PaymentInfo = ({cart, createPayments}) => {
                     <h5>Toplam: <strong>{formatPrice('AZN').format(costs.totalCost)}</strong></h5>
                 </div>
                 <div className="card-body">
-                    <CheckboxInput label="Çek çap edilsin" name="is-print" value={isPrint} onChange={()=>setIsPrint(!isPrint)} />
+                    <CheckboxInput label="Çek çap edilsin" name="is-print" value={isPrint}
+                                   onChange={() => setIsPrint(!isPrint)}/>
                     <CheckboxInput
                         label="Təhvil-təslim prosesi"
                         value={isForDelivery}

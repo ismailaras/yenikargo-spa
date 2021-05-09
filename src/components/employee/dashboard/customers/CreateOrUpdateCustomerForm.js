@@ -92,7 +92,6 @@ const CreateOrUpdateCustomerForm = ({
         </div>
         {!values.id &&
           <ListGroup style={{ position: "relative", bottom: ".7rem" }}>
-            {console.log(customersByNumber)}
             {customersByNumber.map((c) => {
               return (
                 <ListGroupItem key={c.id} className="mb-1 p-0">

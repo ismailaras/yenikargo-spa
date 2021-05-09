@@ -21,10 +21,10 @@ const PrintLabelButton = ({pckg, disabled, cls, stations, getStations}) => {
                     Qaimə
                 </button>}
                 content={() => ref.current}
-                onAfterPrint={() => setToggled(false)}
-                onPrintError={() => setToggled(true)}
-                onBeforeGetContent={() => setToggled(false)}
-                onBeforePrint={() => setToggled(true)}
+                onAfterPrint={() => setToggled(true)}
+                onPrintError={() => setToggled(false)}
+                onBeforeGetContent={() => setToggled(true)}
+                onBeforePrint={() => setToggled(false)}
             />
             <div style={{display:'none'}}><Label ref={ref} pckg={pckg} toggled={toggled} stations={stations}/></div>
         </span>

@@ -29,7 +29,6 @@ export const PaymentDTableChild = ({data}) => {
                         </div>
                     </div>
                 </Col>
-                {console.log(data)}
             </Row>
         </div>
     )

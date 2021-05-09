@@ -10,7 +10,6 @@ const SetCustomers = ({setCustomers, setReceiverCustomer, setSenderCustomer}) =>
         <div className={notEmpty(setCustomers.senderCustomer) || notEmpty(setCustomers.receiverCustomer)
             ? "mb-3"
             : null}>
-            {console.log(setCustomers)}
             {notEmpty(setCustomers.senderCustomer)
                 ? (
                     <button
