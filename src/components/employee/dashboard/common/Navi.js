@@ -42,87 +42,86 @@ const Navi = ({ signIn, signOut, auth }) => {
   return (
     <div style={{ marginBottom: 15 }}>
       <Navbar color="primary" dark expand="md">
+
+        <NavbarBrand to="/" style={{ padding: 0 }}>
+          <img src={logo_light} alt="logo" width={150} />
+        </NavbarBrand>
+        <UncontrolledDropdown nav inNavbar style={{listStyleType:'none'}}>
+          <DropdownToggle nav caret>
+            <button type="button" className="btn btn-info btn-sm">
+              <i className="fa fa-arrow-circle-down" /> Menyu
+            </button>
+          </DropdownToggle>
+          <DropdownMenu right>
+            {!auth.currentEmployee.is_sorting_admin &&
+            <Link to={Routes.checkout}>
+              <DropdownItem>
+                <span className="text-info">Ödəniş al</span>
+              </DropdownItem>
+            </Link>}
+            {!auth.currentEmployee.is_sorting_admin ? (
+                <Link to={Routes.stations}>
+                  <DropdownItem>
+                    <span className="text-info">Filiallar *</span>
+                  </DropdownItem>
+                </Link>
+            ) : null}
+            {!auth.currentEmployee.is_sorting_admin ? (
+                <Link to={Routes.tariffs}>
+                  <DropdownItem>
+                    <span className="text-info">Tariflər *</span>
+                  </DropdownItem>
+                </Link>
+            ) : null}
+            {auth.currentEmployee.is_superuser && <Link to={Routes.employees}>
+              <DropdownItem>
+                <span className="text-info">İşçilər</span>
+              </DropdownItem>
+            </Link>}
+            {!auth.currentEmployee.is_sorting_admin &&
+            <Link to={Routes.payments}>
+              <DropdownItem>
+                <span className="text-info">Ödənişlər</span>
+              </DropdownItem>
+            </Link>}
+            {auth.currentEmployee.is_superuser ? (
+                <Link to={Routes.allExtraSelling}>
+                  <DropdownItem>
+                    <span className="text-info">Ekstra servislər *</span>
+                  </DropdownItem>
+                </Link>
+            ) : null}
+            {!auth.currentEmployee.is_sorting_admin &&
+            <Link to={Routes.courier}>
+              <DropdownItem>
+                <span className="text-info">Kuryer</span>
+              </DropdownItem>
+            </Link>}
+            {!auth.currentEmployee.is_sorting_admin &&
+            <Link to={Routes.report}>
+              <DropdownItem>
+                <span className="text-info">Hesabat *</span>
+              </DropdownItem>
+            </Link>}
+          </DropdownMenu>
+        </UncontrolledDropdown>
+
+        {
+          <Link to={Routes.customers} style={{background:"#fff",borderRadius:'5px',marginRight:'1rem'}}>
+            <DropdownItem>
+              <span className="text-info">Müştərilər</span>
+            </DropdownItem>
+          </Link>}
+        <Link to={Routes.packages} style={{background:"#fff",borderRadius:'5px'}}>
+          <DropdownItem>
+            <span className="text-info">Paketlər</span>
+          </DropdownItem>
+        </Link>
         <Container>
-          <NavbarBrand to="/" style={{ padding: 0 }}>
-            <img src={logo_light} alt="logo" width={150} />
-          </NavbarBrand>
           <NavbarToggler onClick={toggle} />
           <Collapse isOpen={isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <div className="nav_userinfo">{auth.currentEmployee.first_name} {auth.currentEmployee.last_name} - {auth.currentEmployee.employee_role} - {auth.currentEmployee?.station?.name}</div>
-              <UncontrolledDropdown nav inNavbar>
-                <DropdownToggle nav caret>
-                  <button type="button" className="btn btn-info btn-sm">
-                    <i className="fa fa-arrow-circle-down" /> Menyu
-                  </button>
-                </DropdownToggle>
-                <DropdownMenu right>
-                {
-                  <Link to={Routes.customers}>
-                    <DropdownItem>
-                      <span className="text-info">Müştərilər</span>
-                    </DropdownItem>
-                  </Link>}
-                  <Link to={Routes.packages}>
-                    <DropdownItem>
-                      <span className="text-info">Paketlər</span>
-                    </DropdownItem>
-                  </Link>
-                  {!auth.currentEmployee.is_sorting_admin && 
-                  <Link to={Routes.checkout}>
-                    <DropdownItem>
-                      <span className="text-info">Ödəniş al</span>
-                    </DropdownItem>
-                  </Link>}
-                  {!auth.currentEmployee.is_sorting_admin ? (
-                    <Link to={Routes.stations}>
-                      <DropdownItem>
-                        <span className="text-info">Filiallar *</span>
-                      </DropdownItem>
-                    </Link>
-                  ) : null}
-                  {!auth.currentEmployee.is_sorting_admin ? (
-                    <Link to={Routes.tariffs}>
-                      <DropdownItem>
-                        <span className="text-info">Tariflər *</span>
-                      </DropdownItem>
-                    </Link>
-                  ) : null}
-                  {auth.currentEmployee.is_superuser && <Link to={Routes.employees}>
-                    <DropdownItem>
-                      <span className="text-info">İşçilər</span>
-                    </DropdownItem>
-                  </Link>}
-                  {!auth.currentEmployee.is_sorting_admin &&
-                  <Link to={Routes.payments}>
-                    <DropdownItem>
-                      <span className="text-info">Ödənişlər</span>
-                    </DropdownItem>
-                  </Link>}
-                  {auth.currentEmployee.is_superuser ? (
-                    <Link to={Routes.allExtraSelling}>
-                      <DropdownItem>
-                        <span className="text-info">Ekstra servislər *</span>
-                      </DropdownItem>
-                    </Link>
-                  ) : null}
-                  {!auth.currentEmployee.is_sorting_admin && 
-                  <Link to={Routes.courier}>
-                    <DropdownItem>
-                      <span className="text-info">Kuryer</span>
-                    </DropdownItem>
-                  </Link>}
-                  {!auth.currentEmployee.is_sorting_admin && 
-                  <Link to={Routes.report}>
-                    <DropdownItem>
-                      <span className="text-info">Hesabat *</span>
-                    </DropdownItem>
-                  </Link>}
-                </DropdownMenu>
-              </UncontrolledDropdown>
-              <NavItem>
-                <NavLink></NavLink>
-              </NavItem>
               <NavItem>
                 <NavLink>
                   <button
