@@ -67,6 +67,7 @@ const cols = [
     {
         name: <h6>Çəki (KQ)</h6>,
         selector: "weight",
+        center:true,
         sortable: true,
         minWidth: 100
     },
@@ -74,6 +75,7 @@ const cols = [
         name: <h6>Daşınma haqqı</h6>,
         selector: "amount",
         sortable: true,
+        center:true,
         minWidth: 100,
         format: (row) => formatPrice("AZN").format(row.amount),
     },
@@ -81,12 +83,14 @@ const cols = [
         name: <h6>Əlavə dəyəri</h6>,
         selector: "extra_amount",
         sortable: true,
+        center:true,
         minWidth: 100,
         format: (row) => formatPrice("AZN").format(row.extra_amount),
     },
     {
         name: <h6>Ədəd</h6>,
         selector: "quantity",
+        center:true,
         sortable: true,
         minWidth: 100
     },
@@ -112,12 +116,14 @@ const cols = [
     {
         name: <h6>Ödənilib</h6>,
         selector: "is_paid",
+        center:true,
         sortable: true,
         format: (row) => formatBool(row["is_paid"]),
     },
     {
         name: <h6>Məhsul ödənilib</h6>,
         selector: "is_product_paid",
+        center:true,
         sortable: true,
         format: (row) => formatBool(row["is_product_paid"]),
     },
@@ -125,23 +131,27 @@ const cols = [
         name: <h6>Kuryer haqqı ödənilib</h6>,
         selector: "is_courier_cost_paid",
         sortable: true,
+        center:true,
         format: (row) => formatBool(row["is_courier_cost_paid"]),
     },
     {
         name: <h6>Alan ödəməli</h6>,
         selector: "will_receiver_pay",
         sortable: true,
+        center:true,
         format: (row) => formatBool(row["will_receiver_pay"]),
     },
     {
         name: <h6>Qarşı ödəməli</h6>,
         selector: "is_postpaid",
         sortable: true,
+        center:true,
         format: (row) => formatBool(row["is_postpaid"]),
     },
     {
         name: <h6>Ödəniş metodu</h6>,
         selector: "payment_method",
+        center:true,
         sortable: true,
     },
     {
