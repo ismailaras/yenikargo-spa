@@ -4,7 +4,7 @@ import TextInput from "../../../toolbox/TextInput";
 import NumberInput from "../../../toolbox/NumberInput";
 import DFilter from '../../../toolbox/DFilter';
 
-const FindPaymentsForm = ({onSubmit, onChange, values, errors, onBlur, touched, isSubmitting, radioInputProps}) => {
+const FindPaymentsForm = ({onSubmit, onChange, values, errors, onBlur, touched, isSubmitting, radioInputProps, setIsAdvanceFilter, isAdvanceFilter}) => {
     return (
         <div>
             <div className="card">
@@ -46,6 +46,16 @@ const FindPaymentsForm = ({onSubmit, onChange, values, errors, onBlur, touched, 
                             <i className="fa fa-search"/>
                             <span> Axtar</span>
                         </button>
+                        {!isAdvanceFilter && (
+                            <button
+                                className="btn btn-warning ml-1"
+                                type="button"
+                                onClick={() => setIsAdvanceFilter(!isAdvanceFilter)}
+                            >
+                                <i className="fa fa-filter" />
+                                <span> Ətraflı</span>
+                            </button>
+                        )}
                     </div>
                 </form>
             </div>

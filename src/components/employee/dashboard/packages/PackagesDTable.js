@@ -196,6 +196,10 @@ const PackagesDTable = ({
             setFoundPackages(
                 packages.filter((p) => selectedPackages.lastSelectedPackage.id !== p.id)
             );
+            selectPackages([]);
+        }else {
+            selectPackages([]);
+            return null;
         }
     };
     const addToCartAndRedirect = () => {
@@ -240,7 +244,7 @@ const PackagesDTable = ({
                 selectedPackages.allSelectedPackages.length !== 1 ||
                 (!auth.currentEmployee.is_sorting_admin && !auth.currentEmployee.is_superuser && (selectedPackages.lastSelectedPackage.sender_station_id !== auth.currentEmployee.station_id &&
                     selectedPackages.lastSelectedPackage.receiver_station_id !== auth.currentEmployee.station_id)) ||
-                selectedPackages.lastSelectedPackage.tracking_state !== "Declared"
+                selectedPackages.lastSelectedPackage?.tracking_state !== "Declared"
             }
             body={<CreateOrUpdatePackage/>}
         />,
@@ -270,7 +274,7 @@ const PackagesDTable = ({
                 auth.currentEmployee.is_readonly_admin ||
                 selectedPackages.allSelectedPackages.length !== 1 || (!auth.currentEmployee.is_superuser && (selectedPackages.lastSelectedPackage.sender_station_id !== auth.currentEmployee.station_id &&
                     selectedPackages.lastSelectedPackage.receiver_station_id !== auth.currentEmployee.station_id)) ||
-                selectedPackages.lastSelectedPackage.tracking_state !== "Declared"
+                selectedPackages.lastSelectedPackage?.tracking_state !== "Declared"
             }
             body={<CreateOrUpdateCourier/>}
         />,

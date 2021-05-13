@@ -66,9 +66,9 @@ const CreateOrUpdatePackage = ({
   };
   const setCustomers = useSelector(state=> state.setCustomerReducer)
   useEffect(() => {
-    if (stations.length === 0) {
-      getStations();
-    }
+    // if (stations.length === 0) {
+    //   getStations();
+    // }
     const sendStationID = {
       sender_station_id: initialValues.sender_station_id,
       receiver_station_id: initialValues.receiver_station_id,

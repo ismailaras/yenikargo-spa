@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
   findAdvancedPackages,
   selectPackages,
@@ -43,11 +43,11 @@ const FindPackagesAdvancedForm = ({
       setSubmitting(false);
     },
   });
-  useEffect(() => {
-    if (stations.length === 0) {
-      getStations();
-    }
-  });
+  // useEffect(() => {
+  //   if (stations.length === 0) {
+  //     getStations();
+  //   }
+  // });
   const stateCollection = [
     { value: "Declared", label: "Declared", isSorting:false },
     { value: "ReadyToSorting", label: "ReadyToSorting", isSorting:true },

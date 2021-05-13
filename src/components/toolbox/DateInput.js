@@ -1,7 +1,7 @@
 import React from 'react';
 import {InputFeedback} from "./InputFeedback";
 
-const TextInput = ({name, label, onChange, placeHolder, value, error, onBlur, touched, readOnly, onKeyPress, disabled,onKeyUp}) => {
+const DateInput = ({name, label, onChange, placeHolder, value, error, onBlur, touched, readOnly, disabled}) => {
     let clsName = 'form-control';
     if (value || (!error && touched)) {
         clsName += ' is-valid'
@@ -13,12 +13,11 @@ const TextInput = ({name, label, onChange, placeHolder, value, error, onBlur, to
         <div className='form-group'>
             <label htmlFor={name}>{label}</label>
             <input
-                type="text"
+                type="date"
                 defaultValue={value}
                 onChange={onChange}
+                data-date-format="DD MM YYYY"
                 name={name}
-                onKeyPress={onKeyPress}
-                onKeyUp={onKeyUp}
                 readOnly={readOnly}
                 onBlur={onBlur}
                 disabled={disabled}
@@ -29,4 +28,4 @@ const TextInput = ({name, label, onChange, placeHolder, value, error, onBlur, to
     )
 }
 
-export default TextInput;
+export default DateInput;

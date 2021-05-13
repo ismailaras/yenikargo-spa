@@ -97,6 +97,22 @@ export const findPayments = findObject => {
     }
 }
 
+export const findAdvancedPayments = findObject => {
+    return async dispatch => {
+        dispatch(findPaymentsBegin())
+        paymentService.findAdvancedPayments(findObject)
+            .then(async data => {
+                await data;
+                if (data.message) {
+                    dispatch(findPaymentsError(data.message))
+                } else {
+                    dispatch(findPaymentsSuccess(data))
+                }
+            })
+            .catch(err => dispatch(findPaymentsError(err)));
+    }
+}
+
 
 export const findReports = findObject => {
     return async dispatch => {

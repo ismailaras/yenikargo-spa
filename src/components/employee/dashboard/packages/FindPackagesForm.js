@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import RadioInputGroup from "../../../toolbox/RadioInputGroup";
 import NumberInput from "../../../toolbox/NumberInput";
 import TextInput from "../../../toolbox/TextInput";
@@ -22,11 +22,11 @@ const FindPackagesForm = ({
   isAdvanceFilter,
   auth
 }) => {
-  useEffect(() => {
-    if (stations.length === 0) {
-      getStations();
-    }
-  });
+  // useEffect(() => {
+  //   if (stations.length === 0) {
+  //     getStations();
+  //   }
+  // });
   const stateCollection = [
     { value: "0", label: "Declared", isSorting:false },
     { value: "1", label: "ReadyToSorting", isSorting:true },
@@ -75,7 +75,8 @@ const FindPackagesForm = ({
                   <TextInput
                     name="keyword"
                     label="Barkod"
-                    onKeyPress={onKeyPress}
+                    // onKeyPress={onKeyPress}
+                    onKeyUp={onKeyPress}
                     placeHolder="0000000000000"
                     touched={touched.keyword}
                     error={errors.keyword}

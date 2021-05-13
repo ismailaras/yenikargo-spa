@@ -29,7 +29,7 @@ class Label extends Component {
                            {/*     fontSize: 50,*/}
                            {/*     textTransform: 'uppercase'*/}
                            {/* }}>{this.props.stations.find(station => station.id === this.props.pckg.sender_station_id)}</h1>*/}
-                           <p>Alan filial: {this.props.pckg?.receiver_station.name}</p>
+                           <h3>{this.props.pckg?.receiver_station.name}</h3>
                         </div>
                         <div className="col-2 align-self-center">
                             <img alt="logo" src={logo_print} style={{width:'50px',height:'auto',objectFit:'cover'}}/>
@@ -37,7 +37,7 @@ class Label extends Component {
                     </div>
                     <hr/>
                     <div className="row">
-                            <div className="col-6">Alan: {this.props.pckg.receiver_customer_id} </div>
+                            <div className="col-6">Alan: <b style={{fontSize:"18px"}}>{this.props.pckg.receiver_customer_id}</b> </div>
                             <div className="col-6">Bağlama çəkisi: {this.props.pckg.weight} kg</div>
                     </div>
                     <div className="row">

@@ -38,6 +38,7 @@ import { deleteEmployeeReducer } from "./employees/deleteEmployeeReducer";
 import { setEmployeesFilterKeysReducer } from "./employees/setEmployeesFilterKeysReducer";
 import { createPaymentsReducer } from "./payments/createPaymentsReducer";
 import { findPaymentsReducer } from "./payments/findPaymentsReducer";
+import { findAdvancedPaymentsReducer } from "./payments/findAdvancedPaymentsReducer";
 import { findReportsReducer } from "./payments/findReportsReducer";
 import { deleteStationReducer } from "./stations/deleteStationReducer";
 import { updateStationReducer } from "./stations/updateStationReducer";
@@ -99,6 +100,7 @@ const appReducer = combineReducers({
   findEmployeesReducer,
   createPaymentsReducer,
   findPaymentsReducer,
+  findAdvancedPaymentsReducer,
   findReportsReducer,
   selectStationsReducer,
   createStationReducer,

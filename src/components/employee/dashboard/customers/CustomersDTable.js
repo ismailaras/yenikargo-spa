@@ -17,6 +17,7 @@ import {
   formatPercentage,
   getStateNameInAzerbaijani,
 } from "../../../../utilities/helpers";
+import {selectPackages} from "../../../../redux/actions/packageActions";
 
 const cols = [
   {
@@ -100,6 +101,7 @@ const CustomersDTable = ({
   customers,
   selectedCustomers,
   setSenderCustomer,
+  selectPackages,
   setReceiverCustomer,
   currentUser,
   auth
@@ -107,7 +109,8 @@ const CustomersDTable = ({
   const [foundCustomers, setFoundCustomers] = useState(customers);
   useEffect(() => {
     setFoundCustomers(customers);
-  }, [customers]);
+    selectPackages([]);
+  }, [customers,selectPackages]);
   const handleChange = (e) => {
     selectCustomers(e.selectedRows);
   };
@@ -209,6 +212,7 @@ const mapDispatchToProps = {
   selectCustomers,
   setSenderCustomer,
   setReceiverCustomer,
+  selectPackages,
   deleteCustomer,
 };
 

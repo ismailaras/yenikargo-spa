@@ -5,7 +5,7 @@ import FindPaymentsForm from "./FindPaymentsForm";
 import {useFormik} from "formik";
 import {findPaymentsFormValidationSchema} from '../../../../utilities/formValidationSchemas';
 
-const FindPayments = ({findPayments, selectPayments}) => {
+const FindPayments = ({findPayments, selectPayments, isAdvanceFilter, setIsAdvanceFilter}) => {
     const {handleSubmit, handleChange, values, errors, touched, handleBlur, isSubmitting} = useFormik({
         initialValues: {keyword: '', via: 'viaPackageId'},
         validationSchema: findPaymentsFormValidationSchema,
@@ -34,6 +34,8 @@ const FindPayments = ({findPayments, selectPayments}) => {
             radioInputProps={radioInputProps}
             onBlur={handleBlur}
             touched={touched}
+            setIsAdvanceFilter={setIsAdvanceFilter}
+            isAdvanceFilter={isAdvanceFilter}
             isSubmitting={isSubmitting}
         />
     )

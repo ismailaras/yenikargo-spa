@@ -46,6 +46,14 @@ const Navi = ({ signIn, signOut, auth }) => {
         <NavbarBrand to="/" style={{ padding: 0 }}>
           <img src={logo_light} alt="logo" width={150} />
         </NavbarBrand>
+
+        {
+          <Link to={Routes.customers} className="px-3 py-1" style={{background:"#fff",borderRadius:'5px',marginRight:'1rem'}}>
+              <span className="text-info">Müştərilər</span>
+          </Link>}
+        <Link to={Routes.packages} className="px-3 py-1" style={{background:"#fff",borderRadius:'5px'}}>
+            <span className="text-info">Paketlər</span>
+        </Link>
         <UncontrolledDropdown nav inNavbar style={{listStyleType:'none'}}>
           <DropdownToggle nav caret>
             <button type="button" className="btn btn-info btn-sm">
@@ -106,17 +114,6 @@ const Navi = ({ signIn, signOut, auth }) => {
           </DropdownMenu>
         </UncontrolledDropdown>
 
-        {
-          <Link to={Routes.customers} style={{background:"#fff",borderRadius:'5px',marginRight:'1rem'}}>
-            <DropdownItem>
-              <span className="text-info">Müştərilər</span>
-            </DropdownItem>
-          </Link>}
-        <Link to={Routes.packages} style={{background:"#fff",borderRadius:'5px'}}>
-          <DropdownItem>
-            <span className="text-info">Paketlər</span>
-          </DropdownItem>
-        </Link>
         <Container>
           <NavbarToggler onClick={toggle} />
           <Collapse isOpen={isOpen} navbar>

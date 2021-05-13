@@ -16,7 +16,7 @@ export const setCustomerReducer = (state = initialState.setCustomer, action) => 
             if (action.payload === state.receiverCustomer) {
                 notification.warn(CANNOT_BE_SAME_TEXT);
                 return state
-            }else if(state.receiverCustomer.station_id === action.payload.station_id){
+            }else if(notEmpty(state.receiverCustomer) && state.receiverCustomer.station_id === action.payload.station_id){
                 notification.warn(CANNOT_BE_SAME_STATION_TEXT)
                 return state
             }
@@ -33,7 +33,7 @@ export const setCustomerReducer = (state = initialState.setCustomer, action) => 
             if (action.payload === state.senderCustomer) {
                 notification.warn(CANNOT_BE_SAME_TEXT);
                 return state
-            }else if(state.senderCustomer.station_id === action.payload.station_id){
+            }else if(notEmpty(state.senderCustomer) && state.senderCustomer.station_id === action.payload.station_id){
                 notification.warn(CANNOT_BE_SAME_STATION_TEXT)
                 return state
             }else if (!notEmpty(action.payload)) {

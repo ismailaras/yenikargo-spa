@@ -1,7 +1,7 @@
 import React from 'react';
 import {InputFeedback} from "./InputFeedback";
 
-const SelectInput = ({name, label, onChange, defaultOption, value, error, options, onBlur, touched, disabled}) => {
+const SelectInput = ({name, label, onChange, defaultOption, value, error, options, onBlur, touched, disabled,multiple}) => {
     let clsName = 'form-control';
     if (value || (!error && touched)) {
         clsName += ' is-valid'
@@ -16,6 +16,7 @@ const SelectInput = ({name, label, onChange, defaultOption, value, error, option
                 name={name}
                 onChange={onChange}
                 defaultValue={value}
+                multiple={multiple}
                 onBlur={onBlur}
                 disabled={disabled}
                 className={clsName}>

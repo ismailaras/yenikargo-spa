@@ -47,15 +47,12 @@ const PaymentInfo = ({cart, createPayments}) => {
                     // }
                     if ((cartItem.will_receiver_pay && cartItem.is_postpaid) && isForDelivery) {
                         costs.extraSellingCost += cartItem.price * cartItem.quantity;
-                    }
-                    if ((cartItem.will_receiver_pay && cartItem.is_postpaid) && !isForDelivery) {
+                    }else if ((cartItem.will_receiver_pay && cartItem.is_postpaid) && !isForDelivery) {
                         costs.extraSellingCost = 0;
-                    }
-                    if ((!cartItem.will_receiver_pay && !cartItem.is_postpaid && isForDelivery)) {
+                    }else if (!cartItem.is_postpaid && !cartItem.will_receiver_pay) {
                         costs.extraSellingCost += cartItem.price * cartItem.quantity;
                         cartItem.payment_needing = false;
-                    }
-                    if (cartItem.is_postpaid && !isForDelivery) {
+                    }else if (cartItem.is_postpaid && !isForDelivery) {
                         costs.extraSellingCost = 0;
                     }
                 }
@@ -108,6 +105,7 @@ const PaymentInfo = ({cart, createPayments}) => {
                     <hr/>
                     <h5>Toplam: <strong>{formatPrice('AZN').format(costs.totalCost)}</strong></h5>
                 </div>
+                {/*(!cart[0]?.will_receiver_pay && !cart[0]?.is_postpaid) ||*/}
                 <div className="card-body">
                     <CheckboxInput label="Çek çap edilsin" name="is-print" value={isPrint}
                                    onChange={() => setIsPrint(!isPrint)}/>

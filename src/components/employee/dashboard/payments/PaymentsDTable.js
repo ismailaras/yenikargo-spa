@@ -10,6 +10,7 @@ import {
   formatDate,
   getStateNameInAzerbaijani,
 } from "../../../../utilities/helpers";
+import PrintPaymentsButton from "./PrintPaymentsButton";
 
 const cols = [
   {
@@ -75,7 +76,14 @@ const PaymentsDTable = ({
   const handleChange = (e) => {
     selectPayments(e.selectedRows);
   };
-  const buttons = [];
+  const buttons = [
+    <PrintPaymentsButton
+        key={1}
+        disabled={payments.length === 0 }
+        cls="btn btn-secondary"
+        pckg={payments}
+    />,
+  ];
   return (
     <div>
       <DTable
