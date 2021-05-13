@@ -4,6 +4,24 @@ import * as employeeService from "../../services/employeeService";
 import * as notification from "../../utilities/notification";
 import {begin, end, endAll, pendingTask} from 'react-redux-spinner';
 
+export const getEmployeesBegin = () => ({
+    type: actionTypes.GET_EMPLOYEES_BEGIN,
+    payload: {},
+    [pendingTask]: begin
+})
+
+export const getEmployeesSuccess = employees => ({
+    type: actionTypes.GET_EMPLOYEES_SUCCESS,
+    payload: employees,
+    [pendingTask]: end
+})
+
+export const getEmployeesError = error => ({
+    type: actionTypes.GET_EMPLOYEES_ERROR,
+    payload: error,
+    [pendingTask]: endAll
+})
+
 export const setEmployeesFilterKeys = keywords => ({
     type: actionTypes.SET_EMPLOYEES_FILTER_KEYS,
     payload: keywords,
@@ -96,6 +114,22 @@ export const deleteEmployeeError = error => ({
     [pendingTask]: endAll
 })
 
+
+export const addEmployeeToTable = employee => ({
+    type: actionTypes.ADD_EMPLOYEE_TO_TABLE,
+    payload: employee
+})
+
+export const updateEmployeeOnTable = employee => ({
+    type: actionTypes.UPDATE_EMPLOYEE_ON_TABLE,
+    payload: employee
+})
+
+export const deleteEmployeeFromTable = employee => ({
+    type: actionTypes.DELETE_EMPLOYEE_FROM_TABLE,
+    payload: employee
+})
+
 export const createEmployee = employee => {
     return async dispatch => {
         dispatch(createEmployeeBegin())
@@ -146,6 +180,22 @@ export const deleteEmployee = employee => {
                 }
             })
             .catch(err => dispatch(deleteEmployeeError(err)));
+    }
+}
+
+export const getEmployees = () => {
+    return async dispatch => {
+        dispatch(getEmployeesBegin())
+        employeeService.getEmployees()
+            .then(async data => {
+                await data;
+                if (data.message) {
+                    dispatch(getEmployeesError(data.message))
+                } else {
+                    dispatch(getEmployeesSuccess(data))
+                }
+            })
+            .catch(err => dispatch(getEmployeesError(err)));
     }
 }
 

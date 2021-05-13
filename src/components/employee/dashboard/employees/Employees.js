@@ -12,10 +12,10 @@ const Employees = () => {
             <Navi/>
             <Container fluid={true}>
                 <Row>
-                    <Col md={3} className="mb-3">
-                        <FindEmployees/>
-                    </Col>
-                    <Col md={9}>
+                    {/*<Col md={3} className="mb-3">*/}
+                    {/*    <FindEmployees/>*/}
+                    {/*</Col>*/}
+                    <Col md={12}>
                         <EmployeesDTable/>
                     </Col>
                 </Row>

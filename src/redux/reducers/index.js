@@ -55,6 +55,7 @@ import { updateTariffReducer } from "./tariffs/updateTariffReducer";
 import { createTariffReducer } from "./tariffs/createTariffReducer";
 import { selectTariffsReducer } from "./tariffs/selectTariffsReducer";
 import { setTariffReducer } from "./tariffs/setTariffReducer";
+import {getEmployeesReducer} from "./employees/getEmployeesReducer";
 
 const appReducer = combineReducers({
   getCitiesReducer,
@@ -92,6 +93,7 @@ const appReducer = combineReducers({
   updateCourierReducer,
   deleteCourierReducer,
   setCouriersFilterKeysReducer,
+  getEmployeesReducer,
   createEmployeeReducer,
   updateEmployeeReducer,
   deleteEmployeeReducer,

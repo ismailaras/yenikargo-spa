@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import DTable from "../../../toolbox/DTable";
 import { connect } from "react-redux";
 import {
-  deleteEmployee,
+  deleteEmployee, getEmployees,
   selectEmployees,
 } from "../../../../redux/actions/employeeActions";
 import CreateOrUpdateEmployee from "./CreateOrUpdateEmployee";
@@ -83,14 +83,20 @@ const EmployeesDTable = ({
   deleteEmployee,
   selectEmployees,
   employees,
+  employees2,
   selectedEmployees,
+  getEmployees,
   auth
 }) => {
-  const [foundEmployees, setFoundEmployees] = useState(employees);
+  const [foundEmployees, setFoundEmployees] = useState(employees2);
   useEffect(() => {
-    setFoundEmployees(employees);
-  }, [employees]);
-
+    setFoundEmployees(employees2);
+  }, [employees2]);
+  useEffect(()=>{
+    if(employees2.length === 0){
+      getEmployees()
+    }
+  })
   const handleChange = (e) => {
     selectEmployees(e.selectedRows);
   };
@@ -133,8 +139,9 @@ const EmployeesDTable = ({
   ];
   return (
     <div>
+      {console.log(employees)}
       <DTable
-        data={foundEmployees}
+        data={foundEmployees.length === 0 ? employees: foundEmployees}
         cols={cols}
         buttons={buttons}
         expandableRowsComponent={<EmployeeDTableChild />}
@@ -147,12 +154,14 @@ const EmployeesDTable = ({
 };
 
 const mapStateToProps = (state) => ({
-  employees: state.findEmployeesReducer,
+  employees: state.getEmployeesReducer,
+  employees2: state.getEmployeesReducer,
   selectedEmployees: state.selectEmployeesReducer,
   auth:state.authReducer
 });
 
 const mapDispatchToProps = {
+  getEmployees,
   selectEmployees,
   deleteEmployee,
 };

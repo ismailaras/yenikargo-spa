@@ -9,7 +9,7 @@ class PrintLabel extends Component {
         let i = 0;
         while (i < 1) {
             i++;
-            labels.push(<div className="card">
+            labels.push(<div key={i} className="card">
                 <div className="card-body">
                     <table className="table table-dark">
                         <thead>
