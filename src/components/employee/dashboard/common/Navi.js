@@ -86,7 +86,7 @@ const Navi = ({ signIn, signOut, auth }) => {
                 <span className="text-info">İşçilər</span>
               </DropdownItem>
             </Link>}
-            {!auth.currentEmployee.is_sorting_admin &&
+            {(auth.currentEmployee.is_readonly_admin || auth.currentEmployee.is_superuser) &&
             <Link to={Routes.payments}>
               <DropdownItem>
                 <span className="text-info">Ödənişlər</span>
