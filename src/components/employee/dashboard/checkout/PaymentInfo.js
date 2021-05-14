@@ -39,46 +39,38 @@ const PaymentInfo = ({cart, createPayments}) => {
             }
             cart.forEach(cartItem => {
                 cartItem.payment_needing = false;
-                if (cartItem.paymentFor === 'ExtraSelling') {
-                    // cartItem.payment_needing = true;
-                    // if ((cartItem.will_receiver_pay && cartItem.is_postpaid) && isForDelivery) {
-                    //     cartItem.payment_needing = false;
-                    //     costs.extraSellingCost += cartItem.price * cartItem.quantity;
-                    // }
-                    if ((cartItem.will_receiver_pay && cartItem.is_postpaid) && isForDelivery) {
-                        costs.extraSellingCost += cartItem.price * cartItem.quantity;
-                    }else if ((cartItem.will_receiver_pay && cartItem.is_postpaid) && !isForDelivery) {
-                        costs.extraSellingCost = 0;
-                    }else if (!cartItem.is_postpaid && !cartItem.will_receiver_pay) {
-                        costs.extraSellingCost += cartItem.price * cartItem.quantity;
-                        cartItem.payment_needing = false;
-                    }else if (cartItem.is_postpaid && !isForDelivery) {
-                        costs.extraSellingCost = 0;
-                    }
+                if(cartItem.paymentFor === 'ExtraSelling' && !cartItem.is_paid && (!cartItem.will_receiver_pay && !cartItem.is_postpaid)){
+                    costs.extraSellingCost += cartItem.price * cartItem.quantity;
+                }else if (cartItem.paymentFor === 'ExtraSelling' && !cartItem.is_paid && ((cartItem.will_receiver_pay || cartItem.is_postpaid) && !isForDelivery)) {
+                    costs.extraSellingCost = 0;
                 }
-                if (cartItem.paymentFor === 'Package'
-                    && !cartItem.is_paid
-                    && (!cartItem.will_receiver_pay || (cartItem.will_receiver_pay && isForDelivery))) {
-                    cartItem.payment_needing = true;
-                    costs.shippingCost += cartItem.amount;
-                    costs.courierCost += cartItem.courier_cost;
+                if(cartItem.paymentFor === 'ExtraSelling' && !cartItem.is_paid && (!cartItem.will_receiver_pay && !cartItem.is_postpaid )){
+                    costs.extraSellingCost += cartItem.price * cartItem.quantity;
                 }
-                if (cartItem.paymentFor === 'Package'
-                    && !cartItem.is_courier_cost_paid
-                    && (!cartItem.will_receiver_pay || (cartItem.will_receiver_pay && isForDelivery))) {
-                    cartItem.payment_needing = true;
-                    costs.courierCost += cartItem.courier_cost;
+                if (cartItem.paymentFor === 'ExtraSelling' && !cartItem.is_paid && ((cartItem.will_receiver_pay || cartItem.is_postpaid) && isForDelivery)) {
+                    costs.extraSellingCost += cartItem.price * cartItem.quantity;
+                }else if(cartItem.paymentFor === 'ExtraSelling' && !cartItem.is_paid && ((!cartItem.will_receiver_pay || cartItem.is_postpaid ) && !isForDelivery)){
+                    costs.extraSellingCost = 0;
                 }
+
+
                 if (cartItem.paymentFor === 'Package'
                     && !cartItem.is_product_paid
                     && (!cartItem.will_receiver_pay || (cartItem.will_receiver_pay && isForDelivery))) {
                     cartItem.payment_needing = true;
-
-                    // costs.productPrice += cartItem.price;
+                    costs.shippingCost += cartItem.amount;
+                    costs.courierCost += cartItem.courier_cost;
+                    costs.productPrice += cartItem.price;
                 }
                 if (cartItem.paymentFor === 'Package'
                     && cartItem.is_postpaid && !isForDelivery) {
                     costs.shippingCost = 0;
+                    costs.productPrice = 0;
+                    costs.courierCost = 0;
+                }
+
+                if(cartItem.paymentFor === 'Package' && !cartItem.is_postpaid){
+                    costs.productPrice = 0;
                 }
             });
             costs.totalCost = costs.extraSellingCost + costs.shippingCost + costs.courierCost + costs.productPrice;
