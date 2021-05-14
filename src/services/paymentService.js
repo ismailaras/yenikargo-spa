@@ -18,7 +18,7 @@ export const findPayments = findObject => {
 }
 
 export const findAdvancedPayments = p => {
-    return apiService.post("payment/advanced_filter", {"from_date":p.from_date,"to_date":p.to_date,"station_id":p.station_id.map(Number)})
+    return apiService.post("payment/advanced_filter", {"from_date":p.from_date,"to_date":p.to_date,"stations":p.stations.map(Number)})
         .then(data => data)
         .catch(err => err);
 }

@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {
   selectPackages,
   setPackagesFilterKeys
@@ -28,11 +28,12 @@ const FindPaymentsAdvancedForm = ({
     touched,
     handleBlur,
     isSubmitting,
+    resetForm
   } = useFormik({
     initialValues: {
       from_date: null,
       to_date: null,
-      station_id: [].map(Number)
+      stations: []
     },
     validationSchema: findPackagesAdvancedFormValidationSchema,
     onSubmit: (values, { setSubmitting }) => {
@@ -40,6 +41,7 @@ const FindPaymentsAdvancedForm = ({
       setSubmitting(false);
     },
   });
+  const [isReset, setIsReset] = useState(false)
   useEffect(() => {
      if (stations.length === 0) {
        getStations();
@@ -75,11 +77,11 @@ const FindPaymentsAdvancedForm = ({
                 return (
                     <label key={index}>
                       <input
-                          name="station_id"
+                          name="stations"
                           type="checkbox"
                           id={s.id}
                           value={s.id}
-                          checked={values.station_id.includes(String(s.id))}
+                          checked={values.stations.includes(String(s.id))}
                           onChange={handleChange}
                       />
                       <span className="pl-2">{s.name}</span>
@@ -90,13 +92,13 @@ const FindPaymentsAdvancedForm = ({
           </DFilter>
           <div className="card-footer">
             {isAdvanceFilter && (
-              <button
-                className="btn btn-warning"
-                type="button"
-                onClick={() => setIsAdvanceFilter(!isAdvanceFilter)}
-              >
-                <i className="fa fa-arrow-circle-left" />
-              </button>
+                  <button
+                    className="btn btn-warning"
+                    type="button"
+                    onClick={() => setIsAdvanceFilter(!isAdvanceFilter)}
+                  >
+                    <i className="fa fa-arrow-circle-left" />
+                  </button>
             )}
             <button
               className="btn btn-primary  ml-1"
@@ -106,9 +108,28 @@ const FindPaymentsAdvancedForm = ({
               <i className="fa fa-search" />
               <span> Axtar</span>
             </button>
+            {isAdvanceFilter && (
+                <button
+                    className="btn btn-outline-info ml-2"
+                    type="button"
+                    onClick={() => {
+                      resetForm()
+                      findAdvancedPayments({from_date: "2030-01-01",to_date: null,stations:[]})
+                      setIsReset(true)
+                      setTimeout(()=>{
+                        setIsReset(false)
+                      },2000)
+                    }}
+                >
+                  <i className="fa fa-refresh" />
+                </button>
+            )}
           </div>
         </form>
       </div>
+      {isReset && <div className="alert alert-info alert-dismissible fade show mt-2" role="alert">
+        Axtarış sıfırlandı
+      </div>}
     </div>
   );
 };

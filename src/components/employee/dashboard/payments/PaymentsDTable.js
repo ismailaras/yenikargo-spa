@@ -10,7 +10,7 @@ import {
   formatDate,
   getStateNameInAzerbaijani,
 } from "../../../../utilities/helpers";
-import PrintPaymentsButton from "./PrintPaymentsButton";
+import {CSVLink} from "react-csv";
 
 const cols = [
   {
@@ -44,11 +44,6 @@ const cols = [
     sortable: true,
   },
   {
-    name: <h6>Comment</h6>,
-    selector: "comment",
-    sortable: true,
-  },
-  {
     name: <h6>Tarix</h6>,
     selector: "created_date",
     sortable: true,
@@ -60,6 +55,12 @@ const cols = [
     selector: "data_state",
     sortable: true,
     format: (row) => getStateNameInAzerbaijani(row["data_state"]),
+  },
+  {
+    name: <h6>Comment</h6>,
+    selector: "comment",
+    minWidth: "50%",
+    sortable: true,
   },
 ];
 
@@ -76,13 +77,25 @@ const PaymentsDTable = ({
   const handleChange = (e) => {
     selectPayments(e.selectedRows);
   };
+  const headers = [
+    { label: "First Name", key: "firstname" },
+    { label: "Last Name", key: "lastname" },
+    { label: "Email", key: "email" }
+  ];
+  const info = []
+  const data = payments.map(a=>{
+    info.push({id:a.id,sort:a.sort,amount:a.amount,method:a.method,employee:a.employee.first_name+" "+a.employee.last_name,comment:a.comment,created_date:a.created_date})
+  })
+  console.log(info)
+  console.log(data)
   const buttons = [
-    <PrintPaymentsButton
-        key={1}
-        disabled={payments.length === 0 }
-        cls="btn btn-secondary"
-        pckg={payments}
-    />,
+    <CSVLink
+        data={info}
+        className="btn btn-secondary"
+        filename={"yenikargo-report.csv"}
+    >
+      Export
+    </CSVLink>
   ];
   return (
     <div>
