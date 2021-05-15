@@ -21,7 +21,6 @@ class Label extends Component {
                             <h1>SAY: {i}/{this.props.pckg.quantity}</h1>
                         </div>
                     </div>
-                    {/* {console.log(this.props.pckg)} */}
                     <hr/>
                     <div className="row">
                        <div className="col-10">
@@ -29,7 +28,7 @@ class Label extends Component {
                            {/*     fontSize: 50,*/}
                            {/*     textTransform: 'uppercase'*/}
                            {/* }}>{this.props.stations.find(station => station.id === this.props.pckg.sender_station_id)}</h1>*/}
-                           <h3>{this.props.pckg?.receiver_station.name}</h3>
+                           <h1>{this.props.pckg?.receiver_station.name}</h1>
                         </div>
                         <div className="col-2 align-self-center">
                             <img alt="logo" src={logo_print} style={{width:'50px',height:'auto',objectFit:'cover'}}/>

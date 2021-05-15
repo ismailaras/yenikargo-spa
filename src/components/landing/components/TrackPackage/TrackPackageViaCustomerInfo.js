@@ -59,7 +59,7 @@ const TrackPackageViaCustomerInfo = ({ trackingPackages }) => {
                         <tr key={index} style={{background: trackingPackage.current_state === item.state && "green"}}>
                           <td>#</td>
                           <td>{getStatusNameInAzerbaijani(item.state)}</td>
-                          <td>{item.state === "Declared" ? trackingPackage.sender_station_name:item.state === "Delivered"?trackingPackage.receiver_station_name : null }</td>
+                          <td>{item.state === "Declared" ? trackingPackage.sender_station_name:item.state === "Arrived"?trackingPackage.receiver_station_name : null }</td>
                           <td>{formatDate(item.created_date)}</td>
                         </tr>
                       );

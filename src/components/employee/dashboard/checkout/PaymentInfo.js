@@ -38,18 +38,10 @@ const PaymentInfo = ({cart, createPayments}) => {
                 console.log(cart)
             }
             cart.forEach(cartItem => {
-                cartItem.payment_needing = false;
-                if(cartItem.paymentFor === 'ExtraSelling' && !cartItem.is_paid && (!cartItem.will_receiver_pay && !cartItem.is_postpaid)){
-                    costs.extraSellingCost += cartItem.price * cartItem.quantity;
-                }else if (cartItem.paymentFor === 'ExtraSelling' && !cartItem.is_paid && ((cartItem.will_receiver_pay || cartItem.is_postpaid) && !isForDelivery)) {
-                    costs.extraSellingCost = 0;
-                }
-                if(cartItem.paymentFor === 'ExtraSelling' && !cartItem.is_paid && (!cartItem.will_receiver_pay && !cartItem.is_postpaid )){
+                if(cartItem.paymentFor === 'ExtraSelling' && !cartItem.is_paid && (!cartItem.will_receiver_pay || !cartItem.is_postpaid )){
                     costs.extraSellingCost += cartItem.price * cartItem.quantity;
                 }
-                if (cartItem.paymentFor === 'ExtraSelling' && !cartItem.is_paid && ((cartItem.will_receiver_pay || cartItem.is_postpaid) && isForDelivery)) {
-                    costs.extraSellingCost += cartItem.price * cartItem.quantity;
-                }else if(cartItem.paymentFor === 'ExtraSelling' && !cartItem.is_paid && ((!cartItem.will_receiver_pay || cartItem.is_postpaid ) && !isForDelivery)){
+                if(cartItem.paymentFor === 'ExtraSelling' && !cartItem.is_paid && (cartItem.will_receiver_pay && !isForDelivery) && (cartItem.is_postpaid && !isForDelivery)){
                     costs.extraSellingCost = 0;
                 }
 

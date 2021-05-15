@@ -223,7 +223,7 @@ const PackagesDTable = ({
         });
         history.push(Routes.checkout);
     };
-    const checkStatus = (!auth.currentEmployee.is_superuser && selectedPackages.allSelectedPackages.find(a => a.tracking_state === "Delivered") && true) || (auth.currentEmployee.is_operator_admin && selectedPackages.lastSelectedPackage?.tracking_state === "Sorting") || ((selectedPackages.allSelectedPackages.find(a => a.sender_station_id !== auth.currentEmployee.station_id) && true) && (selectedPackages.lastSelectedPackage?.tracking_state === "Declared" || (auth.currentEmployee.is_operator_admin && selectedPackages.lastSelectedPackage?.tracking_state === "ReadyToSorting"))) || ((selectedPackages.allSelectedPackages.find(a => a.receiver_station_id !== auth.currentEmployee.station_id) && true) && ((auth.currentEmployee.is_operator_admin && selectedPackages.lastSelectedPackage?.tracking_state === "OnWay") || selectedPackages.lastSelectedPackage?.tracking_state === "Arrived"))
+    const checkStatus = (!auth.currentEmployee.is_superuser && selectedPackages.allSelectedPackages.find(a => a.tracking_state === "Delivered") && true) || (auth.currentEmployee.is_operator_admin && selectedPackages.lastSelectedPackage?.tracking_state === "Sorting") || ((selectedPackages.allSelectedPackages.find(a => a.sender_station_id !== auth.currentEmployee.station_id) && true) && (selectedPackages.lastSelectedPackage?.tracking_state === "Declared" || (auth.currentEmployee.is_operator_admin && selectedPackages.lastSelectedPackage?.tracking_state === "ReadyToSorting"))) || ((selectedPackages.allSelectedPackages.find(a => a.receiver_station_id !== auth.currentEmployee.station_id) && true) && ((auth.currentEmployee.is_operator_admin && selectedPackages.lastSelectedPackage?.tracking_state === "OnWay") || (auth.currentEmployee.is_operator_admin && selectedPackages.lastSelectedPackage?.tracking_state === "Arrived")))
     // const findDifferentStationPackage = selectedPackages.allSelectedPackages.find(a=> a.sender_station_id !== auth.currentEmployee.station_id)
     // const findDifferentStationPackage1 = selectedPackages.allSelectedPackages.find(a=> a.receiver_station_id !== auth.currentEmployee.station_id)
 
@@ -237,7 +237,7 @@ const PackagesDTable = ({
                 selectedPackages.allSelectedPackages.length !== 1 ||
                 (!auth.currentEmployee.is_sorting_admin && !auth.currentEmployee.is_superuser && (selectedPackages.lastSelectedPackage.sender_station_id !== auth.currentEmployee.station_id &&
                     selectedPackages.lastSelectedPackage.receiver_station_id !== auth.currentEmployee.station_id)) ||
-                selectedPackages.lastSelectedPackage.tracking_state !== "Declared"
+                (!auth.currentEmployee.is_superuser && selectedPackages.lastSelectedPackage.tracking_state !== "Declared")
             }
         >
             Sil
@@ -254,7 +254,7 @@ const PackagesDTable = ({
                 selectedPackages.allSelectedPackages.length !== 1 ||
                 (!auth.currentEmployee.is_sorting_admin && !auth.currentEmployee.is_superuser && (selectedPackages.lastSelectedPackage.sender_station_id !== auth.currentEmployee.station_id &&
                     selectedPackages.lastSelectedPackage.receiver_station_id !== auth.currentEmployee.station_id)) ||
-                selectedPackages.lastSelectedPackage?.tracking_state !== "Declared"
+                (!auth.currentEmployee.is_superuser && selectedPackages.lastSelectedPackage?.tracking_state !== "Declared")
             }
             body={<CreateOrUpdatePackage/>}
         />,
