@@ -17,7 +17,12 @@ export const cartReducer = (state = initialState.cart, action) => {
                 return [...state, {...action.payload}]
             }
         case actionTypes.REMOVE_FROM_CART:
-            state = state.filter(cartItem => cartItem.id !== action.payload.id);
+            state = state.filter(cartItem => {
+                if (action.payload.remove) {
+                    return cartItem.id !== action.payload.c.id && cartItem.paymentFor !== 'ExtraSelling';
+                }
+                return cartItem.id !== action.payload.c.id;
+            });
             return state;
         case actionTypes.ADD_COURIER_TO_PACKAGES:
             const {packages, courier} = action.payload;

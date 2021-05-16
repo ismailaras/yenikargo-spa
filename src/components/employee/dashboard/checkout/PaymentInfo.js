@@ -37,8 +37,6 @@ const PaymentInfo = ({cart, createPayments}) => {
             let paymentNeeding = false;
             cart.forEach(cartItem => {
                 cartItem.payment_needing = false;
-                console.log("-------------------------")
-                console.log(cartItem)
                 if (cartItem.paymentFor === 'ExtraSelling') {
                     costs.extraSellingCost += cartItem.price * cartItem.quantity;
                 } else {

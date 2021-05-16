@@ -40,7 +40,7 @@ const ShippingInfo = ({cart, removeFromCart}) => {
                                     {/*    Kuryer artır*/}
                                     {/*</button> : null}*/}
                                     <button
-                                        onClick={() => removeFromCart(cartItem)}
+                                        onClick={() => removeFromCart(cartItem, true)}
                                         className="btn btn-danger btn-sm ml-2">
                                         Ləvğ et
                                     </button>

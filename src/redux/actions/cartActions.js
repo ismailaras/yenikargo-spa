@@ -5,10 +5,12 @@ export const addToCart = cartItem => ({
     payload: cartItem
 })
 
-export const removeFromCart = cartItem => ({
-    //TODO: write ads
+export const removeFromCart = (cartItem, remove = false) => ({
     type: actionTypes.REMOVE_FROM_CART,
-    payload: cartItem
+    payload: {
+        c: cartItem,
+        remove
+    }
 })
 
 export const parsePaymentsToCart = (payments, isForDelivery) => ({
