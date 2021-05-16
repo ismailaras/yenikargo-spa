@@ -22,9 +22,13 @@ const ExtraSelling = ({getAllExtraSelling, allExtraSelling, addToCart, removeFro
             paymentFor: 'ExtraSelling',
             price: extraSelling.price
         };
+        console.log("+++++++++++++++")
+        console.log(cartItem)
+        console.log("+++++++++++++++")
         if (quantity > 0) {
             addToCart(cartItem);
         } else {
+            //TODO: write
             removeFromCart(cartItem);
         }
     }
