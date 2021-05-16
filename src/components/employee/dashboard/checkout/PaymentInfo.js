@@ -37,8 +37,10 @@ const PaymentInfo = ({cart, createPayments}) => {
             let paymentNeeding = false;
             cart.forEach(cartItem => {
                 cartItem.payment_needing = false;
+                console.log("-------------------------")
+                console.log(cartItem)
                 if (cartItem.paymentFor === 'ExtraSelling') {
-                    costs.extraSellingCost += cartItem.price * cartItem.quantity
+                    costs.extraSellingCost += cartItem.price * cartItem.quantity;
                 } else {
                     if (isForDelivery && (cartItem.will_receiver_pay
                         || (!cartItem.will_receiver_pay && cartItem.is_postpaid)
@@ -53,13 +55,14 @@ const PaymentInfo = ({cart, createPayments}) => {
                     && (!cartItem.will_receiver_pay || (cartItem.will_receiver_pay && isForDelivery))) {
                     cartItem.payment_needing = true;
                     costs.shippingCost += cartItem.amount;
-                    costs.courierCost += cartItem.courier_cost;
+                    // costs.courierCost += cartItem.courier_cost;
                 }
                 if (cartItem.paymentFor === 'Package'
                     && !cartItem.is_courier_cost_paid
                     && (!cartItem.will_receiver_pay || (cartItem.will_receiver_pay && isForDelivery))) {
                     cartItem.payment_needing = true;
                     costs.courierCost += cartItem.courier_cost;
+                    costs.productPrice += cartItem.price;
                 }
                 if (cartItem.paymentFor === 'Package'
                     && !cartItem.is_product_paid
@@ -69,6 +72,8 @@ const PaymentInfo = ({cart, createPayments}) => {
                 if (cartItem.paymentFor === 'Package'
                     && cartItem.is_postpaid && !isForDelivery) {
                     costs.shippingCost = 0;
+                    costs.productPrice = 0;
+                    costs.courierCost = 0;
                 }
             });
             if (!paymentNeeding) {
