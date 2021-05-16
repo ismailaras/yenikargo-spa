@@ -6,6 +6,7 @@ export const addToCart = cartItem => ({
 })
 
 export const removeFromCart = cartItem => ({
+    //TODO: write
     type: actionTypes.REMOVE_FROM_CART,
     payload: cartItem
 })
