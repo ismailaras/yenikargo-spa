@@ -73,6 +73,14 @@ const PaymentInfo = ({cart, createPayments}) => {
                     costs.productPrice = 0;
                     costs.courierCost = 0;
                 }
+                if (cartItem.paymentFor === 'Package'
+                    && cartItem.is_postpaid && !cartItem.will_receiver_pay && isForDelivery) {
+                    costs.productPrice = 0;
+                }
+                if (cartItem.paymentFor === 'Package'
+                    && cartItem.is_postpaid && !cartItem.will_receiver_pay && !isForDelivery) {
+                    costs.productPrice += cartItem.price;
+                }
             });
             if (!paymentNeeding) {
                 costs.extraSellingCost = 0;
