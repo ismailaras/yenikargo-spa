@@ -7,10 +7,9 @@ import {
 } from "../../../../utilities/helpers";
 
 const TrackPackageViaCustomerInfo = ({ trackingPackages }) => {
-
   return (
     <div className="mt-3">
-      {trackingPackages.map((trackingPackage) => {
+      {trackingPackages.sort((a,b)=>b.package_id-a.package_id).map((trackingPackage) => {
         return (
           <div key={trackingPackage.package_id}>
             <Alert color="success">
