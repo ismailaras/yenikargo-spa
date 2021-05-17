@@ -4,6 +4,7 @@ export const createOrUpdateCustomerFormValidationSchema = Yup.object().shape({
   first_name: Yup.string().required("Ad daxil edilməlidir."),
   last_name: Yup.string().required("Soyad daxil edilməlidir."),
   bank_name: Yup.string(),
+  bank_info: Yup.string(),
   mobile_number: Yup.string()
     .required("Mobil nömrə daxil edilməlidir.")
     .test(

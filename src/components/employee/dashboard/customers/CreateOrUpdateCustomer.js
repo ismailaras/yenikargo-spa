@@ -23,7 +23,8 @@ const CreateOrUpdateCustomer = ({createCustomer, updateCustomer, stations, getSt
         address: '',
         card_number: '',
         exp_date: '',
-        bank_name: ''
+        bank_name: '',
+        bank_info:''
     }
     if (notEmpty(selectedCustomers.lastSelectedCustomer)) {
         initialValues = selectedCustomers.lastSelectedCustomer
