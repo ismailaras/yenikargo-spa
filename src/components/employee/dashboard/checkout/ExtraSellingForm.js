@@ -3,12 +3,12 @@ import IncreaseDecreaseInput from "../../../toolbox/IncreaseDecreaseInput";
 import React from "react";
 import RadioInputGroup from "../../../toolbox/RadioInputGroup";
 
-export const ExtraSellingForm = ({allExtraSelling, handleChange, selectedCartItem, getRadioInputProps, onChange, handleSubmit}) => {
+export const ExtraSellingForm = ({allExtraSelling, handleChange, selectedCartItem, getRadioInputProps, onChange, handleSubmit,handleReset}) => {
     return <div className="card">
         <div className="card-header">
             Extra servislər
         </div>
-        <div className="card-body" style={{overflow: 'scroll', height: 300}}>
+        <div className="card-body" style={{overflow: 'scroll', height: 350}}>
             {allExtraSelling.map(extraSelling => (
                 <div key={extraSelling.id}>
                     <div className="row bg-light pt-3 mb-2"
@@ -25,8 +25,9 @@ export const ExtraSellingForm = ({allExtraSelling, handleChange, selectedCartIte
                     </div>
                 </div>
             ))}
-            <div className="col-md-1">
+            <div>
                 <RadioInputGroup
+                    radioClass="mr-3"
                     radioInputProps={getRadioInputProps()}
                     name="cartItem"
                     inline={true}
@@ -34,7 +35,8 @@ export const ExtraSellingForm = ({allExtraSelling, handleChange, selectedCartIte
                     onChange={onChange}
                 />
             </div>
-            <button className="btn btn-primary" onClick={handleSubmit}>Artır</button>
+            <button className="btn btn-success" onClick={handleSubmit}>Artır</button>
+            <button className="btn btn-outline-danger ml-2" onClick={handleReset}>Sıfırla</button>
         </div>
     </div>
 }

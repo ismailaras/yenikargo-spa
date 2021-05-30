@@ -1,7 +1,7 @@
 import React from 'react';
 import RadioInput from "./RadioInput";
 
-const RadioInputGroup = ({radioInputProps, onChange, name, inline, checkedValue}) => {
+const RadioInputGroup = ({radioInputProps, onChange, name, inline, checkedValue,radioClass}) => {
     let cls = 'form-group';
     if (inline) {
         cls += ' custom-control-inline';
@@ -10,6 +10,7 @@ const RadioInputGroup = ({radioInputProps, onChange, name, inline, checkedValue}
             {radioInputProps.map(radioInputProp =>  (
                 <RadioInput
                     name={name}
+                    className={radioClass}
                     key={radioInputProp.value}
                     inline={inline}
                     checked={checkedValue === radioInputProp.value}

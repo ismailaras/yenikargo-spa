@@ -22,6 +22,11 @@ const ExtraSelling = ({getAllExtraSelling, allExtraSelling, addToCart, removeFro
         await addExtraSellingCost(parseInt(selectedCartItem, 10), cost);
         cost = 0;
     }
+    const handleReset = ()=>{
+        let cost = 0;
+
+        addExtraSellingCost(parseInt(selectedCartItem, 10), cost);
+    }
     const handleChange = (event) => {
         const {name, value} = event.target;
         const cartItemId = parseInt(name, 10);
@@ -49,6 +54,7 @@ const ExtraSelling = ({getAllExtraSelling, allExtraSelling, addToCart, removeFro
             selectCartItem={selectCartItem}
             cart={cart}
             handleSubmit={handleSubmit}
+            handleReset={handleReset}
             onChange={onChange}
             getRadioInputProps={getRadioInputProps}
         />

@@ -39,12 +39,21 @@ const PaymentInfo = ({cart, createPayments}) => {
                 if (!cartItem.is_paid || !cartItem.is_courier_cost_paid) {
                     costs.shippingCost += cartItem.amount;
                     costs.courierCost += cartItem.courier_cost;
-                    console.log(cartItem.extraSellingCost)
-                    if (notEmpty(cartItem.extraSellingCost)) costs.extraSellingCost += cartItem.extraSellingCost;
+                    if (notEmpty(cartItem.extra_selling_cost)) costs.extraSellingCost += cartItem.extra_selling_cost;
                 }
-                if (!cartItem.is_product_paid && cartItem.is_postpaid && isForDelivery) {
+                if (!cartItem.is_product_paid && cartItem.is_postpaid && isForDelivery && !cartItem.will_receiver_pay) {
                     costs.productPrice += cartItem.price;
+                    costs.shippingCost = 0;
+                    costs.courierCost = 0;
+                    costs.extraSellingCost = 0;
                 }
+                if (!cartItem.is_product_paid && !isForDelivery && ((cartItem.is_postpaid && cartItem.will_receiver_pay) || cartItem.will_receiver_pay)) {
+                    costs.productPrice = 0;
+                    costs.shippingCost = 0;
+                    costs.courierCost = 0;
+                    costs.extraSellingCost = 0;
+                }
+                if (isForDelivery && cartItem.is_postpaid && cartItem.will_receiver_pay) costs.productPrice += cartItem.price;
             });
             costs.totalCost = costs.extraSellingCost + costs.shippingCost + costs.courierCost + costs.productPrice;
             return costs;

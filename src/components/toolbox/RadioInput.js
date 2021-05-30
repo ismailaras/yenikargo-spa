@@ -1,8 +1,8 @@
 import React from 'react';
 
-const RadioInput = ({name, label, value, checked, onChange}) => {
+const RadioInput = ({name, label, value, checked, onChange,className}) => {
     let cls = "custom-control custom-radio";
-    return (<div className={cls}>
+    return (<div className={`${cls} ${className}`}>
             <input
                 type="radio"
                 id={value}
