@@ -295,7 +295,7 @@ const PackagesDTable = ({
             disabled={
                 (selectedPackages?.lastSelectedPackage?.tracking_state !== "Arrived" && selectedPackages?.lastSelectedPackage?.tracking_state !== "Declared") ||
                 auth.currentEmployee.is_readonly_admin ||
-                selectedPackages.allSelectedPackages.length !== 1}
+                selectedPackages.allSelectedPackages.length === 0}
         >
             Ödəniş al
         </button>,

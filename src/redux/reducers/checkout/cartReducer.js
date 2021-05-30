@@ -16,6 +16,14 @@ export const cartReducer = (state = initialState.cart, action) => {
             } else {
                 return [...state, {...action.payload}]
             }
+        case actionTypes.ADD_EXTRA_SERVICE_COST:
+            console.log(action.payload);
+            return state.map(cItem => {
+                if (cItem.id === action.payload.id) {
+                    cItem.extra_selling_cost = action.payload.extra_selling_cost;
+                }
+                return cItem;
+            });
         case actionTypes.REMOVE_FROM_CART:
             state = state.filter(cartItem => {
                 if (action.payload.remove) {

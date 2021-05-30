@@ -1,10 +1,7 @@
 import React from 'react';
 
-const RadioInput = ({name, label, value, inline, checked,onChange}) => {
+const RadioInput = ({name, label, value, checked, onChange}) => {
     let cls = "custom-control custom-radio";
-    if (inline) {
-        cls += ' custom-control-inline';
-    }
     return (<div className={cls}>
             <input
                 type="radio"
@@ -14,7 +11,7 @@ const RadioInput = ({name, label, value, inline, checked,onChange}) => {
                 defaultChecked={checked}
                 defaultValue={value}
                 className="custom-control-input"/>
-                <label className="custom-control-label" htmlFor={value}>{label}</label>
+            <label className="custom-control-label" htmlFor={value}>{label}</label>
         </div>
     )
 }

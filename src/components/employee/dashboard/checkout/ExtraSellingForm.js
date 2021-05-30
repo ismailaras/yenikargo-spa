@@ -1,9 +1,10 @@
 import {formatPrice} from "../../../../utilities/helpers";
 import IncreaseDecreaseInput from "../../../toolbox/IncreaseDecreaseInput";
 import React from "react";
+import RadioInputGroup from "../../../toolbox/RadioInputGroup";
 
-export const ExtraSellingForm = ({allExtraSelling, handleChange}) => (
-    <div className="card">
+export const ExtraSellingForm = ({allExtraSelling, handleChange, selectedCartItem, getRadioInputProps, onChange, handleSubmit}) => {
+    return <div className="card">
         <div className="card-header">
             Extra servislər
         </div>
@@ -24,6 +25,16 @@ export const ExtraSellingForm = ({allExtraSelling, handleChange}) => (
                     </div>
                 </div>
             ))}
+            <div className="col-md-1">
+                <RadioInputGroup
+                    radioInputProps={getRadioInputProps()}
+                    name="cartItem"
+                    inline={true}
+                    checkedValue={selectedCartItem}
+                    onChange={onChange}
+                />
+            </div>
+            <button className="btn btn-primary" onClick={handleSubmit}>Artır</button>
         </div>
     </div>
-)
+}

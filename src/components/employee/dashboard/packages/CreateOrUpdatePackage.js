@@ -31,9 +31,6 @@ function setInitialValues(initialValues, setCustomers, selectedPackages) {
   return initialValues;
 }
 
-
-
-
 const CreateOrUpdatePackage = ({
   createPackage,
   updatePackage,

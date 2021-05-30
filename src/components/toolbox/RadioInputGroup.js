@@ -2,7 +2,11 @@ import React from 'react';
 import RadioInput from "./RadioInput";
 
 const RadioInputGroup = ({radioInputProps, onChange, name, inline, checkedValue}) => {
-    return (<div className="form-group" onChange={onChange}>
+    let cls = 'form-group';
+    if (inline) {
+        cls += ' custom-control-inline';
+    }
+    return (<div className={cls} onChange={onChange}>
             {radioInputProps.map(radioInputProp =>  (
                 <RadioInput
                     name={name}

@@ -1,7 +1,7 @@
 import {connect, useSelector} from "react-redux";
 import React, {useEffect, useRef, useState} from "react";
 import CheckboxInput from "../../../toolbox/CheckboxInput";
-import {formatPrice} from "../../../../utilities/helpers";
+import {formatPrice, notEmpty} from "../../../../utilities/helpers";
 import RadioInputGroup from "../../../toolbox/RadioInputGroup";
 import {iterPaymentMethods, PaymentMethodEnum} from "../../../../enums/paymentMethodEnum";
 import {createPayments} from "../../../../redux/actions/paymentActions";
@@ -34,62 +34,18 @@ const PaymentInfo = ({cart, createPayments}) => {
                 courierCost: 0,
                 productPrice: 0,
             };
-            let paymentNeeding = false;
             cart.forEach(cartItem => {
-                cartItem.payment_needing = false;
-                if (cartItem.paymentFor === 'ExtraSelling') {
-                    costs.extraSellingCost += cartItem.price * cartItem.quantity;
-                } else {
-                    if (isForDelivery && (cartItem.will_receiver_pay
-                        || (!cartItem.will_receiver_pay && cartItem.is_postpaid)
-                        || (cartItem.will_receiver_pay && cartItem.is_postpaid))) {
-                        paymentNeeding = true;
-                    } else if (!cartItem.will_receiver_pay && !cartItem.is_postpaid) {
-                        paymentNeeding = true;
-                    }
-                }
-                if (cartItem.paymentFor === 'Package'
-                    && !cartItem.is_paid
-                    && (!cartItem.will_receiver_pay || (cartItem.will_receiver_pay && isForDelivery))) {
-                    cartItem.payment_needing = true;
+                cartItem.payment_needing = true;
+                if (!cartItem.is_paid || !cartItem.is_courier_cost_paid) {
                     costs.shippingCost += cartItem.amount;
-                    // costs.courierCost += cartItem.courier_cost;
-                }
-                if (cartItem.paymentFor === 'Package'
-                    && !cartItem.is_courier_cost_paid
-                    && (!cartItem.will_receiver_pay || (cartItem.will_receiver_pay && isForDelivery))) {
-                    cartItem.payment_needing = true;
                     costs.courierCost += cartItem.courier_cost;
+                    console.log(cartItem.extraSellingCost)
+                    if (notEmpty(cartItem.extraSellingCost)) costs.extraSellingCost += cartItem.extraSellingCost;
+                }
+                if (!cartItem.is_product_paid && cartItem.is_postpaid && isForDelivery) {
                     costs.productPrice += cartItem.price;
                 }
-                if (cartItem.paymentFor === 'Package'
-                    && !cartItem.is_product_paid
-                    && (!cartItem.will_receiver_pay || (cartItem.will_receiver_pay && isForDelivery))) {
-                    cartItem.payment_needing = true;
-                }
-                if (cartItem.paymentFor === 'Package'
-                    && cartItem.is_postpaid && !isForDelivery) {
-                    costs.shippingCost = 0;
-                    costs.productPrice = 0;
-                    costs.courierCost = 0;
-                }
-                if ((cartItem.paymentFor === 'Package' || cartItem.paymentFor === 'ExtraSelling')
-                    && cartItem.is_postpaid && !cartItem.will_receiver_pay && isForDelivery) {
-                    costs.courierCost = 0;
-                    costs.shippingCost = 0;
-                    paymentNeeding = false
-                    costs.productPrice =  cartItem.price;
-                }
-                if ((cartItem.paymentFor === 'Package' || cartItem.paymentFor === 'ExtraSelling')
-                    && cartItem.is_postpaid && !cartItem.will_receiver_pay && !isForDelivery) {
-                    costs.shippingCost += cartItem.amount;
-                    paymentNeeding = true
-                    costs.courierCost += cartItem.courier_cost;
-                }
             });
-            if (!paymentNeeding) {
-                costs.extraSellingCost = 0;
-            }
             costs.totalCost = costs.extraSellingCost + costs.shippingCost + costs.courierCost + costs.productPrice;
             return costs;
         }

@@ -29,7 +29,7 @@ const ShippingInfo = ({cart, removeFromCart}) => {
                                     {cartItem.deliver_to_address ?
                                         <div className="badge badge-danger">Evə çatdırılma</div> : null}
                                 </div>
-                                <div className="col-md-4">
+                                <div className="col-md-3">
                                     <PrintLabelButton
                                         cls='btn btn-primary btn-sm'
                                         pckg={cartItem}
@@ -48,7 +48,6 @@ const ShippingInfo = ({cart, removeFromCart}) => {
                             </div>
                             <hr/>
                             <div className="row">
-
                                 <div className="col-md-4">
                                     <p>Alan müştəri: <strong> {cartItem.receiver_full_name}</strong></p>
                                     <p>Əlaqə nömrəsi: <strong>{cartItem.receiver_mobile_number}</strong></p>
@@ -60,6 +59,9 @@ const ShippingInfo = ({cart, removeFromCart}) => {
                                         xidməti: <strong>{formatPrice('AZN').format(cartItem.courier_cost)}</strong>
                                     </p>
                                     <p>Məhsul qiyməti: <strong>{formatPrice('AZN').format(cartItem.price)}</strong></p>
+                                    <p>Ekstra servis
+                                        qiyməti: <strong>{formatPrice('AZN').format(cartItem.extra_selling_cost)}</strong>
+                                    </p>
                                 </div>
                                 <div className="col-md-4">
                                     <p>Ədəd: <strong>{cartItem.quantity}</strong></p>

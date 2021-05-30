@@ -5,6 +5,14 @@ export const addToCart = cartItem => ({
     payload: cartItem
 })
 
+export const addExtraSellingCost = (id, extra_selling_cost) => ({
+    type: actionTypes.ADD_EXTRA_SERVICE_COST,
+    payload: {
+        id,
+        extra_selling_cost
+    }
+})
+
 export const removeFromCart = (cartItem, remove = false) => ({
     type: actionTypes.REMOVE_FROM_CART,
     payload: {
