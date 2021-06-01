@@ -69,6 +69,11 @@ const cols = [
     sortable: true,
   },
   {
+    name: <h6>Bank qeyd</h6>,
+    selector: "bank_info",
+    sortable: true,
+  },
+  {
     name: <h6>Partnyordur</h6>,
     selector: "is_partner",
     sortable: true,

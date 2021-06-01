@@ -102,6 +102,13 @@ const cols = [
         format: (row) => formatPrice("AZN").format(row.price),
     },
     {
+        name: <h6>Ekstra servis</h6>,
+        selector: "extra_selling_cost",
+        sortable: true,
+        minWidth: 100,
+        format: (row) => formatPrice("AZN").format(row.extra_selling_cost),
+    },
+    {
         name: <h6>Kuryer haqqı</h6>,
         selector: "courier_cost",
         sortable: true,
