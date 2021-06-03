@@ -50,7 +50,7 @@ export const cartReducer = (state = initialState.cart, action) => {
                         const payment = action.payload.payments.find(payment => payment.sort === 'Package');
                         cartItem.payment_method = payment.method;
                         if (action.payload.isForDelivery) cartItem.tracking_state = TrackingStateEnum.Delivered;
-                        if (!cartItem.is_paid) cartItem.is_paid = true;
+                        // if (cartItem.is_paid) cartItem.is_paid = true;
                         if (!cartItem.is_courier_cost_paid && cartItem.courier_id) cartItem.is_courier_cost_paid = true;
                         if (!cartItem.is_product_paid && cartItem.is_postpaid) cartItem.is_product_paid = true;
                     }
