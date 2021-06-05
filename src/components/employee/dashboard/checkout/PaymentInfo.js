@@ -71,7 +71,6 @@ const PaymentInfo = ({cart, createPayments}) => {
                 costs.productPrice += costs1.productPrice;
                 costs.courierCost += costs1.courierCost;
                 costs.extraSellingCost += costs1.extraSellingCost;
-                costs.totalCost += costs1.totalCost;
             });
             return costs;
         }
