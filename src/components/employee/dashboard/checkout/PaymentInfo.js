@@ -8,12 +8,17 @@ import {createPayments} from "../../../../redux/actions/paymentActions";
 import {useReactToPrint} from "react-to-print";
 import Receipt from "./Receipt";
 
-
 const PaymentInfo = ({cart, createPayments}) => {
     const payments = useSelector(state => state.createPaymentsReducer)
     const [toggled, setToggled] = useState(false);
+    const [costs, setCosts] = useState({
+        totalCost: 0,
+        extraSellingCost: 0,
+        shippingCost: 0,
+        courierCost: 0,
+        productPrice: 0,
+    });
     const ref = useRef()
-    const [costs, setCosts] = useState({});
     const [isForDelivery, setIsForDelivery] = useState(false);
     const [isPrint, setIsPrint] = useState(false);
     const [paymentMethod, setPaymentMethod] = useState(PaymentMethodEnum.Cash);
@@ -35,27 +40,39 @@ const PaymentInfo = ({cart, createPayments}) => {
                 productPrice: 0,
             };
             cart.forEach(cartItem => {
+                let costs1 = {
+                    totalCost: 0,
+                    extraSellingCost: 0,
+                    shippingCost: 0,
+                    courierCost: 0,
+                    productPrice: 0,
+                };
                 cartItem.payment_needing = true;
                 if (!cartItem.is_paid || !cartItem.is_courier_cost_paid) {
-                    costs.shippingCost += cartItem.amount;
-                    costs.courierCost += cartItem.courier_cost;
-                    if (notEmpty(cartItem.extra_selling_cost)) costs.extraSellingCost += cartItem.extra_selling_cost;
+                    costs1.shippingCost += cartItem.amount;
+                    costs1.courierCost += cartItem.courier_cost;
+                    if (notEmpty(cartItem.extra_selling_cost)) costs1.extraSellingCost += cartItem.extra_selling_cost;
                 }
                 if (!cartItem.is_product_paid && cartItem.is_postpaid && isForDelivery && !cartItem.will_receiver_pay) {
-                    costs.productPrice += cartItem.price;
-                    costs.shippingCost = 0;
-                    costs.courierCost = 0;
-                    costs.extraSellingCost = 0;
+                    costs1.productPrice += cartItem.price;
+                    costs1.shippingCost = 0;
+                    costs1.courierCost = 0;
+                    costs1.extraSellingCost = 0;
                 }
                 if (!cartItem.is_product_paid && !isForDelivery && ((cartItem.is_postpaid && cartItem.will_receiver_pay) || cartItem.will_receiver_pay)) {
-                    costs.productPrice = 0;
-                    costs.shippingCost = 0;
-                    costs.courierCost = 0;
-                    costs.extraSellingCost = 0;
+                    costs1.productPrice = 0;
+                    costs1.shippingCost = 0;
+                    costs1.courierCost = 0;
+                    costs1.extraSellingCost = 0;
                 }
-                if (isForDelivery && cartItem.is_postpaid && cartItem.will_receiver_pay) costs.productPrice += cartItem.price;
+                if (isForDelivery && cartItem.is_postpaid && cartItem.will_receiver_pay) costs1.productPrice += cartItem.price;
+                costs.totalCost += costs1.extraSellingCost + costs1.shippingCost + costs1.courierCost + costs1.productPrice;
+                costs.shippingCost += costs1.shippingCost;
+                costs.productPrice += costs1.productPrice;
+                costs.courierCost += costs1.courierCost;
+                costs.extraSellingCost += costs1.extraSellingCost;
+                costs.totalCost += costs1.totalCost;
             });
-            costs.totalCost = costs.extraSellingCost + costs.shippingCost + costs.courierCost + costs.productPrice;
             return costs;
         }
         setCosts(getCosts());
