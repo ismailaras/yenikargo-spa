@@ -9,9 +9,9 @@ export const createPaymentsBegin = () => ({
     [pendingTask]: begin
 })
 
-export const createPaymentsSuccess = payments => ({
+export const createPaymentsSuccess = payment => ({
     type: actionTypes.CREATE_PAYMENTS_SUCCESS,
-    payload: payments,
+    payload: payment,
     [pendingTask]: end
 })
 
@@ -62,7 +62,7 @@ export const selectPayments = selectedPayments => ({
     payload: selectedPayments
 })
 
-export const createPayments = (cart, isForDelivery, paymentMethod, costs, handlePrint) => {
+export const createPayments = (cart, isForDelivery, paymentMethod, costs) => {
     return async dispatch => {
         dispatch(createPaymentsBegin())
         paymentService.createPayments(cart, isForDelivery, paymentMethod, costs)
@@ -71,9 +71,8 @@ export const createPayments = (cart, isForDelivery, paymentMethod, costs, handle
                 if (data.message) {
                     dispatch(createPaymentsError(data.message));
                 } else {
-                    dispatch(createPaymentsSuccess(data));
+                    dispatch(createPaymentsSuccess(data.payment));
                     dispatch(parsePaymentsToCart(data, isForDelivery));
-                    handlePrint();
                 }
             })
             .catch(err => dispatch(createPaymentsError(err)));

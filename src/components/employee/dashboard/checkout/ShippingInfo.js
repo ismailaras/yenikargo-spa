@@ -34,11 +34,6 @@ const ShippingInfo = ({cart, removeFromCart}) => {
                                         cls='btn btn-primary btn-sm'
                                         pckg={cartItem}
                                     />
-                                    {/*{!cartItem.courier_id ? <button*/}
-                                    {/*    onClick={() => removeFromCart(cartItem)}*/}
-                                    {/*    className="btn btn-info btn-sm ml-2">*/}
-                                    {/*    Kuryer artır*/}
-                                    {/*</button> : null}*/}
                                     <button
                                         onClick={() => removeFromCart(cartItem, true)}
                                         className="btn btn-danger btn-sm ml-2">

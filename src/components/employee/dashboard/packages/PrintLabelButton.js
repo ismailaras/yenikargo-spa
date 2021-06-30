@@ -18,7 +18,7 @@ const PrintLabelButton = ({pckg, disabled, cls, stations, getStations}) => {
                 trigger={() => <button
                     className={cls}
                     disabled={disabled}>
-                    Qaimə
+                    Barkod çap et
                 </button>}
                 content={() => ref.current}
                 onAfterPrint={() => setToggled(true)}

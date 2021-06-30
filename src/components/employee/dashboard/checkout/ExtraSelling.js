@@ -24,7 +24,6 @@ const ExtraSelling = ({getAllExtraSelling, allExtraSelling, addToCart, removeFro
     }
     const handleReset = ()=>{
         let cost = 0;
-
         addExtraSellingCost(parseInt(selectedCartItem, 10), cost);
     }
     const handleChange = (event) => {

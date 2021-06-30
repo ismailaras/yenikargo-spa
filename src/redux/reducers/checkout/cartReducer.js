@@ -1,6 +1,7 @@
 import initialState from "../initialState";
 import * as actionTypes from '../../actions/actionTypes';
-import {TrackingStateEnum} from "../../../enums/trackingStateEnum";
+import { TrackingStateEnum } from "../../../enums/trackingStateEnum";
+import { notEmpty } from "../../../utilities/helpers";
 
 export const cartReducer = (state = initialState.cart, action) => {
     switch (action.type) {
@@ -9,12 +10,12 @@ export const cartReducer = (state = initialState.cart, action) => {
             if (addedItem) {
                 return state.map(cartItem => {
                     if (cartItem.id === action.payload.id) {
-                        return Object.assign({}, addedItem, {quantity: action.payload.quantity})
+                        return Object.assign({}, addedItem, { quantity: action.payload.quantity })
                     }
                     return cartItem;
                 });
             } else {
-                return [...state, {...action.payload}]
+                return [...state, { ...action.payload }]
             }
         case actionTypes.ADD_EXTRA_SERVICE_COST:
             console.log(action.payload);
@@ -33,7 +34,7 @@ export const cartReducer = (state = initialState.cart, action) => {
             });
             return state;
         case actionTypes.ADD_COURIER_TO_PACKAGES:
-            const {packages, courier} = action.payload;
+            const { packages, courier } = action.payload;
             state = state.map(ps => {
                 let selectedPackage = packages.find(p => ps.id === p.id && ps.sort === 'Package');
                 if (selectedPackage) {
@@ -46,14 +47,13 @@ export const cartReducer = (state = initialState.cart, action) => {
         case actionTypes.PARSE_PAYMENTS_TO_CART:
             return state.map(cartItem => {
                 if (cartItem.payment_needing) {
-                    if (cartItem.paymentFor === 'Package') {
-                        const payment = action.payload.payments.find(payment => payment.sort === 'Package');
-                        cartItem.payment_method = payment.method;
-                        if (action.payload.isForDelivery) cartItem.tracking_state = TrackingStateEnum.Delivered;
-                        // if (cartItem.is_paid) cartItem.is_paid = true;
-                        if (!cartItem.is_courier_cost_paid && cartItem.courier_id) cartItem.is_courier_cost_paid = true;
-                        if (!cartItem.is_product_paid && cartItem.is_postpaid) cartItem.is_product_paid = true;
-                    }
+                    const payment = action.payload.payment;
+                    cartItem.payment_method = payment.method;
+                    if (action.payload.isForDelivery) cartItem.tracking_state = TrackingStateEnum.Delivered;
+                    if (!cartItem.is_paid) cartItem.is_paid = true;
+                    if (!cartItem.is_courier_cost_paid && cartItem.courier_id) cartItem.is_courier_cost_paid = true;
+                    if (!cartItem.is_product_paid && cartItem.is_postpaid) cartItem.is_product_paid = true;
+                    if (notEmpty(cartItem.extra_selling_cost)) cartItem.is_extra = true;
                 }
                 return cartItem;
             });

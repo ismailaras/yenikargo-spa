@@ -7,7 +7,7 @@ export const createPaymentsReducer = (state = initialState.payments, action) => 
         case actionTypes.CREATE_PAYMENTS_BEGIN:
             return state;
         case actionTypes.CREATE_PAYMENTS_SUCCESS:
-            return action.payload;
+            return [action.payload];
         case actionTypes.CREATE_PAYMENTS_ERROR:
             return state
         default:
