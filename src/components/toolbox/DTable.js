@@ -61,7 +61,7 @@ const DTable = (props) => {
                     selectableRowsHighlight={true}
                     responsive={true}
                     customStyles={customStyles}
-                    data={props.data}/>
+                    data={props.data.sort((a, b) => b.id - a.id)}/>
             </div>
             <div className="card-footer">
                 {props.buttons.map(button => (

@@ -12,10 +12,11 @@ const Reports = ({auth}) => {
             <Navi/>
             <Container fluid={true}>
                 <Row>
-                    {!auth.currentEmployee.is_operator_admin &&
+                <FindReports/>
+                    {!auth.currentEmployee.is_operator_admin ?
                     <Col md={3} className="mb-3">
                         <FindReports/>
-                    </Col>}
+                    </Col> : null}
                     <Col md={9}>
                         <ReportsDTable/>
                     </Col>

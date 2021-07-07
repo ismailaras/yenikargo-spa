@@ -8,9 +8,9 @@ import {
 
 const TrackPackageInfo = ({ trackingPackage }) => {
   return (
-    <div className="mt-3">
+    <div className="mt-3"  style={{textTransform: 'uppercase'}}>
       <Alert color="success">
-        <div className="d-flex justify-content-between align-items-center">
+        <div className=" align-items-center">
           <p>
             Paket - <span className="lead">{trackingPackage.package_id}</span>
           </p>
@@ -20,10 +20,9 @@ const TrackPackageInfo = ({ trackingPackage }) => {
               {getStatusNameInAzerbaijani(trackingPackage.current_state)}
             </span>
           </p>
-          <p>Göndərən müştəri: {trackingPackage.sender_customer_id} \
-            Alan müştəri: {trackingPackage.receiver_customer_id}</p>
+          <p>Göndərən: {trackingPackage.sender_customer_id} - {trackingPackage.sender_customer_name}</p>
+          <p>Alan: {trackingPackage.receiver_customer_id} - {trackingPackage.receiver_customer_name} - {trackingPackage.receiver_customer_mobile_number} </p>         
         </div>
-
         <hr />
 
         <table className="table text-white table-bordered">

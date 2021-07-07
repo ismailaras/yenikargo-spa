@@ -2,13 +2,13 @@ import React from "react";
 import { connect } from "react-redux";
 import { useFormik } from "formik";
 import { trackPackageFormValidationSchema } from "../../../../utilities/formValidationSchemas";
-import NumberInput from "../../../toolbox/NumberInput";
+import TextInput from "../../../toolbox/TextInput";
 import { trackPackage } from "../../../../redux/actions/packageActions";
 import TrackPackageInfo from "./TrackPackageInfo";
 
 const TrackPackage = ({ trackPackage, trackingPackage }) => {
   let initialValues = {
-    id: 0,
+    id: '',
   };
   const {
     handleSubmit,
@@ -30,7 +30,7 @@ const TrackPackage = ({ trackPackage, trackingPackage }) => {
     <form onSubmit={handleSubmit}>
       <h5>Bağlama ID ilə axtar</h5>
       <hr/>
-      <NumberInput
+      <TextInput
         label="Paket ID"
         placeHolder="Paket ID"
         name="id"

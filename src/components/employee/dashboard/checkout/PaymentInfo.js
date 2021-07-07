@@ -71,8 +71,8 @@ const PaymentInfo = ({ cart, createPayments }) => {
                         if (notEmpty(cartItem.extra_selling_cost)) costs1.extraSellingCost += cartItem.extra_selling_cost;
                         if (!cartItem.is_courier_cost_paid && cartItem.courierCost) costs1.courierCost += cartItem.courierCost;
                     }
-                    if (!cartItem.is_product_paid && cartItem.is_postpaid && cartItem.price && isForDelivery) costs1.productPrice += cartItem.price;
                 }
+                if (!cartItem.is_product_paid && cartItem.is_postpaid && cartItem.price && isForDelivery) costs1.productPrice += cartItem.price;
                 costs.totalCost += costs1.extraSellingCost + costs1.shippingCost + costs1.courierCost + costs1.productPrice;
                 costs.shippingCost += costs1.shippingCost;
                 costs.productPrice += costs1.productPrice;
