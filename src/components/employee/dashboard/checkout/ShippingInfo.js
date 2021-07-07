@@ -1,7 +1,7 @@
 import React from "react";
 import PrintLabelButton from "../packages/PrintLabelButton";
 import {connect} from "react-redux";
-import {formatPrice} from "../../../../utilities/helpers";
+import {formatBool, formatPrice} from "../../../../utilities/helpers";
 import {removeFromCart} from "../../../../redux/actions/cartActions";
 
 const ShippingInfo = ({cart, removeFromCart}) => {
@@ -20,7 +20,7 @@ const ShippingInfo = ({cart, removeFromCart}) => {
                                 <div className="col-md-3 align-self-center">
                                     <span style={{fontSize: 20}}>Bağlama kodu: <strong>{cartItem.id}</strong></span>
                                 </div>
-                                <div className="col-md-5 align-self-center">
+                                <div className="col-md-4 align-self-center">
                                     {cartItem.is_postpaid ?
                                         <div className="badge badge-info">Qarşı ödəməli məhsul</div> : null}
                                     {cartItem.will_receiver_pay
@@ -28,6 +28,9 @@ const ShippingInfo = ({cart, removeFromCart}) => {
                                         : <div className="badge badge-warning">Göndərən ödəyir</div>}
                                     {cartItem.deliver_to_address ?
                                         <div className="badge badge-danger">Evə çatdırılma</div> : null}
+                                </div>
+                                <div className="col-md-1">
+                                    Ödəniş lazımdır: {formatBool(cartItem.payment_needing)}
                                 </div>
                                 <div className="col-md-3">
                                     <PrintLabelButton

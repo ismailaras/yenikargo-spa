@@ -38,14 +38,10 @@ const PaymentInfo = ({ cart, createPayments }) => {
             notification.error('Heç bir bağlama tapılmadı.');
             return;
         }
-        const paidItem = cart.find(cartItem => cartItem.is_paid);
-        if (!paidItem && cart.length > 0)
-            createPayments(cart, isForDelivery, paymentMethod, costs)
+    createPayments(cart, isForDelivery, paymentMethod, costs)
                 .then(() => {
                     if (isPrint) handlePrint();
                 })
-        else
-            notification.error('Ödənilmiş bağlamaları ləğv edin.')
     }
 
     useEffect(() => {
@@ -67,12 +63,10 @@ const PaymentInfo = ({ cart, createPayments }) => {
                 };
                 if (!cartItem.is_paid) {
                     if (isForDelivery && cartItem.will_receiver_pay) {
-                        cartItem.payment_needing = true;
                         costs1.shippingCost += cartItem.amount;
                         if (notEmpty(cartItem.extra_selling_cost)) costs1.extraSellingCost += cartItem.extra_selling_cost;
                         if (!cartItem.is_courier_cost_paid && cartItem.courierCost) costs1.courierCost += cartItem.courierCost;
                     } else if (!isForDelivery && !cartItem.will_receiver_pay) {
-                        cartItem.payment_needing = true;
                         costs1.shippingCost += cartItem.amount;
                         if (notEmpty(cartItem.extra_selling_cost)) costs1.extraSellingCost += cartItem.extra_selling_cost;
                         if (!cartItem.is_courier_cost_paid && cartItem.courierCost) costs1.courierCost += cartItem.courierCost;

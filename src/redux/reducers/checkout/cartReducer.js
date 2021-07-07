@@ -46,13 +46,12 @@ export const cartReducer = (state = initialState.cart, action) => {
             return state;
         case actionTypes.PARSE_PAYMENTS_TO_CART:
             const s = state.map(cartItem => {
-                if (cartItem.payment_needing) {
-                    const payment = action.payload.payment;
-                    if (action.payload.isForDelivery) cartItem.tracking_state = TrackingStateEnum.Delivered;
-                    cartItem.is_paid = true;
-                    if (!cartItem.is_courier_cost_paid && cartItem.courier_id) cartItem.is_courier_cost_paid = true;
-                    if (!cartItem.is_product_paid && cartItem.is_postpaid) cartItem.is_product_paid = true;
-                }
+                const payment = action.payload.payment;
+                if (action.payload.isForDelivery) cartItem.tracking_state = TrackingStateEnum.Delivered;
+                if (!action.payload.isForDelivery && !cartItem.will_receiver_pay) cartItem.is_paid = true;
+                if (action.payload.isForDelivery && cartItem.will_receiver_pay) cartItem.is_paid = true;
+                if (!cartItem.is_courier_cost_paid && cartItem.courier_id) cartItem.is_courier_cost_paid = true;
+                if (!cartItem.is_product_paid && cartItem.is_postpaid) cartItem.is_product_paid = true;
                 return cartItem;
             });
             return s;
