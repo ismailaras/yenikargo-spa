@@ -8,7 +8,7 @@ import {connect} from 'react-redux'
 
 
 const Customers = () => {
-
+    
     return (
         <div>
             <Navi/>

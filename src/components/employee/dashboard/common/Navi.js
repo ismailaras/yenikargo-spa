@@ -111,6 +111,12 @@ const Navi = ({ signIn, signOut, auth }) => {
                 <span className="text-info">Hesabat *</span>
               </DropdownItem>
             </Link>}
+            {!auth.currentEmployee.is_sorting_admin &&
+            <Link to={Routes.reportExcel}>
+              <DropdownItem>
+                <span className="text-info">Hesabat Excel *</span>
+              </DropdownItem>
+            </Link>}
           </DropdownMenu>
         </UncontrolledDropdown>
 

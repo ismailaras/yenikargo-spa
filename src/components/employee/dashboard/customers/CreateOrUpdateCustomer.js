@@ -44,9 +44,13 @@ const CreateOrUpdateCustomer = ({createCustomer, updateCustomer, stations, getSt
             setSubmitting(false);
         }
     });
+    const onChange = e => {
+        console.log(e.target);
+        handleChange(e);
+    }
     return (
         <CreateOrUpdateCustomerForm
-            onChange={handleChange}
+            onChange={onChange}
             onSubmit={handleSubmit}
             onBlur={handleBlur}
             values={values}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Alert } from "reactstrap";
 import { connect } from "react-redux";
 import {
@@ -7,13 +7,16 @@ import {
 } from "../../../../utilities/helpers";
 
 const TrackPackageViaCustomerInfo = ({ trackingPackages }) => {
+  useEffect(() => {
+    console.log(trackingPackages)
+  })
   return (
     <div className="mt-3">
       {trackingPackages.sort((a,b)=>b.package_id-a.package_id).map((trackingPackage) => {
         return (
           <div key={trackingPackage.package_id}>
             <Alert color="success">
-              <div className="d-flex justify-content-between align-items-center">
+              <div className="align-items-center">
                 <h4 className="alert-heading">
                   Paket - {trackingPackage.package_id}{" "}
                 </h4>
@@ -24,10 +27,8 @@ const TrackPackageViaCustomerInfo = ({ trackingPackages }) => {
                   </span>
                 </p>
                 <div>
-                    <p className="mb-0">
-                      Göndərən müştəri: {trackingPackage.sender_customer_id} \
-                      Alan müştəri: {trackingPackage.receiver_customer_id}
-                      </p>
+                <p>Göndərən: {trackingPackage.sender_customer_id} - {trackingPackage.sender_customer_name}</p>
+          <p>Alan: {trackingPackage.receiver_customer_id} - {trackingPackage.receiver_customer_name} - {trackingPackage.receiver_customer_mobile_number} </p>   
                 </div>
               </div>
 

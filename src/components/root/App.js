@@ -26,7 +26,7 @@ import Discounts from "../landing/pages/Discounts";
 import Vacations from "../landing/pages/Vacations";
 import InternationalShipping from "../landing/pages/InternationalShipping";
 import Reports from "../employee/dashboard/reports/Reports";
-
+import {ReportExcel} from '../employee/dashboard/report-excel/ReportExcel';
 function App() {
   return (
     <div>
@@ -49,6 +49,7 @@ function App() {
         <PrivateRoute exact path={Routes.stations} component={Stations} />
         <PrivateRoute exact path={Routes.tariffs} component={Tariffs} />
         <PrivateRoute exact path={Routes.report} component={Reports} />
+        <PrivateRoute exact path={Routes.reportExcel} component={ReportExcel} />
         <PrivateRoute
           exact
           path={Routes.allExtraSelling}

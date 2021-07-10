@@ -28,3 +28,9 @@ export const findReports = findObject => {
         .then(data => data)
         .catch(err => err);
 }
+
+export const getReportExcelData = obj => {
+    return apiService.post("payment/get_report_excel", obj)
+        .then(data => data)
+        .catch(err => err);
+}

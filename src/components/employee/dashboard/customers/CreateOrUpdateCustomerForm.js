@@ -231,7 +231,7 @@ const CreateOrUpdateCustomerForm = ({
                 <div className="form-row">
                     <div className="col-md-12">
                         <TextareaInput
-                            label="Ünvan"
+                            label="Real Yaşayış Ünvanı"
                             placeHolder="Ünvan"
                             name="address"
                             value={values.address}

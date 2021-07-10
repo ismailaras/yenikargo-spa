@@ -57,12 +57,15 @@ export const handleResponse = async response => {
         }
         return data;
     }
+    
+    console.log(response.json())
     let err = '';
     if (response.status === 401) {
         err = ERROR_MESSAGE_UNAUTHORIZED;
     } else {
         err = ERROR_MESSAGE_COMMON;
     }
+    
     throw new Error(err);
 }
 
